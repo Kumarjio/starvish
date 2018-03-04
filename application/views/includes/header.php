@@ -118,14 +118,14 @@
                 <ul class="dropdown">
                   <li class="treeview">
                     <a href="<?php echo base_url()?>" ><br>
-                      <i class="fa fa-files-o"></i>
+                      <i class="fa fa-paperclip"></i>
                       <span>Customer PO</span>
                     </a>
                   </li>
                   <br>
                   <li class="treeview">
                     <a href="<?php echo base_url()?>" >
-                      <i class="fa fa-files-o"></i>
+                      <i class="fa fa-file-text-o"></i>
                       <span>Vendor PO</span>
                     </a>
                   </li>
@@ -158,14 +158,14 @@
                 <ul class="dropdown">
                   <li class="treeview">
                     <a href="<?php echo base_url()?>" ><br>
-                      <i class="fa fa-calendar"></i>
+                      <i class="fa fa-file-text-o"></i>
                       <span>Customer DC</span>
                     </a>
                   </li>
                   <br>
                   <li class="treeview">
                     <a href="<?php echo base_url()?>" >
-                      <i class="fa fa-bar-chart"></i>
+                      <i class="fa fa-paperclip"></i>
                       <span>Vendor DC</span>
                     </a>
                   </li>
@@ -176,14 +176,14 @@
 
           <li class="treeview">
               <a href="<?php echo base_url()?>" >
-                <i class="fa fa-plane"></i>
+                <i class="fa fa-unlink"></i>
                     <span>Followup Master</span>
                 </a>
            </li>
 
            <li class="treeview">
                <a href="<?php echo base_url()?>" >
-                 <i class="fa fa-plane"></i>
+                 <i class="fa fa-flag-o"></i>
                      <span>Daily Jobs</span>
                  </a>
             </li>
@@ -202,21 +202,21 @@
                 <ul class="dropdown">
                   <li class="treeview">
                     <a href="<?php echo base_url()?>" ><br>
-                      <i class="fa fa-calendar"></i>
+                      <i class="fa fa-credit-card"></i>
                       <span>Revenue Reports </span>
                     </a>
                   </li>
                   <br>
                   <li class="treeview">
                       <a href="<?php echo base_url()?>" >
-                        <i class="fa fa-bar-chart"></i>
+                        <i class="	fa fa-money"></i>
                       <span>Expenditure</span>
                     </a>
                   </li>
                   <br>
                   <li class="treeview">
                       <a href="<?php echo base_url()?>" >
-                        <i class="fa fa-bar-chart"></i>
+                        <i class="fa fa-spinner"></i>
                       <span>Pending Payments</span>
                     </a>
                   </li>
@@ -230,7 +230,7 @@
                   <br>
                   <li class="treeview">
                       <a href="<?php echo base_url()?>" >
-                        <i class="fa fa-bar-chart"></i>
+                        <i class="fa fa-usd"></i>
                       <span>Tax Report </span>
                     </a>
                   </li>
@@ -248,28 +248,28 @@
             <li class="header">ADMIN PANEL</li>
             <li class="treeview">
               <a href="#master" data-toggle="collapse" title="View Purchase Orders">
-                <i class="fa fa-files-o"></i>
+                <i class="fa fa-users"></i>
                 <span>Administration</span>
               </a>
               <div id="master" class="collapse">
                 <ul class="dropdown">
                   <li class="treeview">
                     <a href="<?php echo base_url()?>" ><br>
-                      <i class="fa fa-calendar"></i>
+                      <i class="fa fa-heart-o"></i>
                       <span>Customer Master</span>
                     </a>
                   </li>
                   <br>
                   <li class="treeview">
                       <a href="<?php echo base_url()?>" >
-                        <i class="fa fa-bar-chart"></i>
+                        <i class="fa fa-plus-square-o"></i>
                       <span>Vendor Master</span>
                     </a>
                   </li>
                   <br>
                   <li class="treeview">
                       <a href="<?php echo base_url()?>" >
-                        <i class="fa fa-bar-chart"></i>
+                        <i class="fa fa-user"></i>
                       <span>Employee Master</span>
                     </a>
                   </li>
