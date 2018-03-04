@@ -37,8 +37,9 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
-					<img src="<?=base_url()?>assets/source/loginpage/images/img-01.png" alt="IMG">
-          <br><br><h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STARVISH &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MECHATRONICS </h3>
+					<img src="<?=base_url()?>assets/source/loginpage/images/logo.png" alt="logo">
+					<img src="<?=base_url()?>assets/source/loginpage/images/text.png" alt="StarVish">
+          
 				</div>
 
 				<form class="login100-form validate-form" method="post" action="<?php echo base_url(); ?>loginMe">
