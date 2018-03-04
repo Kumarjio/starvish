@@ -103,12 +103,33 @@
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
               </a>
             </li>
+
             <li class="treeview">
-              <a href="#" >
+              <a href="#quot" data-toggle="collapse" title="View Purchase Orders">
                 <i class="fa fa-file"></i>
                 <span>Quotation</span>
               </a>
+              <div id="quot" class="collapse">
+                <ul class="dropdown">
+                  <li class="treeview">
+                    <a href="<?php echo base_url()?>" ><br>
+                      <i class="fa fa-paperclip"></i>
+                      <span>Customer Quotation</span>
+                    </a>
+                  </li>
+                  <br>
+                  <li class="treeview">
+                    <a href="<?php echo base_url()?>" >
+                      <i class="fa fa-file-text-o"></i>
+                      <span>Vendor Quotation</span>
+                    </a>
+                  </li>
+                  <br>
+                </ul>
+              </div>
             </li>
+
+
             <li class="treeview">
               <a href="#PO" data-toggle="collapse" title="View Purchase Orders">
                 <i class="fa fa-bell-o"></i>
