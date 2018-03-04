@@ -41,9 +41,9 @@
         <!-- Logo -->
         <a href="<?php echo base_url(); ?>" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>CI</b>AS</span>
+          <span class="logo-mini"><b>SV</b>M</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>CodeInsect</b>AS</span>
+          <span class="logo-lg"><b>StarVish</b>&nbsp;Mechatronics</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -105,49 +105,180 @@
             </li>
             <li class="treeview">
               <a href="#" >
-                <i class="fa fa-plane"></i>
-                <span>New Task</span>
+                <i class="fa fa-clone"></i>
+                <span>Quotation</span>
               </a>
             </li>
             <li class="treeview">
-              <a href="#" >
-                <i class="fa fa-ticket"></i>
-                <span>My Tasks</span>
+              <a href="#PO" data-toggle="collapse" title="View Purchase Orders">
+                <i class="fa fa-files-o"></i>
+                <span>Purchase Orders</span>
+              </a>
+              <div id="PO" class="collapse">
+                <ul class="dropdown">
+                  <li class="treeview">
+                    <a href="<?php echo base_url()?>" ><br>
+                      <i class="fa fa-calendar"></i>
+                      <span>Customer PO</span>
+                    </a>
+                  </li>
+                  <br>
+                  <li class="treeview">
+                    <a href="<?php echo base_url()?>" >
+                      <i class="fa fa-bar-chart"></i>
+                      <span>Vendor PO</span>
+                    </a>
+                  </li>
+                  <br>
+                  <li class="treeview">
+                    <a href="<?php echo base_url()?>" >
+                      <i class="fa fa-line-chart"></i>
+                      <span>Purchase Logs</span>
+                    </a>
+                  </li>
+                  <br>
+                </ul>
+              </div>
+            </li>
+
+
+            <li class="treeview">
+              <a href="<?php echo base_url()?>" >
+                <i class="fa fa-plane"></i>
+                <span>Invoice</span>
               </a>
             </li>
+
+            <li class="treeview">
+              <a href="#dc" data-toggle="collapse" title="View Purchase Orders">
+                <i class="fa fa-files-o"></i>
+                <span>Delivery Challan</span>
+              </a>
+              <div id="dc" class="collapse">
+                <ul class="dropdown">
+                  <li class="treeview">
+                    <a href="<?php echo base_url()?>" ><br>
+                      <i class="fa fa-calendar"></i>
+                      <span>Customer DC</span>
+                    </a>
+                  </li>
+                  <br>
+                  <li class="treeview">
+                    <a href="<?php echo base_url()?>" >
+                      <i class="fa fa-bar-chart"></i>
+                      <span>Vendor DC</span>
+                    </a>
+                  </li>
+                  <br>
+                </ul>
+              </div>
+            </li>
+
+          <li class="treeview">
+              <a href="<?php echo base_url()?>" >
+                <i class="fa fa-plane"></i>
+                    <span>Followup Master</span>
+                </a>
+           </li>
+
+           <li class="treeview">
+               <a href="<?php echo base_url()?>" >
+                 <i class="fa fa-plane"></i>
+                     <span>Daily Jobs</span>
+                 </a>
+            </li>
+
             <?php
             if($role == ROLE_ADMIN || $role == ROLE_MANAGER)
             {
             ?>
+            <li class="header">MANAGER PANEL</li>
             <li class="treeview">
-              <a href="#" >
-                <i class="fa fa-thumb-tack"></i>
-                <span>Task Status</span>
+              <a href="#reports" data-toggle="collapse" title="View Purchase Orders">
+                <i class="fa fa-files-o"></i>
+                <span>Reports</span>
               </a>
+              <div id="reports" class="collapse">
+                <ul class="dropdown">
+                  <li class="treeview">
+                    <a href="<?php echo base_url()?>" ><br>
+                      <i class="fa fa-calendar"></i>
+                      <span>Revenue Reports </span>
+                    </a>
+                  </li>
+                  <br>
+                  <li class="treeview">
+                      <a href="<?php echo base_url()?>" >
+                        <i class="fa fa-bar-chart"></i>
+                      <span>Expenditure</span>
+                    </a>
+                  </li>
+                  <br>
+                  <li class="treeview">
+                      <a href="<?php echo base_url()?>" >
+                        <i class="fa fa-bar-chart"></i>
+                      <span>Pending Payments</span>
+                    </a>
+                  </li>
+                  <br>
+                  <li class="treeview">
+                      <a href="<?php echo base_url()?>" >
+                        <i class="fa fa-bar-chart"></i>
+                      <span>Daily Job Report</span>
+                    </a>
+                  </li>
+                  <br>
+                  <li class="treeview">
+                      <a href="<?php echo base_url()?>" >
+                        <i class="fa fa-bar-chart"></i>
+                      <span>Tax Report </span>
+                    </a>
+                  </li>
+                  <br>
+                </ul>
+              </div>
             </li>
-            <li class="treeview">
-              <a href="#" >
-                <i class="fa fa-upload"></i>
-                <span>Task Uploads</span>
-              </a>
-            </li>
+
+
             <?php
             }
             if($role == ROLE_ADMIN)
             {
             ?>
+            <li class="header">ADMIN PANEL</li>
             <li class="treeview">
-              <a href="<?php echo base_url(); ?>userListing">
-                <i class="fa fa-users"></i>
-                <span>Users</span>
-              </a>
-            </li>
-            <li class="treeview">
-              <a href="#" >
+              <a href="#master" data-toggle="collapse" title="View Purchase Orders">
                 <i class="fa fa-files-o"></i>
-                <span>Reports</span>
+                <span>Administration</span>
               </a>
+              <div id="master" class="collapse">
+                <ul class="dropdown">
+                  <li class="treeview">
+                    <a href="<?php echo base_url()?>" ><br>
+                      <i class="fa fa-calendar"></i>
+                      <span>Customer Master</span>
+                    </a>
+                  </li>
+                  <br>
+                  <li class="treeview">
+                      <a href="<?php echo base_url()?>" >
+                        <i class="fa fa-bar-chart"></i>
+                      <span>Vendor Master</span>
+                    </a>
+                  </li>
+                  <br>
+                  <li class="treeview">
+                      <a href="<?php echo base_url()?>" >
+                        <i class="fa fa-bar-chart"></i>
+                      <span>Employee Master</span>
+                    </a>
+                  </li>
+                  <br>
+
+                </ul>
+              </div>
             </li>
+
             <?php
             }
             ?>
