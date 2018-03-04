@@ -2,7 +2,7 @@
 
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b><p>Made with <i class="fa fa-heart" aria-hidden="true" style="color:#be1931"> Yogesh </i> | Version 1.0 </p></b> 
+          <b><p>Made with <i class="fa fa-heart" aria-hidden="true" style="color:#be1931"> Yogesh </i> | Version 1.0 </p></b>
         </div>
         <strong>Copyright &copy; 2018-2020 <a href="<?php echo base_url(); ?>">StarVish Mechatronics</a>.</strong> All rights reserved.
     </footer>
