@@ -105,34 +105,34 @@
             </li>
             <li class="treeview">
               <a href="#" >
-                <i class="fa fa-clone"></i>
+                <i class="fa fa-file"></i>
                 <span>Quotation</span>
               </a>
             </li>
             <li class="treeview">
               <a href="#PO" data-toggle="collapse" title="View Purchase Orders">
-                <i class="fa fa-files-o"></i>
+                <i class="fa fa-bell-o"></i>
                 <span>Purchase Orders</span>
               </a>
               <div id="PO" class="collapse">
                 <ul class="dropdown">
                   <li class="treeview">
                     <a href="<?php echo base_url()?>" ><br>
-                      <i class="fa fa-calendar"></i>
+                      <i class="fa fa-files-o"></i>
                       <span>Customer PO</span>
                     </a>
                   </li>
                   <br>
                   <li class="treeview">
                     <a href="<?php echo base_url()?>" >
-                      <i class="fa fa-bar-chart"></i>
+                      <i class="fa fa-files-o"></i>
                       <span>Vendor PO</span>
                     </a>
                   </li>
                   <br>
                   <li class="treeview">
                     <a href="<?php echo base_url()?>" >
-                      <i class="fa fa-line-chart"></i>
+                      <i class="fa fa-building-o"></i>
                       <span>Purchase Logs</span>
                     </a>
                   </li>
@@ -144,14 +144,14 @@
 
             <li class="treeview">
               <a href="<?php echo base_url()?>" >
-                <i class="fa fa-plane"></i>
+                <i class="fa fa-check-square-o"></i>
                 <span>Invoice</span>
               </a>
             </li>
 
             <li class="treeview">
               <a href="#dc" data-toggle="collapse" title="View Purchase Orders">
-                <i class="fa fa-files-o"></i>
+                <i class="fa fa-cube"></i>
                 <span>Delivery Challan</span>
               </a>
               <div id="dc" class="collapse">
