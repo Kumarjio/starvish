@@ -275,7 +275,7 @@
               <div id="master" class="collapse">
                 <ul class="dropdown">
                   <li class="treeview">
-                    <a href="<?php echo base_url()?>" ><br>
+                    <a href="<?php echo base_url()?>customer_master" ><br>
                       <i class="fa fa-heart-o"></i>
                       <span>Customer Master</span>
                     </a>
@@ -289,13 +289,12 @@
                   </li>
                   <br>
                   <li class="treeview">
-                      <a href="<?php echo base_url()?>" >
+                      <a href="<?php echo base_url()?>userListing" >
                         <i class="fa fa-user"></i>
                       <span>Employee Master</span>
                     </a>
                   </li>
                   <br>
-
                 </ul>
               </div>
             </li>
