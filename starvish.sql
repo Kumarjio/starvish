@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 04, 2018 at 01:11 PM
+-- Generation Time: Mar 12, 2018 at 07:29 PM
 -- Server version: 5.7.21-0ubuntu0.17.10.1
 -- PHP Version: 7.1.11-0ubuntu0.17.10.1
 
@@ -23,16 +23,251 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ci_sessions`
+-- Table structure for table `customer_dc`
 --
 
-CREATE TABLE `ci_sessions` (
-  `session_id` varchar(40) NOT NULL DEFAULT '0',
-  `ip_address` varchar(45) NOT NULL DEFAULT '0',
-  `user_agent` varchar(120) NOT NULL,
-  `last_activity` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `user_data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `customer_dc` (
+  `date` date NOT NULL,
+  `customer_id` varchar(15) NOT NULL,
+  `dc_no` varchar(20) NOT NULL,
+  `description` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_dc_products`
+--
+
+CREATE TABLE `customer_dc_products` (
+  `dc_no` varchar(15) NOT NULL,
+  `description` varchar(50) NOT NULL,
+  `quantity` int(3) NOT NULL,
+  `remarks` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_followup_master`
+--
+
+CREATE TABLE `customer_followup_master` (
+  `customer_id` varchar(15) NOT NULL,
+  `company_name` varchar(50) NOT NULL,
+  `description` varchar(50) NOT NULL,
+  `quote_date` date NOT NULL,
+  `quote_no` varchar(15) NOT NULL,
+  `po_status` enum('received','pending') NOT NULL,
+  `po_date` date NOT NULL,
+  `po_no` varchar(15) NOT NULL,
+  `work_status` varchar(30) NOT NULL,
+  `work_date` date NOT NULL,
+  `invoice_date` date NOT NULL,
+  `invoice_no` varchar(15) NOT NULL,
+  `amount` int(5) NOT NULL,
+  `payment_status` enum('pending','paid') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_invoice`
+--
+
+CREATE TABLE `customer_invoice` (
+  `date` date NOT NULL,
+  `customer_id` varchar(15) NOT NULL,
+  `invoice_id` varchar(15) NOT NULL,
+  `po_id` varchar(15) NOT NULL,
+  `srn/dc` varchar(15) NOT NULL,
+  `paymentt_mode` enum('cash','card','online') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_invoice_products`
+--
+
+CREATE TABLE `customer_invoice_products` (
+  `invoice_id` varchar(15) NOT NULL,
+  `description` varchar(50) NOT NULL,
+  `hsn/sac` varchar(15) NOT NULL,
+  `quantity` int(4) NOT NULL,
+  `unit_charges` int(5) NOT NULL,
+  `total` int(5) NOT NULL,
+  `cgst_percent` int(3) NOT NULL,
+  `cgst_amt` int(5) NOT NULL,
+  `sgst_percent` int(3) NOT NULL,
+  `sgst_amt` int(5) NOT NULL,
+  `igst_percent` int(3) NOT NULL,
+  `igst_amt` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_master`
+--
+
+CREATE TABLE `customer_master` (
+  `customer_id` varchar(20) NOT NULL,
+  `company_name` varchar(30) NOT NULL,
+  `address1` varchar(30) NOT NULL,
+  `address2` varchar(30) NOT NULL,
+  `contact_persion1` varchar(30) NOT NULL,
+  `designation1` varchar(20) NOT NULL,
+  `email1` varchar(30) NOT NULL,
+  `contact_number1` int(13) NOT NULL,
+  `contact_person2` varchar(30) NOT NULL,
+  `designation2` varchar(20) NOT NULL,
+  `contact_no2` int(13) NOT NULL,
+  `gstin` varchar(20) NOT NULL,
+  `bank_name` varchar(25) NOT NULL,
+  `account_name` varchar(30) NOT NULL,
+  `account_number` int(30) NOT NULL,
+  `ifsc_code` varchar(30) NOT NULL,
+  `attachment` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_po`
+--
+
+CREATE TABLE `customer_po` (
+  `date` date NOT NULL,
+  `customer_id` varchar(15) NOT NULL,
+  `po_id` varchar(15) NOT NULL,
+  `description` varchar(50) NOT NULL,
+  `file_path` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_quote`
+--
+
+CREATE TABLE `customer_quote` (
+  `date` date NOT NULL,
+  `quote_id` varchar(15) NOT NULL,
+  `customer_id` varchar(15) NOT NULL,
+  `description` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_quote_products`
+--
+
+CREATE TABLE `customer_quote_products` (
+  `quote_id` varchar(15) NOT NULL,
+  `product_id` varchar(20) NOT NULL,
+  `description` varchar(50) NOT NULL,
+  `hsn/sac` varchar(15) NOT NULL,
+  `quantity` int(3) NOT NULL,
+  `unit_charges` int(20) NOT NULL,
+  `total` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `daily_attendence`
+--
+
+CREATE TABLE `daily_attendence` (
+  `date` date NOT NULL,
+  `emp_id` varchar(15) NOT NULL,
+  `emp_name` varchar(40) NOT NULL,
+  `in_time` time NOT NULL,
+  `out_time` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `daily_expenses`
+--
+
+CREATE TABLE `daily_expenses` (
+  `date` date NOT NULL,
+  `emp_id` varchar(15) NOT NULL,
+  `emp_name` varchar(40) NOT NULL,
+  `amount` int(10) NOT NULL,
+  `description` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `daily_jobs`
+--
+
+CREATE TABLE `daily_jobs` (
+  `date` date NOT NULL,
+  `emp_id` varchar(15) NOT NULL,
+  `emp_name` varchar(40) NOT NULL,
+  `company_name` varchar(50) NOT NULL,
+  `machine` int(5) NOT NULL,
+  `job_title` int(50) NOT NULL,
+  `reference` varchar(50) NOT NULL,
+  `no_of_machines_used` int(5) NOT NULL,
+  `cost` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employee_master`
+--
+
+CREATE TABLE `employee_master` (
+  `id` varchar(20) NOT NULL,
+  `name` varchar(40) NOT NULL,
+  `address1` varchar(50) NOT NULL,
+  `address2` varchar(50) NOT NULL,
+  `designation` varchar(20) NOT NULL,
+  `email` varchar(20) NOT NULL,
+  `contact_no` int(13) NOT NULL,
+  `DOJ` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mileage_imbursement`
+--
+
+CREATE TABLE `mileage_imbursement` (
+  `date` int(11) NOT NULL,
+  `emp_id` varchar(15) NOT NULL,
+  `emp_name` varchar(40) NOT NULL,
+  `start_km` int(10) NOT NULL,
+  `end_km` int(10) NOT NULL,
+  `total_km` int(10) NOT NULL,
+  `amount` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sv_table`
+--
+
+CREATE TABLE `sv_table` (
+  `company_name` varchar(50) NOT NULL,
+  `owner_1` varchar(50) NOT NULL,
+  `owner_2` varchar(50) DEFAULT NULL,
+  `address1` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `contact_no` int(13) NOT NULL,
+  `gstn` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -56,7 +291,20 @@ CREATE TABLE `tbl_last_login` (
 --
 
 INSERT INTO `tbl_last_login` (`id`, `userId`, `sessionData`, `machineIp`, `userAgent`, `agentString`, `platform`, `createdDtm`) VALUES
-(1, 1, '{\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 64.0.3282.119', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36', 'Linux', '2018-03-04 11:52:35');
+(1, 1, '{\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 64.0.3282.119', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36', 'Linux', '2018-03-04 11:52:35'),
+(2, 1, '{\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 64.0.3282.119', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36', 'Linux', '2018-03-04 14:08:44'),
+(3, 1, '{\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 64.0.3282.119', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36', 'Linux', '2018-03-04 14:11:20'),
+(4, 1, '{\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 64.0.3282.119', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36', 'Linux', '2018-03-04 17:21:17'),
+(5, 2, '{\"role\":\"2\",\"roleText\":\"Manager\",\"name\":\"Manager\"}', '::1', 'Chrome 64.0.3282.119', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36', 'Linux', '2018-03-04 17:22:10'),
+(6, 1, '{\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 64.0.3282.119', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36', 'Linux', '2018-03-04 18:09:04'),
+(7, 1, '{\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 64.0.3282.119', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36', 'Linux', '2018-03-04 19:27:57'),
+(8, 1, '{\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 64.0.3282.119', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36', 'Linux', '2018-03-04 21:25:48'),
+(9, 2, '{\"role\":\"2\",\"roleText\":\"Manager\",\"name\":\"Manager\"}', '::1', 'Chrome 64.0.3282.119', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36', 'Linux', '2018-03-04 21:26:09'),
+(10, 1, '{\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 64.0.3282.119', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36', 'Linux', '2018-03-04 21:26:48'),
+(11, 1, '{\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 64.0.3282.119', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36', 'Linux', '2018-03-04 23:15:08'),
+(12, 3, '{\"role\":\"3\",\"roleText\":\"Employee\",\"name\":\"Employee\"}', '::1', 'Chrome 64.0.3282.119', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36', 'Linux', '2018-03-04 23:15:24'),
+(13, 1, '{\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 64.0.3282.119', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36', 'Linux', '2018-03-04 23:36:15'),
+(14, 1, '{\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.146', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36', 'Linux', '2018-03-12 18:15:36');
 
 -- --------------------------------------------------------
 
@@ -122,20 +370,219 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`userId`, `email`, `password`, `name`, `mobile`, `roleId`, `isDeleted`, `createdBy`, `createdDtm`, `updatedBy`, `updatedDtm`) VALUES
-(1, 'admin@gmail.com', '$2y$10$6NOKhXKiR2SAgpFF2WpCkuRgYKlSqFJaqM0NgIM3PT1gKHEM5/SM6', 'System Administrator', '9890098900', 1, 0, 0, '2015-07-01 18:56:49', 1, '2018-01-05 05:56:34'),
-(2, 'manager@gmail.com', '$2y$10$quODe6vkNma30rcxbAHbYuKYAZQqUaflBgc4YpV9/90ywd.5Koklm', 'Manager', '9890098900', 2, 0, 1, '2016-12-09 17:49:56', 1, '2018-01-12 07:22:11'),
-(3, 'employee@gmail.com', '$2y$10$UYsH1G7MkDg1cutOdgl2Q.ZbXjyX.CSjsdgQKvGzAgl60RXZxpB5u', 'Employee', '9890098900', 3, 0, 1, '2016-12-09 17:50:22', 3, '2018-01-04 07:58:28');
+(1, 'admin@gmail.com', '$2y$10$j9HPTqIJOp0/9TbRA5T8A.oIF6SxeC5b4xsXPBCOKX8iLwomItcya', 'System Administrator', '9890098900', 1, 0, 0, '2015-07-01 18:56:49', 1, '2018-01-05 05:56:34'),
+(2, 'manager@gmail.com', '$2y$10$j9HPTqIJOp0/9TbRA5T8A.oIF6SxeC5b4xsXPBCOKX8iLwomItcya', 'Manager', '9890098900', 2, 0, 1, '2016-12-09 17:49:56', 1, '2018-01-12 07:22:11'),
+(3, 'employee@gmail.com', '$2y$10$j9HPTqIJOp0/9TbRA5T8A.oIF6SxeC5b4xsXPBCOKX8iLwomItcya', 'Employee', '9890098900', 3, 0, 1, '2016-12-09 17:50:22', 3, '2018-01-04 07:58:28');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor_dc`
+--
+
+CREATE TABLE `vendor_dc` (
+  `date` date NOT NULL,
+  `vendor_id` varchar(15) NOT NULL,
+  `dc_no` varchar(15) NOT NULL,
+  `description` varchar(50) NOT NULL,
+  `file_path` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor_followup_master`
+--
+
+CREATE TABLE `vendor_followup_master` (
+  `date` date NOT NULL,
+  `vendor_id` varchar(15) NOT NULL,
+  `vendor name` varchar(40) NOT NULL,
+  `total_amt` int(10) NOT NULL,
+  `cgst_amt` int(10) NOT NULL,
+  `sgst_amt` int(10) NOT NULL,
+  `igst_amt` int(10) NOT NULL,
+  `grand_total` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor_invoice`
+--
+
+CREATE TABLE `vendor_invoice` (
+  `date` date NOT NULL,
+  `vendor_id` varchar(15) NOT NULL,
+  `invoice_id` varchar(15) NOT NULL,
+  `amount` int(10) NOT NULL,
+  `gst` int(10) NOT NULL,
+  `total_amt` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor_master`
+--
+
+CREATE TABLE `vendor_master` (
+  `vendor_id` varchar(20) NOT NULL,
+  `company_name` varchar(30) NOT NULL,
+  `address1` varchar(30) NOT NULL,
+  `address2` varchar(30) NOT NULL,
+  `contact_persion1` varchar(30) NOT NULL,
+  `designation1` varchar(20) NOT NULL,
+  `email1` varchar(30) NOT NULL,
+  `contact_number1` int(13) NOT NULL,
+  `contact_person2` varchar(30) NOT NULL,
+  `designation2` varchar(20) NOT NULL,
+  `contact_no2` int(13) NOT NULL,
+  `gstin` varchar(20) NOT NULL,
+  `bank_name` varchar(25) NOT NULL,
+  `account_name` varchar(30) NOT NULL,
+  `account_number` int(30) NOT NULL,
+  `ifsc_code` varchar(30) NOT NULL,
+  `attachment` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor_po`
+--
+
+CREATE TABLE `vendor_po` (
+  `date` date NOT NULL,
+  `po_id` varchar(15) NOT NULL,
+  `vendor_id` varchar(15) NOT NULL,
+  `description` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor_products`
+--
+
+CREATE TABLE `vendor_products` (
+  `po_id` varchar(15) NOT NULL,
+  `product_id` varchar(15) NOT NULL,
+  `description` varchar(50) NOT NULL,
+  `hsn/sac` varchar(10) NOT NULL,
+  `quantity` int(5) NOT NULL,
+  `unit_charges` int(10) NOT NULL,
+  `total` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor_quote`
+--
+
+CREATE TABLE `vendor_quote` (
+  `date` date NOT NULL,
+  `vendor_quote_id` varchar(13) NOT NULL,
+  `vendor_id` varchar(15) NOT NULL,
+  `description` varchar(50) NOT NULL,
+  `file_path` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `ci_sessions`
+-- Indexes for table `customer_dc`
 --
-ALTER TABLE `ci_sessions`
-  ADD PRIMARY KEY (`session_id`),
-  ADD KEY `last_activity_idx` (`last_activity`);
+ALTER TABLE `customer_dc`
+  ADD PRIMARY KEY (`dc_no`),
+  ADD KEY `customer_id` (`customer_id`);
+
+--
+-- Indexes for table `customer_dc_products`
+--
+ALTER TABLE `customer_dc_products`
+  ADD KEY `dc_no` (`dc_no`);
+
+--
+-- Indexes for table `customer_followup_master`
+--
+ALTER TABLE `customer_followup_master`
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `quote_no` (`quote_no`),
+  ADD KEY `invoice_no` (`invoice_no`);
+
+--
+-- Indexes for table `customer_invoice`
+--
+ALTER TABLE `customer_invoice`
+  ADD PRIMARY KEY (`invoice_id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `po_id` (`po_id`),
+  ADD KEY `srn/dc` (`srn/dc`);
+
+--
+-- Indexes for table `customer_invoice_products`
+--
+ALTER TABLE `customer_invoice_products`
+  ADD KEY `invoice_no` (`invoice_id`);
+
+--
+-- Indexes for table `customer_master`
+--
+ALTER TABLE `customer_master`
+  ADD PRIMARY KEY (`customer_id`);
+
+--
+-- Indexes for table `customer_po`
+--
+ALTER TABLE `customer_po`
+  ADD PRIMARY KEY (`po_id`),
+  ADD KEY `customer_id` (`customer_id`);
+
+--
+-- Indexes for table `customer_quote`
+--
+ALTER TABLE `customer_quote`
+  ADD PRIMARY KEY (`quote_id`);
+
+--
+-- Indexes for table `customer_quote_products`
+--
+ALTER TABLE `customer_quote_products`
+  ADD KEY `quote_id` (`quote_id`);
+
+--
+-- Indexes for table `daily_attendence`
+--
+ALTER TABLE `daily_attendence`
+  ADD KEY `emp_id` (`emp_id`);
+
+--
+-- Indexes for table `daily_expenses`
+--
+ALTER TABLE `daily_expenses`
+  ADD KEY `emp_id` (`emp_id`);
+
+--
+-- Indexes for table `daily_jobs`
+--
+ALTER TABLE `daily_jobs`
+  ADD KEY `emp_id` (`emp_id`);
+
+--
+-- Indexes for table `employee_master`
+--
+ALTER TABLE `employee_master`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `mileage_imbursement`
+--
+ALTER TABLE `mileage_imbursement`
+  ADD KEY `emp_id` (`emp_id`);
 
 --
 -- Indexes for table `tbl_last_login`
@@ -162,6 +609,50 @@ ALTER TABLE `tbl_users`
   ADD PRIMARY KEY (`userId`);
 
 --
+-- Indexes for table `vendor_dc`
+--
+ALTER TABLE `vendor_dc`
+  ADD KEY `vendor_id` (`vendor_id`);
+
+--
+-- Indexes for table `vendor_followup_master`
+--
+ALTER TABLE `vendor_followup_master`
+  ADD KEY `vendor_id` (`vendor_id`);
+
+--
+-- Indexes for table `vendor_invoice`
+--
+ALTER TABLE `vendor_invoice`
+  ADD PRIMARY KEY (`invoice_id`),
+  ADD KEY `vendor_id` (`vendor_id`);
+
+--
+-- Indexes for table `vendor_master`
+--
+ALTER TABLE `vendor_master`
+  ADD PRIMARY KEY (`vendor_id`);
+
+--
+-- Indexes for table `vendor_po`
+--
+ALTER TABLE `vendor_po`
+  ADD PRIMARY KEY (`po_id`),
+  ADD KEY `vendor_id` (`vendor_id`);
+
+--
+-- Indexes for table `vendor_products`
+--
+ALTER TABLE `vendor_products`
+  ADD KEY `quote_id` (`po_id`);
+
+--
+-- Indexes for table `vendor_quote`
+--
+ALTER TABLE `vendor_quote`
+  ADD KEY `vendor_id` (`vendor_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -169,7 +660,7 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT for table `tbl_last_login`
 --
 ALTER TABLE `tbl_last_login`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `tbl_reset_password`
 --
@@ -185,6 +676,122 @@ ALTER TABLE `tbl_roles`
 --
 ALTER TABLE `tbl_users`
   MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `customer_dc`
+--
+ALTER TABLE `customer_dc`
+  ADD CONSTRAINT `customer_dc_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_master` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `customer_dc_products`
+--
+ALTER TABLE `customer_dc_products`
+  ADD CONSTRAINT `customer_dc_products_ibfk_1` FOREIGN KEY (`dc_no`) REFERENCES `customer_dc` (`dc_no`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `customer_followup_master`
+--
+ALTER TABLE `customer_followup_master`
+  ADD CONSTRAINT `customer_followup_master_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_master` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `customer_followup_master_ibfk_2` FOREIGN KEY (`quote_no`) REFERENCES `customer_quote` (`quote_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `customer_followup_master_ibfk_3` FOREIGN KEY (`invoice_no`) REFERENCES `customer_invoice` (`invoice_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `customer_invoice`
+--
+ALTER TABLE `customer_invoice`
+  ADD CONSTRAINT `customer_invoice_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_master` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `customer_invoice_ibfk_2` FOREIGN KEY (`po_id`) REFERENCES `customer_po` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `customer_invoice_ibfk_3` FOREIGN KEY (`srn/dc`) REFERENCES `customer_dc` (`dc_no`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `customer_invoice_products`
+--
+ALTER TABLE `customer_invoice_products`
+  ADD CONSTRAINT `customer_invoice_products_ibfk_1` FOREIGN KEY (`invoice_id`) REFERENCES `customer_invoice` (`invoice_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `customer_po`
+--
+ALTER TABLE `customer_po`
+  ADD CONSTRAINT `customer_po_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_master` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `customer_quote`
+--
+ALTER TABLE `customer_quote`
+  ADD CONSTRAINT `customer_quote_ref` FOREIGN KEY (`quote_id`) REFERENCES `customer_master` (`customer_id`);
+
+--
+-- Constraints for table `customer_quote_products`
+--
+ALTER TABLE `customer_quote_products`
+  ADD CONSTRAINT `customer_quote_products_ibfk_1` FOREIGN KEY (`quote_id`) REFERENCES `customer_quote` (`quote_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `daily_attendence`
+--
+ALTER TABLE `daily_attendence`
+  ADD CONSTRAINT `daily_attendence_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `employee_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `daily_expenses`
+--
+ALTER TABLE `daily_expenses`
+  ADD CONSTRAINT `daily_expenses_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `employee_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `daily_jobs`
+--
+ALTER TABLE `daily_jobs`
+  ADD CONSTRAINT `daily_jobs_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `employee_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `mileage_imbursement`
+--
+ALTER TABLE `mileage_imbursement`
+  ADD CONSTRAINT `mileage_imbursement_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `employee_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `vendor_dc`
+--
+ALTER TABLE `vendor_dc`
+  ADD CONSTRAINT `vendor_dc_ibfk_1` FOREIGN KEY (`vendor_id`) REFERENCES `vendor_master` (`vendor_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `vendor_followup_master`
+--
+ALTER TABLE `vendor_followup_master`
+  ADD CONSTRAINT `vendor_followup_master_ibfk_1` FOREIGN KEY (`vendor_id`) REFERENCES `vendor_master` (`vendor_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `vendor_invoice`
+--
+ALTER TABLE `vendor_invoice`
+  ADD CONSTRAINT `vendor_invoice_ibfk_1` FOREIGN KEY (`vendor_id`) REFERENCES `vendor_master` (`vendor_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `vendor_po`
+--
+ALTER TABLE `vendor_po`
+  ADD CONSTRAINT `vendor_po_ibfk_1` FOREIGN KEY (`vendor_id`) REFERENCES `vendor_master` (`vendor_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `vendor_products`
+--
+ALTER TABLE `vendor_products`
+  ADD CONSTRAINT `vendor_products_ibfk_1` FOREIGN KEY (`po_id`) REFERENCES `vendor_po` (`po_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `vendor_quote`
+--
+ALTER TABLE `vendor_quote`
+  ADD CONSTRAINT `vendor_quote_ibfk_1` FOREIGN KEY (`vendor_id`) REFERENCES `vendor_master` (`vendor_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

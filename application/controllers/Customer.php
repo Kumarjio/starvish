@@ -12,7 +12,6 @@ class Customer extends BaseController
   {
       parent::__construct();
       $this->load->model('customer_model');
-
       $this->isLoggedIn();
   }
   /**
@@ -23,4 +22,5 @@ class Customer extends BaseController
       $this->global['pageTitle'] = 'StarVish: Customer Master';
       $html =$this->loadViews("customer/customerlisting", $this->global, NULL , NULL);
   }
+
 }
