@@ -94,7 +94,7 @@
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar" style="height:100vh;overflow-y:scroll;">
+        <section class="sidebar" style="overflow-y:auto; height:700px; position:relative">
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" class="smooth-scroll list-unstyled">
             <li class="header">MAIN NAVIGATION</li>
