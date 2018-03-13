@@ -96,7 +96,7 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
           <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="sidebar-menu">
+          <ul class="sidebar-menu" class="smooth-scroll list-unstyled">
             <li class="header">MAIN NAVIGATION</li>
             <li class="treeview">
               <a href="<?php echo base_url(); ?>dashboard">
@@ -215,12 +215,25 @@
             ?>
             <li class="header">MANAGER PANEL</li>
             <li class="treeview">
+                <a href="<?php echo base_url()?>" >
+                  <i class="fa fa-usd"></i>
+                <span>Pay slip </span>
+              </a>
+            </li>
+            <li class="treeview">
               <a href="#reports" data-toggle="collapse" title="View Purchase Orders">
                 <i class="fa fa-files-o"></i>
                 <span>Reports</span>
               </a>
               <div id="reports" class="collapse">
                 <ul class="dropdown">
+                  <li class="treeview">
+                    <a href="<?php echo base_url()?>" ><br>
+                      <i class="fa fa-credit-card"></i>
+                      <span>Service Reports </span>
+                    </a>
+                  </li>
+
                   <li class="treeview">
                     <a href="<?php echo base_url()?>" ><br>
                       <i class="fa fa-credit-card"></i>
