@@ -70,6 +70,7 @@ class Login extends CI_Controller
                 $lastLogin = $this->login_model->lastLoginInfo($result->userId);
 
                 $sessionArray = array('userId'=>$result->userId,
+                                        'emp_id'=>$result->employee_id,
                                         'role'=>$result->roleId,
                                         'roleText'=>$result->role,
                                         'name'=>$result->name,

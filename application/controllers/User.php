@@ -103,13 +103,24 @@ class User extends BaseController
         else
         {
             $this->load->library('form_validation');
-
+            $this->form_validation->set_rules('emp_id','Employee ID','trim|required');
             $this->form_validation->set_rules('fname','Full Name','trim|required|max_length[128]');
             $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[128]');
+            $this->form_validation->set_rules('mobile','Mobile Number','required|min_length[10]');
             $this->form_validation->set_rules('password','Password','required|max_length[20]');
             $this->form_validation->set_rules('cpassword','Confirm Password','trim|required|matches[password]|max_length[20]');
+            $this->form_validation->set_rules('address1','Address Line 1','trim|required');
+            $this->form_validation->set_rules('address2','Address Line 2','trim|required');
+            $this->form_validation->set_rules('desg','Designation','trim|required');
+            $this->form_validation->set_rules('doj','DOJ','trim|required');
+            $this->form_validation->set_rules('bank','Bank Name','trim|required');
+            $this->form_validation->set_rules('bank_acc','Bank account','trim|required');
+            $this->form_validation->set_rules('ifsc','IFSC Code','trim|required');
+            $this->form_validation->set_rules('aadhaar','Aadhaar Number','trim|required');
+            $this->form_validation->set_rules('pan','PAN Number','trim|required');
             $this->form_validation->set_rules('role','Role','trim|required|numeric');
-            $this->form_validation->set_rules('mobile','Mobile Number','required|min_length[10]');
+
+
 
             if($this->form_validation->run() == FALSE)
             {
@@ -117,18 +128,35 @@ class User extends BaseController
             }
             else
             {
+                $emp_id = $this->security->xss_clean($this->input->post('emp_id'));
                 $name = ucwords(strtolower($this->security->xss_clean($this->input->post('fname'))));
                 $email = $this->security->xss_clean($this->input->post('email'));
-                $password = $this->input->post('password');
-                $roleId = $this->input->post('role');
                 $mobile = $this->security->xss_clean($this->input->post('mobile'));
+                $password = $this->input->post('password');
+                $address1 = $this->security->xss_clean($this->input->post('address1'));
+                $address2 = $this->security->xss_clean($this->input->post('address2'));
+                $desg = $this->security->xss_clean($this->input->post('desg'));
+                $doj = $this->security->xss_clean($this->input->post('doj'));
+                $bank = $this->security->xss_clean($this->input->post('bank'));
+                $bank_acc = $this->security->xss_clean($this->input->post('bank_acc'));
+                $ifsc = $this->security->xss_clean($this->input->post('ifsc'));
+                $aadhaar = $this->security->xss_clean($this->input->post('aadhaar'));
+                $pan = $this->security->xss_clean($this->input->post('pan'));
+                $roleId = $this->input->post('role');
 
-                $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>$roleId, 'name'=> $name,
+                $userInfo = array('employee_id'=>$emp_id,'email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>$roleId, 'name'=> $name,
                                     'mobile'=>$mobile, 'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:s'));
 
-                $this->load->model('user_model');
-                $result = $this->user_model->addNewUser($userInfo);
+                $emp_info=array('id'=>$emp_id,'name'=>$name,
+                                'address1'=>$address1,'address2'=>$address2,
+                                'designation'=>$desg,'email'=>$email,
+                                'contact_no'=>$mobile, 'DOJ'=>$doj,
+                                'pan_no'=>$pan,'bank_name'=>$bank,
+                                'account_number'=>$bank_acc, 'ifsc_code'=>$ifsc,
+                                 'aadhaar_no'=>$aadhaar);
 
+                $this->load->model('user_model');
+                $result = $this->user_model->addNewUser($userInfo,$emp_info);
                 if($result > 0)
                 {
                     $this->session->set_flashdata('success', 'New User created successfully');
@@ -163,7 +191,8 @@ class User extends BaseController
 
             $data['roles'] = $this->user_model->getUserRoles();
             $data['userInfo'] = $this->user_model->getUserInfo($userId);
-
+            $emp_id=$data['userInfo'][0]->employee_id;
+            $data['datas']=$this->user_model->get_details($emp_id);
             $this->global['pageTitle'] = 'StarVish: Edit User';
 
             $this->loadViews("editOld", $this->global, $data, NULL);
@@ -185,13 +214,23 @@ class User extends BaseController
             $this->load->library('form_validation');
 
             $userId = $this->input->post('userId');
-
+            $this->form_validation->set_rules('emp_id','Employee ID','trim|required');
             $this->form_validation->set_rules('fname','Full Name','trim|required|max_length[128]');
             $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[128]');
-            $this->form_validation->set_rules('password','Password','matches[cpassword]|max_length[20]');
-            $this->form_validation->set_rules('cpassword','Confirm Password','matches[password]|max_length[20]');
-            $this->form_validation->set_rules('role','Role','trim|required|numeric');
             $this->form_validation->set_rules('mobile','Mobile Number','required|min_length[10]');
+            $this->form_validation->set_rules('password','Password','max_length[20]');
+            $this->form_validation->set_rules('cpassword','Confirm Password','trim|matches[password]|max_length[20]');
+            $this->form_validation->set_rules('address1','Address Line 1','trim|required');
+            $this->form_validation->set_rules('address2','Address Line 2','trim|required');
+            $this->form_validation->set_rules('desg','Designation','trim|required');
+            $this->form_validation->set_rules('doj','DOJ','trim|required');
+            $this->form_validation->set_rules('bank','Bank Name','trim|required');
+            $this->form_validation->set_rules('bank_acc','Bank account','trim|required');
+            $this->form_validation->set_rules('ifsc','IFSC Code','trim|required');
+            $this->form_validation->set_rules('aadhaar','Aadhaar Number','trim|required');
+            $this->form_validation->set_rules('pan','PAN Number','trim|required');
+            $this->form_validation->set_rules('role','Role','trim|required|numeric');
+
 
             if($this->form_validation->run() == FALSE)
             {
@@ -199,27 +238,44 @@ class User extends BaseController
             }
             else
             {
-                $name = ucwords(strtolower($this->security->xss_clean($this->input->post('fname'))));
-                $email = $this->security->xss_clean($this->input->post('email'));
-                $password = $this->input->post('password');
-                $roleId = $this->input->post('role');
-                $mobile = $this->security->xss_clean($this->input->post('mobile'));
+              $emp_id = $this->security->xss_clean($this->input->post('emp_id'));
+              $name = ucwords(strtolower($this->security->xss_clean($this->input->post('fname'))));
+              $email = $this->security->xss_clean($this->input->post('email'));
+              $mobile = $this->security->xss_clean($this->input->post('mobile'));
+              $password = $this->input->post('password');
+              $address1 = $this->security->xss_clean($this->input->post('address1'));
+              $address2 = $this->security->xss_clean($this->input->post('address2'));
+              $desg = $this->security->xss_clean($this->input->post('desg'));
+              $doj = $this->security->xss_clean($this->input->post('doj'));
+              $bank = $this->security->xss_clean($this->input->post('bank'));
+              $bank_acc = $this->security->xss_clean($this->input->post('bank_acc'));
+              $ifsc = $this->security->xss_clean($this->input->post('ifsc'));
+              $aadhaar = $this->security->xss_clean($this->input->post('aadhaar'));
+              $pan = $this->security->xss_clean($this->input->post('pan'));
+              $roleId = $this->input->post('role');
 
-                $userInfo = array();
+              $userInfo = array();
 
                 if(empty($password))
                 {
-                    $userInfo = array('email'=>$email, 'roleId'=>$roleId, 'name'=>$name,
+                    $userInfo = array('employee_id'=>$emp_id,'email'=>$email, 'roleId'=>$roleId, 'name'=>$name,
                                     'mobile'=>$mobile, 'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
                 }
                 else
                 {
-                    $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>$roleId,
+                    $userInfo = array('employee_id'=>$emp_id,'email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>$roleId,
                         'name'=>ucwords($name), 'mobile'=>$mobile, 'updatedBy'=>$this->vendorId,
                         'updatedDtm'=>date('Y-m-d H:i:s'));
                 }
+                $emp_info=array('id'=>$emp_id,'name'=>$name,
+                                'address1'=>$address1,'address2'=>$address2,
+                                'designation'=>$desg,'email'=>$email,
+                                'contact_no'=>$mobile, 'DOJ'=>$doj,
+                                'pan_no'=>$pan,'bank_name'=>$bank,
+                                'account_number'=>$bank_acc, 'ifsc_code'=>$ifsc,
+                                 'aadhaar_no'=>$aadhaar);
 
-                $result = $this->user_model->editUser($userInfo, $userId);
+                $result = $this->user_model->editUser($userInfo, $userId,$emp_id,$emp_info);
 
                 if($result == true)
                 {

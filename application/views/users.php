@@ -31,23 +31,25 @@
                     </div>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
-                  <table class="table table-hover">
-                    <tr>
-                      <th>Id</th>
+                    <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+                  <table class="table table-striped table-bordered table-hover">
+                    <thead class="bg-primary">
+                      <th>&nbsp;Employee ID</th>
                       <th>Name</th>
                       <th>Email</th>
                       <th>Mobile</th>
                       <th>Role</th>
                       <th class="text-center">Actions</th>
-                    </tr>
+                    </thead>
                     <?php
                     if(!empty($userRecords))
                     {
                         foreach($userRecords as $record)
                         {
                     ?>
+                    <tbody>
                     <tr>
-                      <td><?php echo $record->userId ?></td>
+                      <td>&nbsp;&nbsp;&nbsp;<?php echo $record->employee_id ?></td>
                       <td><?php echo $record->name ?></td>
                       <td><?php echo $record->email ?></td>
                       <td><?php echo $record->mobile ?></td>
@@ -58,12 +60,13 @@
                           <a class="btn btn-sm btn-danger deleteUser" href="#" data-userid="<?php echo $record->userId; ?>" title="Delete"><i class="fa fa-trash"></i></a>
                       </td>
                     </tr>
+                  </tbody>
                     <?php
                         }
                     }
                     ?>
                   </table>
-
+                </div>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
                     <?php echo $this->pagination->create_links(); ?>

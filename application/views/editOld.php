@@ -1,10 +1,10 @@
 <?php
-
 $userId = '';
 $name = '';
 $email = '';
 $mobile = '';
 $roleId = '';
+
 
 if(!empty($userInfo))
 {
@@ -18,51 +18,71 @@ if(!empty($userInfo))
     }
 }
 
-
 ?>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <i class="fa fa-users"></i> User Management
+        <i class="fa fa-users"></i>Employee Master
         <small>Add / Edit User</small>
       </h1>
     </section>
-    
+
     <section class="content">
-    
+
         <div class="row">
             <!-- left column -->
             <div class="col-md-8">
               <!-- general form elements -->
-                
-                
-                
+
                 <div class="box box-primary">
                     <div class="box-header">
                         <h3 class="box-title">Enter User Details</h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
-                    
+
                     <form role="form" action="<?php echo base_url() ?>editUser" method="post" id="editUser" role="form">
                         <div class="box-body">
+
+                          <!--row 1-->
                             <div class="row">
-                                <div class="col-md-6">                                
-                                    <div class="form-group">
-                                        <label for="fname">Full Name</label>
-                                        <input type="text" class="form-control" id="fname" placeholder="Full Name" name="fname" value="<?php echo $name; ?>" maxlength="128">
-                                        <input type="hidden" value="<?php echo $userId; ?>" name="userId" id="userId" />    
-                                    </div>
-                                    
-                                </div>
+
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="emp_id">Employee ID</label>
+                                      <input type="text " class="form-control required" value="<?php echo $datas[0]->id; ?>" id="emp_id" name="emp_id" maxlength="128" readonly>
+                                      <input type="hidden" value="<?php echo $userId;?>" name="userId" id="userId" />
+                                  </div>
+                              </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="email">Email address</label>
-                                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" value="<?php echo $email; ?>" maxlength="128">
+                                        <label for="fname">Employee Name</label>
+                                        <input type="text" class="form-control required" value="<?php echo $name; ?>" id="fname" name="fname" maxlength="128">
                                     </div>
                                 </div>
+                            </div><!--row 1 End-->
+
+                          <!--row 2-->
+                            <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="email">Email address</label>
+                                      <input type="text" class="form-control required email" id="email" value="<?php echo $email;?>" name="email" maxlength="128">
+                                  </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="mobile">Mobile Number</label>
+                                      <input type="text" class="form-control required digits" id="mobile" value="<?php echo $mobile; ?>" name="mobile" maxlength="10">
+                                  </div>
+                              </div>
                             </div>
+                            <!--row 2 end-->
+
+                            <!--row 3-->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -77,13 +97,87 @@ if(!empty($userInfo))
                                     </div>
                                 </div>
                             </div>
+                            <!--row 3 end-->
+
+                            <!--row 4-->
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="mobile">Mobile Number</label>
-                                        <input type="text" class="form-control" id="mobile" placeholder="Mobile Number" name="mobile" value="<?php echo $mobile; ?>" maxlength="10">
-                                    </div>
+
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="address1">Address Line 1</label>
+                                      <input type="text" class="form-control required" id="address1" value="<?php echo $datas[0]->address1; ?>" name="address1" maxlength="100">
+                                  </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="address2">Address Line 2</label>
+                                    <input type="text" class="form-control required" id="address2" value="<?php echo $datas[0]->address2; ?>" name="address2" maxlength="100">
                                 </div>
+                          </div>
+                            </div>
+                            <!--row 4 end-->
+
+                            <!--row 5-->
+                            <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="desg">Designation</label>
+                                      <input type="text" class="form-control required" id="desg" value="<?php echo $datas[0]->designation;?>" name="desg" maxlength="100">
+                                  </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="doj">DOJ</label>
+                                    <input type="date" class="form-control required" id="doj" value="<?php echo $datas[0]->doj; ?>" name="doj" maxlength="100">
+                                </div>
+                          </div>
+                            </div>
+                            <!--row 5 end-->
+
+                            <!--row 6-->
+                            <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="bank">Bank name</label>
+                                      <input type="text" class="form-control required" id="bank" value="<?php echo $datas[0]->bank_name; ?>" name="bank" maxlength="100">
+                                  </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="bank_acc">Account Number</label>
+                                    <input type="text" class="form-control required" id="bank_acc" value="<?php echo $datas[0]->account_number; ?>" name="bank_acc" maxlength="100">
+                                </div>
+                          </div>
+                            </div>
+                            <!--row 6 end-->
+
+                            <!--row 7-->
+                            <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="ifsc">IFSC code</label>
+                                      <input type="text" class="form-control required" id="ifsc" value="<?php echo $datas[0]->ifsc_code; ?>" name="ifsc" maxlength="100">
+                                  </div>
+                            </div>
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="bank">Aadhaar Number</label>
+                                      <input type="text" class="form-control required" id="aadhaar" value="<?php echo $datas[0]->aadhaar_no; ?>" name="aadhaar" maxlength="100">
+                                  </div>
+                            </div>
+                          </div>
+                            <!--row 7 end-->
+
+                            <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="pan">PAN Number</label>
+                                      <input type="text" class="form-control required" id="pan" value="<?php echo $datas[0]->pan_no;?>" name="pan" maxlength="30">
+                                  </div>
+                              </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="role">Role</label>
@@ -102,10 +196,10 @@ if(!empty($userInfo))
                                             ?>
                                         </select>
                                     </div>
-                                </div>    
+                                </div>
                             </div>
                         </div><!-- /.box-body -->
-    
+
                         <div class="box-footer">
                             <input type="submit" class="btn btn-primary" value="Submit" />
                             <input type="reset" class="btn btn-default" value="Reset" />
@@ -122,10 +216,10 @@ if(!empty($userInfo))
                 ?>
                 <div class="alert alert-danger alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <?php echo $this->session->flashdata('error'); ?>                    
+                    <?php echo $this->session->flashdata('error'); ?>
                 </div>
                 <?php } ?>
-                <?php  
+                <?php
                     $success = $this->session->flashdata('success');
                     if($success)
                     {
@@ -135,14 +229,14 @@ if(!empty($userInfo))
                     <?php echo $this->session->flashdata('success'); ?>
                 </div>
                 <?php } ?>
-                
+
                 <div class="row">
                     <div class="col-md-12">
                         <?php echo validation_errors('<div class="alert alert-danger alert-dismissable">', ' <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button></div>'); ?>
                     </div>
                 </div>
             </div>
-        </div>    
+        </div>
     </section>
 </div>
 
