@@ -55,6 +55,12 @@ $route['404_override'] = 'error';
 /****************Customer MASTER******************/
 $route['customer_master']='customer';
 
+
+
+/****************vendor MASTER******************/
+$route['vendor_master']='vendor';
+
+
 /*********** USER DEFINED ROUTES *******************/
 
 $route['loginMe'] = 'login/loginMe';
