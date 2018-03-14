@@ -35,7 +35,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="cname">Company Name</label>
-                                        <input type="text" class="form-control required" value="<?php echo $datas[0]->cname; ?>" id="company_name" name="company_name" maxlength="128">
+                                        <input type="text" class="form-control required" value="<?php echo $datas[0]->company_name; ?>" id="company_name" name="company_name" maxlength="128">
                                     </div>
                                 </div>
                             </div><!--row 1 End-->
@@ -63,14 +63,14 @@
                                   <div class="col-md-6">
                                       <div class="form-group">
                                           <label for="contactperson1l">Contact Person 1</label>
-                                          <input type="text" class="form-control required " id="contact_person1" value="<?php echo $datas[0]->contactperson1; ?>" name="contact_person1" maxlength="50">
+                                          <input type="text" class="form-control required " id="contact_person1" value="<?php echo $datas[0]->contact_person1; ?>" name="contact_person1" maxlength="50">
                                       </div>
                                   </div>
 
                                   <div class="col-md-6">
                                       <div class="form-group">
                                           <label for="contactperson2">Contact person 2</label>
-                                          <input type="text" class="form-control required" id="contact_person2" value="<?php echo $datas[0]->contactperson2; ?>" name="contact_person2" maxlength="50">
+                                          <input type="text" class="form-control required" id="contact_person2" value="<?php echo $datas[0]->contact_person2; ?>" name="contact_person2" maxlength="50">
                                       </div>
                                   </div>
                                 </div>
@@ -117,14 +117,14 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="contact_no1">Contact Number 1</label>
-                                                <input type="number" class="form-control required" id="contact_no1" value="<?php echo $datas[0]->contactno1; ?>" name="contact_no1" maxlength="13">
+                                                <input type="number" class="form-control required" id="contact_no1" value="<?php echo $datas[0]->contact_no1; ?>" name="contact_no1" maxlength="13">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="contact_no2">Contact Number 2</label>
-                                                <input type="number" class="form-control required " id="contact_no2" value="<?php echo $datas[0]->contactno2; ?>" name="contact_no2" maxlength="50">
+                                                <input type="number" class="form-control required " id="contact_no2" value="<?php echo $datas[0]->contact_no2; ?>" name="contact_no2" maxlength="50">
                                             </div>
                                         </div>
                                       </div>
@@ -135,14 +135,14 @@
                                           <div class="col-md-6">
                                               <div class="form-group">
                                                   <label for="bank_name">Bank Name</label>
-                                                  <input type="text" class="form-control required" id="bank_name" value="<?php echo $datas[0]->bankname; ?>" name="bank_name" maxlength="50">
+                                                  <input type="text" class="form-control required" id="bank_name" value="<?php echo $datas[0]->bank_name; ?>" name="bank_name" maxlength="50">
                                               </div>
                                           </div>
 
                                           <div class="col-md-6">
                                               <div class="form-group">
                                                   <label for="account_name">Account Name</label>
-                                                  <input type="text" class="form-control required " id="account_name" value="<?php echo $datas[0]->accountname; ?>" name="account_name" maxlength="50">
+                                                  <input type="text" class="form-control required " id="account_name" value="<?php echo $datas[0]->account_name; ?>" name="account_name" maxlength="50">
                                               </div>
                                           </div>
                                         </div>
@@ -153,14 +153,14 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="account_number">Account Number</label>
-                                                    <input type="number" class="form-control required digits" id="account_number" value="<?php echo $datas[0]->accountnumber; ?>" name="account_number" maxlength="20">
+                                                    <input type="number" class="form-control required digits" id="account_number" value="<?php echo $datas[0]->account_number; ?>" name="account_number" maxlength="20">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="ifsc_code">IFSC Code</label>
-                                                    <input type="text" class="form-control required " id="ifsc_code" value="<?php echo $datas[0]->ifsccode; ?>" name="ifsc_code" maxlength="50">
+                                                    <input type="text" class="form-control required " id="ifsc_code" value="<?php echo $datas[0]->ifsc_code; ?>" name="ifsc_code" maxlength="50">
                                                 </div>
                                             </div>
                                           </div>

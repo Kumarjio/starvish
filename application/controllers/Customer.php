@@ -49,7 +49,7 @@ class Customer extends BaseController
 public function add_customer()
 {
   $customer_id=$this->input->post('customer_id');
-  $cname=$this->input->post('company_name');
+  $company_name=$this->input->post('company_name');
   $address1=$this->input->post('address1');
   $address2=$this->input->post('address2');
   $contactperson1=$this->input->post('contact_person1');
@@ -67,7 +67,7 @@ public function add_customer()
   $gstin=$this->input->post('gstin');
   $attachment=$this->input->post('attachment');
 
-  $datas=array('customer_id'=>$customer_id,'company_name'=>$cname,'address1'=>$address1,
+  $datas=array('customer_id'=>$customer_id,'company_name'=>$company_name,'address1'=>$address1,
               'address2'=>$address2,'contact_person1'=>$contactperson1,'contact_person2'=>$contactperson2,
               'designation1'=>$designation1,'designation2'=>$designation2,'email1'=>$email1,'email2'=>$email2,
               'contact_no1'=>$contactno1,'contact_no2'=>$contactno2,'gstin'=>$gstin,'bank_name'=>$bankname,
