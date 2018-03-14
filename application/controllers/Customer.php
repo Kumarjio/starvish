@@ -100,21 +100,22 @@ class Customer extends BaseController
       {
           $this->load->library('form_validation');
           $this->form_validation->set_rules('customer_id','Customer ID','trim|required');
-          $this->form_validation->set_rules('cname','Company Name','trim|required|max_length[128]');
-          $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[128]');
-          $this->form_validation->set_rules('contactno1','Contact Number 1','required|min_length[10]');
-          $this->form_validation->set_rules('contactno2','Contact Number 2','required|max_length[20]');
+          $this->form_validation->set_rules('company_name','Company Name','trim|required|max_length[128]');
+          $this->form_validation->set_rules('email1','Email1','trim|required|valid_email|max_length[128]');
+          $this->form_validation->set_rules('email2','Email2','trim|required|valid_email|max_length[128]');
+          $this->form_validation->set_rules('contact_no1','Contact Number 1','required|min_length[10]');
+          $this->form_validation->set_rules('contact_no2','Contact Number 2','required|max_length[20]');
           $this->form_validation->set_rules('gstin','GSTIN','trim|required|max_length[20]');
           $this->form_validation->set_rules('address1','Address Line 1','trim|required');
           $this->form_validation->set_rules('address2','Address Line 2','trim|required');
-          $this->form_validation->set_rules('desg1','Designation 1','trim|required');
-          $this->form_validation->set_rules('desg2','Designation 2','trim|required');
-          $this->form_validation->set_rules('contactperson1','Contact Person 1','trim|required|max_length[128]');
-          $this->form_validation->set_rules('contactperson2','Contact Person 2','trim|required|max_length[128]');
-          $this->form_validation->set_rules('bname','Bank Name','trim|required|max_length[128]');
-          $this->form_validation->set_rules('accountname','Account Name','trim|required');
-          $this->form_validation->set_rules('accountnumber','Account Number','trim|required');
-          $this->form_validation->set_rules('ifsccode','IFSC Code','trim|required|numeric');
+          $this->form_validation->set_rules('designation1','Designation 1','trim|required');
+          $this->form_validation->set_rules('designation2','Designation 2','trim|required');
+          $this->form_validation->set_rules('contact_person1','Contact Person 1','trim|required|max_length[128]');
+          $this->form_validation->set_rules('contact_person2','Contact Person 2','trim|required|max_length[128]');
+          $this->form_validation->set_rules('bank_name','Bank Name','trim|required|max_length[128]');
+          $this->form_validation->set_rules('account_name','Account Name','trim|required');
+          $this->form_validation->set_rules('account_number','Account Number','trim|required');
+          $this->form_validation->set_rules('ifsc_code','IFSC Code','trim|required|numeric');
           $this->form_validation->set_rules('attachment','Attachment','trim|required');
 
 
@@ -126,21 +127,22 @@ class Customer extends BaseController
           else
           {
               $customer_id = $this->security->xss_clean($this->input->post('customer_id'));
-              $name = ucwords(strtolower($this->security->xss_clean($this->input->post('cname'))));
-              $email = $this->security->xss_clean($this->input->post('email'));
-              $contactno1 = $this->security->xss_clean($this->input->post('contactno1'));
-              $contactno2 = $this->security->xss_clean($this->input->post('contactno2'));
+              $name = ucwords(strtolower($this->security->xss_clean($this->input->post('company_name'))));
+              $email1 = $this->security->xss_clean($this->input->post('email1'));
+              $email2 = $this->security->xss_clean($this->input->post('email2'));
+              $contactno1 = $this->security->xss_clean($this->input->post('contact_no1'));
+              $contactno2 = $this->security->xss_clean($this->input->post('contact_no2'));
               $address1 = $this->security->xss_clean($this->input->post('address1'));
               $address2 = $this->security->xss_clean($this->input->post('address2'));
-              $desg1 = $this->security->xss_clean($this->input->post('desg1'));
-              $desg2 = $this->security->xss_clean($this->input->post('desg2'));
-              $contactperson1 = ucwords(strtolower($this->security->xss_clean($this->input->post('contactperson1'))));
-              $contactperson2 = ucwords(strtolower($this->security->xss_clean($this->input->post('contactperson2'))));
+              $desg1 = $this->security->xss_clean($this->input->post('designation1'));
+              $desg2 = $this->security->xss_clean($this->input->post('designation2'));
+              $contactperson1 = ucwords(strtolower($this->security->xss_clean($this->input->post('contact_person1'))));
+              $contactperson2 = ucwords(strtolower($this->security->xss_clean($this->input->post('contact_person2'))));
               $gstin = $this->security->xss_clean($this->input->post('gstin'));
-              $bname = ucwords(strtolower($this->security->xss_clean($this->input->post('bname'))));
-              $accountname = $this->security->xss_clean($this->input->post('accountname'));
-              $accountnumber = $this->security->xss_clean($this->input->post('accountnumber'));
-              $ifsc = $this->security->xss_clean($this->input->post('ifsccode'));
+              $bname = ucwords(strtolower($this->security->xss_clean($this->input->post('bank_name'))));
+              $accountname = $this->security->xss_clean($this->input->post('account_name'));
+              $accountnumber = $this->security->xss_clean($this->input->post('account_number'));
+              $ifsc = $this->security->xss_clean($this->input->post('ifsc_code'));
               $attachment = $this->security->xss_clean($this->input->post('attachment'));
 
 
@@ -150,19 +152,19 @@ class Customer extends BaseController
 //customer_id`, `company_name`, `address1`, `address2`, `contact_persion1`, `designation1`, `email`, `contact_no1`,
 //`contact_person2`,
 // `designation2`, `contact_no2`, `gstin`, `bank_name`, `account_name`, `account_number`, `ifsc_code`, `attachment`
-//ide mari ellathukum type adi okk da na pathukre doubt na koopudre.
+
               $customer_info=array('customer_id'=>$customer_id,'company_name'=>$name,
                               'address1'=>$address1,'address2'=>$address2,'contact_person1'=>$contactperson1,
                               'designation1'=>$desg1,>'contact_no1'=>$contactno1,
                               'contact_person2'=>$contactperson2,'contact_no2'=>$contactno2,
-                              'designation2'=>$desg2,'email'=>$email,
-                              'contact_no'=>$mobile, 'DOJ'=>$doj,
-                              'pan_no'=>$pan,'bank_name'=>$bank,
-                              'account_number'=>$bank_acc, 'ifsc_code'=>$ifsc,
-                               'aadhaar_no'=>$aadhaar);
+                              'designation2'=>$desg2,'email1'=>$email1,
+                              'email2'=>$email2,'account_name'=>$accountname,
+                              'gstin'=>$gstin,'bank_name'=>$bname,
+                              'account_number'=>$accountnumber, 'ifsc_code'=>$ifsc,
+                               'attachment'=>$attachment);
 
               $this->load->model('customer_model');
-              $result = $this->customer_model->addNewCustomer($userInfo,$customer_info);
+              $result = $this->customer_model->addNewCustomer($customer_info);
               if($result > 0)
               {
                   $this->session->set_flashdata('success', 'New Customer created successfully');
@@ -180,21 +182,21 @@ class Customer extends BaseController
    * This function is used load customer edit information
    * @param number $customerId : Optional : This is customer id
    */
-  function editOld($customerId = NULL)
+  function editOld($customer_id = NULL)
   {
-      if($this->isAdmin() == TRUE || $customerId == 1)
+      if($this->isAdmin() == TRUE || $customer_id == 1)
       {
           $this->loadThis();
       }
       else
       {
-          if($customerId == null)
+          if($customer_id == null)
           {
               redirect('customerListing');
           }
 
           $data['roles'] = $this->customer_model->getCustomerRoles();
-          $data['customerInfo'] = $this->customer_model->getCustomerInfo($customerId);
+          $data['customerInfo'] = $this->customer_model->getCustomerInfo($customer_id);
           $emp_id=$data['customerInfo'][0]->employee_id;
           $data['datas']=$this->customer_model->get_details($emp_id);
           $this->global['pageTitle'] = 'StarVish: Edit User';
