@@ -59,7 +59,11 @@ $route['customer_master']='customer';
 
 /****************vendor MASTER******************/
 $route['vendor_master']='vendor';
-
+$route['add_edit_vendor']='vendor/add_edit_vendor';
+$route['add_edit_vendor/(:any)']='vendor/add_edit_vendor/$1';
+$route['update_vendor']='vendor/update_vendor';
+$route['add_vendor']='vendor/add_vendor';
+$route['delete_vendor/(:any)']='vendor/delete_vendor/$1';
 
 /*********** USER DEFINED ROUTES *******************/
 

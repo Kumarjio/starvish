@@ -3,7 +3,7 @@
 require APPPATH . '/libraries/BaseController.php';
 
 
-class Customer extends BaseController
+class Vendor extends BaseController
 {
   /**
    * This is default constructor of the class
@@ -11,7 +11,7 @@ class Customer extends BaseController
   public function __construct()
   {
       parent::__construct();
-      $this->load->model('customer_model');
+      $this->load->model('vendor_model');
       $this->isLoggedIn();
   }
   /**
@@ -19,7 +19,7 @@ class Customer extends BaseController
    */
   public function index()
   {
-      $this->global['pageTitle'] = 'StarVish: Customer Master';
+      $this->global['pageTitle'] = 'StarVish: Vendor Master';
       $html =$this->loadViews("customer/customerlisting", $this->global, NULL , NULL);
   }
   /**
