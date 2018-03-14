@@ -295,7 +295,7 @@
                   </li>
                   <br>
                   <li class="treeview">
-                      <a href="<?php echo base_url()?>" >
+                      <a href="<?php echo base_url()?>vendor_master" >
                         <i class="fa fa-plus-square-o"></i>
                       <span>Vendor Master</span>
                     </a>
