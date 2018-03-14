@@ -29,4 +29,94 @@ class Vendor extends BaseController
       $html =$this->loadViews("vendor/vendorlisting", $this->global, $res , NULL);
   }
 
+
+//this function used to redirect to addvendor or editvendor based on the vendorid
+  public function add_edit_vendor($id=NULL)
+  {
+    if($id==NULL)
+    {
+      $this->global['pageTitle'] = 'StarVish:Add Vendor';
+    $this->loadViews("vendor/add_vendor", $this->global, NULL , NULL);
+    }
+    else {
+      $this->global['pageTitle'] = 'StarVish:Edit Vendor';
+      $result['datas']=$this->vendor_model->fetch_vendor($id);
+      $this->loadViews("vendor/edit_vendor",$this->global,$result,NULL);
+    }
+  }
+
+//function for adding vendor
+    public function add_vendor()
+    {
+      $vendor_id=$this->input->post('vendor_id');
+      $company_name=$this->input->post('company_name');
+      $address1=$this->input->post('address1');
+      $address2=$this->input->post('address2');
+      $contact_person1=$this->input->post('contact_person1');
+      $contact_person2=$this->input->post('contact_person2');
+      $desg1=$this->input->post('desg1');
+      $desg2=$this->input->post('desg2');
+      $email1=$this->input->post('email1');
+      $email2=$this->input->post('email2');
+      $contact_no1=$this->input->post('contact_no1');
+      $contact_no2=$this->input->post('contact_no2');
+      $bank=$this->input->post('bank');
+      $bank_acc_name=$this->input->post('bank_acc');
+      $bank_acc_no=$this->input->post('bank_acc_no');
+      $ifsc_code=$this->input->post('ifsc_code');
+      $gst=$this->input->post('gst');
+      $attachment=$this->input->post('attachment');
+
+      $data=array('vendor_id'=>$vendor_id,'company_name'=>$company_name,'address1'=>$address1,
+                  'address2'=>$address2,'contact_person1'=>$contact_person1,'contact_person2'=>$contact_person2,
+                  'designation1'=>$desg1,'designation2'=>$desg2,'email1'=>$email1,'email2'=>$email2,
+                  'contact_no1'=>$contact_no1,'contact_no2'=>$contact_no2,'gstin'=>$gst,'bank_name'=>$bank,
+                  'account_name'=>$bank_acc_name,'account_number'=>$bank_acc_no,'ifsc_code'=>$ifsc_code,
+                  'attachment'=>$attachment
+                  );
+        $this->vendor_model->add_vendor($data);
+        redirect('add_edit_vendor');
+    }
+
+//function for editing vedor Details
+public function update_vendor()
+{
+  $vendor_id=$this->input->post('vendor_id');
+  $company_name=$this->input->post('company_name');
+  $address1=$this->input->post('address1');
+  $address2=$this->input->post('address2');
+  $contact_person1=$this->input->post('contact_person1');
+  $contact_person2=$this->input->post('contact_person2');
+  $desg1=$this->input->post('desg1');
+  $desg2=$this->input->post('desg2');
+  $email1=$this->input->post('email1');
+  $email2=$this->input->post('email2');
+  $contact_no1=$this->input->post('contact_no1');
+  $contact_no2=$this->input->post('contact_no2');
+  $bank=$this->input->post('bank');
+  $bank_acc_name=$this->input->post('bank_acc');
+  $bank_acc_no=$this->input->post('bank_acc_no');
+  $ifsc_code=$this->input->post('ifsc_code');
+  $gst=$this->input->post('gst');
+  $attachment=$this->input->post('attachment');
+
+  $datas=array('vendor_id'=>$vendor_id,'company_name'=>$company_name,'address1'=>$address1,
+              'address2'=>$address2,'contact_person1'=>$contact_person1,'contact_person2'=>$contact_person2,
+              'designation1'=>$desg1,'designation2'=>$desg2,'email1'=>$email1,'email2'=>$email2,
+              'contact_no1'=>$contact_no1,'contact_no2'=>$contact_no2,'gstin'=>$gst,'bank_name'=>$bank,
+              'account_name'=>$bank_acc_name,'account_number'=>$bank_acc_no,'ifsc_code'=>$ifsc_code,
+              'attachment'=>$attachment
+              );
+
+    $this->vendor_model->update_vendor($vendor_id,$datas);
+    redirect('vendor_master');
+}
+
+//function to delete vendor data
+public function delete_vendor($id)
+{
+  $this->vendor_model->delete_vendor($id);
+  redirect('vendor_master');
+}
+
 }
