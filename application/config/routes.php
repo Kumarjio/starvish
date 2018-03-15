@@ -66,10 +66,6 @@ $route['add_customer']='customer/add_customer';
 $route['delete_customer/(:any)']='customer/delete_customer/$1';
 $route['customer_listing']='customer/customer_listing';
 
-
-
-
-
 /****************vendor MASTER******************/
 $route['vendor_master']='vendor';
 $route['add_edit_vendor']='vendor/add_edit_vendor';
