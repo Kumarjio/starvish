@@ -48,4 +48,31 @@ public function delete_customer($id)
   $this->db->delete('customer_master',array('customer_id'=>$id));
 }
 
+//function to list the users based on the search result
+
+public function customer_listing($searchText)
+{
+$this->db->select('*');
+$this->db->from('customer_master');
+if(!empty($searchText)) {
+    $likeCriteria = "(customer_id  LIKE '%".$searchText."%'
+                      OR  company_name  LIKE '%".$searchText."%'
+                    OR  contact_person1  LIKE '%".$searchText."%'
+                    OR  contact_person2  LIKE '%".$searchText."%'
+                    OR  email1 LIKE '%".$searchText."%'
+                    OR  email2 LIKE '%".$searchText."%'
+                    OR  bank_name LIKE '%".$searchText."%'
+                    OR  account_name LIKE '%".$searchText."%'
+                    OR  account_number LIKE '%".$searchText."%'
+                    OR  address2 LIKE '%".$searchText."%'
+                    OR  address1  LIKE '%".$searchText."%')";
+    $this->db->where($likeCriteria);
+}
+if($query = $this->db->get())
+      return $query->result();
+else
+    return false;
+}
+
+
 }

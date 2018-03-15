@@ -22,10 +22,14 @@ class Customer extends BaseController
       $this->global['pageTitle'] = 'StarVish: Customer Master';
       $result=$this->customer_model->customerlisting();
       if($result!=false)
-        $res['datas']=$result;
+        {$res['datas']=$result;
+          $res['searchText']='';
+        }
       else {
         $res['datas']='NA';
+        $res['searchText']='';
       }
+
       $html =$this->loadViews("customer/customerlisting", $this->global, $res , NULL);
   }
   //this function used to redirect to addcustomer or editcustomer based on the customerid
@@ -119,4 +123,23 @@ public function add_customer()
     $this->customer_model->delete_customer($id);
     redirect('customer_master');
   }
+
+  //function to list the customer based on the search result
+  public function customer_listing()
+  {
+    $this->global['pageTitle'] = 'StarVish: Search';
+    $searchText = $this->security->xss_clean($this->input->post('searchText'));
+    $result=$this->customer_model->customer_listing($searchText);
+    if($result!=FALSE)
+    {
+      $data['datas']=$result;
+      $data['searchText'] = $searchText;
+    }
+    else {
+      $data['datas']='NA';
+      $data['searchText'] = $searchText;
+    }
+  $this->loadViews("customer/customerlisting",$this->global,$data,NULL);
+  }
+
 }
