@@ -22,9 +22,12 @@ class Vendor extends BaseController
       $this->global['pageTitle'] = 'StarVish: Vendor Master';
       $result=$this->vendor_model->vendorlisting();
       if($result!=false)
-        $res['datas']=$result;
+        {$res['datas']=$result;
+          $res['searchText']='';
+        }
       else {
         $res['datas']='NA';
+        $res['searchText']='';
       }
       $html =$this->loadViews("vendor/vendorlisting", $this->global, $res , NULL);
   }

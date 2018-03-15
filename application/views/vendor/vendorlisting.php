@@ -45,6 +45,7 @@
                       echo '<table class="table table-striped table-condensed table-hover table-bordered">
                           <thead class="bg-primary">
                             <tr>
+                            <th>S.No</th>
                             <th>Vendor ID</th>
                             <th>Company Name</th>
                             <th>Contact person</th>
@@ -54,11 +55,12 @@
                             </tr>
                           </thead>
                           <tbody>';
-                          $i=0;
+                          $i=1;
                           foreach($datas as $data)
                           {
 
                             echo'<tr class="bg-info">
+                             <td>'.$i++.'</td>
                               <td>'.$data->vendor_id.'</td>
                               <td>'.$data->company_name.'</td>
                               <td>'.$data->contact_person1.', '.$data->contact_person2.'</td>
