@@ -2,7 +2,7 @@
 
 require APPPATH . '/libraries/BaseController.php';
 
-
+//customer master
 class Customer extends BaseController
 {
   /**
@@ -14,6 +14,8 @@ class Customer extends BaseController
       $this->load->model('customer_model');
       $this->isLoggedIn();
   }
+
+
   /**
    * This function used to load the first screen of the customer
    */

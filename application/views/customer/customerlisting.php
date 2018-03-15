@@ -1,4 +1,5 @@
 <div class="content-wrapper">
+  <!-- add customer -->
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>

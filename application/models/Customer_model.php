@@ -5,6 +5,7 @@ class Customer_model extends CI_Model
   /*This function is for listing the customer in customer_master
   *@returns customer_master as array
   */
+  //customer master
 public function customerlisting()
 {
   if($res=$this->db->get('customer_master'))
