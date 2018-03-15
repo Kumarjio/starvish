@@ -53,6 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = "login";
 $route['404_override'] = 'error';
 
+<<<<<<< HEAD
 $route['upload']='vendor/upload';
 $route['do_upload']='vendor/do_upload';
 /****************Customer MASTER******************/
@@ -63,6 +64,8 @@ $route['update_customer']='customer/update_customer';
 $route['add_customer']='customer/add_customer';
 $route['delete_customer/(:any)']='customer/delete_customer/$1';
 $route['customer_listing']='customer/customer_listing';
+=======
+>>>>>>> 78c56af690e06d6dc288eaa7d9fc36e1b0088fd7
 
 
 /****************vendor MASTER******************/
