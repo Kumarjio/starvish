@@ -47,4 +47,31 @@ public function vendorlisting()
     $this->db->delete('vendor_master',array('vendor_id'=>$id));
   }
 
+  //function to list the users based on the search result
+
+  public function vendor_listing($searchText)
+  {
+  $this->db->select('*');
+  $this->db->from('vendor_master');
+  if(!empty($searchText)) {
+      $likeCriteria = "(vendor_id  LIKE '%".$searchText."%'
+                        OR  company_name  LIKE '%".$searchText."%'
+                      OR  contact_person1  LIKE '%".$searchText."%'
+                      OR  contact_person2  LIKE '%".$searchText."%'
+                      OR  email1 LIKE '%".$searchText."%'
+                      OR  email2 LIKE '%".$searchText."%'
+                      OR  bank_name LIKE '%".$searchText."%'
+                      OR  account_name LIKE '%".$searchText."%'
+                      OR  account_number LIKE '%".$searchText."%'
+                      OR  address2 LIKE '%".$searchText."%'
+                      OR  address1  LIKE '%".$searchText."%')";
+      $this->db->where($likeCriteria);
+  }
+  if($query = $this->db->get())
+        return $query->result();
+  else
+      return false;
+  }
+
+
 }

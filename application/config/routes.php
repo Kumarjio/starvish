@@ -64,13 +64,15 @@ $route['add_edit_vendor/(:any)']='vendor/add_edit_vendor/$1';
 $route['update_vendor']='vendor/update_vendor';
 $route['add_vendor']='vendor/add_vendor';
 $route['delete_vendor/(:any)']='vendor/delete_vendor/$1';
+$route['vendor_listing']='vendor/vendor_listing';
+
+
 /*********** USER DEFINED ROUTES *******************/
 
 $route['loginMe'] = 'login/loginMe';
 $route['dashboard'] = 'user';
 $route['logout'] = 'user/logout';
 $route['userListing'] = 'user/userListing';
-$route['userListing/(:num)'] = "user/userListing/$1";
 $route['addNew'] = "user/addNew";
 
 $route['addNewUser'] = "user/addNewUser";

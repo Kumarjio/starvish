@@ -119,4 +119,25 @@ public function delete_vendor($id)
   redirect('vendor_master');
 }
 
+//function to list the users based on the search result
+
+public function vendor_listing()
+{
+  $this->global['pageTitle'] = 'StarVish: Search';
+  $searchText = $this->security->xss_clean($this->input->post('searchText'));
+
+  $result=$this->vendor_model->vendor_listing($searchText);
+  if($result!=FALSE)
+  {
+    $data['datas']=$result;
+    $data['searchText'] = $searchText;
+  }
+  else {
+    $data['datas']='NA';
+    $data['searchText'] = $searchText;
+  }
+
+$this->loadViews("vendor/vendorlisting",$this->global,$data,NULL);
+}
+
 }
