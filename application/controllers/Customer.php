@@ -19,6 +19,7 @@ class Vendor extends BaseController
    */
   public function index()
   {
+<<<<<<< HEAD
       $this->global['pageTitle'] = 'StarVish: Vendor Master';
       $html =$this->loadViews("customer/customerlisting", $this->global, NULL , NULL);
   }
@@ -31,65 +32,40 @@ class Vendor extends BaseController
       if($this->isAdmin() == TRUE)
       {
           $this->loadThis();
+=======
+      $this->global['pageTitle'] = 'StarVish: Customer Master';
+      $result=$this->customer_model->customerlisting();
+      if($result!=false)
+        {$res['datas']=$result;
+          $res['searchText']='';
+        }
+      else {
+        $res['datas']='NA';
+        $res['searchText']='';
+>>>>>>> babe205dd5c9360c0d4e045bee8502bf2d1b9bec
       }
-      else
-      {
-          $searchText = $this->security->xss_clean($this->input->post('searchText'));
-          $data['searchText'] = $searchText;
 
-          $this->load->library('pagination');
-
-          $count = $this->customer_model->customerListingCount($searchText);
-
-    $returns = $this->paginationCompress ( "customerListing/", $count, 10 );
-
-          $data['customerRecords'] = $this->customer_model->customerListing($searchText, $returns["page"], $returns["segment"]);
-
-          $this->global['pageTitle'] = 'StarVish: Customer Listing';
-
-          $this->loadViews("customers", $this->global, $data, NULL);
-      }
+      $html =$this->loadViews("customer/customerlisting", $this->global, $res , NULL);
   }
-
-  /**
-   * This function is used to load the add new form
-   */
-  function addNew()
-  {
-      if($this->isAdmin() == TRUE)
+  //this function used to redirect to addcustomer or editcustomer based on the customerid
+    public function add_edit_customer($id=NULL)
+    {
+      if($id==NULL)
       {
-          $this->loadThis();
+        $this->global['pageTitle'] = 'StarVish:Add Customer';
+      $this->loadViews("customer/add_customer", $this->global, NULL , NULL);
       }
-      else
-      {
-          $this->load->model('customer_model');
-          $data['roles'] = $this->customer_model->getCustomerRoles();
-
-          $this->global['pageTitle'] = 'StarVish: Add New Customer';
-
-          $this->loadViews("addNew", $this->global, $data, NULL);
+      else {
+        $this->global['pageTitle'] = 'StarVish:Edit Customer';
+        $result['datas']=$this->customer_model->fetch_customer($id);
+        $this->loadViews("customer/edit_customer",$this->global,$result,NULL);
       }
-  }
-  /**
-   * This function is used to check whether email already exist or not
-   */
-  function checkEmailExists()
-  {
-      $customerId = $this->input->post("customerId");
-      $email = $this->input->post("email");
+    }
 
-      if(empty($customerId)){
-          $result = $this->customer_model->checkEmailExists($email);
-      } else {
-          $result = $this->customer_model->checkEmailExists($email, $customerId);
-      }
-
-      if(empty($result)){ echo("true"); }
-      else { echo("false"); }
-  }
   /**
    * This function is used to add new customer to the system
    */
+<<<<<<< HEAD
   function addNewCustomer()
   {
       if($this->isAdmin() == TRUE)
@@ -313,109 +289,98 @@ class Vendor extends BaseController
           $customerInfo = array('isDeleted'=>1,'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
 
           $result = $this->customer_model->deleteCustomer($customerId, $customerInfo);
+=======
+public function add_customer()
+{
+  $customer_id=$this->input->post('customer_id');
+  $company_name=$this->input->post('company_name');
+  $address1=$this->input->post('address1');
+  $address2=$this->input->post('address2');
+  $contactperson1=$this->input->post('contact_person1');
+  $contactperson2=$this->input->post('contact_person2');
+  $designation1=$this->input->post('designation1');
+  $designation2=$this->input->post('designation2');
+  $email1=$this->input->post('email1');
+  $email2=$this->input->post('email2');
+  $contactno1=$this->input->post('contact_no1');
+  $contactno2=$this->input->post('contact_no2');
+  $bankname=$this->input->post('bank_name');
+  $accountname=$this->input->post('account_name');
+  $accountnumber=$this->input->post('account_number');
+  $ifsccode=$this->input->post('ifsc_code');
+  $gstin=$this->input->post('gstin');
+  $attachment=$this->input->post('attachment');
 
-          if ($result > 0) { echo(json_encode(array('status'=>TRUE))); }
-          else { echo(json_encode(array('status'=>FALSE))); }
-      }
+  $datas=array('customer_id'=>$customer_id,'company_name'=>$company_name,'address1'=>$address1,
+              'address2'=>$address2,'contact_person1'=>$contactperson1,'contact_person2'=>$contactperson2,
+              'designation1'=>$designation1,'designation2'=>$designation2,'email1'=>$email1,'email2'=>$email2,
+              'contact_no1'=>$contactno1,'contact_no2'=>$contactno2,'gstin'=>$gstin,'bank_name'=>$bankname,
+              'account_name'=>$accountname,'account_number'=>$accountnumber,'ifsc_code'=>$ifsccode,
+              'attachment'=>$attachment
+              );
+
+              $this->customer_model->add_customer($datas);
+              redirect('add_edit_customer');
+}
+>>>>>>> babe205dd5c9360c0d4e045bee8502bf2d1b9bec
+
+//function to edit customer
+
+  public function update_customer(){
+    $customer_id=$this->input->post('customer_id');
+    $cname=$this->input->post('company_name');
+    $address1=$this->input->post('address1');
+    $address2=$this->input->post('address2');
+    $contactperson1=$this->input->post('contact_person1');
+    $contactperson2=$this->input->post('contact_person2');
+    $designation1=$this->input->post('designation1');
+    $designation2=$this->input->post('designation2');
+    $email1=$this->input->post('email1');
+    $email2=$this->input->post('email2');
+    $contactno1=$this->input->post('contact_no1');
+    $contactno2=$this->input->post('contact_no2');
+    $bankname=$this->input->post('bank_name');
+    $accountname=$this->input->post('account_name');
+    $accountnumber=$this->input->post('account_number');
+    $ifsccode=$this->input->post('ifsc_code');
+    $gstin=$this->input->post('gstin');
+    $attachment=$this->input->post('attachment');
+
+    $datas=array('customer_id'=>$customer_id,'company_name'=>$cname,'address1'=>$address1,
+                'address2'=>$address2,'contact_person1'=>$contactperson1,'contact_person2'=>$contactperson2,
+                'designation1'=>$designation1,'designation2'=>$designation2,'email1'=>$email1,'email2'=>$email2,
+                'contact_no1'=>$contactno1,'contact_no2'=>$contactno2,'gstin'=>$gstin,'bank_name'=>$bankname,
+                'account_name'=>$accountname,'account_number'=>$accountnumber,'ifsc_code'=>$ifsccode,
+                'attachment'=>$attachment
+                );
+
+      $this->customer_model->update_customer($customer_id,$datas);
+      redirect('customer_master');
   }
 
-  /**
-   * This function is used to load the change password screen
-   */
-  function loadChangePass()
+  //function to delete customer data
+  public function delete_customer($id)
   {
-      $this->global['pageTitle'] = 'StarVish: Change Password';
-
-      $this->loadViews("changePassword", $this->global, NULL, NULL);
+    $this->customer_model->delete_customer($id);
+    redirect('customer_master');
   }
 
-  /**
-   * This function is used to change the password of the customer
-   */
-  function changePassword()
+  //function to list the customer based on the search result
+  public function customer_listing()
   {
-      $this->load->library('form_validation');
-
-      $this->form_validation->set_rules('oldPassword','Old password','required|max_length[20]');
-      $this->form_validation->set_rules('newPassword','New password','required|max_length[20]');
-      $this->form_validation->set_rules('cNewPassword','Confirm new password','required|matches[newPassword]|max_length[20]');
-
-      if($this->form_validation->run() == FALSE)
-      {
-          $this->loadChangePass();
-      }
-      else
-      {
-          $oldPassword = $this->input->post('oldPassword');
-          $newPassword = $this->input->post('newPassword');
-
-          $resultPas = $this->customer_model->matchOldPassword($this->vendorId, $oldPassword);
-
-          if(empty($resultPas))
-          {
-              $this->session->set_flashdata('nomatch', 'Your old password not correct');
-              redirect('loadChangePass');
-          }
-          else
-          {
-              $customersData = array('password'=>getHashedPassword($newPassword), 'updatedBy'=>$this->vendorId,
-                              'updatedDtm'=>date('Y-m-d H:i:s'));
-
-              $result = $this->customer_model->changePassword($this->vendorId, $customersData);
-
-              if($result > 0) { $this->session->set_flashdata('success', 'Password updation successful'); }
-              else { $this->session->set_flashdata('error', 'Password updation failed'); }
-
-              redirect('loadChangePass');
-          }
-      }
-  }
-  /**
-   * Page not found : error 404
-   */
-  function pageNotFound()
-  {
-      $this->global['pageTitle'] = 'StarVish: 404 - Page Not Found';
-
-      $this->loadViews("404", $this->global, NULL, NULL);
-  }
-
-  /**
-   * This function used to show login history
-   * @param number $customerId : This is customer id
-   */
-  function loginHistoy($customerId = NULL)
-  {
-      if($this->isAdmin() == TRUE)
-      {
-          $this->loadThis();
-      }
-      else
-      {
-          $customerId = ($customerId == NULL ? $this->session->customerdata("customerId") : $customerId);
-
-          $searchText = $this->input->post('searchText');
-          $fromDate = $this->input->post('fromDate');
-          $toDate = $this->input->post('toDate');
-
-          $data["customerInfo"] = $this->customer_model->getcustomerInfoById($customerId);
-
-          $data['searchText'] = $searchText;
-          $data['fromDate'] = $fromDate;
-          $data['toDate'] = $toDate;
-
-          $this->load->library('pagination');
-
-          $count = $this->customer_model->loginHistoryCount($customerId, $searchText, $fromDate, $toDate);
-
-          $returns = $this->paginationCompress ( "login-history/".$customerId."/", $count, 5, 3);
-
-          $data['customerRecords'] = $this->customer_model->loginHistory($customerId, $searchText, $fromDate, $toDate, $returns["page"], $returns["segment"]);
-
-          $this->global['pageTitle'] = 'StarVish: Customer Login History';
-
-          $this->loadViews("loginHistory", $this->global, $data, NULL);
-      }
+    $this->global['pageTitle'] = 'StarVish: Search';
+    $searchText = $this->security->xss_clean($this->input->post('searchText'));
+    $result=$this->customer_model->customer_listing($searchText);
+    if($result!=FALSE)
+    {
+      $data['datas']=$result;
+      $data['searchText'] = $searchText;
+    }
+    else {
+      $data['datas']='NA';
+      $data['searchText'] = $searchText;
+    }
+  $this->loadViews("customer/customerlisting",$this->global,$data,NULL);
   }
 
 }

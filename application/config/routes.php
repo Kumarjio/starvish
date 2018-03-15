@@ -54,7 +54,12 @@ $route['default_controller'] = "login";
 $route['404_override'] = 'error';
 /****************Customer MASTER******************/
 $route['customer_master']='customer';
-
+$route['add_edit_customer']='customer/add_edit_customer';
+$route['add_edit_customer/(:any)']='customer/add_edit_customer/$1';
+$route['update_customer']='customer/update_customer';
+$route['add_customer']='customer/add_customer';
+$route['delete_customer/(:any)']='customer/delete_customer/$1';
+$route['customer_listing']='customer/customer_listing';
 
 
 /****************vendor MASTER******************/
@@ -64,6 +69,10 @@ $route['add_edit_vendor/(:any)']='vendor/add_edit_vendor/$1';
 $route['update_vendor']='vendor/update_vendor';
 $route['add_vendor']='vendor/add_vendor';
 $route['delete_vendor/(:any)']='vendor/delete_vendor/$1';
+<<<<<<< HEAD
+=======
+
+>>>>>>> babe205dd5c9360c0d4e045bee8502bf2d1b9bec
 /*********** USER DEFINED ROUTES *******************/
 
 $route['loginMe'] = 'login/loginMe';
