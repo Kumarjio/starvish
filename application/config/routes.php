@@ -52,14 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = "login";
 $route['404_override'] = 'error';
-/****************Customer MASTER******************/
-$route['customer_master']='customer';
-$route['add_edit_customer']='customer/add_edit_customer';
-$route['add_edit_customer/(:any)']='customer/add_edit_customer/$1';
-$route['update_customer']='customer/update_customer';
-$route['add_customer']='customer/add_customer';
-$route['delete_customer/(:any)']='customer/delete_customer/$1';
-$route['customer_listing']='customer/customer_listing';
+
 
 
 /****************vendor MASTER******************/
