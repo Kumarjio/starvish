@@ -1,5 +1,3 @@
-
-
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -26,7 +24,11 @@
                         <li><?php echo $item;?>: <?php echo $value;?></li>
                         <?php endforeach; ?>
                     </ul>
-                    <p><?php echo anchor('upload_controller/file_view', 'Upload Another File!'); ?></p>
+
+                    <p><?php //print_r(array_map(null,$upload_data));
+                      echo $upload_data['file_name'];
+                      ?></p>
+                    <p><?php echo anchor('upload', 'Upload Another File!'); ?></p>
 
                     </div><!-- /.box-body -->
 

@@ -25,14 +25,14 @@ class Vendor extends BaseController
   public function do_upload(){
     $this->global['pageTitle'] = 'StarVish: Upload ';
   $config = array(
-  'upload_path' => base_url().'/uploads/',
+  'upload_path' => 'uploads/',
   'allowed_types' => "gif|jpg|jpeg|png|iso|dmg|zip|rar|doc|docx|xls|xlsx|ppt|pptx|csv|ods|odt|odp|pdf|rtf|sxc|sxi|txt|exe|avi|mpeg|mp3|mp4|3gp",
   'overwrite' => TRUE,
   'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
 
   );
   $this->load->library('upload', $config);
-
+  $this->upload->initialize($config);
   if($this->upload->do_upload('userfile'))
     {
       $data = array('upload_data' => $this->upload->data());
