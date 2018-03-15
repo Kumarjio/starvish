@@ -57,6 +57,7 @@ $route['upload']='vendor/upload';
 $route['do_upload']='vendor/do_upload';
 
 
+
 /****************vendor MASTER******************/
 $route['vendor_master']='vendor';
 $route['add_edit_vendor']='vendor/add_edit_vendor';
@@ -65,6 +66,7 @@ $route['update_vendor']='vendor/update_vendor';
 $route['add_vendor']='vendor/add_vendor';
 $route['delete_vendor/(:any)']='vendor/delete_vendor/$1';
 $route['vendor_listing']='vendor/vendor_listing';
+
 
 /*********** USER DEFINED ROUTES *******************/
 

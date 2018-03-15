@@ -19,7 +19,11 @@ public function vendorlisting()
   //function to add vendor into vendor_master table
   public function add_vendor($datas)
   {
-    $this->db->insert('vendor_master',$datas);
+    $this->db->trans_start();
+    $v_id =$this->db->insert('vendor_master',$datas);
+    $vend_id = $this->db->insert_id();
+    $this->db->trans_complete();
+    return $v_id;
   }
 
   //function to fetch details from vendor table
@@ -39,12 +43,14 @@ public function vendorlisting()
   {
     $this->db->where('vendor_id',$id);
     $this->db->update('vendor_master',$datas);
+    return TRUE;
   }
 
   //function to delete_vendor
   public function delete_vendor($id)
   {
     $this->db->delete('vendor_master',array('vendor_id'=>$id));
+    return $this->db->affected_rows();
   }
 
   //function to list the users based on the search result
