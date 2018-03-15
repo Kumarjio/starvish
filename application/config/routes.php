@@ -52,6 +52,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = "login";
 $route['404_override'] = 'error';
+
+$route['upload']='vendor/upload';
+$route['do_upload']='vendor/do_upload';
 /****************Customer MASTER******************/
 $route['customer_master']='customer';
 

@@ -12,8 +12,40 @@ class Vendor extends BaseController
   {
       parent::__construct();
       $this->load->model('vendor_model');
+      $this->load->library('upload');
+      $this->load->helper(array('form', 'url'));
       $this->isLoggedIn();
   }
+  function upload()
+  {
+    $this->global['pageTitle'] = 'StarVish: Upload ';
+    $this->loadViews("vendor/upload", $this->global, array('error' => ' ' ), NULL);
+  }
+
+  public function do_upload(){
+    $this->global['pageTitle'] = 'StarVish: Upload ';
+  $config = array(
+  'upload_path' => base_url().'/uploads/',
+  'allowed_types' => "gif|jpg|jpeg|png|iso|dmg|zip|rar|doc|docx|xls|xlsx|ppt|pptx|csv|ods|odt|odp|pdf|rtf|sxc|sxi|txt|exe|avi|mpeg|mp3|mp4|3gp",
+  'overwrite' => TRUE,
+  'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
+
+  );
+  $this->load->library('upload', $config);
+
+  if($this->upload->do_upload('userfile'))
+    {
+      $data = array('upload_data' => $this->upload->data());
+      $this->loadViews("vendor/upload_success", $this->global,$data, NULL);
+    }
+  else
+    {
+      $error = array('error' => $this->upload->display_errors());
+      $this->loadViews("vendor/upload", $this->global,$error, NULL);
+    }
+
+  }
+
   /**
    * This function used to load the first screen of the user
    */
