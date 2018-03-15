@@ -57,8 +57,6 @@ $route['upload']='vendor/upload';
 $route['do_upload']='vendor/do_upload';
 
 
-
-
 /****************vendor MASTER******************/
 $route['vendor_master']='vendor';
 $route['add_edit_vendor']='vendor/add_edit_vendor';
