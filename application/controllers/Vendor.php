@@ -77,7 +77,15 @@ class Vendor extends BaseController
                   'account_name'=>$bank_acc_name,'account_number'=>$bank_acc_no,'ifsc_code'=>$ifsc_code,
                   'attachment'=>$attachment
                   );
-        $this->vendor_model->add_vendor($data);
+        $result = FALSE;
+        $result = $this->vendor_model->add_vendor($data);
+        if($result == TRUE){
+            $this->session->set_flashdata('success', 'New Vendor created successfully');
+        }
+        else {
+          $this->session->set_flashdata('error','Vendor creation Failed!');
+        }
+
         redirect('add_edit_vendor');
     }
 
@@ -110,15 +118,31 @@ public function update_vendor()
               'account_name'=>$bank_acc_name,'account_number'=>$bank_acc_no,'ifsc_code'=>$ifsc_code,
               'attachment'=>$attachment
               );
-
-    $this->vendor_model->update_vendor($vendor_id,$datas);
+    $result = FALSE;
+    $result = $this->vendor_model->update_vendor($vendor_id,$datas);
+    if($result == true)
+    {
+        $this->session->set_flashdata('success', 'Vendor updated successfully');
+    }
+    else
+    {
+        $this->session->set_flashdata('error', 'Vendor updation failed!');
+    }
     redirect('vendor_master');
 }
 
 //function to delete vendor data
 public function delete_vendor($id)
 {
-  $this->vendor_model->delete_vendor($id);
+  $result = $this->vendor_model->delete_vendor($id);
+  if($result == true)
+  {
+      $this->session->set_flashdata('success', 'Vendor Deleted successfully');
+  }
+  else
+  {
+      $this->session->set_flashdata('error', 'Vendor Deletion failed!');
+  }
   redirect('vendor_master');
 }
 
