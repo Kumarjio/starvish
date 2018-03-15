@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 14, 2018 at 04:39 PM
+-- Generation Time: Mar 15, 2018 at 12:49 PM
 -- Server version: 5.7.21-0ubuntu0.17.10.1
 -- PHP Version: 7.1.11-0ubuntu0.17.10.1
 
@@ -116,12 +116,13 @@ CREATE TABLE `customer_master` (
   `company_name` varchar(30) NOT NULL,
   `address1` varchar(30) NOT NULL,
   `address2` varchar(30) NOT NULL,
-  `contact_persion1` varchar(30) NOT NULL,
+  `contact_person1` varchar(30) NOT NULL,
   `designation1` varchar(20) NOT NULL,
   `email1` varchar(30) NOT NULL,
-  `contact_number1` int(13) NOT NULL,
+  `contact_no1` int(13) NOT NULL,
   `contact_person2` varchar(30) NOT NULL,
   `designation2` varchar(20) NOT NULL,
+  `email2` varchar(30) NOT NULL,
   `contact_no2` int(13) NOT NULL,
   `gstin` varchar(20) NOT NULL,
   `bank_name` varchar(25) NOT NULL,
@@ -130,6 +131,13 @@ CREATE TABLE `customer_master` (
   `ifsc_code` varchar(30) NOT NULL,
   `attachment` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer_master`
+--
+
+INSERT INTO `customer_master` (`customer_id`, `company_name`, `address1`, `address2`, `contact_person1`, `designation1`, `email1`, `contact_no1`, `contact_person2`, `designation2`, `email2`, `contact_no2`, `gstin`, `bank_name`, `account_name`, `account_number`, `ifsc_code`, `attachment`) VALUES
+('cust1', 'V2lancers', '108 sourashtra teachers colony', 'mdu', 'yogesh', 'jbh', 'developer@igniteddreamz.com', 23456, 'naresh', 'jkho', 'developer@igniteddreamz.com', 3456789, '567890', '34567890', '4567890', 4567890, '4567890', '56789');
 
 -- --------------------------------------------------------
 
@@ -399,7 +407,10 @@ INSERT INTO `tbl_last_login` (`id`, `userId`, `sessionData`, `machineIp`, `userA
 (17, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.146', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36', 'Linux', '2018-03-13 15:48:27'),
 (18, 18, '{\"emp_id\":\"svemp1\",\"role\":\"2\",\"roleText\":\"Manager\",\"name\":\"Employee1\"}', '::1', 'Chrome 65.0.3325.146', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36', 'Linux', '2018-03-13 18:45:03'),
 (19, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.146', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36', 'Linux', '2018-03-13 18:45:53'),
-(20, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.146', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36', 'Linux', '2018-03-14 07:46:49');
+(20, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.146', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36', 'Linux', '2018-03-14 07:46:49'),
+(21, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.146', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36', 'Linux', '2018-03-14 22:30:46'),
+(22, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-15 07:40:37'),
+(23, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-15 07:40:38');
 
 -- --------------------------------------------------------
 
@@ -802,7 +813,7 @@ ALTER TABLE `vendor_quote`
 -- AUTO_INCREMENT for table `tbl_last_login`
 --
 ALTER TABLE `tbl_last_login`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `tbl_reset_password`
 --
