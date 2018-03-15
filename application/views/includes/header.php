@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title><?php echo $pageTitle; ?></title>
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no,shrink-to-fit=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
     <link href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- FontAwesome 4.3.0 -->
@@ -94,7 +94,7 @@
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar" style="height:100vh;overflow-y:scroll;">
+        <section class="sidebar" style="overflow-y:auto; height:700px; position:relative">
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" class="smooth-scroll list-unstyled">
             <li class="header">MAIN NAVIGATION</li>
@@ -295,7 +295,7 @@
                   </li>
                   <br>
                   <li class="treeview">
-                      <a href="<?php echo base_url()?>" >
+                      <a href="<?php echo base_url()?>vendor_master" >
                         <i class="fa fa-plus-square-o"></i>
                       <span>Vendor Master</span>
                     </a>

@@ -12,8 +12,40 @@ class Vendor extends BaseController
   {
       parent::__construct();
       $this->load->model('vendor_model');
+      $this->load->library('upload');
+      $this->load->helper(array('form', 'url'));
       $this->isLoggedIn();
   }
+  function upload()
+  {
+    $this->global['pageTitle'] = 'StarVish: Upload ';
+    $this->loadViews("vendor/upload", $this->global, array('error' => ' ' ), NULL);
+  }
+
+  public function do_upload(){
+    $this->global['pageTitle'] = 'StarVish: Upload ';
+  $config = array(
+  'upload_path' => 'uploads/',
+  'allowed_types' => "gif|jpg|jpeg|png|iso|dmg|zip|rar|doc|docx|xls|xlsx|ppt|pptx|csv|ods|odt|odp|pdf|rtf|sxc|sxi|txt|exe|avi|mpeg|mp3|mp4|3gp",
+  'overwrite' => TRUE,
+  'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
+
+  );
+  $this->load->library('upload', $config);
+  $this->upload->initialize($config);
+  if($this->upload->do_upload('userfile'))
+    {
+      $data = array('upload_data' => $this->upload->data());
+      $this->loadViews("vendor/upload_success", $this->global,$data, NULL);
+    }
+  else
+    {
+      $error = array('error' => $this->upload->display_errors());
+      $this->loadViews("vendor/upload", $this->global,$error, NULL);
+    }
+
+  }
+
   /**
    * This function used to load the first screen of the user
    */
@@ -22,9 +54,12 @@ class Vendor extends BaseController
       $this->global['pageTitle'] = 'StarVish: Vendor Master';
       $result=$this->vendor_model->vendorlisting();
       if($result!=false)
-        $res['datas']=$result;
+        {$res['datas']=$result;
+          $res['searchText']='';
+        }
       else {
         $res['datas']='NA';
+        $res['searchText']='';
       }
       $html =$this->loadViews("vendor/vendorlisting", $this->global, $res , NULL);
   }
@@ -74,7 +109,15 @@ class Vendor extends BaseController
                   'account_name'=>$bank_acc_name,'account_number'=>$bank_acc_no,'ifsc_code'=>$ifsc_code,
                   'attachment'=>$attachment
                   );
-        $this->vendor_model->add_vendor($data);
+        $result = FALSE;
+        $result = $this->vendor_model->add_vendor($data);
+        if($result == TRUE){
+            $this->session->set_flashdata('success', 'New Vendor created successfully');
+        }
+        else {
+          $this->session->set_flashdata('error','Vendor creation Failed!');
+        }
+
         redirect('add_edit_vendor');
     }
 
@@ -107,16 +150,53 @@ public function update_vendor()
               'account_name'=>$bank_acc_name,'account_number'=>$bank_acc_no,'ifsc_code'=>$ifsc_code,
               'attachment'=>$attachment
               );
-
-    $this->vendor_model->update_vendor($vendor_id,$datas);
+    $result = FALSE;
+    $result = $this->vendor_model->update_vendor($vendor_id,$datas);
+    if($result == true)
+    {
+        $this->session->set_flashdata('success', 'Vendor updated successfully');
+    }
+    else
+    {
+        $this->session->set_flashdata('error', 'Vendor updation failed!');
+    }
     redirect('vendor_master');
 }
 
 //function to delete vendor data
 public function delete_vendor($id)
 {
-  $this->vendor_model->delete_vendor($id);
+  $result = $this->vendor_model->delete_vendor($id);
+  if($result == true)
+  {
+      $this->session->set_flashdata('success', 'Vendor Deleted successfully');
+  }
+  else
+  {
+      $this->session->set_flashdata('error', 'Vendor Deletion failed!');
+  }
   redirect('vendor_master');
+}
+
+//function to list the users based on the search result
+
+public function vendor_listing()
+{
+  $this->global['pageTitle'] = 'StarVish: Search';
+  $searchText = $this->security->xss_clean($this->input->post('searchText'));
+
+  $result=$this->vendor_model->vendor_listing($searchText);
+  if($result!=FALSE)
+  {
+    $data['datas']=$result;
+    $data['searchText'] = $searchText;
+  }
+  else {
+    $data['datas']='NA';
+    $data['searchText'] = $searchText;
+  }
+
+$this->loadViews("vendor/vendorlisting",$this->global,$data,NULL);
 }
 
 }
