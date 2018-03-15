@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 15, 2018 at 06:39 PM
+-- Generation Time: Mar 15, 2018 at 07:01 PM
 -- Server version: 5.7.21-0ubuntu0.17.10.1
 -- PHP Version: 7.1.11-0ubuntu0.17.10.1
 
@@ -129,15 +129,16 @@ CREATE TABLE `customer_master` (
   `account_name` varchar(30) NOT NULL,
   `account_number` int(30) NOT NULL,
   `ifsc_code` varchar(30) NOT NULL,
-  `attachment` varchar(50) NOT NULL
+  `attachment` varchar(50) NOT NULL,
+  `file_path` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customer_master`
 --
 
-INSERT INTO `customer_master` (`customer_id`, `company_name`, `address1`, `address2`, `contact_person1`, `designation1`, `email1`, `contact_no1`, `contact_person2`, `designation2`, `email2`, `contact_no2`, `gstin`, `bank_name`, `account_name`, `account_number`, `ifsc_code`, `attachment`) VALUES
-('cust1', 'V2lancers', '108 sourashtra teachers colony', 'mdu', 'yogesh', 'jbh', 'developer@igniteddreamz.com', 23456, 'naresh', 'jkho', 'developer@igniteddreamz.com', 3456789, '567890', '34567890', '4567890', 4567890, '4567890', '56789');
+INSERT INTO `customer_master` (`customer_id`, `company_name`, `address1`, `address2`, `contact_person1`, `designation1`, `email1`, `contact_no1`, `contact_person2`, `designation2`, `email2`, `contact_no2`, `gstin`, `bank_name`, `account_name`, `account_number`, `ifsc_code`, `attachment`, `file_path`) VALUES
+('cust1', 'V2lancers', '108 sourashtra teachers colony', 'mdu', 'yogesh', 'jbh', 'developer@igniteddreamz.com', 23456, 'naresh', 'jkho', 'developer@igniteddreamz.com', 3456789, '567890', '34567890', '4567890', 4567890, '4567890', '56789', '');
 
 -- --------------------------------------------------------
 
@@ -560,16 +561,17 @@ CREATE TABLE `vendor_master` (
   `account_name` varchar(30) NOT NULL,
   `account_number` int(30) NOT NULL,
   `ifsc_code` varchar(30) NOT NULL,
-  `attachment` varchar(50) NOT NULL
+  `attachment` varchar(50) NOT NULL,
+  `file_path` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `vendor_master`
 --
 
-INSERT INTO `vendor_master` (`vendor_id`, `company_name`, `address1`, `address2`, `contact_person1`, `designation1`, `email1`, `contact_no1`, `contact_person2`, `designation2`, `email2`, `contact_no2`, `gstin`, `bank_name`, `account_name`, `account_number`, `ifsc_code`, `attachment`) VALUES
-('dummy', 'V2lancers!', '108 sourashtra teachers colony', 'jhvg', 'ghhhg', 'kjhgjh', 'developer@igniteddreamz.com', '23342', 'S', 'jkhg', 'developer@igniteddreamz.com', '456789', 'jh', 'jhgjhgh', 'jgh', 567890, 'jh', 'cv'),
-('ven2', 'V2lancers', '108 sourashtra teachers colony', 'madurai', 'yogesh', 'ceo', 'developer@igniteddreamz.com', '123456789', 'gokul', 'manager', 'developer@igniteddreamz.com', '23456789', '23456789', 'canarabank', '23456789', 234567890, '4567890-', '45678');
+INSERT INTO `vendor_master` (`vendor_id`, `company_name`, `address1`, `address2`, `contact_person1`, `designation1`, `email1`, `contact_no1`, `contact_person2`, `designation2`, `email2`, `contact_no2`, `gstin`, `bank_name`, `account_name`, `account_number`, `ifsc_code`, `attachment`, `file_path`) VALUES
+('dummy', 'V2lancers!', '108 sourashtra teachers colony', 'jhvg', 'ghhhg', 'kjhgjh', 'developer@igniteddreamz.com', '23342', 'S', 'jkhg', 'developer@igniteddreamz.com', '456789', 'jh', 'jhgjhgh', 'jgh', 567890, 'jh', 'cv', ''),
+('ven2', 'V2lancers', '108 sourashtra teachers colony', 'madurai', 'yogesh', 'ceo', 'developer@igniteddreamz.com', '123456789', 'gokul', 'manager', 'developer@igniteddreamz.com', '23456789', '23456789', 'canarabank', '23456789', 234567890, '4567890-', '45678', '');
 
 -- --------------------------------------------------------
 
