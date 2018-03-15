@@ -23,6 +23,16 @@
                 <div class="box box-primary">
                     <div class="box-header">
                         <h3 class="box-title"> Vendor List</h3>
+                        <div class="box-tools">
+                            <form action="<?php echo base_url() ?>vendor_listing" method="POST" id="searchList">
+                                <div class="input-group">
+                                  <input type="text" name="searchText" value="<?php echo $searchText; ?>" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
+                                  <div class="input-group-btn">
+                                    <button class="btn btn-sm btn-default searchList"><i class="fa fa-search"></i></button>
+                                  </div>
+                                </div>
+                            </form>
+                        </div>
                     </div><!-- /.box-header -->
                     <?php
                     if($datas!='NA')
@@ -35,6 +45,7 @@
                       echo '<table class="table table-striped table-condensed table-hover table-bordered">
                           <thead class="bg-primary">
                             <tr>
+                            <th>S.No</th>
                             <th>Vendor ID</th>
                             <th>Company Name</th>
                             <th>Contact person</th>
@@ -44,11 +55,12 @@
                             </tr>
                           </thead>
                           <tbody>';
-                          $i=0;
+                          $i=1;
                           foreach($datas as $data)
                           {
 
                             echo'<tr class="bg-info">
+                             <td>'.$i++.'</td>
                               <td>'.$data->vendor_id.'</td>
                               <td>'.$data->company_name.'</td>
                               <td>'.$data->contact_person1.', '.$data->contact_person2.'</td>
