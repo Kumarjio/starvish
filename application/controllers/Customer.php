@@ -119,4 +119,23 @@ public function add_customer()
     $this->customer_model->delete_customer($id);
     redirect('customer_master');
   }
+
+  //function to list the customer based on the search result
+  public function customer_listing()
+  {
+    $this->global['pageTitle'] = 'StarVish: Search';
+    $searchText = $this->security->xss_clean($this->input->post('searchText'));
+    $result=$this->customer_model->customer_listing($searchText);
+    if($result!=FALSE)
+    {
+      $data['datas']=$result;
+      $data['searchText'] = $searchText;
+    }
+    else {
+      $data['datas']='NA';
+      $data['searchText'] = $searchText;
+    }
+  $this->loadViews("customer/customerlisting",$this->global,$data,NULL);
+  }
+
 }
