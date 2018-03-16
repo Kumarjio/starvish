@@ -150,6 +150,7 @@
    var ano=btn.data('ano');
    var ifsc=btn.data('ifsc');
    var at=btn.data('at');
+
    $('#customer_id').text(id); //put the data value in the element which set in the modal with an id
    $('#name').text(name);
     $('#address1').text(address1);   $('#address2').text(address2);
@@ -160,7 +161,7 @@
    $('#gst').text(gst);$('#bank').text(bank);
     $('#anm').text(anm); $('#ano').text(ano);
    $('#ifsc').text(ifsc); $('#at').text(at);
-   $("#at").attr("href", "uploads/"+at);//file upload location
+   $("#at").attr("href", "uploads/customer/"+at);//file upload location
   });
  });
 </script>
