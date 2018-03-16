@@ -178,7 +178,7 @@
                                               <div class="col-md-6">
                                                   <div class="form-group">
                                                       <label for="attachment">Attachment</label>
-                                                      <input type="text" class="form-control required " id="attachment" value="<?php echo $datas[0]->attachment;?>" name="attachment" maxlength="50">
+                                                      <input type="file" class="form-control required " id="attachment" value="<?php echo $datas[0]->attachment;?>" name="attachment" maxlength="50">
                                                   </div>
                                               </div>
                                             </div>

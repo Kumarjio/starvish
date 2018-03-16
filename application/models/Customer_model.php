@@ -20,7 +20,8 @@ public function customerlisting()
 //function to add customer into customer_master table
 public function add_customer($datas)
 {
-  $this->db->insert('customer_master',$datas);
+  $res=$this->db->insert('customer_master',$datas);
+  return $res;
 }
 
 //function to fetch details from customer table
@@ -40,13 +41,15 @@ public function fetch_customer($id)
 public function update_customer($id,$datas)
 {
   $this->db->where('customer_id',$id);
-  $this->db->update('customer_master',$datas);
+  $res=$this->db->update('customer_master',$datas);
+  return $res;
 }
 
 //function to delete customer
 public function delete_customer($id)
 {
-  $this->db->delete('customer_master',array('customer_id'=>$id));
+  $res=$this->db->delete('customer_master',array('customer_id'=>$id));
+  return $res;
 }
 
 //function to list the users based on the search result
