@@ -90,14 +90,14 @@
                               <td>'.$data->contact_no1.', '.$data->contact_no2.'</td>
                               <td>'.$data->email1.', '.$data->email2.'</td>';?>
                               <td class="text-center">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#datas" data-id="<?php echo $data->customer_id?>"
+                                <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#datas" data-id="<?php echo $data->customer_id?>"
                                     data-name="<?php echo $data->company_name?>" data-address1="<?php echo $data->address1?>" data-address2="<?php echo $data->address2?>"
                                    data-cp1="<?php echo $data->contact_person1?>" data-cp2="<?php echo $data->contact_person2?>" data-desg1="<?php echo $data->designation1?>"
                                    data-desg2="<?php echo $data->designation2?>" data-email1="<?php echo $data->email1?>" data-email2="<?php echo $data->email2?>"
                                    data-cn1="<?php echo $data->contact_no1?>" data-cn2="<?php echo $data->contact_no2?>" data-gst="<?php echo $data->gstin?>"
                                    data-bank="<?php echo $data->bank_name?>" data-anm="<?php echo $data->account_name?>" data-ano="<?php echo $data->account_number?>"
                                    data-ifsc="<?php echo $data->ifsc_code?>" data-at="<?php echo $data->attachment?>">
-                                    View</button>&nbsp;|
+                                    <i class="fa fa-info-circle"></i></a>&nbsp;|
                                   <a class="btn btn-sm btn-info" href="<?php echo base_url().'add_edit_customer/'.$data->customer_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
                                   <a class="btn btn-sm btn-danger" href="<?php  echo base_url().'delete_customer/'.$data->customer_id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
                               </td>

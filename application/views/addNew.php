@@ -70,7 +70,7 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="emp_id">Employee ID</label>
-                                      <input type="text" class="form-control required" value="<?php echo set_value('emp_id'); ?>" id="emp_id" name="emp_id" maxlength="128">
+                                      <input type="text" class=tsyo"form-control required" value="<?php echo set_value('emp_id'); ?>" id="emp_id" name="emp_id" maxlength="128">
                                   </div>
                               </div>
 

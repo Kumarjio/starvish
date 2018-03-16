@@ -35,6 +35,7 @@
                     <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
                   <table class="table table-striped table-bordered table-hover">
                     <thead class="bg-primary">
+                      <th>S.No</th>
                       <th>&nbsp;Employee ID</th>
                       <th>Name</th>
                       <th>Email</th>
@@ -43,6 +44,7 @@
                       <th class="text-center">Actions</th>
                     </thead>
                     <?php
+                    $i=1;
                     if(!empty($userRecords))
                     {
                         foreach($userRecords as $record)
@@ -50,6 +52,7 @@
                     ?>
                     <tbody>
                     <tr>
+                      <td><?php echo $i++;?></td>
                       <td>&nbsp;&nbsp;&nbsp;<?php echo $record->employee_id ?></td>
                       <td><?php echo $record->name ?></td>
                       <td><?php echo $record->email ?></td>
