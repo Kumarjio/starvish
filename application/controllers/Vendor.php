@@ -100,9 +100,10 @@ class Vendor extends BaseController
       $bank_acc_no=$this->input->post('bank_acc_no');
       $ifsc_code=$this->input->post('ifsc_code');
       $gst=$this->input->post('gst');
-	  
+
 	   $config = array(	//file upload
   'upload_path' => 'uploads/',
+  'file_name'=>$vendor_id.'-'.$company_name,
   'allowed_types' => "gif|jpg|jpeg|png|iso|dmg|zip|rar|doc|docx|xls|xlsx|ppt|pptx|csv|ods|odt|odp|pdf|rtf|sxc|sxi|txt|exe|avi|mpeg|mp3|mp4|3gp",
   'overwrite' => TRUE,
   'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
@@ -155,6 +156,7 @@ public function update_vendor()
   $gst=$this->input->post('gst');
    $config = array(   //attachment upload
   'upload_path' => 'uploads/',
+  'file_name'=>$vendor_id.'-'.$company_name,
   'allowed_types' => "gif|jpg|jpeg|png|iso|dmg|zip|rar|doc|docx|xls|xlsx|ppt|pptx|csv|ods|odt|odp|pdf|rtf|sxc|sxi|txt|exe|avi|mpeg|mp3|mp4|3gp",
   'overwrite' => TRUE,
   'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
@@ -171,7 +173,7 @@ if($attachment=="") //check empty file input
               'designation1'=>$desg1,'designation2'=>$desg2,'email1'=>$email1,'email2'=>$email2,
               'contact_no1'=>$contact_no1,'contact_no2'=>$contact_no2,'gstin'=>$gst,'bank_name'=>$bank,
               'account_name'=>$bank_acc_name,'account_number'=>$bank_acc_no,'ifsc_code'=>$ifsc_code,
-     
+
               );
 	}
 	else{
