@@ -43,7 +43,8 @@
                         <i><h3 class="box-title">Add New Customer</h3></i>
                     </div><!-- /.box-header -->
                     <?php $this->load->helper("form"); ?>
-                    <form role="form" id="addvendor" action="<?php echo base_url() ?>add_customer" method="post" role="form">
+          <!--          <form role="form" id="addvendor" action="<?php echo base_url() ?>add_customer" method="post" role="form">-->
+          <?php echo form_open_multipart('add_customer');?>
                         <div class="box-body">
 
                           <!--row 1-->

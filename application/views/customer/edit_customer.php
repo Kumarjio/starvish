@@ -20,7 +20,8 @@
                         <h3 class="box-title"> Edit customer</h3>
                     </div><!-- /.box-header -->
                     <?php $this->load->helper("form"); ?>
-                    <form role="form" id="addcustomer" action="<?php echo base_url() ?>update_customer" method="post" role="form">
+                    <!--<form role="form" id="addcustomer" action="<?php echo base_url() ?>update_customer" method="post" role="form">-->
+                    <?php echo form_open_multipart('update_customer');?>
                         <div class="box-body">
 
                           <!--row 1-->

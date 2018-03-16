@@ -82,7 +82,7 @@ public function add_customer()
  $this->load->library('upload', $config);
  $this->upload->initialize($config);
  $this->upload->do_upload('attachment');
-   $attachment=$this->upload->data('file_name');
+   $attachment=$this->upload->data('orig_name');
  $filePath=$this->upload->data('full_path');
 
   $datas=array('customer_id'=>$customer_id,'company_name'=>$company_name,'address1'=>$address1,
@@ -136,7 +136,7 @@ public function add_customer()
     $this->load->library('upload', $config);
     $this->upload->initialize($config);
     $this->upload->do_upload('attachment');
-    $attachment=$this->upload->data('file_name');
+    $attachment=$this->upload->data('orig_name');
     $filePath=$this->upload->data('full_path');
     if($attachment=="") //check empty file input
     {
