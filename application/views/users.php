@@ -6,6 +6,7 @@
         <small>Add, Edit, Delete</small>
       </h1>
     </section>
+
     <section class="content">
         <div class="row">
             <div class="col-xs-12 text-right">

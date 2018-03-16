@@ -10,7 +10,28 @@
     <section class="content">
 
         <div class="row">
-            <!-- left column -->
+                      <!-- left column -->  <?php
+                            $this->load->helper('form');
+                            $error = $this->session->flashdata('error');
+                            if($error)
+                            {
+                        ?>
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <?php echo $this->session->flashdata('error'); ?>
+                        </div>
+                        <?php } ?>
+                        <?php
+                            $success = $this->session->flashdata('success');
+                            if($success)
+                            {
+                        ?>
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <?php echo $this->session->flashdata('success'); ?>
+                        </div>
+                      <?php } ?>
+
             <div class="col-md-8">
               <!-- general form elements -->
 
@@ -22,7 +43,7 @@
                     </div><!-- /.box-header -->
                     <!-- form start -->
                     <?php $this->load->helper("form"); ?>
-                    <form role="form" id="addUser" action="<?php echo base_url() ?>addNewUser" method="post" role="form">
+                    <form role="form" id="addVendor" action="<?php echo base_url() ?>addNewUser" method="post" role="form">
                         <div class="box-body">
 
                           <!--row 1-->
@@ -188,28 +209,6 @@
                     </form>
                 </div>
             </div>
-            <div class="col-md-4">
-                <?php
-                    $this->load->helper('form');
-                    $error = $this->session->flashdata('error');
-                    if($error)
-                    {
-                ?>
-                <div class="alert alert-danger alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <?php echo $this->session->flashdata('error'); ?>
-                </div>
-                <?php } ?>
-                <?php
-                    $success = $this->session->flashdata('success');
-                    if($success)
-                    {
-                ?>
-                <div class="alert alert-success alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <?php echo $this->session->flashdata('success'); ?>
-                </div>
-                <?php } ?>
 
                 <div class="row">
                     <div class="col-md-12">
