@@ -256,7 +256,7 @@
         </tr>
         <tr>
           <th>Attachment</th>
-          <td ><a id="at"></a></td>
+          <td ><a target="_blank" id="at"></a></td>
         </tr>
 
             </tbody>
