@@ -160,6 +160,7 @@
    $('#gst').text(gst);$('#bank').text(bank);
     $('#anm').text(anm); $('#ano').text(ano);
    $('#ifsc').text(ifsc); $('#at').text(at);
+   $("#at").attr("href", "uploads/"+at);//file upload location
 
   });
  });
@@ -255,7 +256,7 @@
         </tr>
         <tr>
           <th>Attachment</th>
-          <td id="at"></td>
+          <td ><a id="at"></a></td>
         </tr>
 
             </tbody>

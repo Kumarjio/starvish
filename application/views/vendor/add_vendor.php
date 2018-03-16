@@ -42,7 +42,8 @@
                         <i><h3 class="box-title">Add New Vendor</h3></i>
                     </div><!-- /.box-header -->
                     <?php $this->load->helper("form"); ?>
-                    <form role="form" id="addvendor" action="<?php echo base_url() ?>add_vendor" method="post" role="form">
+                   <!-- <form role="form" id="addvendor" action="<?php echo base_url() ?>add_vendor" method="post" role="form">-->
+				    <?php echo form_open_multipart('add_vendor');?>
                         <div class="box-body">
 
                           <!--row 1-->
@@ -200,7 +201,7 @@
                                               <div class="col-md-6">
                                                   <div class="form-group">
                                                       <label for="attachment">Attachment</label>
-                                                      <input type="text" class="form-control required " id="attachment"  name="attachment" maxlength="50">
+                                                      <input type="file" class="form-control required " id="attachment"  name="attachment" maxlength="50">
                                                   </div>
                                               </div>
                                             </div>
