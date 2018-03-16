@@ -56,7 +56,15 @@ $route['404_override'] = 'error';
 $route['upload']='vendor/upload';
 $route['do_upload']='vendor/do_upload';
 
+/****************Customer MASTER******************/
 
+$route['customer_master']='customer';
+$route['add_edit_customer']='customer/add_edit_customer';
+$route['add_edit_customer/(:any)']='customer/add_edit_customer/$1';
+$route['update_customer']='customer/update_customer';
+$route['add_customer']='customer/add_customer';
+$route['delete_customer/(:any)']='customer/delete_customer/$1';
+$route['customer_listing']='customer/customer_listing';
 
 /****************vendor MASTER******************/
 $route['vendor_master']='vendor';
