@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
-<<<<<<< HEAD
--- Generation Time: Mar 15, 2018 at 07:01 PM
-=======
--- Generation Time: Mar 15, 2018 at 06:55 PM
->>>>>>> 03597ad6b9018815875a009aa12cdf6ca350ff71
+-- Generation Time: Mar 16, 2018 at 12:11 PM
 -- Server version: 5.7.21-0ubuntu0.17.10.1
 -- PHP Version: 7.1.11-0ubuntu0.17.10.1
 
@@ -136,13 +132,6 @@ CREATE TABLE `customer_master` (
   `attachment` varchar(50) NOT NULL,
   `file_path` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `customer_master`
---
-
-INSERT INTO `customer_master` (`customer_id`, `company_name`, `address1`, `address2`, `contact_person1`, `designation1`, `email1`, `contact_no1`, `contact_person2`, `designation2`, `email2`, `contact_no2`, `gstin`, `bank_name`, `account_name`, `account_number`, `ifsc_code`, `attachment`, `file_path`) VALUES
-('cust1', 'V2lancers', '108 sourashtra teachers colony', 'mdu', 'yogesh', 'jbh', 'developer@igniteddreamz.com', 23456, 'naresh', 'jkho', 'developer@igniteddreamz.com', 3456789, '567890', '34567890', '4567890', 4567890, '4567890', '56789', '');
 
 -- --------------------------------------------------------
 
@@ -416,7 +405,10 @@ INSERT INTO `tbl_last_login` (`id`, `userId`, `sessionData`, `machineIp`, `userA
 (21, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.146', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36', 'Linux', '2018-03-14 22:30:46'),
 (22, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-15 07:40:37'),
 (23, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-15 07:40:38'),
-(24, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-15 15:47:52');
+(24, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-15 15:47:52'),
+(25, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-15 21:54:08'),
+(26, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-16 07:14:01'),
+(27, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-16 09:18:30');
 
 -- --------------------------------------------------------
 
@@ -574,8 +566,7 @@ CREATE TABLE `vendor_master` (
 --
 
 INSERT INTO `vendor_master` (`vendor_id`, `company_name`, `address1`, `address2`, `contact_person1`, `designation1`, `email1`, `contact_no1`, `contact_person2`, `designation2`, `email2`, `contact_no2`, `gstin`, `bank_name`, `account_name`, `account_number`, `ifsc_code`, `attachment`, `file_path`) VALUES
-('dummy', 'V2lancers!', '108 sourashtra teachers colony', 'jhvg', 'ghhhg', 'kjhgjh', 'developer@igniteddreamz.com', '23342', 'S', 'jkhg', 'developer@igniteddreamz.com', '456789', 'jh', 'jhgjhgh', 'jgh', 567890, 'jh', 'cv', ''),
-('ven2', 'V2lancers', '108 sourashtra teachers colony', 'madurai', 'yogesh', 'ceo', 'developer@igniteddreamz.com', '123456789', 'gokul', 'manager', 'developer@igniteddreamz.com', '23456789', '23456789', 'canarabank', '23456789', 234567890, '4567890-', '45678', '');
+('ven1', 'v7lancerss', '108 sourashtra teachers colony', 'Madurai', 'yogesh', 'ceo', 'tsyogesh40@gmail.com', '07373535614', 'Arun', 'manager', 'tsyogesh46@gmail.com', '34567890', '213131421', 'hdfc', 'yogesh ', 2147483647, 'xfcghgjkl123', 'ven1-v7lancerss.pdf', '/var/www/starvish/uploads/vendor/ven1-v7lancerss.pdf');
 
 -- --------------------------------------------------------
 
@@ -820,7 +811,7 @@ ALTER TABLE `vendor_quote`
 -- AUTO_INCREMENT for table `tbl_last_login`
 --
 ALTER TABLE `tbl_last_login`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `tbl_reset_password`
 --

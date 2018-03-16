@@ -42,6 +42,24 @@
                         <h3 class="box-title">Enter Employee Details</h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
+                    <script>
+                    $(document).ready(function(){
+
+                      jQuery.validator.addMethod("noSpace", function(value, element) {
+                        return value.indexOf(" ") < 0 && value != "";
+                      }, "No space please and don't leave it empty");
+
+
+                      $("form").validate({
+                        rules: {
+                          emp_id: {
+                            noSpace: true
+                          }
+                        }
+                      });
+
+                      })
+                    </script>
                     <?php $this->load->helper("form"); ?>
                     <form role="form" id="addVendor" action="<?php echo base_url() ?>addNewUser" method="post" role="form">
                         <div class="box-body">

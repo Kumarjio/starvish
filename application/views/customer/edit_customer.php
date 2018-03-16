@@ -20,13 +20,10 @@
                         <h3 class="box-title"> Edit customer</h3>
                     </div><!-- /.box-header -->
                     <?php $this->load->helper("form"); ?>
-<<<<<<< HEAD:application/views/customer/edit_customer.php
+
                     <!--<form role="form" id="addcustomer" action="<?php echo base_url() ?>update_customer" method="post" role="form">-->
                     <?php echo form_open_multipart('update_customer');?>
-=======
-                  <!--<form role="form" id="addvendor" action="<?php echo base_url() ?>update_vendor" method="post" role="form">-->
-				    <?php echo form_open_multipart('update_vendor');?>
->>>>>>> master:application/views/vendor/edit_vendor.php
+          
                         <div class="box-body">
 
                           <!--row 1-->

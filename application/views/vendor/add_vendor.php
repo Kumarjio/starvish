@@ -1,5 +1,3 @@
-
-
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -41,6 +39,24 @@
                     <div class="box-header">
                         <i><h3 class="box-title">Add New Vendor</h3></i>
                     </div><!-- /.box-header -->
+                    <script>
+                    $(document).ready(function(){
+
+                      jQuery.validator.addMethod("noSpace", function(value, element) {
+                        return value.indexOf(" ") < 0 && value != "";
+                      }, "No space please and don't leave it empty");
+
+
+                      $("form").validate({
+                        rules: {
+                          vendor_id: {
+                            noSpace: true
+                          }
+                        }
+                      });
+
+                      })
+                    </script>
                     <?php $this->load->helper("form"); ?>
                    <!-- <form role="form" id="addvendor" action="<?php echo base_url() ?>add_vendor" method="post" role="form">-->
 				    <?php echo form_open_multipart('add_vendor');?>
