@@ -2,6 +2,28 @@
 
 class User_model extends CI_Model
 {
+
+  //count the no of employees
+    function count_employee()
+    {
+      $res=$this->db->get('employee_master');
+      return $res->num_rows();
+    }
+
+      //count the no of customer
+    function count_customer()
+      {
+        $res=$this->db->get('customer_master');
+        return $res->num_rows();
+      }
+
+      //count the no of vendor
+        function count_vendor()
+        {
+          $res=$this->db->get('vendor_master');
+          return $res->num_rows();
+          }
+
     /**
      * This function is used to get the user listing count
      * @param string $searchText : This is optional search text

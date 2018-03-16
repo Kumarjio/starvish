@@ -21,8 +21,10 @@ class User extends BaseController
     public function index()
     {
         $this->global['pageTitle'] = 'StarVish: Dashboard';
-
-        $this->loadViews("dashboard", $this->global, NULL , NULL);
+        $data['emp_no']=$this->user_model->count_employee();
+        $data['cust_no']=$this->user_model->count_customer();
+        $data['vendor_no']=$this->user_model->count_vendor();
+        $this->loadViews("dashboard", $this->global, $data , NULL);
     }
 
     /**
