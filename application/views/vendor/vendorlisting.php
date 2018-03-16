@@ -160,7 +160,7 @@
    $('#gst').text(gst);$('#bank').text(bank);
     $('#anm').text(anm); $('#ano').text(ano);
    $('#ifsc').text(ifsc); $('#at').text(at);
-   $("#at").attr("href", "uploads/"+at);//file upload location
+   $("#at").attr("href", "uploads/vendor/"+at);//file upload location
 
   });
  });

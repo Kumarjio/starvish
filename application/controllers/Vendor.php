@@ -25,7 +25,7 @@ class Vendor extends BaseController
   public function do_upload(){
     $this->global['pageTitle'] = 'StarVish: Upload ';
   $config = array(
-  'upload_path' => 'uploads/',
+  'upload_path' => 'uploads/vendor/',
   'allowed_types' => "gif|jpg|jpeg|png|iso|dmg|zip|rar|doc|docx|xls|xlsx|ppt|pptx|csv|ods|odt|odp|pdf|rtf|sxc|sxi|txt|exe|avi|mpeg|mp3|mp4|3gp",
   'overwrite' => TRUE,
   'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
@@ -102,7 +102,7 @@ class Vendor extends BaseController
       $gst=$this->input->post('gst');
 
 	   $config = array(	//file upload
-  'upload_path' => 'uploads/',
+  'upload_path' => 'uploads/vendor/',
   'file_name'=>$vendor_id.'-'.$company_name,
   'allowed_types' => "gif|jpg|jpeg|png|iso|dmg|zip|rar|doc|docx|xls|xlsx|ppt|pptx|csv|ods|odt|odp|pdf|rtf|sxc|sxi|txt|exe|avi|mpeg|mp3|mp4|3gp",
   'overwrite' => TRUE,
@@ -155,7 +155,7 @@ public function update_vendor()
   $ifsc_code=$this->input->post('ifsc_code');
   $gst=$this->input->post('gst');
    $config = array(   //attachment upload
-  'upload_path' => 'uploads/',
+  'upload_path' => 'uploads/vendor/',
   'file_name'=>$vendor_id.'-'.$company_name,
   'allowed_types' => "gif|jpg|jpeg|png|iso|dmg|zip|rar|doc|docx|xls|xlsx|ppt|pptx|csv|ods|odt|odp|pdf|rtf|sxc|sxi|txt|exe|avi|mpeg|mp3|mp4|3gp",
   'overwrite' => TRUE,
