@@ -161,7 +161,12 @@
    $('#gst').text(gst);$('#bank').text(bank);
     $('#anm').text(anm); $('#ano').text(ano);
    $('#ifsc').text(ifsc); $('#at').text(at);
+<<<<<<< HEAD:application/views/customer/customerlisting.php
    $("#at").attr("href", "uploads/customer/"+at);//file upload location
+=======
+   $("#at").attr("href", "uploads/vendor/"+at);//file upload location
+
+>>>>>>> master:application/views/vendor/vendorlisting.php
   });
  });
 </script>
