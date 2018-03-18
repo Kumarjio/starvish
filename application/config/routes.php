@@ -76,6 +76,10 @@ $route['delete_vendor/(:any)']='vendor/delete_vendor/$1';
 $route['vendor_listing']='vendor/vendor_listing';
 
 
+/****************vendor QUOTATION******************/
+$route['vendor_quotation']='vendorquotation';
+
+
 /*********** USER DEFINED ROUTES *******************/
 
 $route['loginMe'] = 'login/loginMe';

@@ -4,7 +4,7 @@
     <section class="content-header">
       <h1>
         <i class="fa fa-plus-square-o"></i> Customer Master
-        <small>Add, Edit or Delete Customers</small>
+        <small>Add, Edit or Delete Customer</small>
       </h1>
     </section>
 

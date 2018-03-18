@@ -119,7 +119,7 @@
                   </li>
                   <br>
                   <li class="treeview">
-                    <a href="<?php echo base_url()?>" >
+                    <a href="<?php echo base_url()?>vendor_quotation" >
                       <i class="fa fa-file-text-o"></i>
                       <span>Vendor Quotation</span>
                     </a>
