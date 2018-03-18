@@ -78,6 +78,12 @@ $route['vendor_listing']='vendor/vendor_listing';
 
 /****************vendor QUOTATION******************/
 $route['vendor_quotation']='vendorquotation';
+$route['add_edit_vendor_quotation']='vendorquotation/add_edit_vendor_quotation';
+$route['add_edit_vendor_quotation/(:any)']='vendorquotation/add_edit_vendor_quotation/$1';
+$route['update_vendor_quotation']='vendorquotation/update_vendor_quotation';
+$route['add_vendor_quotation']='vendorquotation/add_vendor_quotation';
+$route['delete_vendor_quotation/(:any)']='vendorquotation/delete_vendor_quotation/$1';
+$route['vendor_quotation_listing']='vendorquotation/vendor_quotation_listing';
 
 
 /*********** USER DEFINED ROUTES *******************/

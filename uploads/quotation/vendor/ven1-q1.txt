@@ -1,0 +1,6 @@
+<<<<<<< HEAD
+asdfghjkl
+=======
+sample
+customer
+>>>>>>> 751ef33cbb9c951c86f6eb9196a9006113cf155a
