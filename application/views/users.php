@@ -3,7 +3,7 @@
     <section class="content-header">
       <h1>
         <i class="fa fa-users"></i> Employee Master
-        <small>Add, Edit, Delete</small>
+        <small>Add, Edit, or Delete Employees</small>
       </h1>
     </section>
 
@@ -60,7 +60,7 @@
                       <td><?php echo $record->role ?></td>
                       <td class="text-center">
                           <a class="btn btn-sm btn-primary" href="<?= base_url().'login-history/'.$record->userId; ?>" title="Login history"><i class="fa fa-history"></i></a> |
-                          <a class="btn btn-sm btn-info" href="<?php echo base_url().'editOld/'.$record->userId; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
+                          <a class="btn btn-sm btn-info" href="<?php echo base_url().'editOld/'.$record->userId; ?>" title="Edit"><i class="fa fa-pencil"></i></a> |
                           <a class="btn btn-sm btn-danger deleteUser" href="#" data-userid="<?php echo $record->userId; ?>" title="Delete"><i class="fa fa-trash"></i></a>
                       </td>
                     </tr>
