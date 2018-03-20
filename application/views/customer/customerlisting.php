@@ -98,7 +98,7 @@
                                    data-bank="<?php echo $data->bank_name?>" data-anm="<?php echo $data->account_name?>" data-ano="<?php echo $data->account_number?>"
                                    data-ifsc="<?php echo $data->ifsc_code?>" data-at="<?php echo $data->attachment?>">
                                     <i class="fa fa-info-circle"></i></a>&nbsp;|
-                                  <a class="btn btn-sm btn-info" href="<?php echo base_url().'add_edit_customer/'.$data->customer_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
+                                  <a class="btn btn-sm btn-info" href="<?php echo base_url().'add_edit_customer/'.$data->customer_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>&nbsp;|
                                   <a class="btn btn-sm btn-danger" href="<?php  echo base_url().'delete_customer/'.$data->customer_id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
                               </td>
                             <?php echo '</tr>

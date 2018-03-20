@@ -1,6 +1,13 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+      <div class="row">
+          <div class="col-xs-12 text-left">
+              <div class="form-group">
+                  <a class="btn btn-primary" href="<?php echo base_url(); ?>userListing"><i class="fa fa-angle-left"></i> Back</a>
+              </div>
+          </div>
+      </div>
       <h1>
         <i class="fa fa-users"></i> Employee Master
         <small>Add / Edit Employee</small>
@@ -66,11 +73,10 @@
 
                           <!--row 1-->
                             <div class="row">
-
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="emp_id">Employee ID</label>
-                                      <input type="text" class=tsyo"form-control required" value="<?php echo set_value('emp_id'); ?>" id="emp_id" name="emp_id" maxlength="128">
+                                      <input type="text" class="form-control required" value="<?php echo set_value('emp_id'); ?>" id="emp_id" name="emp_id" maxlength="128">
                                   </div>
                               </div>
 

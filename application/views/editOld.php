@@ -23,6 +23,13 @@ if(!empty($userInfo))
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+      <div class="row">
+          <div class="col-xs-12 text-left">
+              <div class="form-group">
+                  <a class="btn btn-primary" href="<?php echo base_url(); ?>userListing"><i class="fa fa-angle-left"></i> Back</a>
+              </div>
+          </div>
+      </div>
       <h1>
         <i class="fa fa-users"></i>Employee Master
         <small>Add / Edit User</small>

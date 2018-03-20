@@ -1,6 +1,13 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+      <div class="row">
+          <div class="col-xs-12 text-left">
+              <div class="form-group">
+                  <a class="btn btn-primary" href="<?php echo base_url(); ?>vendor_master"><i class="fa fa-angle-left"></i> Back</a>
+              </div>
+          </div>
+      </div>
       <h1>
         <i class="fa fa-plus-square-o"></i> Vendor Master
         <small>Add, Edit or Delete the Vendors</small>
