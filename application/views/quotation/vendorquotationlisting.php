@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <i class="fa fa-plus-square-o"></i> Vendor Quotation Listing
+        <i class="fa fa-file-text-o"></i> Vendor Quotation Listing
         <small>Add, Edit, Update or Delete Vendor Quotation</small>
       </h1>
     </section>
@@ -85,10 +85,11 @@
                               <td>'.$data->vendor_quote_id.'</td>
                               <td>'.$data->vendor_id.'</td>
                               <td>'.$data->description.'</td>';?>
+
                               <td class="text-center">
                                   <a  class="btn btn-sm btn-success" data-toggle="modal" data-target="#datas" data-id="<?php echo $i++?>"
-                                    data-date="<?php echo $data->date?>" data-vendor_quote_id="<?php echo $data->vendor_quote_id?>" data-vendor_id="<?php echo $data->vendor_id?>"
-                                   data-description="<?php echo $data->description?>"data-attachment="<?php echo $data->attachment?>">
+                                    data-date="<?php echo $data->date;?>" data-vendor_quote_id="<?php echo $data->vendor_quote_id;?>" data-vendor_id="<?php echo $data->vendor_id;?>"
+                                   data-description="<?php echo $data->description;?>" data-at="<?php echo $data->attachment?>">
                                     <i class="fa fa-info-circle"></i></a>&nbsp;|
                                   <a class="btn btn-sm btn-info" href="<?php echo base_url().'add_edit_vendor_quotation/'.$data->vendor_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>&nbsp;|
                                   <a class="btn btn-sm btn-danger" href="<?php  echo base_url().'delete_vendor_quotation/'.$data->vendor_id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
@@ -129,15 +130,14 @@
    var vendor_quote_id=btn.data('vendor_quote_id');
    var vendor_id=btn.data('vendor_id');
    var description=btn.data('description');
-   var attachment=btn.data('attachment');
-
+   var attachment=btn.data('at');
 
    $('#id').text(id); //put the data value in the element which set in the modal with an id
    $('#date').text(date);
     $('#vendor_quote_id').text(vendor_quote_id);
     $('#vendor_id').text(vendor_id);
    $('#description').text(description);
-   $("#attachment").attr("href", "uploads/quotation/vendor"+attachment);//file upload location
+   $('#at').attr("href", "uploads/quotation/vendor/"+attachment);//file upload location
   });
  });
 </script>
@@ -180,7 +180,7 @@
           </tr>
           <tr>
             <th>Attachment</th>
-            <td ><a target="_blank" id="attachment"></a></td>
+            <td ><a target="_blank" id="at"></a></td>
           </tr>
             </tbody>
                 </table>

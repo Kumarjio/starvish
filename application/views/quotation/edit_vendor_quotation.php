@@ -95,16 +95,53 @@
                                   <!--row 4 end-->
 
                                   <!--row 5-->
-                                    <div class="row">
-                                      <div class="col-md-6">
-                                          <div class="form-group">
-                                              <label for="attachment">Attachment</label>
-                                              <input type="file" class="form-control required" id="attachment" name="attachment" maxlength="50">
-                                          </div>
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="attachment" class="custom-file">Attachment</label>
+                                      <div class="input-group">
+                                          <label class="input-group-btn">
+                                            <span class="btn btn-primary">
+                                              Browse&hellip; <input type="file" style="display: none;" name="attachment" id="attachment">
+                                            </span>
+                                          </label>
+                                          <input type="text" class="form-control" placeholder="Browse Files" readonly>
                                       </div>
-                                    <!--row 5 end-->
+                                        </span>
+                                    </div>
+                                </div>
+                                  <!--row 5 end-->
 
-                          </div>
+                                  <script>
+                                  $(function() {
+
+                                    // We can attach the `fileselect` event to all file inputs on the page
+                                    $(document).on('change', ':file', function() {
+                                      var input = $(this),
+                                      numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                                      label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                                      input.trigger('fileselect', [numFiles, label]);
+                                    });
+
+                                    // We can watch for our custom `fi  leselect` event like this
+                                    $(document).ready( function() {
+                                      $(':file').on('fileselect', function(event, numFiles, label) {
+
+                                        var input = $(this).parents('.input-group').find(':text'),
+                                        log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                                        if( input.length ) {
+                                          input.val(log);
+                                        } else {
+                                          if( log ) alert(log);
+                                        }
+
+                                      });
+                                    });
+                                  });
+                                  </script>
+
+
+                          </div><br>
                           <div class="box-footer">
                               <input type="submit" class="btn btn-primary" value="Update Vendor Quotation" />
                               <input type="reset" class="btn btn-default" value="Reset" />

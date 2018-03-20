@@ -68,14 +68,27 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="date">Date</label>
-                                      <input type="text" class="form-control required" value="<?php echo set_value('date'); ?>" id="date" name="date" maxlength="128">
+                                      <input type="date" class="form-control required" value="<?php echo set_value('date'); ?>" id="date" name="date" maxlength="128">
                                   </div>
                               </div>
 
 
                             </div><!--row 1 End-->
 
-                          <!--row 2-->
+                            <!--row 2-->
+                                <div class="row">
+                                  <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label for="vendor_id">Vendor Id</label>
+                                          <input type="textarea" class="form-control required " id="vendor_id" value="<?php echo set_value('vendor_id'); ?>" name="vendor_id" maxlength="50">
+                                      </div>
+                                  </div>
+                                </div>
+                                <!--row 2 end-->
+
+
+
+                          <!--row 3-->
                             <div class="row">
                               <div class="col-md-6">
                                   <div class="form-group">
@@ -85,48 +98,68 @@
                               </div>
                             </div>
 
-
-
-                            <!--row 2 end-->
-
-                            <!--row 3-->
-                                <div class="row">
-                                  <div class="col-md-6">
-                                      <div class="form-group">
-                                          <label for="vendor_id">Vendor Id</label>
-                                          <input type="textarea" class="form-control required " id="vendor_id" value="<?php echo set_value('vendor_id'); ?>" name="vendor_id" maxlength="50">
-                                      </div>
-                                  </div>
-                                </div>
-                                <!--row 3 end-->
+                            <!--row 3 end-->
 
                                 <!--row 4-->
                                   <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="description">Description</label>
-                                            <input type="text" class="form-control required" id="description" value="<?php echo set_value('description'); ?>" name="description" maxlength="150">
+                                          <textarea type="textarea" rows="5" cols="60" class="form-control required" id="description" value="<?php echo set_value('description'); ?>" name="description" maxlength="500"></textarea>
                                         </div>
                                     </div>
                                   </div>
-                                  <!--row 4 end-->
+                                  <!--row 4end-->
 
                                   <!--row 5-->
                                     <div class="row">
                                       <div class="col-md-6">
-                                          <div class="form-group">
-                                              <label for="attachment">Attachment</label>
-                                              <input type="file" class="form-control required" id="attachment" name="attachment" maxlength="50">
-                                          </div>
+                                          <label for="attachment" class="custom-file">Attachment</label>
+                                        <div class="input-group">
+                                            <label class="input-group-btn">
+                                              <span class="btn btn-primary">
+                                                Browse&hellip; <input type="file" style="display: none;" name="attachment" id="attachment">
+                                              </span>
+                                            </label>
+                                            <input type="text" class="form-control" placeholder="Browse Files" readonly>
+                                        </div>
+                                          </span>
                                       </div>
-                                    <!--row 5 end-->
+                                  </div>
+                              <!--row 5 end-->
 
+                                  <script>
+                                  $(function() {
 
+                                    // We can attach the `fileselect` event to all file inputs on the page
+                                    $(document).on('change', ':file', function() {
+                                      var input = $(this),
+                                      numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                                      label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                                      input.trigger('fileselect', [numFiles, label]);
+                                    });
 
+                                    // We can watch for our custom `fi  leselect` event like this
+                                    $(document).ready( function() {
+                                      $(':file').on('fileselect', function(event, numFiles, label) {
 
-                          </div>
+                                        var input = $(this).parents('.input-group').find(':text'),
+                                        log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                                        if( input.length ) {
+                                          input.val(log);
+                                        } else {
+                                          if( log ) alert(log);
+                                        }
+
+                                      });
+                                    });
+                                  });
+                                  </script>
+
+                          </div><br>
                           <div class="box-footer">
-                              <input type="submit" class="btn btn-primary" value="Add Vendor Quotation" />
+                              <input type="submit" class="btn btn-primary" value="Add Quotation" />
                               <input type="reset" class="btn btn-default" value="Reset" />
                           </div>
                       </form>

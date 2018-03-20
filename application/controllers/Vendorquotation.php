@@ -66,7 +66,8 @@ class Vendorquotation extends BaseController{
       if($id==NULL)
       {
         $this->global['pageTitle'] = 'StarVish:Add Vendor Quotation';
-      $this->loadViews("quotation/add_vendor_quotation", $this->global, NULL , NULL);
+        $res['datas']=$this->vendor_quotation_model->fetch_vendor();
+      $this->loadViews("quotation/add_vendor_quotation", $this->global, $res , NULL);
       }
       else {
         $this->global['pageTitle'] = 'StarVish:Edit Vendor Quotation';

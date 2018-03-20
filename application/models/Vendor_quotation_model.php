@@ -1,6 +1,15 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Vendor_quotation_model extends CI_Model{
+
+  //function to list the vendors
+  public function fetch_vendor()
+  {
+    $res=$this->db->get('vendor_master');
+    return $res->result();
+  }
+
+  //function to list the quotation
   public function vendorquotationlisting()
   {
     if($res=$this->db->get('vendor_quote'))
