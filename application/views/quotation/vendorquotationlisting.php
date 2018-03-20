@@ -134,9 +134,10 @@
 
    $('#id').text(id); //put the data value in the element which set in the modal with an id
    $('#date').text(date);
-    $('#vendor_quote_id').text(vendor_quote_id);
-    $('#vendor_id').text(vendor_id);
+   $('#vendor_quote_id').text(vendor_quote_id);
+   $('#vendor_id').text(vendor_id);
    $('#description').text(description);
+   $('#at').text(attachment);
    $('#at').attr("href", "uploads/quotation/vendor/"+attachment);//file upload location
   });
  });
@@ -181,6 +182,7 @@
           <tr>
             <th>Attachment</th>
             <td ><a target="_blank" id="at"></a></td>
+            <!--<td id="at"></td>-->
           </tr>
             </tbody>
                 </table>
