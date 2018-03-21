@@ -65,7 +65,14 @@ $route['update_customer']='customer/update_customer';
 $route['add_customer']='customer/add_customer';
 $route['delete_customer/(:any)']='customer/delete_customer/$1';
 $route['customer_listing']='customer/customer_listing';
-
+$route['customer_quotation']='customer/customer_quotation';
+$route['quotation_search']='customer/quotation_search';
+$route['add_edit_customer_quote']='customer/add_edit_customer_quote';
+$route['add_edit_customer_quote/(:any)']='customer/add_edit_customer_quote/$1';
+$route['update_customer_quote']='customer/update_customer_quote';
+$route['add_customer_quote']='customer/add_customer_quote';
+$route['delete_customer_quote/(:any)']='customer/delete_customer_quote/$1';
+$route['generate_pdf/(:any)']='customer/generate_pdf/$1';
 /****************vendor MASTER******************/
 $route['vendor_master']='vendor';
 $route['add_edit_vendor']='vendor/add_edit_vendor';
