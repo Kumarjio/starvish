@@ -56,9 +56,10 @@ class User_model extends CI_Model
      */
     function userListing($searchText = '', $page, $segment)
     {
-        $this->db->select('BaseTbl.userId,BaseTbl.employee_id, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, Role.role');
+        $this->db->select('BaseTbl.userId,BaseTbl.employee_id, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, Role.role,emp.id,emp.name,emp.address1,emp.address2,emp.designation,emp.email,emp.contact_no,emp.doj,emp.pan_no,emp.bank_name,emp.account_number,emp.ifsc_code,emp.aadhaar_no');
         $this->db->from('tbl_users as BaseTbl');
         $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
+        $this->db->join('employee_master as emp', 'emp.id = BaseTbl.employee_id','left');
         if(!empty($searchText)) {
             $likeCriteria = "(BaseTbl.email  LIKE '%".$searchText."%'
                             OR  BaseTbl.name  LIKE '%".$searchText."%'
@@ -73,6 +74,7 @@ class User_model extends CI_Model
         $result = $query->result();
         return $result;
     }
+
 
     /**
      * This function is used to get the user roles information

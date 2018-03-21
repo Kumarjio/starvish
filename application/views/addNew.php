@@ -205,9 +205,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="role">Role</label>
+                                        <label for="role">Designation</label>
                                         <select class="form-control required" id="role" name="role">
-                                            <option value="0">Select Role</option>
+                                            <option value="0">Select Designation</option>
                                             <?php
                                             if(!empty($roles))
                                             {

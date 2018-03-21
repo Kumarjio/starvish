@@ -48,7 +48,7 @@ class User extends BaseController
 			$returns = $this->paginationCompress ( "userListing/", $count, 10 );
 
             $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
-
+            
             $this->global['pageTitle'] = 'StarVish: User Listing';
 
             $this->loadViews("users", $this->global, $data, NULL);

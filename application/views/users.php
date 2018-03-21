@@ -69,10 +69,15 @@
                                 <td>'.$record->mobile.'</td>
                                 <td>'.$record->role.'</td>';?>
                                 <td class="text-center">
-                          <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#datas" data-id="<?php echo $record->employee_id?>"
-                              data-name="<?php echo $record->name?>" data-email="<?php echo $record->email?>" data-mobile="<?php echo $record->mobile?>"
-                             data-role="<?php echo $record->role?>">
-                              <i class="fa fa-info-circle"></i></a>&nbsp;|
+
+                              <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#datas" data-id="<?php echo $record->employee_id?>"
+                              data-name="<?php echo $record->name?>" data-address1="<?php echo $record->address1;?>" data-address2="<?php echo $record->address2?>"
+                              data-desgination="<?php echo $record->designation?>" data-email="<?php echo $record->email?>" data-mobile="<?php echo $record->mobile?>"
+                              data-doj="<?php echo $record->doj?>" data-pan="<?php echo $record->pan_no?>" data-bank="<?php echo $record->bank_name?>"
+                              data-acc="<?php echo $record->account_number?>" data-ifsc="<?php echo $record->ifsc_code?>" data-aadhaar="<?php echo $record->aadhaar_no?>"
+                              data-role="<?php echo $record->role?>">
+
+                            <i class="fa fa-info-circle"></i></a>&nbsp;|
                           <a class="btn btn-sm btn-primary" href="<?= base_url().'login-history/'.$record->userId; ?>" title="Login history"><i class="fa fa-history"></i></a> |
                           <a class="btn btn-sm btn-info" href="<?php echo base_url().'editOld/'.$record->userId; ?>" title="Edit"><i class="fa fa-pencil"></i></a> |
                           <a class="btn btn-sm btn-danger deleteUser" href="#" data-userid="<?php echo $record->userId; ?>" title="Delete"><i class="fa fa-trash"></i></a>
@@ -85,8 +90,8 @@
                 </table></div>
                 </div>
                 </div>
+                </div>
                 </div>';
-
               }
               else {
                 echo '<br><br>
@@ -111,14 +116,32 @@
            var btn = $(event.relatedTarget); // find which button is clicked
            var id = btn.data('id'); //get the time data attribute
            var name=btn.data('name');
+           var address1=btn.data('address1');
+           var address2=btn.data('address2');
+           var desg=btn.data('desgination');
            var email=btn.data('email');
            var mobile=btn.data('mobile');
+           var doj=btn.data('doj');
+           var pan=btn.data('pan');
+           var bank=btn.data('bank');
+           var acc=btn.data('acc');
+           var ifsc=btn.data('ifsc');
+           var aadhaar=btn.data('aadhaar');
            var role=btn.data('role');
 
            $('#employee_id').text(id); //put the data value in the element which set in the modal with an id
            $('#name').text(name);
+           $('#address1').text(address1);
+           $('#address2').text(address2);
+           $('#desg').text(desg);
             $('#email').text(email);
             $('#mobile').text(mobile);
+            $('#doj').text(doj);
+            $('#pan').text(pan);
+            $('#bank').text(bank);
+            $('#acc').text(acc);
+            $('#ifsc').text(ifsc);
+            $('#aadhaar').text(aadhaar);
             $('#role').text(role);
 
           });
@@ -153,12 +176,49 @@
                         <td id="name"></td>
                       </tr>
                       <tr>
+                        <th>Address Line 1</th>
+                        <td id="address1"></td>
+                      </tr>
+                      <tr>
+                        <th>Address Line 2</th>
+                        <td id="address2"></td>
+                      </tr>
+                      
+                      <tr>
+                        <th>Designation</th>
+                        <td id="desg"></td>
+                      </tr>
+                      <tr>
                       <th>Email</th>
                       <td id="email"></td>
                     </tr>
                     <tr>
                     <th>Mobile</th>
                     <td id="mobile"></td>
+                    </tr>
+                    <tr>
+                      <th>Date of Joining</th>
+                      <td id="doj"></td>
+                    </tr>
+                    <tr>
+                      <th>PAN Number</th>
+                      <td id="pan"></td>
+                    </tr>
+                    <tr>
+                      <th>Bank Name</th>
+                      <td id="bank"></td>
+                    </tr>
+                    <tr>
+                      <th>Account Number</th>
+                      <td id="acc"></td>
+                    </tr>
+                    <tr>
+                      <th>IFSC</th>
+                      <td id="ifsc"></td>
+                    </tr>
+                    <tr>
+                      <th>Aadhaar Number</th>
+                      <td id="aadhaar"></td>
                     </tr>
                     <tr>
                     <th>Role</th>
