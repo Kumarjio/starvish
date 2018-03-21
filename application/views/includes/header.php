@@ -112,7 +112,7 @@
               <div id="quot" class="collapse">
                 <ul class="dropdown">
                   <li class="treeview">
-                    <a href="<?php echo base_url()?>" ><br>
+                    <a href="<?php echo base_url()?>customer_quotation" ><br>
                       <i class="fa fa-paperclip"></i>
                       <span>Customer Quotation</span>
                     </a>

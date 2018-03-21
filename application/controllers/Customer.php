@@ -204,5 +204,130 @@ public function add_customer()
     }
   $this->loadViews("customer/customerlisting",$this->global,$data,NULL);
   }
+//customer quotation
+  public function customer_quotation()
+  {
+	  
+      $this->global['pageTitle'] = 'StarVish: Customer Quotation';
+      $result=$this->customer_model->customerquote();
+	
+      if($result!=false)
+        {
+			$res['datas']=$result;
+			$res['searchText']='';
+        }
+      else {
+        $res['datas']='NA';
+        $res['searchText']='';
+      }
 
+      $html =$this->loadViews("customer/customer_quotation", $this->global, $res , NULL);
+  }
+ //function to list the quotation based on the search result
+  public function quotation_search()
+  {
+    $this->global['pageTitle'] = 'StarVish: Search';
+    $searchText = $this->security->xss_clean($this->input->post('searchText'));
+    $result=$this->customer_model->customer_quote($searchText);
+    if($result!=FALSE)
+    {
+      $data['datas']=$result;
+      $data['searchText'] = $searchText;
+    }
+    else {
+      $data['datas']='NA';
+      $data['searchText'] = $searchText;
+    }
+  $this->loadViews("customer/customer_quotation",$this->global,$data,NULL);
+  }
+ 
+//this function used to redirect to addcustomerquote or editcustomerquote based on the quoteidid
+    public function add_edit_customer_quote($id=NULL)
+    {
+      if($id==NULL)
+      {
+        $this->global['pageTitle'] = 'StarVish:Add Quotation';
+      $this->loadViews("customer/add_customer_quotation", $this->global, NULL , NULL);
+      }
+      else {
+        $this->global['pageTitle'] = 'StarVish:Edit Quotation';
+        $result['datas']=$this->customer_model->fetch_customer_quote($id);
+        $this->loadViews("customer/edit_customer_quotation",$this->global,$result,NULL);
+      }
+    }
+	//add customer quotation
+	public function add_customer_quote()
+{
+  $customer_id=$this->input->post('customer_id');
+  $quote_id=$this->input->post('quote_id');
+  $description=$this->input->post('description');
+  $product_id=$this->input->post('product_id');
+  $p_description=$this->input->post('p_description');
+  $hsn=$this->input->post('hsn');
+  $quantity=$this->input->post('quantity');
+  $unit_charge=$this->input->post('unit_charge');
+  $total=$this->input->post('total');
+$current_date=date("Y-m-d");
+  $datas=array('date'=>$current_date,'quote_id'=>$quote_id,'customer_id'=>$customer_id,
+  'description'=>$description
+              );
+        $result = FALSE;
+        $result = $this->customer_model->add_customer_quote($datas);
+        if($result == TRUE){
+			foreach($product_id as $i => $n){
+  $datas=array('quote_id'=>$quote_id,'product_id'=>$product_id[$i],'description'=>$p_description[$i],
+  'hsn/sac'=>$hsn[$i],'quantity'=>$quantity[$i],'unit_charges'=>$unit_charge[$i],'total'=>$total[$i]
+			);     
+ $result = $this->customer_model->add_customer_product($datas);	
+if($result == FALSE)  {
+	$this->session->set_flashdata('error','Quotation creation failed!');
+	break;}
+			}
+		if($result == TRUE)  {
+			$this->session->set_flashdata('success', 'Quotation created successfully');
+        }
+		}
+        else {
+          $this->session->set_flashdata('error','Quotation creation failed!');
+        }
+
+          redirect('customer_quotation');
+}
+
+
+  //function to delete customer data
+  public function delete_customer_quote($id)
+  {
+    $result=$this->customer_model->delete_customer_quote($id);
+    if($result == true)
+    {
+     $this->session->set_flashdata('success', 'customer Quotation Deleted successfully');
+   }
+   else
+   {
+      $this->session->set_flashdata('error', 'customer Quotation Deletion failed!');
+    }
+    redirect('customer_quotation');
+  }
+  
+  
+  
+  //generating pdf
+  public function generate_pdf($id)
+{ini_set('memory_limit', '256M');
+        // load library
+        $this->load->library('pdf');
+        $pdf = $this->pdf->load();
+        // retrieve data from model
+        $data['news'] = "hello";
+        $data['title'] = "items";
+
+        // boost the memory limit if it's low ;)
+        $html = $this->load->view('customer/m', $data, true);//test
+        // render the view into HTML
+        $pdf->WriteHTML($html);
+        // write the HTML into the PDF
+        $output = 'itemreport' . date('Y_m_d_H_i_s') . '_.pdf';
+        $pdf->Output("$output", 'I');
+}
 }

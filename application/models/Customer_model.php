@@ -77,6 +77,78 @@ if($query = $this->db->get())
 else
     return false;
 }
+//customer quotation
+public function customerquote()
+{
+  if($res=$this->db->get('customer_quote'))
+  {
+    return $res->result();
+  }
+  else {
+    return false;
+    }
+}
+//function to quote to customer_quote
+public function add_customer_quote($datas)
+{
+  $res=$this->db->insert('customer_quote',$datas);
+  return $res;
+}
+//function to quote to customer_quote_products
+public function add_customer_product($datas)
+{
+  $res=$this->db->insert('customer_quote_products',$datas);
+  return $res;
+}
+//customer quotation for search
+public function customer_quote()
+{
+$this->db->select('*');
+$this->db->from('customer_quote');
+if(!empty($searchText)) {
+    $likeCriteria = "(customer_id  LIKE '%".$searchText."%'
+                      OR  quote_id  LIKE '%".$searchText."%'
+                    OR  date  LIKE '%".$searchText."%'
+                    OR  description  LIKE '%".$searchText."%')";
+    $this->db->where($likeCriteria);
+}
+if($query = $this->db->get())
+      return $query->result();
+else
+    return false;
+
+}
+//function to delete customer quote
+public function delete_customer_quote($id)
+{
+  $res=$this->db->delete('customer_quote',array('quote_id'=>$id));
+  return $res;
+}
+//function to fetch details from customer quote table
+public function fetch_customer_quote($id)
+{
+  $this->db->select('*');
+  $this->db->from('customer_quote');
+  $this->db->where('quote_id',$id);
+  if($res=$this->db->get())
+    return $res->result();
+  else {
+    return false;
+  }
+}
+
+//customer quotation product
+public function customerproduct($id)
+{
+  $this->db->select('*');
+  $this->db->from('customer_quote_products');
+$this->db->where('quote_id',$id);
+  if($res=$this->db->get())
+    return $res->num_rows();
+  else {
+    return false;
+    }
+}
 
 
 }
