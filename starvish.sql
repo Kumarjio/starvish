@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 16, 2018 at 12:11 PM
+-- Generation Time: Apr 12, 2018 at 08:00 PM
 -- Server version: 5.7.21-0ubuntu0.17.10.1
--- PHP Version: 7.1.11-0ubuntu0.17.10.1
+-- PHP Version: 7.1.15-0ubuntu0.17.10.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -133,6 +133,13 @@ CREATE TABLE `customer_master` (
   `file_path` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `customer_master`
+--
+
+INSERT INTO `customer_master` (`customer_id`, `company_name`, `address1`, `address2`, `contact_person1`, `designation1`, `email1`, `contact_no1`, `contact_person2`, `designation2`, `email2`, `contact_no2`, `gstin`, `bank_name`, `account_name`, `account_number`, `ifsc_code`, `attachment`, `file_path`) VALUES
+('cust1', 'V2lancers', '108 sourashtra teachers colony', 'madurai', 'yogesh', 'manager', 'developer@igniteddreamz.com', 23456789, 'arun', 'employee', 'developer@igniteddreamz.com', 23456789, '34567890', 'canara bank', '123456789', 23456789, '234567890', 'cust1-V2lancers.pdf', '/var/www/starvish/uploads/customer/cust1-V2lancers.pdf');
+
 -- --------------------------------------------------------
 
 --
@@ -160,6 +167,13 @@ CREATE TABLE `customer_quote` (
   `description` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `customer_quote`
+--
+
+INSERT INTO `customer_quote` (`date`, `quote_id`, `customer_id`, `description`) VALUES
+('2018-03-25', 'quot1', 'cust1', 'dummy');
+
 -- --------------------------------------------------------
 
 --
@@ -175,6 +189,13 @@ CREATE TABLE `customer_quote_products` (
   `unit_charges` int(20) NOT NULL,
   `total` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer_quote_products`
+--
+
+INSERT INTO `customer_quote_products` (`quote_id`, `product_id`, `description`, `hsn/sac`, `quantity`, `unit_charges`, `total`) VALUES
+('quot1', 'prod1', 'desc', '123', 1, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -408,7 +429,25 @@ INSERT INTO `tbl_last_login` (`id`, `userId`, `sessionData`, `machineIp`, `userA
 (24, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-15 15:47:52'),
 (25, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-15 21:54:08'),
 (26, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-16 07:14:01'),
-(27, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-16 09:18:30');
+(27, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-16 09:18:30'),
+(28, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-16 16:48:42'),
+(29, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-16 19:20:03'),
+(30, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-16 19:51:42'),
+(31, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-18 20:12:26'),
+(32, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-19 16:02:20'),
+(33, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-20 20:36:25'),
+(34, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-21 06:55:40'),
+(35, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-21 19:09:05'),
+(36, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-22 09:42:33'),
+(37, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-22 18:34:53'),
+(38, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.162', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36', 'Linux', '2018-03-25 08:59:27'),
+(39, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Linux', '2018-04-11 10:50:31'),
+(40, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Linux', '2018-04-11 18:31:41'),
+(41, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Linux', '2018-04-11 18:31:42'),
+(42, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Linux', '2018-04-11 22:15:36'),
+(43, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Linux', '2018-04-12 08:47:05'),
+(44, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Linux', '2018-04-12 12:39:17'),
+(45, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Linux', '2018-04-12 18:01:44');
 
 -- --------------------------------------------------------
 
@@ -608,8 +647,16 @@ CREATE TABLE `vendor_quote` (
   `vendor_quote_id` varchar(13) NOT NULL,
   `vendor_id` varchar(15) NOT NULL,
   `description` varchar(50) NOT NULL,
+  `attachment` varchar(50) NOT NULL,
   `file_path` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `vendor_quote`
+--
+
+INSERT INTO `vendor_quote` (`date`, `vendor_quote_id`, `vendor_id`, `description`, `attachment`, `file_path`) VALUES
+('2018-03-17', '22', 'ven1', 'sf', 'ven1-22.pdf', '/var/www/starvish/uploads/quotation/vendor/ven1-22');
 
 --
 -- Indexes for dumped tables
@@ -668,7 +715,8 @@ ALTER TABLE `customer_po`
 -- Indexes for table `customer_quote`
 --
 ALTER TABLE `customer_quote`
-  ADD PRIMARY KEY (`quote_id`);
+  ADD PRIMARY KEY (`quote_id`),
+  ADD KEY `customer_quote_ref` (`customer_id`);
 
 --
 -- Indexes for table `customer_quote_products`
@@ -811,7 +859,7 @@ ALTER TABLE `vendor_quote`
 -- AUTO_INCREMENT for table `tbl_last_login`
 --
 ALTER TABLE `tbl_last_login`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 --
 -- AUTO_INCREMENT for table `tbl_reset_password`
 --
@@ -875,7 +923,7 @@ ALTER TABLE `customer_po`
 -- Constraints for table `customer_quote`
 --
 ALTER TABLE `customer_quote`
-  ADD CONSTRAINT `customer_quote_ref` FOREIGN KEY (`quote_id`) REFERENCES `customer_master` (`customer_id`);
+  ADD CONSTRAINT `customer_quote_ref` FOREIGN KEY (`customer_id`) REFERENCES `customer_master` (`customer_id`);
 
 --
 -- Constraints for table `customer_quote_products`
