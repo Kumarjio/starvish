@@ -183,7 +183,7 @@
                         <th>Address Line 2</th>
                         <td id="address2"></td>
                       </tr>
-                      
+
                       <tr>
                         <th>Designation</th>
                         <td id="desg"></td>
@@ -229,8 +229,8 @@
                       </div>
                     </div>
                   </div></div>
-
               </div>
+            
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 

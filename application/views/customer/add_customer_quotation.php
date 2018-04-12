@@ -34,7 +34,7 @@
             </div>
             <?php } ?>
 
-            <div class="col-md-10">
+            <div class="col-md-12">
               <!-- general form elements -->
 
                 <div class="box box-primary">
@@ -98,8 +98,8 @@
                             <th>Description</th>
                             <th>Hsn/Sac</th>
                             <th>Quantity</th>
-							<th>Unit Charge</th>
-							<th>Total</th>
+							               <th>Unit Charge</th>
+							                      <th>Total</th>
 							</tr>
                           </thead>
                           <tbody>
@@ -123,15 +123,15 @@
 						<td>
 							<input type="text" class="small" required="required" name="total[]">
 						 </td>
-						
+
 							</p>
                     </tr>
                     </tbody>
                 </table></div></div></div></div>
-				
+
 				</div>
-				
-                            
+
+
                           <div class="box-footer">
 							  <input type="submit" class="btn btn-primary" value="Create & Save" />
                               <input type="reset" class="btn btn-default" value="reset" />
@@ -152,7 +152,7 @@
 function addRow(tableID) {
 	var table = document.getElementById(tableID);
 	var rowCount = table.rows.length;
-	if(rowCount <50){						
+	if(rowCount <50){
 		var row = table.insertRow(rowCount);
 		var colCount = table.rows[1].cells.length;
 		for(var i=0; i<colCount; i++) {
@@ -160,6 +160,6 @@ function addRow(tableID) {
 			newcell.innerHTML = table.rows[1].cells[i].innerHTML;
 		}
 	}
-	
+
 }
 </script>

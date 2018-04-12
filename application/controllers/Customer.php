@@ -207,10 +207,10 @@ public function add_customer()
 //customer quotation
   public function customer_quotation()
   {
-	  
+
       $this->global['pageTitle'] = 'StarVish: Customer Quotation';
       $result=$this->customer_model->customerquote();
-	
+
       if($result!=false)
         {
 			$res['datas']=$result;
@@ -240,7 +240,7 @@ public function add_customer()
     }
   $this->loadViews("customer/customer_quotation",$this->global,$data,NULL);
   }
- 
+
 //this function used to redirect to addcustomerquote or editcustomerquote based on the quoteidid
     public function add_edit_customer_quote($id=NULL)
     {
@@ -277,8 +277,8 @@ $current_date=date("Y-m-d");
 			foreach($product_id as $i => $n){
   $datas=array('quote_id'=>$quote_id,'product_id'=>$product_id[$i],'description'=>$p_description[$i],
   'hsn/sac'=>$hsn[$i],'quantity'=>$quantity[$i],'unit_charges'=>$unit_charge[$i],'total'=>$total[$i]
-			);     
- $result = $this->customer_model->add_customer_product($datas);	
+			);
+ $result = $this->customer_model->add_customer_product($datas);
 if($result == FALSE)  {
 	$this->session->set_flashdata('error','Quotation creation failed!');
 	break;}
@@ -309,9 +309,25 @@ if($result == FALSE)  {
     }
     redirect('customer_quotation');
   }
-  
-  
-  
+
+
+// Function to view the generated Quotation
+  public function customer_quotation_view($id)
+  {
+    $this->global['pageTitle'] = 'StarVish:View Quotation';
+    $result=$this->customer_model->customer_quotation_view($id);
+    if($result!=false)
+    {
+      $data['datas']=$result;
+    }
+    else {
+      $data['datas']='NA';
+    }
+    $this->loadViews("customer/customer_quotation_view",$this->global,$data,NULL);
+
+  }
+
+
   //generating pdf
   public function generate_pdf($id)
 {ini_set('memory_limit', '256M');

@@ -73,6 +73,8 @@ $route['update_customer_quote']='customer/update_customer_quote';
 $route['add_customer_quote']='customer/add_customer_quote';
 $route['delete_customer_quote/(:any)']='customer/delete_customer_quote/$1';
 $route['generate_pdf/(:any)']='customer/generate_pdf/$1';
+$route['customer_quotation_view/(:any)']='customer/customer_quotation_view/$1';
+
 /****************vendor MASTER******************/
 $route['vendor_master']='vendor';
 $route['add_edit_vendor']='vendor/add_edit_vendor';

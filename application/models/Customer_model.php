@@ -150,5 +150,19 @@ $this->db->where('quote_id',$id);
     }
 }
 
+//function to view the quotation_search
+public function customer_quotation_view($id)
+{
+  $this->db->select('*');
+  $this->db->from('customer_quote as quote');
+  $this->db->join('customer_quote_products as products','products.quote_id=quote.quote_id','left');
+  $this->db->where('quote.quote_id',$id);
+  if($res=$this->db->get())
+      return $res->result();
+  else {
+    return false;
+  }
+}
 
+//end
 }
