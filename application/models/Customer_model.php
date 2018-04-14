@@ -52,6 +52,15 @@ public function delete_customer($id)
   return $res;
 }
 
+public function fetch_customers()
+{
+  if($res=$this->db->get('customer_master'))
+      return $res->result();
+  else {
+    return false;
+  }
+}
+
 //function to list the users based on the search result
 
 public function customer_listing($searchText)

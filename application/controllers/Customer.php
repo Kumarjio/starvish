@@ -247,7 +247,9 @@ public function add_customer()
       if($id==NULL)
       {
         $this->global['pageTitle'] = 'StarVish:Add Quotation';
-      $this->loadViews("customer/add_customer_quotation", $this->global, NULL , NULL);
+        $cust_id=$this->customer_model->fetch_customers();
+        $data['customer']=$cust_id;
+      $this->loadViews("customer/add_customer_quotation", $this->global, $data , NULL);
       }
       else {
         $this->global['pageTitle'] = 'StarVish:Edit Quotation';

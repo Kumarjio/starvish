@@ -53,7 +53,13 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="emp_id">Customer ID</label>
-                                      <input type="text" class="form-control required" value="<?php echo set_value('customer_id'); ?>" id="customer_id" name="customer_id" maxlength="128">
+                                            <select class="form-control" name="customer_id">
+                                              <?php foreach($customer as $cust){?>
+                                                    <option value="<?php echo $cust->customer_id;?>"><?php echo $cust->customer_id;?> - <?php echo $cust->company_name;?></option>
+                                                <?php }?>
+                                            </select>
+                                      
+
                                   </div>
                               </div>
 

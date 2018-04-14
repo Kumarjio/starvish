@@ -103,8 +103,8 @@
                                 <td align="right" style="border:3px solid black">Grand Total</td>
                                 <td></td>
                               </tr>
-                              <tr><td colspan="6" style="border-bottom: double;">Amount in words: &nbsp;';
-                              print_r($amount);   'Rupees only </td>
+                              <tr><td colspan="6" style="border-bottom: double;"><b>Amount in words: &nbsp;</b>';
+                              print_r($amount); echo(' Rupees only');   ' </td>
 
                               </tr>
 
