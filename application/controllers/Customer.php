@@ -316,9 +316,13 @@ if($result == FALSE)  {
   {
     $this->global['pageTitle'] = 'StarVish:View Quotation';
     $result=$this->customer_model->customer_quotation_view($id);
+    $company=$this->customer_model->our_details();
+    $customer=$this->customer_model->customer_details($id);
     if($result!=false)
     {
       $data['datas']=$result;
+      $data['company']=$company;
+      $data['customer']=$customer;
     }
     else {
       $data['datas']='NA';

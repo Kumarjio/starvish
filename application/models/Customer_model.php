@@ -14,7 +14,7 @@ public function customerlisting()
   }
   else {
     return false;
-    }
+  }
 }
 
 //function to add customer into customer_master table
@@ -162,6 +162,34 @@ public function customer_quotation_view($id)
   else {
     return false;
   }
+}
+
+public function our_details()
+{
+  if($res=$this->db->get('sv_table'))
+  {
+    return $res->result();
+  }
+  else {
+    return false;
+  }
+}
+
+public function customer_details($id)
+{
+  $this->db->select('customer_id');
+  $this->db->from('customer_quote');
+  $this->db->where('quote_id',$id);
+  $res=$this->db->get();
+  foreach($res->result() as $row)
+  {
+    $cust_id=$row->customer_id;
+  }
+  $this->db->select('*');
+  $this->db->from('customer_master');
+  $this->db->where('customer_id',$cust_id);
+  $result=$this->db->get();
+  return $result->result();
 }
 
 //end
