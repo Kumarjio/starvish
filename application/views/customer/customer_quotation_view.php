@@ -32,7 +32,7 @@
                   <?php foreach($customer as $cust){} ?>
                     <?php $i=1;?>
                     <div class="table-responsive">
-                    <?php echo '<table class="table table-striped table-condensed table-hover table-bordered" style="border:2px solid black;font-family:Roboto;font-size:15px">
+                    <?php echo '<table class="table table-striped table-condensed table-hover table-bordered" style="border:3px solid black;font-family:Roboto;font-size:15px">
                       <tbody>
                           <tr>
                             <td colspan="4" style="font-weight:bold">'.$cust->company_name.'</td>
@@ -52,6 +52,9 @@
                           <tr style="font-weight:bold">
                             <td colspan="6" style="border-bottom:double;">'.$cust->email1.'</td>
                           </tr>
+
+                          <tr style=""><td colspan="6" style="border:3px solid black">&nbsp;</td></tr>
+
                           <tr><td colspan="6" style="font-weight:bold">Quoted to</td></tr>
                         <tr>
                           <td colspan="6">'.$cmp->company_name.'</td>
@@ -59,40 +62,44 @@
                         <tr>
                           <td colspan="6">'.$cmp->address1.'</td>
                         </tr>
+                        <tr style="border:3px solid black"><td colspan="6" style="border:3px solid black">&nbsp;</td></tr>
                         <tr><td colspan="6" style="font-weight:bold;border-bottom:double;">Kind attention: Mr.</td></tr>
                         <tr><td colspan="6">Dear Sir,</td></tr>
                         <tr><td colspan="6">With reference to your enquiry , we take pleasure in submitting our best offer as below:</td></tr>
-                        <tr style="border:2px solid black">
-                          <th style="border:2px solid black">S.NO</th>
-                          <th style="border:2px solid black">Description</th>
-                          <th style="border:2px solid black">HSN/SAC Code</th>
-                          <th style="border:2px solid black">Quantity</th>
-                          <th style="border:2px solid black">Unit Charges</th>
-                          <th style="border:2px solid black">Total amount(in Rs)</th>
+                        <tr style="border:3px solid black">
+                          <th style="border:3px solid black">S.NO</th>
+                          <th style="border:3px solid black">Description</th>
+                          <th style="border:3px solid black">HSN/SAC Code</th>
+                          <th style="border:3px solid black">Quantity</th>
+                          <th style="border:3px solid black">Unit Charges</th>
+                          <th style="border:3px solid black">Total amount(in Rs)</th>
                         </tr>
-                        <tr style="border:2px solid black">
-                          <td style="border:2px solid black">'.$i++.'</td>
-                          <td style="border:2px solid black">'.$data->description.'</td>
-                          <td style="border:2px solid black">'.$data->hsn_sac.'</td>
-                          <td style="border:2px solid black">'.$data->quantity.'</td>
-                          <td style="border:2px solid black">'.$data->unit_charges.'</td>
-                          <td style="border:2px solid black">'.$data->total.'</td>
+                        <tr style="border:3px solid black">
+                          <td style="border:3px solid black">'.$i++.'</td>
+                          <td style="border:3px solid black">'.$data->description.'</td>
+                          <td style="border:3px solid black">'.$data->hsn_sac.'</td>
+                          <td style="border:3px solid black">'.$data->quantity.'</td>
+                          <td style="border:3px solid black">'.$data->unit_charges.'</td>
+                          <td style="border:3px solid black">'.$data->total.'</td>
                         </tr>
-                        <tr style="border:2px solid black">
-                          <td colspan="5" align="right" style="border:2px solid black">Total</td>
+                        <tr style="border:3px solid black">
+                          <td colspan="5" align="right" style="border:3px solid black">Total</td>
                           <td></td>
                         </tr>
-                        <tr style="border:2px solid black">
-                          <td colspan="4" style="border:2px solid black">Tax Value</td>
-                          <td align="right" style="border:2px solid black">Total Tax Value</td>
+                        <tr style="border:3px solid black">
+                          <td colspan="4" style="border:3px solid black">Tax Value</td>
+                          <td align="right" style="border:3px solid black">Total Tax Value</td>
                           <td>4860</td>
                         </tr>
-                        <tr style="border:2px solid black">
+                        <tr style="border:3px solid black">
                           <td colspan="4" style="font-weight:bold">Sl.no 1,2,3: IGST @ 18% = Rs.4860</td>
-                          <td align="right" style="border:2px solid black">Grand Total</td>
+                          <td align="right" style="border:3px solid black">Grand Total</td>
                           <td></td>
                         </tr>
                         <tr><td colspan="6" style="border-bottom: double;">Amount in words: </td></tr>
+
+                        <tr style="border:3px solid black"><td colspan="6" style="border:3px solid black">&nbsp;</td></tr>
+
                         <tr><td colspan="6" style="font-weight:bold;">Note: </td></tr>
                         <tr><td colspan="6" style="font-style:italic">Payment to be done immediately after delivery/service</td></tr>
                         <tr><td colspan="6" style="font-style:italic">We are looking forward for your Purchase Order in return</td></tr>
