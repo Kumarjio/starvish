@@ -73,12 +73,13 @@
                             <th>Customer ID</th>
                             <th>Quote ID</th>
                             <th>Description</th>
-							<th>No of products</th>
-							<th>Actions</th>
+							              <th>No of products</th>
+							              <th>Actions</th>
                             </tr>
                           </thead>
                           <tbody>';
                           $i=1;
+                          
                           foreach($datas as $data)
                           {
                             $id=$data->customer_id;
@@ -88,7 +89,7 @@
                               <td>'.$data->customer_id.'</td>
                               <td>'.$data->quote_id.'</td>
                               <td>'.$data->description.'</td>
-							  <td></td>';?>
+							                  <td>'.$data->product_count.'</td>';?>
                               <td class="text-center">
                               <a class="btn btn-sm btn-success" href="<?php echo base_url().'customer_quotation_view/'.$data->quote_id; ?>" title="view"><i class="fa fa-eye"></i></a>
 									<a class="btn btn-primary" href="<?php echo base_url().'generate_pdf/'.$data->quote_id; ?>" title="Pdf"><i class="fa fa-file-pdf-o" style="font-size:18px;"></i></a>&nbsp;|

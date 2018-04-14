@@ -77,17 +77,18 @@ if($query = $this->db->get())
 else
     return false;
 }
-//customer quotation
+//customer quotation listing
 public function customerquote()
 {
-  if($res=$this->db->get('customer_quote'))
-  {
-    return $res->result();
-  }
-  else {
-    return false;
-    }
+$res=$this->db->query('select customer_quote.*,count(customer_quote_products.quote_id) as product_count from customer_quote INNER JOIN customer_quote_products ON customer_quote.quote_id=customer_quote_products.quote_id GROUP by customer_quote_products.quote_id');
+if($res->result())
+  return $res->result();
+else {
+  return false;
 }
+}
+
+
 //function to quote to customer_quote
 public function add_customer_quote($datas)
 {
@@ -162,6 +163,17 @@ public function customer_quotation_view($id)
   else {
     return false;
   }
+}
+
+//function to count the no of products in the quotation_search
+
+public function customer_quote_products($id)
+{
+  $this->db->select('*');
+  $this->db->from('customer_quote_products');
+  $this->db->where('quote_id',$id);
+  $res=$this->db->get();
+  return $res->num_rows();
 }
 
 //end
