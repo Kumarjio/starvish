@@ -210,7 +210,6 @@ public function add_customer()
 
       $this->global['pageTitle'] = 'StarVish: Customer Quotation';
       $result=$this->customer_model->customerquote();
-
       if($result!=false)
         {
 			$res['datas']=$result;
