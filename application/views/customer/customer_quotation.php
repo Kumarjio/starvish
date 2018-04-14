@@ -79,7 +79,7 @@
                           </thead>
                           <tbody>';
                           $i=1;
-                          
+
                           foreach($datas as $data)
                           {
                             $id=$data->customer_id;
@@ -92,7 +92,7 @@
 							                  <td>'.$data->product_count.'</td>';?>
                               <td class="text-center">
                               <a class="btn btn-sm btn-success" href="<?php echo base_url().'customer_quotation_view/'.$data->quote_id; ?>" title="view"><i class="fa fa-eye"></i></a>
-									<a class="btn btn-primary" href="<?php echo base_url().'generate_pdf/'.$data->quote_id; ?>" title="Pdf"><i class="fa fa-file-pdf-o" style="font-size:18px;"></i></a>&nbsp;|
+									<a class="btn btn-primary" target="blank" href="<?php echo base_url().'generate_pdf/'.$data->quote_id; ?>" title="Pdf"><i class="fa fa-file-pdf-o" style="font-size:18px;"></i></a>&nbsp;|
                                   <a class="btn btn-sm btn-info" href="<?php echo base_url().'add_edit_customer_quote/'.$data->quote_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
                                   <a class="btn btn-sm btn-danger" href="<?php  echo base_url().'delete_customer_quote/'.$data->quote_id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
                               </td>

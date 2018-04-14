@@ -338,11 +338,22 @@ if($result == FALSE)  {
         $this->load->library('pdf');
         $pdf = $this->pdf->load();
         // retrieve data from model
-        $data['news'] = "hello";
-        $data['title'] = "items";
+        $this->global['pageTitle'] = 'StarVish:View Quotation';
+        $result=$this->customer_model->customer_quotation_view($id);
+        $company=$this->customer_model->our_details();
+        $customer=$this->customer_model->customer_details($id);
+        if($result!=false)
+        {
+          $data['datas']=$result;
+          $data['company']=$company;
+          $data['customer']=$customer;
+        }
+        else {
+          $data['datas']='NA';
+        }
 
         // boost the memory limit if it's low ;)
-        $html = $this->load->view('customer/m', $data, true);//test
+        $html = $this->load->view('customer/customer_quotation_pdf',$data,true);//test
         // render the view into HTML
         $pdf->WriteHTML($html);
         // write the HTML into the PDF
