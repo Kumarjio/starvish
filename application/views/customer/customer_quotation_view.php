@@ -117,7 +117,9 @@
                 </div>
                 <div class="form-group">
                     <a class="btn btn-primary" href="<?php echo base_url(); ?>customer_quotation">Back</a>
+                    <a class="btn btn-primary" target="_blank" href="<?php echo base_url(); ?>generate_pdf/quot1">View Pdf</a>
                 </div>
+
             </div>
           </div>
       </div><!-- /.box-body -->
