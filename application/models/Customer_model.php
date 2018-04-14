@@ -80,7 +80,7 @@ else
 //customer quotation listing
 public function customerquote()
 {
-$res=$this->db->query('select customer_quote.*,count(customer_quote_products.quote_id) as product_count from customer_quote INNER JOIN customer_quote_products ON customer_quote.quote_id=customer_quote_products.quote_id GROUP by customer_quote_products.quote_id');
+$res=$this->db->query('select customer_quote.*,count(customer_quote_products.quote_id) as product_count from customer_quote INNER JOIN customer_quote_products ON customer_quote.quote_id=customer_quote_products.quote_id GROUP by customer_quote.quote_id');
 if($res->result())
   return $res->result();
 else {

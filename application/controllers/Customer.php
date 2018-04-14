@@ -1,5 +1,6 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
+
 require APPPATH . '/libraries/BaseController.php';
 
 //customer master
@@ -275,7 +276,7 @@ $current_date=date("Y-m-d");
         if($result == TRUE){
 			foreach($product_id as $i => $n){
   $datas=array('quote_id'=>$quote_id,'product_id'=>$product_id[$i],'description'=>$p_description[$i],
-  'hsn/sac'=>$hsn[$i],'quantity'=>$quantity[$i],'unit_charges'=>$unit_charge[$i],'total'=>$total[$i]
+  'hsn_sac'=>$hsn[$i],'quantity'=>$quantity[$i],'unit_charges'=>$unit_charge[$i],'total'=>$total[$i]
 			);
  $result = $this->customer_model->add_customer_product($datas);
 if($result == FALSE)  {
@@ -313,13 +314,20 @@ if($result == FALSE)  {
 // Function to view the generated Quotation
   public function customer_quotation_view($id)
   {
+    $total=0;
     $this->global['pageTitle'] = 'StarVish:View Quotation';
     $result=$this->customer_model->customer_quotation_view($id);
     $company=$this->customer_model->our_details();
     $customer=$this->customer_model->customer_details($id);
     if($result!=false)
     {
+      foreach($result as $amt)
+      {
+        $total=$total+$amt->total;
+      }
+      $amount=$this->convert_number($total);
       $data['datas']=$result;
+      $data['amount']=$amount;
       $data['company']=$company;
       $data['customer']=$customer;
     }

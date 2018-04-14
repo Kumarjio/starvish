@@ -1,5 +1,4 @@
 
-
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -27,7 +26,7 @@
                     <!--<?php print_r($datas) ?>
                     <?php print_r($company);?>
                     <?php print_r($customer);?>-->
-                    <?php foreach ($datas as $data){} ?>
+
                     <?php foreach($company as $cmp){} ?>
                   <?php foreach($customer as $cust){} ?>
                     <?php $i=1;?>
@@ -37,11 +36,11 @@
                        #Quotation
                           echo '<tr style="border-bottom:hidden">
                             <td colspan="4" style="font-weight:bold">'.$cust->company_name.'</td>
-                            <td align="right" style="font-weight:bold">Quote NO.:</td><td>'.$data->quote_id.'</td>
+                            <td align="right" style="font-weight:bold">Quote NO.:</td><td>'.$datas[0]->quote_id.'</td>
                           </tr>
                           <tr style="border-bottom:hidden">
                             <td colspan="4" style="font-weight:bold">'.$cust->address1.'</td>
-                            <td align="right" style="font-weight:bold">Date:</td><td>'.$data->date.'</td>
+                            <td align="right" style="font-weight:bold">Date:</td><td>'.$datas[0]->date.'</td>
                           </tr>
                           <tr style="border-bottom:hidden;font-weight:bold">
                             <td colspan="4">'.$cust->address2.'</td>
@@ -76,18 +75,23 @@
                                 <th style="border:3px solid black">Quantity</th>
                                 <th style="border:3px solid black">Unit Charges</th>
                                 <th style="border:3px solid black">Total amount(in Rs)</th>
-                              </tr>
-                              <tr style="border:3px solid black">
+                              </tr>';
+                              $total=0;
+                          foreach($datas as $data)
+                          {
+                          echo'   <tr style="border:3px solid black">
                                 <td style="border:3px solid black">'.$i++.'</td>
                                 <td style="border:3px solid black">'.$data->description.'</td>
                                 <td style="border:3px solid black">'.$data->hsn_sac.'</td>
                                 <td style="border:3px solid black">'.$data->quantity.'</td>
                                 <td style="border:3px solid black">'.$data->unit_charges.'</td>
                                 <td style="border:3px solid black">'.$data->total.'</td>
-                              </tr>
-                              <tr style="border:3px solid black">
+                              </tr>';
+                              $total=$total+$data->total;
+                            }
+                              echo '<tr style="border:3px solid black">
                                 <td colspan="5" align="right" style="border:3px solid black">Total</td>
-                                <td></td>
+                                <td>'.$total.'</td>
                               </tr>
                               <tr style="border:3px solid black">
                                 <td colspan="4" style="border:3px solid black">Tax Value</td>
@@ -95,11 +99,14 @@
                                 <td>4860</td>
                               </tr>
                               <tr style="border:3px solid black">
-                                <td colspan="4" style="font-weight:bold">Sl.no 1,2,3: IGST @ 18% = Rs.4860</td>
+                                <td colspan="4" style="font-weight:bold"></td>
                                 <td align="right" style="border:3px solid black">Grand Total</td>
                                 <td></td>
                               </tr>
-                              <tr><td colspan="6" style="border-bottom: double;">Amount in words: </td></tr>
+                              <tr><td colspan="6" style="border-bottom: double;">Amount in words: &nbsp;';
+                              print_r($amount);   'Rupees only </td>
+
+                              </tr>
 
                               <tr style="border-bottom:hidden"><td colspan="6">&nbsp;</td></tr>';
                         #Note
