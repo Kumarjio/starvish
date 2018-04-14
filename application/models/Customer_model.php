@@ -165,7 +165,7 @@ public function customer_quotation_view($id)
   }
 }
 
-<<<<<<< HEAD
+
 public function our_details()
 {
   if($res=$this->db->get('sv_table'))
@@ -192,7 +192,8 @@ public function customer_details($id)
   $this->db->where('customer_id',$cust_id);
   $result=$this->db->get();
   return $result->result();
-=======
+}
+
 //function to count the no of products in the quotation_search
 
 public function customer_quote_products($id)
@@ -202,7 +203,7 @@ public function customer_quote_products($id)
   $this->db->where('quote_id',$id);
   $res=$this->db->get();
   return $res->num_rows();
->>>>>>> 152cdbe8608864e52c87cd705466247930afd928
+
 }
 
 //end
