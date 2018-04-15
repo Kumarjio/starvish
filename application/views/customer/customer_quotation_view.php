@@ -66,28 +66,31 @@
                               <tr><td colspan="6" style="font-weight:bold;border-bottom:double;">Kind attention: Mr.</td></tr>';
 
                         #Dear Sir
-                        echo '<tr style="border-bottom:hidden"><td colspan="6">Dear Sir,</td></tr>
-                              <tr><td colspan="6">With reference to your enquiry , we take pleasure in submitting our best offer as below:</td></tr>
+                        echo '<tr style="border-bottom:hidden"><td colspan="7">Dear Sir,</td></tr>
+                              <tr><td colspan="7">With reference to your enquiry , we take pleasure in submitting our best offer as below:</td></tr>
                               <tr style="border:3px solid black">
                                 <th style="border:3px solid black">S.NO</th>
                                 <th style="border:3px solid black">Description</th>
                                 <th style="border:3px solid black">HSN/SAC Code</th>
                                 <th style="border:3px solid black">Quantity</th>
                                 <th style="border:3px solid black">Unit Charges</th>
+                                <th style="border:3px solid black">Tax</th>
                                 <th style="border:3px solid black">Total amount(in Rs)</th>
                               </tr>';
                               $total=0;
                           foreach($datas as $data)
                           {
+                            $per=($data->tax)/100;
+                            $total=$total+$data->total*$per;
                           echo'   <tr style="border:3px solid black">
                                 <td style="border:3px solid black">'.$i++.'</td>
                                 <td style="border:3px solid black">'.$data->description.'</td>
                                 <td style="border:3px solid black">'.$data->hsn_sac.'</td>
                                 <td style="border:3px solid black">'.$data->quantity.'</td>
                                 <td style="border:3px solid black">'.$data->unit_charges.'</td>
-                                <td style="border:3px solid black">'.$data->total.'</td>
+                                <td style="border:3px solid black">'.$data->tax.'='.$per.'</td>
+                                <td style="border:3px solid black">'.$total.'</td>
                               </tr>';
-                              $total=$total+$data->total;
                             }
                               echo '<tr style="border:3px solid black">
                                 <td colspan="5" align="right" style="border:3px solid black">Total</td>

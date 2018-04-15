@@ -59,7 +59,6 @@
                                                 <?php }?>
                                             </select>
 
-
                                   </div>
                               </div>
 
@@ -105,8 +104,9 @@
                             <th>Hsn/Sac</th>
                             <th>Quantity</th>
 							              <th>Unit Charge</th>
-							              <th>Total</th>
                             <th>Tax</th>
+							              <th>Total</th>
+
 							</tr>
                           </thead>
                           <tbody>

@@ -344,7 +344,7 @@ if($result == FALSE)  {
 
   //generating pdf
   public function generate_pdf($id)
-{ini_set('memory_limit', '256M');
+  {ini_set('memory_limit', '256M');
         // load library
         $this->load->library('pdf');
         $pdf = $this->pdf->load();
@@ -371,4 +371,6 @@ if($result == FALSE)  {
         $output = 'itemreport' . date('Y_m_d_H_i_s') . '_.pdf';
         $pdf->Output("$output", 'I');
 }
+
+
 }
