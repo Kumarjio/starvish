@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 14, 2018 at 07:13 PM
+-- Generation Time: Apr 15, 2018 at 10:42 PM
 -- Server version: 5.5.36
 -- PHP Version: 5.4.27
 
@@ -179,6 +179,7 @@ CREATE TABLE IF NOT EXISTS `customer_quote` (
   `quote_id` varchar(15) NOT NULL,
   `customer_id` varchar(15) NOT NULL,
   `description` varchar(20) NOT NULL,
+  `note` varchar(50) NOT NULL,
   PRIMARY KEY (`quote_id`),
   KEY `customer_quote_ref` (`customer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -187,8 +188,8 @@ CREATE TABLE IF NOT EXISTS `customer_quote` (
 -- Dumping data for table `customer_quote`
 --
 
-INSERT INTO `customer_quote` (`date`, `quote_id`, `customer_id`, `description`) VALUES
-('2018-03-25', 'quot1', 'cust1', 'dummy');
+INSERT INTO `customer_quote` (`date`, `quote_id`, `customer_id`, `description`, `note`) VALUES
+('2018-03-25', 'quot1', 'cust1', 'dummy', 'Credit card only acceptable');
 
 -- --------------------------------------------------------
 
@@ -204,6 +205,7 @@ CREATE TABLE IF NOT EXISTS `customer_quote_products` (
   `quantity` int(3) NOT NULL,
   `unit_charges` int(20) NOT NULL,
   `total` int(20) NOT NULL,
+  `tax` int(20) DEFAULT NULL,
   KEY `quote_id` (`quote_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -211,8 +213,8 @@ CREATE TABLE IF NOT EXISTS `customer_quote_products` (
 -- Dumping data for table `customer_quote_products`
 --
 
-INSERT INTO `customer_quote_products` (`quote_id`, `product_id`, `description`, `hsn_sac`, `quantity`, `unit_charges`, `total`) VALUES
-('quot1', 'prod1', 'desc', '123', 1, 3, 3);
+INSERT INTO `customer_quote_products` (`quote_id`, `product_id`, `description`, `hsn_sac`, `quantity`, `unit_charges`, `total`, `tax`) VALUES
+('quot1', 'prod1', 'desc', '123', 1, 3, 3, 12);
 
 -- --------------------------------------------------------
 
@@ -431,7 +433,7 @@ CREATE TABLE IF NOT EXISTS `tbl_last_login` (
   `platform` varchar(128) NOT NULL,
   `createdDtm` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=54 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=55 ;
 
 --
 -- Dumping data for table `tbl_last_login`
@@ -490,7 +492,8 @@ INSERT INTO `tbl_last_login` (`id`, `userId`, `sessionData`, `machineIp`, `userA
 (50, 1, '{"emp_id":"admin","role":"1","roleText":"System Administrator","name":"System Administrator"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 8.1', '2018-04-13 16:54:24'),
 (51, 1, '{"emp_id":"admin","role":"1","roleText":"System Administrator","name":"System Administrator"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 8.1', '2018-04-13 16:54:25'),
 (52, 1, '{"emp_id":"admin","role":"1","roleText":"System Administrator","name":"System Administrator"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 8.1', '2018-04-13 16:54:25'),
-(53, 1, '{"emp_id":"admin","role":"1","roleText":"System Administrator","name":"System Administrator"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 8.1', '2018-04-14 17:07:32');
+(53, 1, '{"emp_id":"admin","role":"1","roleText":"System Administrator","name":"System Administrator"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 8.1', '2018-04-14 17:07:32'),
+(54, 1, '{"emp_id":"admin","role":"1","roleText":"System Administrator","name":"System Administrator"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 8.1', '2018-04-15 18:21:01');
 
 -- --------------------------------------------------------
 
