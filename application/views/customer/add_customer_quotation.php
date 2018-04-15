@@ -58,7 +58,7 @@
                                                     <option value="<?php echo $cust->customer_id;?>"><?php echo $cust->customer_id;?> - <?php echo $cust->company_name;?></option>
                                                 <?php }?>
                                             </select>
-                                      
+
 
                                   </div>
                               </div>
@@ -104,8 +104,9 @@
                             <th>Description</th>
                             <th>Hsn/Sac</th>
                             <th>Quantity</th>
-							               <th>Unit Charge</th>
-							                      <th>Total</th>
+							              <th>Unit Charge</th>
+							              <th>Total</th>
+                            <th>Tax</th>
 							</tr>
                           </thead>
                           <tbody>
@@ -129,6 +130,9 @@
 						<td>
 							<input type="text" class="small" required="required" name="total[]">
 						 </td>
+             <td>
+ 							<input type="text" class="small" required="required" name="tax[]">
+ 						 </td>
 
 							</p>
                     </tr>

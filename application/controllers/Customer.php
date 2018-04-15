@@ -269,6 +269,7 @@ public function add_customer()
   $quantity=$this->input->post('quantity');
   $unit_charge=$this->input->post('unit_charge');
   $total=$this->input->post('total');
+  $tax=$this->input->post('tax');
 $current_date=date("Y-m-d");
   $datas=array('date'=>$current_date,'quote_id'=>$quote_id,'customer_id'=>$customer_id,
   'description'=>$description
@@ -278,7 +279,7 @@ $current_date=date("Y-m-d");
         if($result == TRUE){
 			foreach($product_id as $i => $n){
   $datas=array('quote_id'=>$quote_id,'product_id'=>$product_id[$i],'description'=>$p_description[$i],
-  'hsn_sac'=>$hsn[$i],'quantity'=>$quantity[$i],'unit_charges'=>$unit_charge[$i],'total'=>$total[$i]
+  'hsn_sac'=>$hsn[$i],'quantity'=>$quantity[$i],'unit_charges'=>$unit_charge[$i],'total'=>$total[$i],'tax'=>$tax[$i]
 			);
  $result = $this->customer_model->add_customer_product($datas);
 if($result == FALSE)  {
