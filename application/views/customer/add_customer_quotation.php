@@ -83,13 +83,25 @@
                             <!--row 2 end-->
 
                             <!--row 3-->
+                            <div class="row">
+                              <div class="col-md-12">
+                                  <div class="form-group">
+                                      <label for="note">Note</label>
+                                      <textarea class="form-control required " id="note" value="<?php echo set_value('note'); ?>" name="note" maxlength="500"></textarea>
+                                  </div>
+                              </div>
+
+                            </div>
+                            <!--row 3 end-->
+
+                            <!--row 4-->
                                 <div class="row">
                                   <div class="col-md-6">
                                       <div class="form-group">
                                          <button type="button" class="btn btn-primary" onClick="addRow('dataTable')">Add Product</button></div>
                                   </div>
                                 </div>
-                                <!--row 3 end-->
+                                <!--row 4 end-->
 
      <div class="container-fluid">
                       <div class="row">

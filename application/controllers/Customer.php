@@ -263,6 +263,7 @@ public function add_customer()
   $customer_id=$this->input->post('customer_id');
   $quote_id=$this->input->post('quote_id');
   $description=$this->input->post('description');
+  $note=$this->input->post('note');
   $product_id=$this->input->post('product_id');
   $p_description=$this->input->post('p_description');
   $hsn=$this->input->post('hsn');
@@ -272,7 +273,7 @@ public function add_customer()
   $tax=$this->input->post('tax');
 $current_date=date("Y-m-d");
   $datas=array('date'=>$current_date,'quote_id'=>$quote_id,'customer_id'=>$customer_id,
-  'description'=>$description
+  'description'=>$description,'note'=>$note
               );
         $result = FALSE;
         $result = $this->customer_model->add_customer_quote($datas);

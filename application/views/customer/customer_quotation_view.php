@@ -23,7 +23,7 @@
                     <div class="row">
                     <div class="col-lg-10 col-lg-offset-1 col-xs-12 col-sm-12 col-md-12">
                     <caption></caption>
-                    <!--<?php print_r($datas) ?>
+                   <!--<?php print_r($datas) ?>
                     <?php print_r($company);?>
                     <?php print_r($customer);?>-->
 
@@ -35,35 +35,32 @@
                       <tbody>';
                        #Quotation
                           echo '<tr style="border-bottom:hidden">
-                            <td colspan="4" style="font-weight:bold">'.$cust->company_name.'</td>
+                            <td colspan="5" style="font-weight:bold">'.$cmp->company_name.'</td>
                             <td align="right" style="font-weight:bold">Quote NO.:</td><td>'.$datas[0]->quote_id.'</td>
                           </tr>
                           <tr style="border-bottom:hidden">
-                            <td colspan="4" style="font-weight:bold">'.$cust->address1.'</td>
+                            <td colspan="5" style="font-weight:bold">'.$cmp->address1.'</td>
                             <td align="right" style="font-weight:bold">Date:</td><td>'.$datas[0]->date.'</td>
                           </tr>
                           <tr style="border-bottom:hidden;font-weight:bold">
-                            <td colspan="4">'.$cust->address2.'</td>
+                            <td colspan="5">Contact no:'.$cmp->contact_no.'</td>
                             <td align="right">Company\'s GSTN:</td><td>'.$cmp->gstn.'</td>
                           </tr>
                           <tr style="border-bottom:hidden;font-weight:bold">
-                            <td colspan="6">Contact no:'.$cust->contact_no1.','.$cust->contact_no2.'</td>
-                          </tr>
-                          <tr style="border-bottom:hidden;font-weight:bold">
-                            <td colspan="6" style="border-bottom:double;">'.$cust->email1.'</td>
+                            <td colspan="7" style="border-bottom:double;">'.$cmp->email.'</td>
                           </tr>';
 
                           #Quoated to
-                          echo '<tr style="border-bottom:hidden"><td colspan="6">&nbsp;</td></tr>
-                              <tr style="border-bottom:hidden"><td colspan="6" style="font-weight:bold">Quoted to</td></tr>
+                          echo '<tr style="border-bottom:hidden"><td colspan="7">&nbsp;</td></tr>
+                              <tr style="border-bottom:hidden"><td colspan="7" style="font-weight:bold">Quoted to</td></tr>
                               <tr style="border-bottom:hidden">
-                                <td colspan="6">'.$cmp->company_name.'</td>
+                                <td colspan="7">'.$cust->company_name.'</td>
                               </tr>
                               <tr style="border-bottom:hidden">
-                                <td colspan="6">'.$cmp->address1.'</td>
+                                <td colspan="7">'.$cust->address1.','.$cust->address2.'</td>
                               </tr>
-                              <tr style="border-bottom:hidden"><td colspan="6">&nbsp;</td></tr>
-                              <tr><td colspan="6" style="font-weight:bold;border-bottom:double;">Kind attention: Mr.</td></tr>';
+                              <tr style="border-bottom:hidden"><td colspan="7">&nbsp;</td></tr>
+                              <tr><td colspan="7" style="font-weight:bold;border-bottom:double;">Kind attention: Mr.</td></tr>';
 
                         #Dear Sir
                         echo '<tr style="border-bottom:hidden"><td colspan="7">Dear Sir,</td></tr>
@@ -93,34 +90,35 @@
                               </tr>';
                             }
                               echo '<tr style="border:3px solid black">
-                                <td colspan="5" align="right" style="border:3px solid black">Total</td>
+                                <td colspan="6" align="right" style="border:3px solid black">Total</td>
                                 <td>'.$total.'</td>
                               </tr>
                               <tr style="border:3px solid black">
-                                <td colspan="4" style="border:3px solid black">Tax Value</td>
+                                <td colspan="5" style="border:3px solid black">Tax Value</td>
                                 <td align="right" style="border:3px solid black">Total Tax Value</td>
                                 <td>4860</td>
                               </tr>
                               <tr style="border:3px solid black">
-                                <td colspan="4" style="font-weight:bold"></td>
+                                <td colspan="5" style="font-weight:bold"></td>
                                 <td align="right" style="border:3px solid black">Grand Total</td>
                                 <td></td>
                               </tr>
-                              <tr><td colspan="6" style="border-bottom: double;"><b>Amount in words: &nbsp;</b>';
+                              <tr><td colspan="7" style="border-bottom: double;"><b>Amount in words: &nbsp;</b>';
                               print_r($amount); echo(' Rupees only');   ' </td>
 
                               </tr>
 
                               <tr style="border-bottom:hidden"><td colspan="6">&nbsp;</td></tr>';
                         #Note
-                        echo '<tr style="border-bottom:hidden"><td colspan="6" style="font-weight:bold;">Note: </td></tr>
-                              <tr style="border-bottom:hidden"><td colspan="6">&nbsp;</td></tr>
-                              <tr style="border-bottom:hidden"><td colspan="6" style="font-style:italic">Payment to be done immediately after delivery/service</td></tr>
-                              <tr style="border-bottom:hidden"><td colspan="6" style="font-style:italic">We are looking forward for your Purchase Order in return</td></tr>
-                              <tr><td colspan="6" style="border-bottom:double;font-style:italic">Quote is valid only for 15 days</td></tr>
-                              <tr style="border-bottom:hidden"><td colspan="5"></td><td align="center" style="font-weight:bold">Yours faithfully</td></tr>
-                              <tr style="border-bottom:hidden"><td colspan="5"></td><td align="center" style="font-style:italic;font-weight:bold">'.$cust->contact_person1.'</td></tr>
-                              <tr><td colspan="5" style="font-style:italic;font-size:12px;">* This is generated digitally</td><td align="center" style="font-weight:bold;font-style:italic">'.$cust->company_name.'</td></tr>
+                        echo '<tr style="border-bottom:hidden"><td colspan="7" style="font-weight:bold;">Note: </td></tr>
+                              <tr style="border-bottom:hidden"><td colspan="7">&nbsp;</td></tr>
+                              <tr style="border-bottom:hidden"><td colspan="7" style="font-style:italic">Payment to be done immediately after delivery/service</td></tr>
+                              <tr style="border-bottom:hidden"><td colspan="7" style="font-style:italic">We are looking forward for your Purchase Order in return</td></tr>
+                              <tr style="border-bottom:hidden"><td colspan="7" style="font-style:italic">Quote is valid only for 15 days</td></tr>
+                              <tr><td colspan="7" style="border-bottom:double;font-style:italic">'.$datas[0]->note.'</td></tr>
+                              <tr style="border-bottom:hidden"><td colspan="6"></td><td align="center" style="font-weight:bold">Yours faithfully</td></tr>
+                              <tr style="border-bottom:hidden"><td colspan="6"></td><td align="center" style="font-style:italic;font-weight:bold">'.$cust->contact_person1.'</td></tr>
+                              <tr><td colspan="6" style="font-style:italic;font-size:12px;">* This is generated digitally</td><td align="center" style="font-weight:bold;font-style:italic">'.$cmp->company_name.'</td></tr>
                           </tbody>
                         </table>';
                       ?>
