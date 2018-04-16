@@ -115,15 +115,14 @@
 							<input type="text" class="small" required="required" name="hsn[]">
 						 </td>
 						<td>
-							<input type="text" class="small" required="required" name="quantity[]">
+							<input type="text" class="small" id="quantity" onkeyup="setQuantity($(this).val())" required="required" name="quantity[]">
 						 </td>
 						<td>
-							<input type="text" class="small" required="required" name="unit_charge[]">
+							<input type="text" class="small" id="unit" onkeyup="setUnit($(this).val())" required="required" name="unit_charge[]">
 						 </td>
 						<td>
-							<input type="text" class="small" required="required" name="total[]">
+							<input type="text" class="small" id="total" onfocus="javascript:$(this).val(vunit*vquantity);" required="required" name="total[]">
 						 </td>
-						
 							</p>
                     </tr>
                     </tbody>
@@ -149,6 +148,16 @@
 
 </div>
 <script>
+var vunit=0;
+var vquantity=0;
+function setUnit(a){
+	vunit=parseInt(a);
+	
+}
+function setQuantity(a){
+	vquantity=parseInt(a);
+	}
+
 function addRow(tableID) {
 	var table = document.getElementById(tableID);
 	var rowCount = table.rows.length;
