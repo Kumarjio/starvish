@@ -308,6 +308,13 @@
                     </a>
                   </li>
                   <br>
+                  <li class="treeview">
+                      <a href="<?php echo base_url()?>note_master" >
+                        <i class="fa fa-user"></i>
+                      <span>Note Master</span>
+                    </a>
+                  </li>
+                  <br>
                 </ul>
               </div>
             </li>

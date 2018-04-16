@@ -84,6 +84,15 @@ $route['add_vendor']='vendor/add_vendor';
 $route['delete_vendor/(:any)']='vendor/delete_vendor/$1';
 $route['vendor_listing']='vendor/vendor_listing';
 
+/****************Note MASTER******************/
+
+$route['note_master']='note';
+$route['add_edit_note']='note/add_edit_note';
+$route['add_edit_note/(:any)']='note/add_edit_note/$1';
+$route['update_note']='note/update_note';
+$route['add_note']='note/add_note';
+$route['delete_note/(:any)']='note/delete_note/$1';
+$route['note_listing']='note/note_listing';
 
 /****************vendor QUOTATION******************/
 $route['vendor_quotation']='vendorquotation';
