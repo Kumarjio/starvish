@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2018 at 10:42 PM
+-- Generation Time: Apr 17, 2018 at 12:44 AM
 -- Server version: 5.5.36
 -- PHP Version: 5.4.27
 
@@ -335,6 +335,26 @@ CREATE TABLE IF NOT EXISTS `mileage_imbursement` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `note_master`
+--
+
+CREATE TABLE IF NOT EXISTS `note_master` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `note_master`
+--
+
+INSERT INTO `note_master` (`id`, `description`) VALUES
+(3, 'credit card payment'),
+(5, 'payment based on debit card');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `order_acceptance`
 --
 
@@ -433,7 +453,7 @@ CREATE TABLE IF NOT EXISTS `tbl_last_login` (
   `platform` varchar(128) NOT NULL,
   `createdDtm` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=55 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=57 ;
 
 --
 -- Dumping data for table `tbl_last_login`
@@ -493,7 +513,9 @@ INSERT INTO `tbl_last_login` (`id`, `userId`, `sessionData`, `machineIp`, `userA
 (51, 1, '{"emp_id":"admin","role":"1","roleText":"System Administrator","name":"System Administrator"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 8.1', '2018-04-13 16:54:25'),
 (52, 1, '{"emp_id":"admin","role":"1","roleText":"System Administrator","name":"System Administrator"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 8.1', '2018-04-13 16:54:25'),
 (53, 1, '{"emp_id":"admin","role":"1","roleText":"System Administrator","name":"System Administrator"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 8.1', '2018-04-14 17:07:32'),
-(54, 1, '{"emp_id":"admin","role":"1","roleText":"System Administrator","name":"System Administrator"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 8.1', '2018-04-15 18:21:01');
+(54, 1, '{"emp_id":"admin","role":"1","roleText":"System Administrator","name":"System Administrator"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 8.1', '2018-04-15 18:21:01'),
+(55, 1, '{"emp_id":"admin","role":"1","roleText":"System Administrator","name":"System Administrator"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 8.1', '2018-04-16 02:44:06'),
+(56, 1, '{"emp_id":"admin","role":"1","roleText":"System Administrator","name":"System Administrator"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Windows 8.1', '2018-04-16 17:27:56');
 
 -- --------------------------------------------------------
 
