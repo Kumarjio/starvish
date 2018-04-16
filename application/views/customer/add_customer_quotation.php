@@ -81,7 +81,7 @@
                                 <div class="row">
                                   <div class="col-md-6">
                                       <div class="form-group">
-                                         <button type="button" class="btn btn-primary" onClick="addRow('dataTable')">Add Product</button></div>
+                                         <button type="button" class="btn btn-primary" onClick="addRow()">Add Product</button></div>
                                   </div>
                                 </div>
                                 <!--row 3 end-->
@@ -91,7 +91,7 @@
                       <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
                       <caption></caption>
                       <div class="table-responsive">
-			  <table id="dataTable" class="table table-striped table-condensed table-hover table-bordered">
+			  <table id="dataTable" class="table table-striped table-condensed table-hover table-bordered product-details">
 			   <thead class="bg-primary">
                             <tr>
                             <th>Product ID</th>
@@ -100,31 +100,12 @@
                             <th>Quantity</th>
 							<th>Unit Charge</th>
 							<th>Total</th>
+							<th>X</th>
 							</tr>
                           </thead>
                           <tbody>
-                    <tr>
-                      <p>
-						<td>
-							<input type="text" class="small" required="required" name="product_id[]">
-						 </td>
-						<td>
-							<input type="text" class="small" required="required" name="p_description[]">
-						 </td>
-						<td>
-							<input type="text" class="small" required="required" name="hsn[]">
-						 </td>
-						<td>
-							<input type="text" class="small" id="quantity" onkeyup="setQuantity($(this).val())" required="required" name="quantity[]">
-						 </td>
-						<td>
-							<input type="text" class="small" id="unit" onkeyup="setUnit($(this).val())" required="required" name="unit_charge[]">
-						 </td>
-						<td>
-							<input type="text" class="small" id="total" onfocus="javascript:$(this).val(vunit*vquantity);" required="required" name="total[]">
-						 </td>
-							</p>
-                    </tr>
+                 
+					
                     </tbody>
                 </table></div></div></div></div>
 				
@@ -148,27 +129,27 @@
 
 </div>
 <script>
-var vunit=0;
-var vquantity=0;
-function setUnit(a){
-	vunit=parseInt(a);
-	
+var counter = 1;
+function addRow(){
+	console.log("crick");
+    counter++;
+    var newRow = jQuery('<tr><td><input type="text" name="product_id[]" class="small" required></td><td><input type="text" name="p_description[]" class="small" required></td><td><input type="text" name="hsn[]" class="small" required/></td><td><input type="text" class="product-add-field quantity ' + counter + '" name="quantity[]" class="small" required/></td><td><input type="text" class="product-add-field unit-price ' + counter + '" name="unit_charge[]" class="small" required/></td><td><input type="text" value="" name="total"  class="product-add-field price-total ' + counter + '" id="" class="small" required/></td><td><a href="#">X</a></td></tr>');
+    jQuery('table.product-details').append(newRow);
 }
-function setQuantity(a){
-	vquantity=parseInt(a);
-	}
 
-function addRow(tableID) {
-	var table = document.getElementById(tableID);
-	var rowCount = table.rows.length;
-	if(rowCount <50){						
-		var row = table.insertRow(rowCount);
-		var colCount = table.rows[1].cells.length;
-		for(var i=0; i<colCount; i++) {
-			var newcell = row.insertCell(i);
-			newcell.innerHTML = table.rows[1].cells[i].innerHTML;
-		}
-	}
-	
-}
+
+jQuery('table.product-details').on('click','tr a',function(e){
+ e.preventDefault();
+jQuery(this).parents('tr').remove();
+});
+
+
+jQuery('table.product-details').on("keyup", "tr", function() {
+    var row = jQuery(this);
+    var value = jQuery( ".unit-price", row ).val();
+    var value2 = jQuery( ".quantity", row ).val();
+    var total = value * value2;
+	jQuery( ".product-add-field.price-total", row ).val( total.toFixed(2) );
+	});
+
 </script>
