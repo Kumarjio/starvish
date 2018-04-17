@@ -135,24 +135,24 @@
                             <div class="row">
 
                                <div class="col-md-4">
-                                    
+
                                         <label for="quote_id">Total Tax</label>
                                         <input type="text"  value="0" id="totaltax" readonly >
-                                    
+
                                 </div>
                                 <div class="col-md-4">
-                                    
+
                                         <label for="quote_id">Total</label>
                                         <input type="text" value="0" id="ttotal" readonly>
-                                    
+
                                 </div>
 								<div class="col-md-4">
                                         <label for="quote_id">Grand Total</label>
                                         <input type="text" value="0" id="grandtotal" readonly>
-                                    
+
                                 </div>
                             </div><!--row 1 End-->
-				
+
 				</div>
 
 
@@ -201,13 +201,13 @@ jQuery('table.product-details').on("keyup", "tr", function() {
     var value2 = jQuery( ".quantity", row ).val();
     var tax = jQuery( ".unit-tax", row).val();
     var total = value * value2;
-	var amt= (tax*value)/100;
-	
+	var amt= (tax*value*value2)/100;
+  var prod_total=total+amt;
 	//load values in index
 	totalArray[counter] = total;
 	grandArray[counter] = total+amt;
 	taxArray[counter] = amt;
-    
+
 	//init to 0 to prevent loop iteration
 	grand_total=0;
 	ttotal=0;
@@ -224,8 +224,8 @@ jQuery('table.product-details').on("keyup", "tr", function() {
 	$("#totaltax").val(tot_tax);
 	$("#ttotal").val(ttotal);
 	$("#grandtotal").val(grand_total);
-	
-	jQuery( ".product-add-field.price-total", row ).val( total.toFixed(3) );
+
+	jQuery( ".product-add-field.price-total", row ).val( prod_total.toFixed(3) );
 	});
 
 </script>
