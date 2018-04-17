@@ -131,6 +131,28 @@
                     </tbody>
                 </table></div></div></div></div>
 
+				  <!--row 1-->
+                            <div class="row">
+
+                               <div class="col-md-4">
+                                    
+                                        <label for="quote_id">Total Tax</label>
+                                        <input type="text"  value="0" id="totaltax" readonly >
+                                    
+                                </div>
+                                <div class="col-md-4">
+                                    
+                                        <label for="quote_id">Total</label>
+                                        <input type="text" value="0" id="ttotal" readonly>
+                                    
+                                </div>
+								<div class="col-md-4">
+                                        <label for="quote_id">Grand Total</label>
+                                        <input type="text" value="0" id="grandtotal" readonly>
+                                    
+                                </div>
+                            </div><!--row 1 End-->
+				
 				</div>
 
 
@@ -153,12 +175,17 @@
 
 
 <script>
-
+var grand_total=0;
+var ttotal=0;
+var tot_tax=0;
 var counter = 1;
+var totalArray =  [];
+var grandArray = [];
+var taxArray = [];
 function addRow(){
 	console.log("crick");
     counter++;
-    var newRow = jQuery('<tr><td><input type="text" name="product_id[]" class="small" required></td><td><input type="text" name="p_description[]" class="small" required></td><td><input type="text" name="hsn[]" class="small" required/></td><td><input type="text" class="product-add-field quantity ' + counter + '" name="quantity[]" class="small" required/></td><td><input type="text" class="product-add-field unit-price ' + counter + '" name="unit_charge[]" class="small" required/></td><td><input type="number" class="small"  id="tax" name="tax[]" class="product-add-field tax ' + counter + '" required"></td><td><input type="text" value="" name="total"  class="product-add-field price-total ' + counter + '" id="" class="small" required/></td><td><a href="#">X</a></td></tr>');
+    var newRow = jQuery('<tr><td><input type="text" name="product_id[]" class="small" required></td><td><input type="text" name="p_description[]" class="small" required></td><td><input type="text" name="hsn[]" class="small" required/></td><td><input type="text" class="product-add-field quantity ' + counter + '" name="quantity[]" class="small" required/></td><td><input type="text" class="product-add-field unit-price ' + counter + '" name="unit_charge[]" class="small" required/></td><td><input type="text" class="product-add-field unit-tax ' + counter + '" name="tax[]" class="small" required/></td><td><input type="text" value="" name="total"  class="product-add-field price-total ' + counter + '" id="" class="small" required/></td><td><a href="#">X</a></td></tr>');
     jQuery('table.product-details').append(newRow);
 }
 
@@ -172,10 +199,32 @@ jQuery('table.product-details').on("keyup", "tr", function() {
     var row = jQuery(this);
     var value = jQuery( ".unit-price", row ).val();
     var value2 = jQuery( ".quantity", row ).val();
-    var tax= jQuery(".tax",row).val();
+    var tax = jQuery( ".unit-tax", row).val();
     var total = value * value2;
-    var amt= (tax*value)/100;
-    var grand_total=total+amt;
+	var amt= (tax*value)/100;
+	
+	//load values in index
+	totalArray[counter] = total;
+	grandArray[counter] = total+amt;
+	taxArray[counter] = amt;
+    
+	//init to 0 to prevent loop iteration
+	grand_total=0;
+	ttotal=0;
+	tot_tax=0;
+	for (var i = 2; i < totalArray.length; i++) {
+	    grand_total += grandArray[i];
+		ttotal += totalArray[i];
+		tot_tax += taxArray[i];
+	}
+	console.log("grand total: "+grand_total);
+	console.log("total total: "+ttotal);
+	console.log("total tax: "+tot_tax);
+	//display values
+	$("#totaltax").val(tot_tax);
+	$("#ttotal").val(ttotal);
+	$("#grandtotal").val(grand_total);
+	
 	jQuery( ".product-add-field.price-total", row ).val( total.toFixed(3) );
 	});
 
