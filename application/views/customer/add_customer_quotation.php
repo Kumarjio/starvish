@@ -87,7 +87,12 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="note">Note</label>
-                                      <textarea class="form-control required " id="note" value="<?php echo set_value('note'); ?>" name="note" maxlength="500"></textarea>
+                                      <!--<textarea class="form-control required " id="note" value="<?php //echo set_value('note'); ?>" name="note" maxlength="500"></textarea>-->
+                                      <select class="form-control" name="note">
+                                        <?php foreach($notes as $note){?>
+                                              <option value="<?php echo $note->description;?>"><?php echo $note->id;?> - <?php echo $note->description;?></option>
+                                          <?php }?>
+                                      </select>
                                   </div>
                               </div>
 
@@ -134,17 +139,18 @@
 							<input type="text" class="small" required="required" name="hsn[]">
 						 </td>
 						<td>
-							<input type="text" class="small" required="required" name="quantity[]">
+							<input type="text" class="small" required="required" id="quan" name="quantity[]">
 						 </td>
 						<td>
-							<input type="text" class="small" required="required" name="unit_charge[]">
-						 </td>
-						<td>
-							<input type="text" class="small" required="required" name="total[]">
+							<input type="text" class="small" required="required" id="unit" name="unit_charge[]">
 						 </td>
              <td>
- 							<input type="text" class="small" required="required" name="tax[]">
+ 							<input type="text" class="small" required="required" id="tax" name="tax[]">
  						 </td>
+						<td>
+							<input type="text" class="small" required="required" id="total" name="total[]">
+						 </td>
+
 
 							</p>
                     </tr>
@@ -171,12 +177,21 @@
 
 </div>
 <script>
+function calc()
+{
+  var quan=document.getElementById('quan');
+  var unit=document.getElementById('unit');
+  console.log(quan);
+  var res=quan*unit;
+  document.getElementById('total').innerHTML=res;
+}
 function addRow(tableID) {
 	var table = document.getElementById(tableID);
 	var rowCount = table.rows.length;
 	if(rowCount <50){
 		var row = table.insertRow(rowCount);
 		var colCount = table.rows[1].cells.length;
+
 		for(var i=0; i<colCount; i++) {
 			var newcell = row.insertCell(i);
 			newcell.innerHTML = table.rows[1].cells[i].innerHTML;

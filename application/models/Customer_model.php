@@ -215,5 +215,15 @@ public function customer_quote_products($id)
 
 }
 
+public function fetch_notes()
+{
+  if($res=$this->db->get('note_master'))
+  {
+    return $res->result();
+  }
+  else {
+    return false;
+  }
+}
 //end
 }
