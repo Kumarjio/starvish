@@ -127,33 +127,7 @@
 							</tr>
                           </thead>
                           <tbody>
-                    <tr>
-                      <p>
-						<td>
-							<input type="text" class="small" required="required" name="product_id[]">
-						 </td>
-						<td>
-							<input type="text" class="small" required="required" name="p_description[]">
-						 </td>
-						<td>
-							<input type="text" class="small" required="required" name="hsn[]">
-						 </td>
-						<td>
-							<input type="text" class="small" required="required" id="quan" name="quantity[]">
-						 </td>
-						<td>
-							<input type="text" class="small" required="required" id="unit" name="unit_charge[]">
-						 </td>
-             <td>
- 							<input type="text" class="small" required="required" id="tax" name="tax[]">
- 						 </td>
-						<td>
-							<input type="text" class="small" required="required" id="total" name="total[]">
-						 </td>
 
-
-							</p>
-                    </tr>
                     </tbody>
                 </table></div></div></div></div>
 
@@ -176,13 +150,15 @@
 
 
 </div>
+
+
 <script>
 
 var counter = 1;
 function addRow(){
 	console.log("crick");
     counter++;
-    var newRow = jQuery('<tr><td><input type="text" name="product_id[]" class="small" required></td><td><input type="text" name="p_description[]" class="small" required></td><td><input type="text" name="hsn[]" class="small" required/></td><td><input type="text" class="product-add-field quantity ' + counter + '" name="quantity[]" class="small" required/></td><td><input type="text" class="product-add-field unit-price ' + counter + '" name="unit_charge[]" class="small" required/></td><td><input type="text" value="" name="total"  class="product-add-field price-total ' + counter + '" id="" class="small" required/></td><td><a href="#">X</a></td></tr>');
+    var newRow = jQuery('<tr><td><input type="text" name="product_id[]" class="small" required></td><td><input type="text" name="p_description[]" class="small" required></td><td><input type="text" name="hsn[]" class="small" required/></td><td><input type="text" class="product-add-field quantity ' + counter + '" name="quantity[]" class="small" required/></td><td><input type="text" class="product-add-field unit-price ' + counter + '" name="unit_charge[]" class="small" required/></td><td><input type="number" class="small"  id="tax" name="tax[]" class="product-add-field tax ' + counter + '" required"></td><td><input type="text" value="" name="total"  class="product-add-field price-total ' + counter + '" id="" class="small" required/></td><td><a href="#">X</a></td></tr>');
     jQuery('table.product-details').append(newRow);
 }
 
@@ -196,8 +172,11 @@ jQuery('table.product-details').on("keyup", "tr", function() {
     var row = jQuery(this);
     var value = jQuery( ".unit-price", row ).val();
     var value2 = jQuery( ".quantity", row ).val();
+    var tax= jQuery(".tax",row).val();
     var total = value * value2;
-	jQuery( ".product-add-field.price-total", row ).val( total.toFixed(2) );
+    var amt= (tax*value)/100;
+    var grand_total=total+amt;
+	jQuery( ".product-add-field.price-total", row ).val( total.toFixed(3) );
 	});
 
 </script>
