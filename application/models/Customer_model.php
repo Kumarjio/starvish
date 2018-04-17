@@ -14,7 +14,7 @@ public function customerlisting()
   }
   else {
     return false;
-    }
+  }
 }
 
 //function to add customer into customer_master table
@@ -52,6 +52,15 @@ public function delete_customer($id)
   return $res;
 }
 
+public function fetch_customers()
+{
+  if($res=$this->db->get('customer_master'))
+      return $res->result();
+  else {
+    return false;
+  }
+}
+
 //function to list the users based on the search result
 
 public function customer_listing($searchText)
@@ -77,17 +86,18 @@ if($query = $this->db->get())
 else
     return false;
 }
-//customer quotation
+//customer quotation listing
 public function customerquote()
 {
-  if($res=$this->db->get('customer_quote'))
-  {
-    return $res->result();
-  }
-  else {
-    return false;
-    }
+$res=$this->db->query('select customer_quote.*,count(customer_quote_products.quote_id) as product_count from customer_quote INNER JOIN customer_quote_products ON customer_quote.quote_id=customer_quote_products.quote_id GROUP by customer_quote.quote_id');
+if($res->result())
+  return $res->result();
+else {
+  return false;
 }
+}
+
+
 //function to quote to customer_quote
 public function add_customer_quote($datas)
 {
@@ -150,5 +160,70 @@ $this->db->where('quote_id',$id);
     }
 }
 
+//function to view the quotation_search
+public function customer_quotation_view($id)
+{
+  $this->db->select('*');
+  $this->db->from('customer_quote as quote');
+  $this->db->join('customer_quote_products as products','products.quote_id=quote.quote_id','left');
+  $this->db->where('quote.quote_id',$id);
+  if($res=$this->db->get())
+      return $res->result();
+  else {
+    return false;
+  }
+}
 
+
+public function our_details()
+{
+  if($res=$this->db->get('sv_table'))
+  {
+    return $res->result();
+  }
+  else {
+    return false;
+  }
+}
+
+public function customer_details($id)
+{
+  $this->db->select('customer_id');
+  $this->db->from('customer_quote');
+  $this->db->where('quote_id',$id);
+  $res=$this->db->get();
+  foreach($res->result() as $row)
+  {
+    $cust_id=$row->customer_id;
+  }
+  $this->db->select('*');
+  $this->db->from('customer_master');
+  $this->db->where('customer_id',$cust_id);
+  $result=$this->db->get();
+  return $result->result();
+}
+
+//function to count the no of products in the quotation_search
+
+public function customer_quote_products($id)
+{
+  $this->db->select('*');
+  $this->db->from('customer_quote_products');
+  $this->db->where('quote_id',$id);
+  $res=$this->db->get();
+  return $res->num_rows();
+
+}
+
+public function fetch_notes()
+{
+  if($res=$this->db->get('note_master'))
+  {
+    return $res->result();
+  }
+  else {
+    return false;
+  }
+}
+//end
 }

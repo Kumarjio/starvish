@@ -119,7 +119,7 @@
                   </li>
                   <br>
                   <li class="treeview">
-                    <a href="<?php echo base_url()?>" >
+                    <a href="<?php echo base_url()?>vendor_quotation" >
                       <i class="fa fa-file-text-o"></i>
                       <span>Vendor Quotation</span>
                     </a>
@@ -305,6 +305,13 @@
                       <a href="<?php echo base_url()?>userListing" >
                         <i class="fa fa-user"></i>
                       <span>Employee Master</span>
+                    </a>
+                  </li>
+                  <br>
+                  <li class="treeview">
+                      <a href="<?php echo base_url()?>note_master" >
+                        <i class="fa fa-user"></i>
+                      <span>Note Master</span>
                     </a>
                   </li>
                   <br>

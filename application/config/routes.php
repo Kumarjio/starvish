@@ -73,6 +73,8 @@ $route['update_customer_quote']='customer/update_customer_quote';
 $route['add_customer_quote']='customer/add_customer_quote';
 $route['delete_customer_quote/(:any)']='customer/delete_customer_quote/$1';
 $route['generate_pdf/(:any)']='customer/generate_pdf/$1';
+$route['customer_quotation_view/(:any)']='customer/customer_quotation_view/$1';
+
 /****************vendor MASTER******************/
 $route['vendor_master']='vendor';
 $route['add_edit_vendor']='vendor/add_edit_vendor';
@@ -81,6 +83,25 @@ $route['update_vendor']='vendor/update_vendor';
 $route['add_vendor']='vendor/add_vendor';
 $route['delete_vendor/(:any)']='vendor/delete_vendor/$1';
 $route['vendor_listing']='vendor/vendor_listing';
+
+/****************Note MASTER******************/
+
+$route['note_master']='note';
+$route['add_edit_note']='note/add_edit_note';
+$route['add_edit_note/(:any)']='note/add_edit_note/$1';
+$route['update_note']='note/update_note';
+$route['add_note']='note/add_note';
+$route['delete_note/(:any)']='note/delete_note/$1';
+$route['note_listing']='note/note_listing';
+
+/****************vendor QUOTATION******************/
+$route['vendor_quotation']='vendorquotation';
+$route['add_edit_vendor_quotation']='vendorquotation/add_edit_vendor_quotation';
+$route['add_edit_vendor_quotation/(:any)']='vendorquotation/add_edit_vendor_quotation/$1';
+$route['update_vendor_quotation']='vendorquotation/update_vendor_quotation';
+$route['add_vendor_quotation']='vendorquotation/add_vendor_quotation';
+$route['delete_vendor_quotation/(:any)']='vendorquotation/delete_vendor_quotation/$1';
+$route['vendor_quotation_listing']='vendorquotation/vendor_quotation_listing';
 
 
 /*********** USER DEFINED ROUTES *******************/

@@ -1,5 +1,6 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
+
 require APPPATH . '/libraries/BaseController.php';
 
 //customer master
@@ -207,10 +208,9 @@ public function add_customer()
 //customer quotation
   public function customer_quotation()
   {
-	  
+
       $this->global['pageTitle'] = 'StarVish: Customer Quotation';
       $result=$this->customer_model->customerquote();
-	
       if($result!=false)
         {
 			$res['datas']=$result;
@@ -240,14 +240,18 @@ public function add_customer()
     }
   $this->loadViews("customer/customer_quotation",$this->global,$data,NULL);
   }
- 
+
 //this function used to redirect to addcustomerquote or editcustomerquote based on the quoteidid
     public function add_edit_customer_quote($id=NULL)
     {
       if($id==NULL)
       {
         $this->global['pageTitle'] = 'StarVish:Add Quotation';
-      $this->loadViews("customer/add_customer_quotation", $this->global, NULL , NULL);
+        $cust_id=$this->customer_model->fetch_customers();
+        $notes=$this->customer_model->fetch_notes();
+        $data['customer']=$cust_id;
+        $data['notes']=$notes;
+      $this->loadViews("customer/add_customer_quotation", $this->global, $data , NULL);
       }
       else {
         $this->global['pageTitle'] = 'StarVish:Edit Quotation';
@@ -261,24 +265,26 @@ public function add_customer()
   $customer_id=$this->input->post('customer_id');
   $quote_id=$this->input->post('quote_id');
   $description=$this->input->post('description');
+  $note=$this->input->post('note');
   $product_id=$this->input->post('product_id');
   $p_description=$this->input->post('p_description');
   $hsn=$this->input->post('hsn');
   $quantity=$this->input->post('quantity');
   $unit_charge=$this->input->post('unit_charge');
   $total=$this->input->post('total');
+  $tax=$this->input->post('tax');
 $current_date=date("Y-m-d");
   $datas=array('date'=>$current_date,'quote_id'=>$quote_id,'customer_id'=>$customer_id,
-  'description'=>$description
+  'description'=>$description,'note'=>$note
               );
         $result = FALSE;
         $result = $this->customer_model->add_customer_quote($datas);
         if($result == TRUE){
 			foreach($product_id as $i => $n){
   $datas=array('quote_id'=>$quote_id,'product_id'=>$product_id[$i],'description'=>$p_description[$i],
-  'hsn/sac'=>$hsn[$i],'quantity'=>$quantity[$i],'unit_charges'=>$unit_charge[$i],'total'=>$total[$i]
-			);     
- $result = $this->customer_model->add_customer_product($datas);	
+  'hsn_sac'=>$hsn[$i],'quantity'=>$quantity[$i],'unit_charges'=>$unit_charge[$i],'total'=>$total[$i],'tax'=>$tax[$i]
+			);
+ $result = $this->customer_model->add_customer_product($datas);
 if($result == FALSE)  {
 	$this->session->set_flashdata('error','Quotation creation failed!');
 	break;}
@@ -309,25 +315,74 @@ if($result == FALSE)  {
     }
     redirect('customer_quotation');
   }
-  
-  
-  
+
+
+// Function to view the generated Quotation
+  public function customer_quotation_view($id)
+  {
+    $total=0;
+    $sp=0;
+    $tax=0;
+    $grand_total=0;
+    $grand_tax=0;
+    $this->global['pageTitle'] = 'StarVish:View Quotation';
+    $result=$this->customer_model->customer_quotation_view($id);
+    $company=$this->customer_model->our_details();
+    $customer=$this->customer_model->customer_details($id);
+    if($result!=false)
+    {
+      foreach($result as $res)
+      {
+
+        $sp=$res->quantity*$res->unit_charges;
+        $tax=($res->tax * $sp )/100;
+        $total=$sp+$tax;
+        //$grand_tax=$grand_tax+$tax;
+        $grand_total=$grand_total+$total;
+      }
+      $amount=$this->convert_number($grand_total);
+      $data['datas']=$result;
+      $data['amount']=$amount;
+      $data['company']=$company;
+      $data['customer']=$customer;
+    }
+    else {
+      $data['datas']='NA';
+    }
+    $this->loadViews("customer/customer_quotation_view",$this->global,$data,NULL);
+
+  }
+
+
   //generating pdf
   public function generate_pdf($id)
-{ini_set('memory_limit', '256M');
+  {ini_set('memory_limit', '256M');
         // load library
         $this->load->library('pdf');
         $pdf = $this->pdf->load();
         // retrieve data from model
-        $data['news'] = "hello";
-        $data['title'] = "items";
+        $this->global['pageTitle'] = 'StarVish:View Quotation';
+        $result=$this->customer_model->customer_quotation_view($id);
+        $company=$this->customer_model->our_details();
+        $customer=$this->customer_model->customer_details($id);
+        if($result!=false)
+        {
+          $data['datas']=$result;
+          $data['company']=$company;
+          $data['customer']=$customer;
+        }
+        else {
+          $data['datas']='NA';
+        }
 
         // boost the memory limit if it's low ;)
-        $html = $this->load->view('customer/m', $data, true);//test
+        $html = $this->load->view('customer/customer_quotation_pdf',$data,true);//test
         // render the view into HTML
         $pdf->WriteHTML($html);
         // write the HTML into the PDF
         $output = 'itemreport' . date('Y_m_d_H_i_s') . '_.pdf';
         $pdf->Output("$output", 'I');
 }
+
+
 }

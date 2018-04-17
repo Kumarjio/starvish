@@ -1,6 +1,13 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+      <div class="row">
+          <div class="col-xs-12 text-left">
+              <div class="form-group">
+                  <a class="btn btn-primary" href="<?php echo base_url(); ?>userListing"><i class="fa fa-angle-left"></i> Back</a>
+              </div>
+          </div>
+      </div>
       <h1>
         <i class="fa fa-users"></i> Employee Master
         <small>Add / Edit Employee</small>
@@ -42,13 +49,30 @@
                         <h3 class="box-title">Enter Employee Details</h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
+                    <script>
+                    $(document).ready(function(){
+
+                      jQuery.validator.addMethod("noSpace", function(value, element) {
+                        return value.indexOf(" ") < 0 && value != "";
+                      }, "No space please and don't leave it empty");
+
+
+                      $("form").validate({
+                        rules: {
+                          emp_id: {
+                            noSpace: true
+                          }
+                        }
+                      });
+
+                      })
+                    </script>
                     <?php $this->load->helper("form"); ?>
                     <form role="form" id="addVendor" action="<?php echo base_url() ?>addNewUser" method="post" role="form">
                         <div class="box-body">
 
                           <!--row 1-->
                             <div class="row">
-
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="emp_id">Employee ID</label>
@@ -181,9 +205,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="role">Role</label>
+                                        <label for="role">Designation</label>
                                         <select class="form-control required" id="role" name="role">
-                                            <option value="0">Select Role</option>
+                                            <option value="0">Select Designation</option>
                                             <?php
                                             if(!empty($roles))
                                             {

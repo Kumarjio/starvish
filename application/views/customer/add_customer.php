@@ -2,6 +2,13 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+      <div class="row">
+          <div class="col-xs-12 text-left">
+              <div class="form-group">
+                  <a class="btn btn-primary" href="<?php echo base_url(); ?>customer_master"><i class="fa fa-angle-left"></i> Back</a>
+              </div>
+          </div>
+      </div>
       <h1>
         <i class="fa fa-plus-square-o"></i> Customer Master
         <small>Add, Edit or Delete the Customers</small>
@@ -42,14 +49,27 @@
                     <div class="box-header">
                         <i><h3 class="box-title">Add New Customer</h3></i>
                     </div><!-- /.box-header -->
+                    <script>
+                    $(document).ready(function(){
+
+                      jQuery.validator.addMethod("noSpace", function(value, element) {
+                        return value.indexOf(" ") < 0 && value != "";
+                      }, "No space please and don't leave it empty");
+
+
+                      $("form").validate({
+                        rules: {
+                          customer_id: {
+                            noSpace: true
+                          }
+                        }
+                      });
+
+                      })
+                    </script>
                     <?php $this->load->helper("form"); ?>
-<<<<<<< HEAD:application/views/customer/add_customer.php
           <!--          <form role="form" id="addvendor" action="<?php echo base_url() ?>add_customer" method="post" role="form">-->
-          <?php echo form_open_multipart('add_customer');?>
-=======
-                   <!-- <form role="form" id="addvendor" action="<?php echo base_url() ?>add_vendor" method="post" role="form">-->
-				    <?php echo form_open_multipart('add_vendor');?>
->>>>>>> master:application/views/vendor/add_vendor.php
+              <?php echo form_open_multipart('add_customer');?>
                         <div class="box-body">
 
                           <!--row 1-->

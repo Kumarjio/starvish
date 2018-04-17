@@ -34,7 +34,7 @@
             </div>
             <?php } ?>
 
-            <div class="col-md-10">
+            <div class="col-md-12">
               <!-- general form elements -->
 
                 <div class="box box-primary">
@@ -53,7 +53,12 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="emp_id">Customer ID</label>
-                                      <input type="text" class="form-control required" value="<?php echo set_value('customer_id'); ?>" id="customer_id" name="customer_id" maxlength="128">
+                                            <select class="form-control" name="customer_id">
+                                              <?php foreach($customer as $cust){?>
+                                                    <option value="<?php echo $cust->customer_id;?>"><?php echo $cust->customer_id;?> - <?php echo $cust->company_name;?></option>
+                                                <?php }?>
+                                            </select>
+
                                   </div>
                               </div>
 
@@ -78,13 +83,30 @@
                             <!--row 2 end-->
 
                             <!--row 3-->
+                            <div class="row">
+                              <div class="col-md-12">
+                                  <div class="form-group">
+                                      <label for="note">Note</label>
+                                      <!--<textarea class="form-control required " id="note" value="<?php //echo set_value('note'); ?>" name="note" maxlength="500"></textarea>-->
+                                      <select class="form-control" name="note">
+                                        <?php foreach($notes as $note){?>
+                                              <option value="<?php echo $note->description;?>"><?php echo $note->id;?> - <?php echo $note->description;?></option>
+                                          <?php }?>
+                                      </select>
+                                  </div>
+                              </div>
+
+                            </div>
+                            <!--row 3 end-->
+
+                            <!--row 4-->
                                 <div class="row">
                                   <div class="col-md-6">
                                       <div class="form-group">
                                          <button type="button" class="btn btn-primary" onClick="addRow()">Add Product</button></div>
                                   </div>
                                 </div>
-                                <!--row 3 end-->
+                                <!--row 4 end-->
 
      <div class="container-fluid">
                       <div class="row">
@@ -98,20 +120,46 @@
                             <th>Description</th>
                             <th>Hsn/Sac</th>
                             <th>Quantity</th>
-							<th>Unit Charge</th>
-							<th>Total</th>
-							<th>X</th>
+							              <th>Unit Charge</th>
+                            <th>Tax</th>
+							              <th>Total</th>
+
 							</tr>
                           </thead>
                           <tbody>
-                 
-					
+                    <tr>
+                      <p>
+						<td>
+							<input type="text" class="small" required="required" name="product_id[]">
+						 </td>
+						<td>
+							<input type="text" class="small" required="required" name="p_description[]">
+						 </td>
+						<td>
+							<input type="text" class="small" required="required" name="hsn[]">
+						 </td>
+						<td>
+							<input type="text" class="small" required="required" id="quan" name="quantity[]">
+						 </td>
+						<td>
+							<input type="text" class="small" required="required" id="unit" name="unit_charge[]">
+						 </td>
+             <td>
+ 							<input type="text" class="small" required="required" id="tax" name="tax[]">
+ 						 </td>
+						<td>
+							<input type="text" class="small" required="required" id="total" name="total[]">
+						 </td>
+
+
+							</p>
+                    </tr>
                     </tbody>
                 </table></div></div></div></div>
-				
+
 				</div>
-				
-                            
+
+
                           <div class="box-footer">
 							  <input type="submit" class="btn btn-primary" value="Create & Save" />
                               <input type="reset" class="btn btn-default" value="reset" />
@@ -129,13 +177,13 @@
 
 </div>
 <script>
+  
 var counter = 1;
 function addRow(){
 	console.log("crick");
     counter++;
     var newRow = jQuery('<tr><td><input type="text" name="product_id[]" class="small" required></td><td><input type="text" name="p_description[]" class="small" required></td><td><input type="text" name="hsn[]" class="small" required/></td><td><input type="text" class="product-add-field quantity ' + counter + '" name="quantity[]" class="small" required/></td><td><input type="text" class="product-add-field unit-price ' + counter + '" name="unit_charge[]" class="small" required/></td><td><input type="text" value="" name="total"  class="product-add-field price-total ' + counter + '" id="" class="small" required/></td><td><a href="#">X</a></td></tr>');
     jQuery('table.product-details').append(newRow);
-}
 
 
 jQuery('table.product-details').on('click','tr a',function(e){
