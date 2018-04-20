@@ -94,6 +94,16 @@ $route['add_note']='note/add_note';
 $route['delete_note/(:any)']='note/delete_note/$1';
 $route['note_listing']='note/note_listing';
 
+/****************Customer PO******************/
+
+$route['customer_po']='customer_po';
+$route['add_edit_customer_po']='customer_po/add_edit_customer_po';
+$route['add_edit_customer_po/(:any)']='customer_po/add_edit_customer_po/$1';
+$route['update_customer_po']='customer_po/update_customer_po';
+$route['add_customer_po']='customer_po/add_customer_po';
+$route['delete_customer_po/(:any)']='customer_po/delete_customer_po/$1';
+$route['customer_po_listing']='customer_po/customer_po_listing';
+
 /****************vendor QUOTATION******************/
 $route['vendor_quotation']='vendorquotation';
 $route['add_edit_vendor_quotation']='vendorquotation/add_edit_vendor_quotation';
