@@ -138,7 +138,7 @@
               <div id="PO" class="collapse">
                 <ul class="dropdown">
                   <li class="treeview">
-                    <a href="<?php echo base_url()?>" ><br>
+                    <a href="<?php echo base_url()?>customer_po" ><br>
                       <i class="fa fa-paperclip"></i>
                       <span>Customer PO</span>
                     </a>
