@@ -185,13 +185,17 @@ var taxArray = [];
 function addRow(){
 	console.log("crick");
     counter++;
-    var newRow = jQuery('<tr><td><input type="text" name="product_id[]" class="small" required></td><td><input type="text" name="p_description[]" class="small" required></td><td><input type="text" name="hsn[]" class="small" required/></td><td><input type="text" class="product-add-field quantity ' + counter + '" name="quantity[]" class="small" required/></td><td><input type="text" class="product-add-field unit-price ' + counter + '" name="unit_charge[]" class="small" required/></td><td><input type="text" class="product-add-field unit-tax ' + counter + '" name="tax[]" class="small" required/></td><td><input type="text" value="" name="total"  class="product-add-field price-total ' + counter + '" id="" class="small" required/></td><td><a href="#">X</a></td></tr>');
+    var newRow = jQuery('<tr><td><input type="text" name="product_id[]" class="small" required></td><td><input type="text" name="p_description[]" class="small" required></td><td><input type="text" name="hsn[]" class="small" required/></td><td><input type="text" class="product-add-field quantity ' + counter + '" name="quantity[]" class="small" required/></td><td><input type="text" class="product-add-field unit-price ' + counter + '" name="unit_charge[]" class="small" required/></td><td><input type="text" class="product-add-field unit-tax ' + counter + '" name="tax[]" class="small" required/></td><td><input type="text" value="" name="total"  class="product-add-field price-total ' + counter + '" id="" class="small" required/></td><td><a href="#"  class="close">X</a></td></tr>');
     jQuery('table.product-details').append(newRow);
 }
+
 
 jQuery('table.product-details').on('click','tr a',function(e){
  e.preventDefault();
 jQuery(this).parents('tr').remove();
+$("#totaltax").val('0');
+$("#ttotal").val('0');
+$("#grandtotal").val('0');
 });
 
 

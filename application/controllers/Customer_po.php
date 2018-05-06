@@ -143,8 +143,8 @@ class Customer_po extends BaseController{
 
             redirect('add_edit_customer_po');
         }
+        //function for editing customer Quotation Details
 
-        //function for editing vendor Quotation Details
         public function update_customer_po()
         {
           $date=$this->input->post('date');
@@ -188,7 +188,7 @@ class Customer_po extends BaseController{
             redirect('customer_po');
         }
 
-        //function to delete vendor Quotation
+        //function to delete customer Quotation
         public function delete_customer_po($customer_id)
         {
           $result = $this->customer_po_model->delete_customer_po($customer_id);
