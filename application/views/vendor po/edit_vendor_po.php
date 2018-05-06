@@ -4,13 +4,13 @@
       <div class="row">
           <div class="col-xs-12 text-left">
               <div class="form-group">
-                  <a class="btn btn-primary" href="<?php echo base_url(); ?>customer_po"><i class="fa fa-angle-left"></i> Back</a>
+                  <a class="btn btn-primary" href="<?php echo base_url(); ?>vendor_po"><i class="fa fa-angle-left"></i> Back</a>
               </div>
           </div>
       </div>
       <h1>
-        <i class="fa fa-plus-square-o"></i> Customer PO Listing
-        <small>Add, Edit, Update or Delete the Customer PO</small>
+        <i class="fa fa-plus-square-o"></i> Vendor PO Listing
+        <small>Add, Edit, Update or Delete the Vendor PO</small>
       </h1>
     </section>
 
@@ -44,14 +44,12 @@
 
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title"> Edit Customer PO</h3>
+                        <h3 class="box-title"> Edit Vendor PO</h3>
                     </div><!-- /.box-header -->
                     <?php $this->load->helper("form"); ?>
                   <!--<form role="form" id="addvendor" action="<?php echo base_url() ?>update_vendor" method="post" role="form">-->
-				    <?php echo form_open_multipart('update_customer_po');?>
+				    <?php echo form_open_multipart('update_vendor_po');?>
                         <div class="box-body">
-
-
                           <!--row 1-->
                             <div class="row">
 
@@ -69,8 +67,8 @@
                             <div class="row">
                               <div class="col-md-6">
                                   <div class="form-group">
-                                      <label for="customer_id">Customer Id</label>
-                                      <input type="text" class="form-control required" value="<?php echo $datas[0]->customer_id; ?>" id="customer_id" name="customer_id" maxlength="128">
+                                      <label for="vendor_id">Vendor Id</label>
+                                      <input type="text" class="form-control required" value="<?php echo $datas[0]->vendor_id; ?>" id="vendor_id" name="vendor_id" maxlength="128">
                                   </div>
                               </div>
                             </div>
@@ -99,58 +97,10 @@
                                         </div>
                                     </div>
                                   </div>
-                                  <!--row 4 end-->
-
-                                  <!--row 5-->
-                              <!--    <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="attachment" class="custom-file">Attachment</label>
-                                      <div class="input-group">
-                                          <label class="input-group-btn">
-                                            <span class="btn btn-primary">
-                                              Browse&hellip; <input type="file" style="display: none;" name="attachment" id="attachment">
-                                            </span>
-                                          </label>
-                                          <input type="text" class="form-control" placeholder="Browse Files" readonly>
-                                      </div>
-                                        </span>
-                                    </div>
-                                </div>-->
-                                  <!--row 5 end-->
-
-                              <!--    <script>
-                                  $(function() {
-
-                                    // We can attach the `fileselect` event to all file inputs on the page
-                                    $(document).on('change', ':file', function() {
-                                      var input = $(this),
-                                      numFiles = input.get(0).files ? input.get(0).files.length : 1,
-                                      label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                                      input.trigger('fileselect', [numFiles, label]);
-                                    });
-
-                                    // We can watch for our custom `fi  leselect` event like this
-                                    $(document).ready( function() {
-                                      $(':file').on('fileselect', function(event, numFiles, label) {
-
-                                        var input = $(this).parents('.input-group').find(':text'),
-                                        log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-                                        if( input.length ) {
-                                          input.val(log);
-                                        } else {
-                                          if( log ) alert(log);
-                                        }
-
-                                      });
-                                    });
-                                  });
-                                </script>-->
-
 
                           </div><br>
                           <div class="box-footer">
-                              <input type="submit" class="btn btn-primary" value="Update Customer PO" />
+                              <input type="submit" class="btn btn-primary" value="Update Vendor PO" />
                               <input type="reset" class="btn btn-default" value="Reset" />
                           </div>
                       </form>

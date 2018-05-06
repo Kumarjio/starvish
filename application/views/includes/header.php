@@ -145,7 +145,7 @@
                   </li>
                   <br>
                   <li class="treeview">
-                    <a href="<?php echo base_url()?>" >
+                    <a href="<?php echo base_url()?>vendor_po" >
                       <i class="fa fa-file-text-o"></i>
                       <span>Vendor PO</span>
                     </a>
@@ -164,10 +164,21 @@
 
 
             <li class="treeview">
-              <a href="<?php echo base_url()?>" >
+              <a href="#inv" data-toggle="collapse" title="View Purchase Orders">
                 <i class="fa fa-check-square-o"></i>
                 <span>Invoice</span>
               </a>
+              <div id="inv" class="collapse">
+                <ul class="dropdown">
+                  <li class="treeview">
+                    <a href="<?php echo base_url()?>customer_invoice" ><br>
+                      <i class="fa fa-file-text-o"></i>
+                      <span>Customer Invoice</span>
+                    </a>
+                  </li>
+                  <br>
+                </ul>
+              </div>
             </li>
 
             <li class="treeview">
@@ -178,14 +189,14 @@
               <div id="dc" class="collapse">
                 <ul class="dropdown">
                   <li class="treeview">
-                    <a href="<?php echo base_url()?>" ><br>
+                    <a href="<?php echo base_url()?>customer_dc" ><br>
                       <i class="fa fa-file-text-o"></i>
                       <span>Customer DC</span>
                     </a>
                   </li>
                   <br>
                   <li class="treeview">
-                    <a href="<?php echo base_url()?>" >
+                    <a href="<?php echo base_url()?>vendor_dc" >
                       <i class="fa fa-paperclip"></i>
                       <span>Vendor DC</span>
                     </a>

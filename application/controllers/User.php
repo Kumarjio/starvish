@@ -40,17 +40,11 @@ class User extends BaseController
         {
             $searchText = $this->security->xss_clean($this->input->post('searchText'));
             $data['searchText'] = $searchText;
-
             $this->load->library('pagination');
-
             $count = $this->user_model->userListingCount($searchText);
-
-			$returns = $this->paginationCompress ( "userListing/", $count, 10 );
-
+			      $returns = $this->paginationCompress ( "userListing/", $count, 10 );
             $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
-            
-            $this->global['pageTitle'] = 'StarVish: User Listing';
-
+          $this->global['pageTitle'] = 'StarVish: User Listing';
             $this->loadViews("users", $this->global, $data, NULL);
         }
     }

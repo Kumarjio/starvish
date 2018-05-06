@@ -294,7 +294,6 @@ if($result == FALSE)  {
         else {
           $this->session->set_flashdata('error','Quotation creation failed!');
         }
-
           redirect('customer_quotation');
 }
 

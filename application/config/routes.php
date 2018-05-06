@@ -104,6 +104,36 @@ $route['add_customer_po']='customer_po/add_customer_po';
 $route['delete_customer_po/(:any)']='customer_po/delete_customer_po/$1';
 $route['customer_po_listing']='customer_po/customer_po_listing';
 
+/****************Vendor PO******************/
+
+$route['vendor_po']='vendor_po';
+$route['add_edit_vendor_po']='vendor_po/add_edit_vendor_po';
+$route['add_edit_vendor_po/(:any)']='vendor_po/add_edit_vendor_po/$1';
+$route['update_vendor_po']='vendor_po/update_vendor_po';
+$route['add_vendor_po']='vendor_po/add_vendor_po';
+$route['delete_vendor_po/(:any)']='vendor_po/delete_vendor_po/$1';
+$route['vendor_po_listing']='vendor_po/vendor_po_listing';
+
+/****************Customer DC******************/
+
+$route['customer_dc']='customer_dc';
+$route['add_edit_customer_dc']='customer_dc/add_edit_customer_dc';
+$route['add_edit_customer_dc/(:any)']='customer_dc/add_edit_customer_dc/$1';
+$route['update_customer_dc']='customer_dc/update_customer_dc';
+$route['add_customer_dc']='customer_dc/add_customer_dc';
+$route['delete_customer_dc/(:any)']='customer_dc/delete_customer_dc/$1';
+$route['customer_dc_listing']='customer_dc/customer_dc_listing';
+
+/****************Vendor DC******************/
+
+$route['vendor_dc']='vendor_dc';
+$route['add_edit_vendor_dc']='vendor_dc/add_edit_vendor_dc';
+$route['add_edit_vendor_dc/(:any)']='vendor_dc/add_edit_vendor_dc/$1';
+$route['update_vendor_dc']='vendor_dc/update_vendor_dc';
+$route['add_vendor_dc']='vendor_dc/add_vendor_dc';
+$route['delete_vendor_dc/(:any)']='vendor_dc/delete_vendor_dc/$1';
+$route['vendor_dc_listing']='vendor_dc/vendor_dc_listing';
+
 /****************vendor QUOTATION******************/
 $route['vendor_quotation']='vendorquotation';
 $route['add_edit_vendor_quotation']='vendorquotation/add_edit_vendor_quotation';
