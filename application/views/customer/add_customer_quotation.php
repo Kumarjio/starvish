@@ -87,7 +87,12 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="note">Note</label>
-                                      <textarea class="form-control required " id="note" value="<?php echo set_value('note'); ?>" name="note" maxlength="500"></textarea>
+                                      <!--<textarea class="form-control required " id="note" value="<?php //echo set_value('note'); ?>" name="note" maxlength="500"></textarea>-->
+                                      <select class="form-control" name="note">
+                                        <?php foreach($notes as $note){?>
+                                              <option value="<?php echo $note->description;?>"><?php echo $note->id;?> - <?php echo $note->description;?></option>
+                                          <?php }?>
+                                      </select>
                                   </div>
                               </div>
 
@@ -98,7 +103,7 @@
                                 <div class="row">
                                   <div class="col-md-6">
                                       <div class="form-group">
-                                         <button type="button" class="btn btn-primary" onClick="addRow('dataTable')">Add Product</button></div>
+                                         <button type="button" class="btn btn-primary" onClick="addRow()">Add Product</button></div>
                                   </div>
                                 </div>
                                 <!--row 4 end-->
@@ -108,7 +113,7 @@
                       <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
                       <caption></caption>
                       <div class="table-responsive">
-			  <table id="dataTable" class="table table-striped table-condensed table-hover table-bordered">
+			  <table id="dataTable" class="table table-striped table-condensed table-hover table-bordered product-details">
 			   <thead class="bg-primary">
                             <tr>
                             <th>Product ID</th>
@@ -122,34 +127,31 @@
 							</tr>
                           </thead>
                           <tbody>
-                    <tr>
-                      <p>
-						<td>
-							<input type="text" class="small" required="required" name="product_id[]">
-						 </td>
-						<td>
-							<input type="text" class="small" required="required" name="p_description[]">
-						 </td>
-						<td>
-							<input type="text" class="small" required="required" name="hsn[]">
-						 </td>
-						<td>
-							<input type="text" class="small" required="required" name="quantity[]">
-						 </td>
-						<td>
-							<input type="text" class="small" required="required" name="unit_charge[]">
-						 </td>
-						<td>
-							<input type="text" class="small" required="required" name="total[]">
-						 </td>
-             <td>
- 							<input type="text" class="small" required="required" name="tax[]">
- 						 </td>
 
-							</p>
-                    </tr>
                     </tbody>
                 </table></div></div></div></div>
+
+				  <!--row 1-->
+                            <div class="row">
+
+                               <div class="col-md-4">
+
+                                        <label for="quote_id">Total Tax</label>
+                                        <input type="text"  value="0" id="totaltax" readonly >
+
+                                </div>
+                                <div class="col-md-4">
+
+                                        <label for="quote_id">Total</label>
+                                        <input type="text" value="0" id="ttotal" readonly>
+
+                                </div>
+								<div class="col-md-4">
+                                        <label for="quote_id">Grand Total</label>
+                                        <input type="text" value="0" id="grandtotal" readonly>
+
+                                </div>
+                            </div><!--row 1 End-->
 
 				</div>
 
@@ -170,18 +172,60 @@
 
 
 </div>
-<script>
-function addRow(tableID) {
-	var table = document.getElementById(tableID);
-	var rowCount = table.rows.length;
-	if(rowCount <50){
-		var row = table.insertRow(rowCount);
-		var colCount = table.rows[1].cells.length;
-		for(var i=0; i<colCount; i++) {
-			var newcell = row.insertCell(i);
-			newcell.innerHTML = table.rows[1].cells[i].innerHTML;
-		}
-	}
 
+
+<script>
+var grand_total=0;
+var ttotal=0;
+var tot_tax=0;
+var counter = 1;
+var totalArray =  [];
+var grandArray = [];
+var taxArray = [];
+function addRow(){
+	console.log("crick");
+    counter++;
+    var newRow = jQuery('<tr><td><input type="text" name="product_id[]" class="small" required></td><td><input type="text" name="p_description[]" class="small" required></td><td><input type="text" name="hsn[]" class="small" required/></td><td><input type="text" class="product-add-field quantity ' + counter + '" name="quantity[]" class="small" required/></td><td><input type="text" class="product-add-field unit-price ' + counter + '" name="unit_charge[]" class="small" required/></td><td><input type="text" class="product-add-field unit-tax ' + counter + '" name="tax[]" class="small" required/></td><td><input type="text" value="" name="total"  class="product-add-field price-total ' + counter + '" id="" class="small" required/></td><td><a href="#">X</a></td></tr>');
+    jQuery('table.product-details').append(newRow);
 }
+
+jQuery('table.product-details').on('click','tr a',function(e){
+ e.preventDefault();
+jQuery(this).parents('tr').remove();
+});
+
+
+jQuery('table.product-details').on("keyup", "tr", function() {
+    var row = jQuery(this);
+    var value = jQuery( ".unit-price", row ).val();
+    var value2 = jQuery( ".quantity", row ).val();
+    var tax = jQuery( ".unit-tax", row).val();
+    var total = value * value2;
+	var amt= (tax*value*value2)/100;
+  var prod_total=total+amt;
+	//load values in index
+	totalArray[counter] = total;
+	grandArray[counter] = total+amt;
+	taxArray[counter] = amt;
+
+	//init to 0 to prevent loop iteration
+	grand_total=0;
+	ttotal=0;
+	tot_tax=0;
+	for (var i = 2; i < totalArray.length; i++) {
+	    grand_total += grandArray[i];
+		ttotal += totalArray[i];
+		tot_tax += taxArray[i];
+	}
+	console.log("grand total: "+grand_total);
+	console.log("total total: "+ttotal);
+	console.log("total tax: "+tot_tax);
+	//display values
+	$("#totaltax").val(tot_tax);
+	$("#ttotal").val(ttotal);
+	$("#grandtotal").val(grand_total);
+
+	jQuery( ".product-add-field.price-total", row ).val( prod_total.toFixed(3) );
+	});
+
 </script>

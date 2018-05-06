@@ -12,6 +12,7 @@ class Vendorquotation extends BaseController{
       parent::__construct();
       $this->load->library('upload');
       $this->load->model('vendor_quotation_model');
+      $this->load->model('vendor_model');
       $this->load->helper(array('form', 'url'));
       $this->isLoggedIn();
   }
@@ -67,6 +68,7 @@ class Vendorquotation extends BaseController{
       {
         $this->global['pageTitle'] = 'StarVish:Add Vendor Quotation';
         $res['datas']=$this->vendor_quotation_model->fetch_vendor();
+        $res['vendor']=$this->vendor_model->vendorlisting();
       $this->loadViews("quotation/add_vendor_quotation", $this->global, $res , NULL);
       }
       else {

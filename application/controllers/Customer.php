@@ -248,7 +248,9 @@ public function add_customer()
       {
         $this->global['pageTitle'] = 'StarVish:Add Quotation';
         $cust_id=$this->customer_model->fetch_customers();
+        $notes=$this->customer_model->fetch_notes();
         $data['customer']=$cust_id;
+        $data['notes']=$notes;
       $this->loadViews("customer/add_customer_quotation", $this->global, $data , NULL);
       }
       else {
@@ -318,17 +320,26 @@ if($result == FALSE)  {
   public function customer_quotation_view($id)
   {
     $total=0;
+    $sp=0;
+    $tax=0;
+    $grand_total=0;
+    $grand_tax=0;
     $this->global['pageTitle'] = 'StarVish:View Quotation';
     $result=$this->customer_model->customer_quotation_view($id);
     $company=$this->customer_model->our_details();
     $customer=$this->customer_model->customer_details($id);
     if($result!=false)
     {
-      foreach($result as $amt)
+      foreach($result as $res)
       {
-        $total=$total+$amt->total;
+
+        $sp=$res->quantity*$res->unit_charges;
+        $tax=($res->tax * $sp )/100;
+        $total=$sp+$tax;
+        //$grand_tax=$grand_tax+$tax;
+        $grand_total=$grand_total+$total;
       }
-      $amount=$this->convert_number($total);
+      $amount=$this->convert_number($grand_total);
       $data['datas']=$result;
       $data['amount']=$amount;
       $data['company']=$company;

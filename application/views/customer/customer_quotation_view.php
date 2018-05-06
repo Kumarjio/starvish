@@ -75,33 +75,40 @@
                                 <th style="border:3px solid black">Total amount(in Rs)</th>
                               </tr>';
                               $total=0;
+                              $sp=0;
+                              $tax=0;
+                              $grand_total=0;
+                              $grand_tax=0;
                           foreach($datas as $data)
                           {
-                            $per=($data->tax)/100;
-                            $total=$total+$data->total*$per;
+                            $sp=$data->quantity*$data->unit_charges;
+                            $tax=($data->tax * $sp )/100;
+                            $total=$sp+$tax;
+                            $grand_tax=$grand_tax+$tax;
+                            $grand_total=$grand_total+$total;
                           echo'   <tr style="border:3px solid black">
                                 <td style="border:3px solid black">'.$i++.'</td>
                                 <td style="border:3px solid black">'.$data->description.'</td>
                                 <td style="border:3px solid black">'.$data->hsn_sac.'</td>
                                 <td style="border:3px solid black">'.$data->quantity.'</td>
                                 <td style="border:3px solid black">'.$data->unit_charges.'</td>
-                                <td style="border:3px solid black">'.$data->tax.'='.$per.'</td>
+                                <td style="border:3px solid black">'.$data->tax.'% @ '.$tax.'</td>
                                 <td style="border:3px solid black">'.$total.'</td>
                               </tr>';
                             }
                               echo '<tr style="border:3px solid black">
                                 <td colspan="6" align="right" style="border:3px solid black">Total</td>
-                                <td>'.$total.'</td>
+                                <td>'.$grand_total.'</td>
                               </tr>
                               <tr style="border:3px solid black">
                                 <td colspan="5" style="border:3px solid black">Tax Value</td>
                                 <td align="right" style="border:3px solid black">Total Tax Value</td>
-                                <td>4860</td>
+                                <td>'.$grand_tax.'</td>
                               </tr>
                               <tr style="border:3px solid black">
                                 <td colspan="5" style="font-weight:bold"></td>
                                 <td align="right" style="border:3px solid black">Grand Total</td>
-                                <td></td>
+                                <td>'.$grand_total.'</td>
                               </tr>
                               <tr><td colspan="7" style="border-bottom: double;"><b>Amount in words: &nbsp;</b>';
                               print_r($amount); echo(' Rupees only');   ' </td>

@@ -87,7 +87,11 @@
                                   <div class="col-md-6">
                                       <div class="form-group">
                                           <label for="vendor_id">Vendor Id</label>
-                                          <input type="textarea" class="form-control required " id="vendor_id" value="<?php echo set_value('vendor_id'); ?>" name="vendor_id" maxlength="50">
+                                          <select class="form-control" name="vendor_id">
+                                            <?php foreach($vendor as $ven){?>
+                                                  <option value="<?php echo $ven->vendor_id;?>"><?php echo $ven->vendor_id;?> - <?php echo $ven->company_name;?></option>
+                                              <?php }?>
+                                          </select>
                                       </div>
                                   </div>
                                 </div>
