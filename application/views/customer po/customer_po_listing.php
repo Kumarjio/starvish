@@ -70,7 +70,9 @@
                             <th>Date</th>
                             <th>Customer Id</th>
                             <th>PO Id</th>
+                            <th>Total Price</th>
                             <th>Description</th>
+                            <th>Files Attached</th>
                             <th>Action</th>
                             </tr>
                           </thead>
@@ -84,7 +86,9 @@
                               <td>'.$data->date.'</td>
                               <td>'.$data->customer_id.'</td>
                               <td>'.$data->po_id.'</td>
-                              <td>'.$data->description.'</td>';?>
+                              <td>'.$data->total_amt.'</td>
+                              <td>'.$data->description.'</td>
+                              <td>'.$data->no_of_files.'</td>';?>
 
                               <td class="text-center">
                                   <a  class="btn btn-sm btn-success" data-toggle="modal" data-target="#datas" data-id="<?php echo $i++?>"

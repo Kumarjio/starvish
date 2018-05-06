@@ -9,6 +9,24 @@ class Customer_po_model extends CI_Model{
     return $res->result();
   }
 
+//file uploading in the table customer_po_files
+public function insert_file($data = array()){
+       $insert = $this->db->insert_batch('customer_po_files',$data);
+       return $insert?true:false;
+   }
+
+
+  //function to fetch details from customer table
+  public function all_customer()
+  {
+    if($res=$this->db->get('customer_master'))
+      return $res->result();
+    else {
+      return false;
+    }
+  }
+
+
   //function to list the customer po
   public function customerpolisting()
   {

@@ -87,7 +87,11 @@
                                   <div class="col-md-6">
                                       <div class="form-group">
                                           <label for="customer_id">Customer Id</label>
-                                          <input type="textarea" class="form-control required " id="customer_id" value="<?php echo set_value('customer_id'); ?>" name="customer_id" maxlength="50">
+                                          <select class="form-control" name="customer_id">
+                                            <?php foreach($customer as $cust){?>
+                                              <option value="<?php echo $cust->customer_id;?>"><?php echo $cust->customer_id;?> - <?php echo $cust->company_name;?></option>
+                                              <?php }?>
+                                          </select>
                                       </div>
                                   </div>
                                 </div>
@@ -107,7 +111,20 @@
 
                             <!--row 3 end-->
 
-                                <!--row 4-->
+                            <!--row 4-->
+                              <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="po_id">Total Price</label>
+                                        <input type="text" class="form-control required" value="<?php echo set_value('total_price'); ?>" id="total_price" name="total_price" maxlength="128">
+                                    </div>
+                                </div>
+                              </div>
+
+                              <!--row 4 end-->
+
+
+                                <!--row 5-->
                                   <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -116,26 +133,26 @@
                                         </div>
                                     </div>
                                   </div>
-                                  <!--row 4end-->
+                                  <!--row 5end-->
 
-                                  <!--row 5-->
-                              <!--      <div class="row">
+                                  <!--row 6-->
+                                <div class="row">
                                       <div class="col-md-6">
                                           <label for="attachment" class="custom-file">Attachment</label>
                                         <div class="input-group">
                                             <label class="input-group-btn">
                                               <span class="btn btn-primary">
-                                                Browse&hellip; <input type="file" style="display: none;" name="attachment" id="attachment">
+                                                Browse&hellip; <input type="file" multiple="" style="display: none;" name="attachment[]" id="attachment[]">
                                               </span>
                                             </label>
                                             <input type="text" class="form-control" placeholder="Browse Files" readonly>
                                         </div>
                                           </span>
                                       </div>
-                                  </div>-->
-                              <!--row 5 end-->
+                                  </div>
+                              <!--row 6 end-->
 
-                          <!--        <script>
+                                 <script>
                                   $(function() {
 
                                     // We can attach the `fileselect` event to all file inputs on the page
@@ -162,11 +179,11 @@
                                       });
                                     });
                                   });
-                                </script>-->
+                                </script>
 
                           </div><br>
                           <div class="box-footer">
-                              <input type="submit" class="btn btn-primary" value="Add PO" />
+                              <input type="submit" class="btn btn-primary" value="Add PO" name="fileSubmit" />
                               <input type="reset" class="btn btn-default" value="Reset" />
                           </div>
                       </form>
