@@ -54,7 +54,7 @@ public function insert_file($data = array()){
   {
     $this->db->select('*');
     $this->db->from('customer_po');
-    $this->db->where('customer_id',$id);
+    $this->db->where('po_id',$id);
     if($res=$this->db->get())
       return $res->result();
     else {
@@ -66,7 +66,7 @@ public function insert_file($data = array()){
   //function to edit customer po
   public function update_customer_po($id,$datas)
   {
-    $this->db->where('customer_id',$id);
+    $this->db->where('po_id',$id);
     $res=$this->db->update('customer_po',$datas);
 
       return $res;
@@ -75,7 +75,7 @@ public function insert_file($data = array()){
   //function to delete_customer_po
   public function delete_customer_po($id)
   {
-    $this->db->delete('customer_po',array('customer_id'=>$id));
+    $this->db->delete('customer_po',array('po_id'=>$id));
     return $this->db->affected_rows();
   }
 

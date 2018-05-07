@@ -32,7 +32,7 @@ class CustomerQuotation extends BaseController
         $res['searchText']='';
       }
 
-      $html =$this->loadViews("customer/customelisting", $this->global, $res , NULL);
+      $html =$this->loadViews("customer/customerlisting", $this->global, $res , NULL);
   }
   //this function used to redirect to addcustomer or editcustomer based on the customerid
     public function add_edit_customer($id=NULL)

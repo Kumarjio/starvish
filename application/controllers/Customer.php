@@ -275,8 +275,7 @@ public function add_customer()
   $tax=$this->input->post('tax');
 $current_date=date("Y-m-d");
   $datas=array('date'=>$current_date,'quote_id'=>$quote_id,'customer_id'=>$customer_id,
-  'description'=>$description,'note'=>$note
-              );
+  'description'=>$description,'note'=>$note );
         $result = FALSE;
         $result = $this->customer_model->add_customer_quote($datas);
         if($result == TRUE){
