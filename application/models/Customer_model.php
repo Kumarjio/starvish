@@ -86,6 +86,8 @@ if($query = $this->db->get())
 else
     return false;
 }
+
+
 //customer quotation listing
 public function customerquote()
 {
@@ -128,6 +130,23 @@ else
     return false;
 
 }
+
+//function to edit customer quote
+public function update_customer_quote($id,$datas)
+{
+  $this->db->where('customer_id',$id);
+  $res=$this->db->update('customer_quote',$datas);
+    return $res;
+}
+
+//function to edit customer quote product
+public function update_customer_quote_product($id,$datas)
+{
+  $this->db->where('quote_id',$id);
+  $res=$this->db->insert('customer_quote_products',$datas);
+    return $res;
+}
+
 //function to delete customer quote
 public function delete_customer_quote($id)
 {
@@ -146,7 +165,18 @@ public function fetch_customer_quote($id)
     return false;
   }
 }
-
+//function to fetch details from customer_quote_products table
+public function fetch_customer_quote_product($id)
+{
+  $this->db->select('*');
+  $this->db->from('customer_quote_products');
+  $this->db->where('quote_id',$id);
+  if($res=$this->db->get())
+    return $res->result();
+  else {
+    return false;
+  }
+}
 //customer quotation product
 public function customerproduct($id)
 {

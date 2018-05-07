@@ -205,6 +205,7 @@ public function add_customer()
     }
   $this->loadViews("customer/customerlisting",$this->global,$data,NULL);
   }
+
 //customer quotation
   public function customer_quotation()
   {
@@ -256,6 +257,7 @@ public function add_customer()
       else {
         $this->global['pageTitle'] = 'StarVish:Edit Quotation';
         $result['datas']=$this->customer_model->fetch_customer_quote($id);
+        $result['data']=$this->customer_model->fetch_customer_quote_product($id);
         $this->loadViews("customer/edit_customer_quotation",$this->global,$result,NULL);
       }
     }
@@ -297,6 +299,49 @@ if($result == FALSE)  {
           $this->session->set_flashdata('error','Quotation creation failed!');
         }
           redirect('customer_quotation');
+}
+
+//function for editing vendor Quotation Details
+public function update_customer_quote()
+{
+  $date=$this->input->post('date');
+  $quote_id=$this->input->post('quote_id');
+  $customer_id=$this->input->post('customer_id');
+  $description=$this->input->post('description');
+
+  $product_id=$this->input->post('product_id');
+  $p_description=$this->input->post('p_description');
+  $hsn=$this->input->post('hsn');
+  $quantity=$this->input->post('quantity');
+  $unit_charge=$this->input->post('unit_charge');
+  $total=$this->input->post('total');
+  $tax=$this->input->post('tax');
+
+  $datas=array('date'=>$date,'quote_id'=>$quote_id,'customer_id'=>$customer_id,
+              'description'=>$description );
+
+  $result = FALSE;
+    $result = $this->customer_model->update_customer_quote($customer_id,$datas);
+    if($result == TRUE){
+  foreach($product_id as $i => $n){
+$data=array('quote_id'=>$quote_id,'product_id'=>$product_id[$i],'description'=>$p_description[$i],
+'hsn_sac'=>$hsn[$i],'quantity'=>$quantity[$i],'unit_charges'=>$unit_charge[$i],'total'=>$total[$i],'tax'=>$tax[$i]);
+$result = $this->customer_model->update_customer_quote_product($quote_id,$data);
+
+if($result == FALSE)  {
+$this->session->set_flashdata('error','Quotation creation failed!');
+break;}
+  }
+  if($result == true)
+    {
+        $this->session->set_flashdata('success', 'Customer Quotation updated successfully');
+    }
+    else
+    {
+        $this->session->set_flashdata('error', 'Customer Quotation updation failed!');
+    }
+    redirect('customer_quotation');
+}
 }
 
 

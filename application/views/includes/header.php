@@ -196,7 +196,7 @@
                   </li>
                   <br>
                   <li class="treeview">
-                    <a href="<?php echo base_url()?>vendor_dc" ><br>
+                    <a href="<?php echo base_url()?>vendor_dc" >
                       <i class="fa fa-paperclip"></i>
                       <span>Vendor DC</span>
                     </a>

@@ -61,20 +61,23 @@
 
                               <div class="col-md-6">
                                   <div class="form-group">
-                                      <label for="emp_id">Customer ID</label>
-                                            <select class="form-control" name="customer_id">
-                                              <?php foreach($customer as $cust){?>
-                                                    <option value="<?php echo $cust->customer_id;?>"><?php echo $cust->customer_id;?> - <?php echo $cust->company_name;?></option>
-                                                <?php }?>
-                                            </select>
-
+                                      <label for="date">Date</label>
+                                        <input type="date" class="form-control required" value="<?php echo $datas[0]->date; ?>" id="date" name="date" maxlength="128">
                                   </div>
                               </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label for="emp_id">Customer ID</label>
+                                          <input type="text" class="form-control required" value="<?php echo $datas[0]->customer_id; ?>" id="customer_id" name="customer_id" maxlength="128">
+                                    </div>
+                                </div>
+                          </div>
+                          <div  class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label for="quote_id">Quote ID</label>
-                                        <input type="text" class="form-control required" value="<?php echo set_value('quote_id'); ?>" id="quote_id" name="quote_id" maxlength="128">
+                                        <input type="text" class="form-control required" value="<?php echo $datas[0]->quote_id; ?>" id="quote_id" name="quote_id" maxlength="128">
                                     </div>
                                 </div>
                             </div><!--row 1 End-->
@@ -84,7 +87,7 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="description">Description</label>
-                                      <textarea class="form-control required " id="description" value="<?php echo set_value('description'); ?>" name="description" maxlength="500"></textarea>
+                                      <input type="text" class="form-control required " id="description" value="<?php echo $datas[0]->description; ?>" name="description" maxlength="500">
                                   </div>
                               </div>
 
@@ -96,12 +99,7 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="note">Note</label>
-                                      <!--<textarea class="form-control required " id="note" value="<?php //echo set_value('note'); ?>" name="note" maxlength="500"></textarea>-->
-                                      <select class="form-control" name="note">
-                                        <?php foreach($notes as $note){?>
-                                              <option value="<?php echo $note->description;?>"><?php echo $note->id;?> - <?php echo $note->description;?></option>
-                                          <?php }?>
-                                      </select>
+                                        <input type="text" class="form-control required " id="note" value="<?php echo $datas[0]->note; ?>" name="note" maxlength="500">
                                   </div>
                               </div>
 
@@ -135,7 +133,17 @@
 							              </tr>
                           </thead>
                           <tbody>
-
+                            <?php for($i=0;$i<count($data);$i++) {
+                           echo'<tr>';
+                                echo '<td><input type="text" id="product_id" name="product_id" value='.$data[$i]->product_id.'></td>
+                                <td><input type="text" id="description" value='.$data[$i]->description.' name="description"></td>
+                                <td><input type="text" id="hsn_sac" value='.$data[$i]->hsn_sac.' name="hsn_sac"></td>
+                                <td><input type="text" id="quantity" value='.$data[$i]->quantity.' name="quantity"></td>
+                                <td><input type="text" id="unit_charges" value='.$data[$i]->unit_charges.' name="unit_charges"></td>
+                                <td><input type="text" id="tax" value='.$data[$i]->tax.' name="tax"></td>
+                                <td><input type="text" id="total" value='.$data[$i]->total.' name="total"></td>
+                              </tr>';
+                            }?>
                           </tbody>
 
                           </table></div></div></div></div>

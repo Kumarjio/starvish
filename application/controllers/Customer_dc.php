@@ -28,7 +28,7 @@ class Customer_dc extends BaseController{
       $res['searchText']='';
     }
 
-    $html =$this->loadViews("customer dc/customer_dc_listing", $this->global, $res , NULL);
+    $html =$this->loadViews("customer_dc/customer_dc_listing", $this->global, $res , NULL);
   }
 
   //this function used to redirect to addcustomer or editcustomer dc based on the customer_id
@@ -38,12 +38,12 @@ class Customer_dc extends BaseController{
       {
         $this->global['pageTitle'] = 'StarVish:Add Customer DC';
         $res['datas']=$this->customer_dc_model->fetch_customer();
-      $this->loadViews("customer dc/add_customer_dc", $this->global, $res , NULL);
+      $this->loadViews("customer_dc/add_customer_dc", $this->global, $res , NULL);
       }
       else {
         $this->global['pageTitle'] = 'StarVish:Edit Customer DC';
         $result['datas']=$this->customer_dc_model->fetch_customer_dc($id);
-        $this->loadViews("customer dc/edit_customer_dc",$this->global,$result,NULL);
+        $this->loadViews("customer_dc/edit_customer_dc",$this->global,$result,NULL);
       }
     }
 
@@ -126,6 +126,6 @@ class Customer_dc extends BaseController{
             $data['searchText'] = $searchText;
           }
 
-        $this->loadViews("customer dc/customer_dc_listing",$this->global,$data,NULL);
+        $this->loadViews("customer_dc/customer_dc_listing",$this->global,$data,NULL);
       }
 }
