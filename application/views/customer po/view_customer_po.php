@@ -5,7 +5,7 @@
     <section class="content-header">
 
       <h1>
-        <i class="fa fa-bar-chart"></i> View Customer PO
+        <i class="fa fa-file-text-o"></i> View Customer PO
         <small></small>
       </h1>
     </section>
