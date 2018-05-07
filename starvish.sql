@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 06, 2018 at 11:54 AM
+-- Generation Time: May 07, 2018 at 05:38 PM
 -- Server version: 5.7.22-0ubuntu0.17.10.1
 -- PHP Version: 7.1.15-0ubuntu0.17.10.1
 
@@ -151,7 +151,7 @@ CREATE TABLE `customer_po` (
   `customer_id` varchar(15) NOT NULL,
   `total_amt` double NOT NULL,
   `po_id` varchar(15) NOT NULL,
-  `description` varchar(50) NOT NULL,
+  `description` varchar(2000) NOT NULL,
   `no_of_files` int(5) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -161,7 +161,7 @@ CREATE TABLE `customer_po` (
 --
 
 INSERT INTO `customer_po` (`date`, `customer_id`, `total_amt`, `po_id`, `description`, `no_of_files`, `created`) VALUES
-('2018-05-12', 'cust1', 55000, '1234', 'hi ', 3, '2018-05-06 05:54:13');
+('2018-05-19', 'cust1', 1234, '123', 'asddafsdfadf', 0, '2018-05-07 11:20:01');
 
 -- --------------------------------------------------------
 
@@ -175,15 +175,6 @@ CREATE TABLE `customer_po_files` (
   `file_path` varchar(200) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `customer_po_files`
---
-
-INSERT INTO `customer_po_files` (`po_id`, `file_name`, `file_path`, `created`) VALUES
-('1234', 'cust1-1234-0.png', '/var/www/starvish/uploads/po/customer/cust1-1234-0.png', '2018-05-06 05:54:13'),
-('1234', 'cust1-1234-1.jpg', '/var/www/starvish/uploads/po/customer/cust1-1234-1.jpg', '2018-05-06 05:54:13'),
-('1234', 'cust1-1234-2.png', '/var/www/starvish/uploads/po/customer/cust1-1234-2.png', '2018-05-06 05:54:13');
 
 -- --------------------------------------------------------
 
@@ -529,7 +520,12 @@ INSERT INTO `tbl_last_login` (`id`, `userId`, `sessionData`, `machineIp`, `userA
 (61, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 65.0.3325.181', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36', 'Linux', '2018-05-04 12:26:32'),
 (62, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 66.0.3359.139', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', 'Linux', '2018-05-05 04:06:37'),
 (63, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 66.0.3359.139', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', 'Linux', '2018-05-05 12:04:14'),
-(64, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 66.0.3359.139', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', 'Linux', '2018-05-06 02:14:40');
+(64, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 66.0.3359.139', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', 'Linux', '2018-05-06 02:14:40'),
+(65, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 66.0.3359.139', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', 'Linux', '2018-05-06 11:20:41'),
+(66, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 66.0.3359.139', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', 'Linux', '2018-05-06 17:38:01'),
+(67, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 66.0.3359.139', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', 'Linux', '2018-05-07 02:26:39'),
+(68, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 66.0.3359.139', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', 'Linux', '2018-05-07 05:04:17'),
+(69, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 66.0.3359.139', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', 'Linux', '2018-05-07 12:06:25');
 
 -- --------------------------------------------------------
 
@@ -958,7 +954,7 @@ ALTER TABLE `note_master`
 -- AUTO_INCREMENT for table `tbl_last_login`
 --
 ALTER TABLE `tbl_last_login`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 --
 -- AUTO_INCREMENT for table `tbl_reset_password`
 --
