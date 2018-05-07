@@ -69,7 +69,7 @@ class Customer_po extends BaseController{
       $res['searchText']='';
     }
 
-    $html =$this->loadViews("customer po/customer_po_listing", $this->global, $res , NULL);
+    $html =$this->loadViews("customer_po/customer_po_listing", $this->global, $res , NULL);
 
   }
 
@@ -81,12 +81,13 @@ class Customer_po extends BaseController{
         $this->global['pageTitle'] = 'StarVish:Add Customer PO';
         $res['datas']=$this->customer_po_model->fetch_customer();
         $res['customer']=$this->customer_po_model->all_customer();
-      $this->loadViews("customer po/add_customer_po", $this->global, $res , NULL);
+      $this->loadViews("customer_po/add_customer_po", $this->global, $res , NULL);
       }
       else {
         $this->global['pageTitle'] = 'StarVish:Edit Customer PO';
         $result['datas']=$this->customer_po_model->fetch_customer_po($id);
         $result['customer']=$this->customer_po_model->all_customer();
+<<<<<<< HEAD
         $files=$this->customer_po_model->view_customer_files($id);
         if($files!=false)
         {
@@ -96,6 +97,9 @@ class Customer_po extends BaseController{
           $result['files']='NA';
         }
         $this->loadViews("customer po/edit_customer_po",$this->global,$result,NULL);
+=======
+        $this->loadViews("customer_po/edit_customer_po",$this->global,$result,NULL);
+>>>>>>> 4c53dbc27ceeb3b81492738c0ee718ea7cb190bd
       }
     }
 
@@ -278,6 +282,6 @@ class Customer_po extends BaseController{
             $data['searchText'] = $searchText;
           }
 
-        $this->loadViews("customer po/customer_po_listing",$this->global,$data,NULL);
+        $this->loadViews("customer_po/customer_po_listing",$this->global,$data,NULL);
       }
 }
