@@ -15,35 +15,34 @@ class Customer_po extends BaseController{
       $this->load->helper(array('form', 'url'));
       $this->isLoggedIn();
   }
-  /*function upload()
+
+
+  //Function to list individual PO's
+  public function view_customer_po($po_id)
   {
-    $this->global['pageTitle'] = 'StarVish: Upload ';
-    $this->loadViews("customer po/upload", $this->global, array('error' => ' ' ), NULL);
+    $this->global['pageTitle'] = 'StarVish: Customer PO Listing';
+    $po_details=$this->customer_po_model->view_customer_po($po_id);
+    $po_files=$this->customer_po_model->view_customer_files($po_id);
+    if($po_details!=false)
+    {
+      $res['datas']=$po_details;
+      if($po_files!=false)
+      {
+        $res['files']=$po_files;
+      }
+      else {
+        $res['files']='NA';
+      }
+    }
+    else {
+      $res['datas']='NA';
+    }
+    $this->loadViews("customer po/view_customer_po", $this->global, $res , NULL);
+
   }
 
-  public function do_upload(){
-    $this->global['pageTitle'] = 'StarVish: Upload ';
-  $config = array(
-  'upload_path' => 'uploads/po/customer/',
-  'allowed_types' => "gif|jpg|jpeg|png|iso|dmg|zip|rar|doc|docx|xls|xlsx|ppt|pptx|csv|ods|odt|odp|pdf|rtf|sxc|sxi|txt|exe|avi|mpeg|mp3|mp4|3gp",
-  'overwrite' => TRUE,
-  'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
-);
-  $this->load->library('upload', $config);
-  $this->upload->initialize($config);
-  if($this->upload->do_upload('userfile'))
-    {
-      $data = array('upload_data' => $this->upload->data());
-      $this->loadViews("customer po/upload_success", $this->global,$data, NULL);
-    }
-  else
-    {
-      $error = array('error' => $this->upload->display_errors());
-      $this->loadViews("customer po/upload", $this->global,$error, NULL);
-    }
 
-  }*/
-
+//function to list all customer PO's
   public function index(){
     $this->global['pageTitle'] = 'StarVish: Customer PO Listing';
     $result=$this->customer_po_model->customerpolisting();
