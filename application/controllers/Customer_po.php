@@ -91,7 +91,7 @@ class Customer_po extends BaseController{
     	   $config = array(	//file upload
       'upload_path' => 'uploads/po/customer/',
       //'file_name'=>$customer_id.'-'.$po_id,
-      'allowed_types' => "gif|jpg|jpeg|png|iso|dmg|zip|rar|doc|docx|xls|xlsx|ppt|pptx|csv|ods|odt|odp|pdf|rtf|sxc|sxi|txt|exe|avi|mpeg|mp3|mp4|3gp",
+      'allowed_types' => "*",
       'overwrite' => TRUE,
       'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
 
