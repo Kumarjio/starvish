@@ -60,7 +60,7 @@ class Customer_po extends BaseController{
 
   }
 
-  //this function used to redirect to addvendor or editvendor quotation based on the vendor_quote_id
+  //this function used to redirect to addcustomer or editcustomer quotation based on the po_id
     public function add_edit_customer_po($id=NULL)
     {
       if($id==NULL)
@@ -143,8 +143,8 @@ class Customer_po extends BaseController{
 
             redirect('add_edit_customer_po');
         }
+        //function for editing customer Quotation Details
 
-        //function for editing vendor Quotation Details
         public function update_customer_po()
         {
           $date=$this->input->post('date');
@@ -176,7 +176,7 @@ class Customer_po extends BaseController{
                       );
         	}  */
           $result = FALSE;
-            $result = $this->customer_po_model->update_customer_po($customer_id,$datas);
+            $result = $this->customer_po_model->update_customer_po($po_id,$datas);
             if($result == true)
             {
                 $this->session->set_flashdata('success', 'Customer PO updated successfully');
@@ -188,10 +188,10 @@ class Customer_po extends BaseController{
             redirect('customer_po');
         }
 
-        //function to delete vendor Quotation
-        public function delete_customer_po($customer_id)
+        //function to delete customer Quotation
+        public function delete_customer_po($po_id)
         {
-          $result = $this->customer_po_model->delete_customer_po($customer_id);
+          $result = $this->customer_po_model->delete_customer_po($po_id);
           if($result == true)
           {
               $this->session->set_flashdata('success', 'Customer PO Deleted successfully');

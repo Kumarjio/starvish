@@ -91,8 +91,8 @@
                                     data-date="<?php echo $data->date;?>" data-vendor_id="<?php echo $data->vendor_id;?>" data-po_id="<?php echo $data->po_id;?>"
                                    data-description="<?php echo $data->description;?>">
                                     <i class="fa fa-info-circle"></i></a>&nbsp;|
-                                  <a class="btn btn-sm btn-info" href="<?php echo base_url().'add_edit_vendor_po/'.$data->vendor_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>&nbsp;|
-                                  <a class="btn btn-sm btn-danger" href="<?php  echo base_url().'delete_vendor_po/'.$data->vendor_id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
+                                  <a class="btn btn-sm btn-info" href="<?php echo base_url().'add_edit_vendor_po/'.$data->po_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>&nbsp;|
+                                  <a class="btn btn-sm btn-danger" href="<?php  echo base_url().'delete_vendor_po/'.$data->po_id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
                               </td>
                             <?php echo '</tr>
                                 ';

@@ -30,13 +30,31 @@ class Vendor_po_model extends CI_Model{
     $this->db->trans_complete();
     return $c_id;
   }
+  //function to quote to vendor_po_products
+  public function add_vendor_product($datas)
+  {
+    $res=$this->db->insert('vendor_po_products',$datas);
+    return $res;
+  }
 
   //function to fetch details from vendor_po table
   public function fetch_vendor_po($id)
   {
     $this->db->select('*');
     $this->db->from('vendor_po');
-    $this->db->where('vendor_id',$id);
+    $this->db->where('po_id',$id);
+    if($res=$this->db->get())
+      return $res->result();
+    else {
+      return false;
+    }
+  }
+  //function to fetch details from vendor_po_products table
+  public function fetch_vendor_product($id)
+  {
+    $this->db->select('*');
+    $this->db->from('vendor_po_products');
+    $this->db->where('po_id',$id);
     if($res=$this->db->get())
       return $res->result();
     else {
@@ -52,11 +70,17 @@ class Vendor_po_model extends CI_Model{
     $res=$this->db->update('vendor_po',$datas);
       return $res;
   }
-
+  //function to edit vendor po
+  public function update_vendor_product($id,$datas)
+  {
+    $this->db->where('po_id',$id);
+    $res=$this->db->update('vendor_po_products',$datas);
+      return $res;
+  }
   //function to delete_vendor_po
   public function delete_vendor_po($id)
   {
-    $this->db->delete('vendor_po',array('vendor_id'=>$id));
+    $this->db->delete('vendor_po',array('po_id'=>$id));
     return $this->db->affected_rows();
   }
 

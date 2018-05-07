@@ -91,9 +91,18 @@
                               <td>'.$data->no_of_files.'</td>';?>
 
                               <td class="text-center">
+<<<<<<< HEAD
                                   <a class="btn btn-sm btn-info" href="<?php echo base_url().'view_customer_po/'.$data->po_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>&nbsp;|
                                   <a class="btn btn-sm btn-info" href="<?php echo base_url().'add_edit_customer_po/'.$data->customer_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>&nbsp;|
                                   <a class="btn btn-sm btn-danger" href="<?php  echo base_url().'delete_customer_po/'.$data->customer_id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
+=======
+                                  <a  class="btn btn-sm btn-success" data-toggle="modal" data-target="#datas" data-id="<?php echo $i++?>"
+                                    data-date="<?php echo $data->date;?>" data-customer_id="<?php echo $data->customer_id;?>" data-po_id="<?php echo $data->po_id;?>"
+                                   data-description="<?php echo $data->description;?>">
+                                    <i class="fa fa-info-circle"></i></a>&nbsp;|
+                                  <a class="btn btn-sm btn-info" href="<?php echo base_url().'add_edit_customer_po/'.$data->po_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>&nbsp;|
+                                  <a class="btn btn-sm btn-danger" href="<?php  echo base_url().'delete_customer_po/'.$data->po_id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
+>>>>>>> 31336674bc17c32c6bdade85cdf8e5cbb64ce5cf
                               </td>
                             <?php echo '</tr>
                                 ';
