@@ -13,6 +13,7 @@
         <small>Add, Edit, Update or Delete the Vendor PO</small>
       </h1>
     </section>
+
     <section class="content">
 
         <div class="row">
@@ -37,7 +38,8 @@
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <?php echo $this->session->flashdata('success'); ?>
             </div>
-          <?php } ?>
+            <?php } ?>
+
             <div class="col-md-12">
               <!-- general form elements -->
 
@@ -69,91 +71,89 @@
                             <!--row 1 end-->
 
                             <!--row 2-->
+                            <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="po_id">PO Id</label>
+                                      <input type="text" class="form-control required " id="po_id" value="<?php echo $datas[0]->po_id; ?>" name="po_id" maxlength="50">
+                                  </div>
+                              </div>
+                            </div>
+                              <!--row 2 end-->
+
+                              <!--row 3-->
                               <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="po_id">PO Id</label>
-                                        <input type="text" class="form-control required " id="po_id" value="<?php echo $datas[0]->po_id; ?>" name="po_id" maxlength="50">
+                                        <label for="description">Description</label>
+                                        <input type="text" rows="5" cols="60" class="form-control required" id="description" value="<?php echo $datas[0]->description; ?>" name="description" maxlength="150">
                                     </div>
                                 </div>
                               </div>
-                                <!--row 2 end-->
 
-                              <!--row 3-->
-                                <div class="row">
-                                  <div class="col-md-6">
-                                      <div class="form-group">
-                                          <label for="description">Description</label>
-                                          <input type="text" rows="5" cols="60" class="form-control required" id="description" value="<?php echo $datas[0]->description; ?>" name="description" maxlength="150">
-                                      </div>
-                                  </div>
+                              <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                       <button type="button" class="btn btn-primary" onClick="addRow()">Add Product</button></div>
                                 </div>
-
-                                <div class="row">
-                                  <div class="col-md-6">
-                                      <div class="form-group">
-                                         <button type="button" class="btn btn-primary" onClick="addRow()">Add Product</button></div>
-                                  </div>
-                                </div>
-                                <!--row 4 end-->
-                                <div class="container-fluid">
-                                    <div class="row">
-                                    <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
-                                    <caption></caption>
-                                    <div class="table-responsive">
-                                          <table id="dataTable" class="table table-striped table-condensed table-hover table-bordered product-details">
-                                                <thead class="bg-primary">
-                                                    <tr>
-                                                      <th>Product ID</th>
-                                                      <th>Description</th>
-                                                      <th>Hsn/Sac</th>
-                                                      <th>Quantity</th>
-                                                      <th>Unit Charge</th>
-                                                      <th>Total</th>
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody>
-                                                  <tr>
-                                                    <td><input type="text" id="product_id" value="<?php echo $data[0]->product_id; ?>" name="product_id"></td>
-                                                    <td><input type="text" id="description" value="<?php echo $data[0]->description; ?>" name="description"></td>
-                                                    <td><input type="text" id="hsn_sac" value="<?php echo $data[0]->hsn_sac; ?>" name="hsn_sac"></td>
-                                                    <td><input type="text" id="quantity" value="<?php echo $data[0]->quantity; ?>" name="quantity"></td>
-                                                    <td><input type="text" id="unit_charges" value="<?php echo $data[0]->unit_charges; ?>" name="unit_charges"></td>
-                                                    <td><input type="text" id="total" value="<?php echo $data[0]->total; ?>" name="total"></td>
-                                                </tr>
-                                                </tbody>
-                                        </table></div></div></div></div>
-                                             <!--<div class="col-md-4">
-
-                                                      <label for="quote_id">Total Tax</label>
-                                                      <input type="text"  value="0" id="totaltax" readonly >
-
-                                              </div>-->
-                                            <div class="row">
-                                                <div class="col-md-4">
-
-                                                      <label for="quote_id">Total</label>
-                                                      <input type="text" value="0" id="ttotal" readonly>
-                                                </div>
-                                                <div class="col-md-4">
-                                                      <label for="quote_id">Grand Total</label>
-                                                      <input type="text" value="0" id="grandtotal" readonly>
-                                                </div>
-                                          </div>
-
-                                </div>
-
-                                          <div class="box-footer">
-                                               <input type="submit" class="btn btn-primary" value="Create & Save" />
-                                              <input type="reset" class="btn btn-default" value="reset" />
-                                          </div>
-                                    </div><!-- /.box-body -->
-
                               </div>
-                        </div>
-                    </section>
-                  </div>
+                              <!--row 4 end-->
+                              <div class="container-fluid">
+                                  <div class="row">
+                                  <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
+                                  <caption></caption>
+                                  <div class="table-responsive">
+                                        <table id="dataTable" class="table table-striped table-condensed table-hover table-bordered product-details">
+                                              <thead class="bg-primary">
+                                                  <tr>
+                                                    <th>Product ID</th>
+                                                    <th>Description</th>
+                                                    <th>Hsn/Sac</th>
+                                                    <th>Quantity</th>
+                                                    <th>Unit Charge</th>
+                                                    <th>Total</th>
+                                                  </tr>
+                                              </thead>
+                                              <tbody>
+                                              <?php for($i=0;$i<count($data);$i++) {
+                                             echo'<tr>';
+                                                  echo '<td><input type="text" id="product_id" name="product_id" value='.$data[$i]->product_id.'></td>
+                                                  <td><input type="text" id="description" value='.$data[$i]->description.' name="description"></td>
+                                                  <td><input type="text" id="hsn_sac" value='.$data[$i]->hsn_sac.' name="hsn_sac"></td>
+                                                  <td><input type="text" id="quantity" value='.$data[$i]->quantity.' name="quantity"></td>
+                                                  <td><input type="text" id="unit_charges" value='.$data[$i]->unit_charges.' name="unit_charges"></td>
+                                                  <td><input type="text" id="total" value='.$data[$i]->total.' name="total"></td>
+                                                </tr>';
+                                              }?>
+                                              </tbody>
+                                      </table></div></div></div></div>
+                                           <!--<div class="col-md-4">
+
+                                                    <label for="quote_id">Total Tax</label>
+                                                    <input type="text"  value="0" id="totaltax" readonly >
+
+                                            </div>-->
+                                          <div class="row">
+                                              <div class="col-md-4">
+                                                    <label for="quote_id">Total</label>
+                                                    <input type="text" value="0" id="ttotal" readonly>
+                                              </div>
+                                              <div class="col-md-4">
+                                                    <label for="quote_id">Grand Total</label>
+                                                    <input type="text" value="0" id="grandtotal" readonly>
+                                              </div>
+                                        </div>
+                                  </div>
+
+                                        <div class="box-footer">
+                                             <input type="submit" class="btn btn-primary" value="Create & Save" />
+                                            <input type="reset" class="btn btn-default" value="reset" />
+                                        </div>
+                                  </div><!-- /.box-body -->
+                            </div>
+                      </div>
+                  </section>
+            </div>
   <script>
   var grand_total=0;
   var ttotal=0;

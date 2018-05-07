@@ -70,11 +70,11 @@ class Vendor_po_model extends CI_Model{
     $res=$this->db->update('vendor_po',$datas);
       return $res;
   }
-  //function to edit vendor po
+  //function to edit vendor product
   public function update_vendor_product($id,$datas)
   {
     $this->db->where('po_id',$id);
-    $res=$this->db->update('vendor_po_products',$datas);
+    $res=$this->db->insert('vendor_po_products',$datas);
       return $res;
   }
   //function to delete_vendor_po

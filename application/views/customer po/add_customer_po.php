@@ -9,8 +9,8 @@
           </div>
       </div>
       <h1>
-        <i class="fa fa-plus-square-o"></i> Customer PO Listing
-        <small>Add, Edit, Update or Delete the Customer PO</small>
+        <i class="fa fa-plus-square-o"></i> Create Customer PO
+        <small>Add Customer Purchase Order</small>
       </h1>
     </section>
 
@@ -103,7 +103,7 @@
                             <div class="row">
                               <div class="col-md-6">
                                   <div class="form-group">
-                                      <label for="po_id">PO Id</label>
+                                      <label for="po_id">PO ID</label>
                                       <input type="text" class="form-control required" value="<?php echo set_value('po_id'); ?>" id="po_id" name="po_id" maxlength="128">
                                   </div>
                               </div>
