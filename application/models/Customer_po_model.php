@@ -19,6 +19,28 @@ class Customer_po_model extends CI_Model{
     }
   }
 
+//function to count the files
+public function count_files($po_id)
+{
+  $this->db->select('*');
+  $this->db->from('customer_po_files');
+  $this->db->where('po_id',$po_id);
+  if($res=$this->db->get())
+    return $res->num_rows();
+  else 
+    return false;
+
+}
+
+
+  //function to delete the files in customer_po
+  public function delete_customer_po_file($file)
+  {
+    $this->db->delete('customer_po_files',array('file_name'=>$file));
+    return $this->db->affected_rows();
+
+  }
+
   //function to fetch all files of customer PO
   public function view_customer_files($po_id)
   {

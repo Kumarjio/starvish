@@ -9,8 +9,8 @@
           </div>
       </div>
       <h1>
-        <i class="fa fa-plus-square-o"></i> Customer PO Listing
-        <small>Add, Edit, Update or Delete the Customer PO</small>
+        <i class="fa fa-plus-square-o"></i> Customer Purchase Order
+        <small>Edit</small>
       </h1>
     </section>
 
@@ -70,7 +70,7 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="customer_id">Customer Id</label>
-                                      <input type="text" class="form-control required" value="<?php echo $datas[0]->customer_id; ?>" id="customer_id" name="customer_id" maxlength="128">
+                                      <input type="text" class="form-control required" value="<?php echo $datas[0]->customer_id; ?>" id="customer_id" name="customer_id" maxlength="128" readonly>
                                   </div>
                               </div>
                             </div>
@@ -84,7 +84,7 @@
                                   <div class="col-md-6">
                                       <div class="form-group">
                                           <label for="po_id">PO Id</label>
-                                          <input type="textarea" class="form-control required " id="po_id" value="<?php echo $datas[0]->po_id; ?>" name="po_id" maxlength="50">
+                                          <input type="textarea" class="form-control required " id="po_id" value="<?php echo $datas[0]->po_id; ?>" name="po_id" maxlength="50" readonly>
                                       </div>
                                   </div>
                                 </div>
@@ -94,31 +94,81 @@
                                   <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <label for="po_id">Total Price</label>
+                                            <input type="text" class="form-control required" value="<?php echo $datas[0]->total_amt; ?>" id="total_price" name="total_price" maxlength="128">
+                                        </div>
+                                    </div>
+                                  </div>
+
+                                  <!--row 4 end-->
+
+                                <!--row 5-->
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
                                             <label for="description">Description</label>
                                             <input type="text" class="form-control required" id="description" value="<?php echo $datas[0]->description; ?>" name="description" maxlength="150">
                                         </div>
                                     </div>
                                   </div>
-                                  <!--row 4 end-->
-
-                                  <!--row 5-->
-                              <!--    <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="attachment" class="custom-file">Attachment</label>
-                                      <div class="input-group">
-                                          <label class="input-group-btn">
-                                            <span class="btn btn-primary">
-                                              Browse&hellip; <input type="file" style="display: none;" name="attachment" id="attachment">
-                                            </span>
-                                          </label>
-                                          <input type="text" class="form-control" placeholder="Browse Files" readonly>
-                                      </div>
-                                        </span>
-                                    </div>
-                                </div>-->
                                   <!--row 5 end-->
 
-                              <!--    <script>
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                      <label for="attachment">Attachments</label>
+
+                                    <?php
+                                    if($files!='NA')
+                                    {
+                                      echo'<ul class="list-group">
+                                        <table>
+                                          <tbody>';
+
+                                        foreach($files as $file)
+                                        {
+
+                                        echo '
+                                        <tr>
+                                        <td><li class="list-group-item"><a href="../uploads/po/customer/'.$file->file_name.'" target="_blank">'.$file->file_name.'</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>';
+                                        ?>
+
+                                      <td>  <a class="btn btn-sm btn-danger" href="<?php  echo base_url().'delete_customer_po_file/'.$file->file_name.'/'.$file->po_id; ?>" title="Delete"> <i class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                        <?php
+                                        echo '</li>';
+                                        }
+                                      }
+                                      else {
+                                          echo '<label for="attachments"> :  N / A </label>';
+                                      }
+                                        ?>
+                                      </tbody>
+                                    </table>
+
+                                      </ul>
+                                    </div>
+                                  </div>
+
+                                  <br>
+
+                                  <!--row 6-->
+                                <div class="row">
+                                      <div class="col-md-6">
+                                          <label for="attachment" class="custom-file">Select file to attach</label>
+                                        <div class="input-group">
+                                            <label class="input-group-btn">
+                                              <span class="btn btn-primary">
+                                                Browse&hellip; <input type="file" multiple="" style="display: none;" name="attachment[]" id="attachment[]">
+                                              </span>
+                                            </label>
+                                            <input type="text" class="form-control" placeholder="Browse Files" readonly>
+                                        </div>
+                                          </span>
+                                      </div>
+                                  </div>
+                              <!--row 6 end-->
+
+                                 <script>
                                   $(function() {
 
                                     // We can attach the `fileselect` event to all file inputs on the page
@@ -145,12 +195,12 @@
                                       });
                                     });
                                   });
-                                </script>-->
+                                </script>
 
 
                           </div><br>
                           <div class="box-footer">
-                              <input type="submit" class="btn btn-primary" value="Update Customer PO" />
+                              <input type="submit" class="btn btn-primary" value="Update Customer PO" name="fileSubmit" />
                               <input type="reset" class="btn btn-default" value="Reset" />
                           </div>
                       </form>

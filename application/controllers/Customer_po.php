@@ -16,6 +16,20 @@ class Customer_po extends BaseController{
       $this->isLoggedIn();
   }
 
+  //delete files in customer po
+  public function delete_customer_po_file($file,$po_id)
+  {
+    $this->global['pageTitle'] = 'StarVish: Customer PO Listing';
+    $po_files=$this->customer_po_model->view_customer_files($po_id);
+    $po=$this->customer_po_model->view_customer_po($po_id);
+    unlink($po_files[0]->file_path);
+    $del=$this->customer_po_model->delete_customer_po_file($file);
+    $count=$this->customer_po_model->count_files($po_id);
+    $data=array('no_of_files'=>$count);
+    $this->customer_po_model->update_customer_po($po_id,$data);
+    $this->add_edit_customer_po($po_id);
+  }
+
 
   //Function to list individual PO's
   public function view_customer_po($po_id)
@@ -73,6 +87,14 @@ class Customer_po extends BaseController{
         $this->global['pageTitle'] = 'StarVish:Edit Customer PO';
         $result['datas']=$this->customer_po_model->fetch_customer_po($id);
         $result['customer']=$this->customer_po_model->all_customer();
+        $files=$this->customer_po_model->view_customer_files($id);
+        if($files!=false)
+        {
+          $result['files']=$files;
+        }
+        else {
+          $result['files']='NA';
+        }
         $this->loadViews("customer po/edit_customer_po",$this->global,$result,NULL);
       }
     }
@@ -99,6 +121,7 @@ class Customer_po extends BaseController{
 
       if($this->input->post('fileSubmit') && !empty($_FILES['attachment']['name'])){
            $filesCount = count($_FILES['attachment']['name']);
+
            $data=array('date'=>$date,'customer_id'=>$customer_id,'total_amt'=>$total_amt,'po_id'=>$po_id,
                       'description'=>$description,'no_of_files'=>$filesCount);
 
@@ -150,33 +173,66 @@ class Customer_po extends BaseController{
           $customer_id=$this->input->post('customer_id');
           $po_id=$this->input->post('po_id');
           $description=$this->input->post('description');
-        /*   $config = array(   //attachment upload
-          'upload_path' => 'uploads/po/customer/',
-          'file_name'=>$customer_id.'-'.$po_id,
-          'allowed_types' => "gif|jpg|jpeg|png|iso|dmg|zip|rar|doc|docx|xls|xlsx|ppt|pptx|csv|ods|odt|odp|pdf|rtf|sxc|sxi|txt|exe|avi|mpeg|mp3|mp4|3gp",
-          'overwrite' => TRUE,
-          'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
-        );
-          $this->load->library('upload', $config);
-          $this->upload->initialize($config);
-          $this->upload->do_upload('attachment');
-        	$attachment=$this->upload->data('orig_name');
-        	$filePath=$this->upload->data('full_path');
-        if($attachment=="") //check empty file input
-        	{*/
-          $datas=array('date'=>$date,'customer_id'=>$customer_id,'po_id'=>$po_id,
-                      'description'=>$description
+          $total_amt=$this->input->post('total_price');
+          //file uploading
+         //$attachment=$this->input->post('attachment');
+         $config = array(	//file upload
+      'upload_path' => 'uploads/po/customer/',
+      //'file_name'=>$customer_id.'-'.$po_id,
+      'allowed_types' => "*",
+      'overwrite' => TRUE,
+      'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
 
-                      );
-        	/*}
-        	else{
-          $datas=array('date'=>$date,'customer_id'=>$customer_id,'po_id'=>$po_id,
-                      'description'=>$description,'attachment'=>$attachment ,'file_path'=>$filePath
-                      );
-        	}  */
-          $result = FALSE;
-            $result = $this->customer_po_model->update_customer_po($po_id,$datas);
-            if($result == true)
+      );
+      $data=array();
+
+      if($this->input->post('fileSubmit') && !empty($_FILES['attachment']['name'])){
+           $filesCount = count($_FILES['attachment']['name']);
+           $result = FALSE;
+
+           $count=$this->customer_po_model->count_files($po_id);
+           $init=$count;
+           $count=$count+$filesCount;
+
+           if($filesCount!=0)
+           {
+           //details to be updated
+           $data=array('date'=>$date,'customer_id'=>$customer_id,'total_amt'=>$total_amt,'po_id'=>$po_id,
+                      'description'=>$description,'no_of_files'=>$count);
+
+
+            $result = $this->customer_po_model->update_customer_po($po_id,$data);
+          }
+           for($i = 0; $i < $filesCount; $i++){
+               $_FILES['userFile']['name'] = $_FILES['attachment']['name'][$i];
+               $_FILES['userFile']['type'] = $_FILES['attachment']['type'][$i];
+               $_FILES['userFile']['tmp_name'] = $_FILES['attachment']['tmp_name'][$i];
+               $_FILES['userFile']['error'] = $_FILES['attachment']['error'][$i];
+               $_FILES['userFile']['size'] = $_FILES['attachment']['size'][$i];
+
+               $config['file_name']=$customer_id.'-'.$po_id.'-'.$init++;
+               $this->load->library('upload', $config);
+               $this->upload->initialize($config);
+               if($this->upload->do_upload('userFile')){
+                   $fileData = $this->upload->data();
+                   $uploadData[$i]['po_id']=$po_id;
+                   $uploadData[$i]['file_name'] = $fileData['file_name'];
+                   $uploadData[$i]['file_path'] = $fileData['full_path'];
+               }
+             }
+
+             if(!empty($uploadData)){
+
+               //Insert file information into the database
+               $insert = $this->customer_po_model->insert_file($uploadData);
+               $statusMsg = $insert?'Files uploaded successfully.':'Some problem occurred, please try again.';
+               $this->session->set_flashdata('statusMsg',$statusMsg);
+           }
+
+
+
+
+            if($result == TRUE)
             {
                 $this->session->set_flashdata('success', 'Customer PO updated successfully');
             }
@@ -184,8 +240,10 @@ class Customer_po extends BaseController{
             {
                 $this->session->set_flashdata('error', 'Customer PO updation failed!');
             }
-            redirect('customer_po');
+          }
+            $this->add_edit_customer_po($po_id);
         }
+
 
         //function to delete customer Quotation
         public function delete_customer_po($po_id)

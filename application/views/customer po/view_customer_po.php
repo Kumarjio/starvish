@@ -56,6 +56,8 @@
                           <td>Created on</td>
                           <td>'.$datas[0]->created.'</td>
                           </tr>';
+                          if($files!='NA')
+                          {
                           $i=0;
 
                           foreach($files as $file)
@@ -65,7 +67,14 @@
                             <td><a href="../uploads/po/customer/'.$file->file_name.'" target="_blank">'.$file->file_name.'</a></td>
                             </tr>';
                           }
-
+                        }
+                        else
+                        {
+                      echo'    <tr>
+                          <td>Attachments</td>
+                          <td>N / A</td>
+                          </tr>';
+                        }
 
                         echo '<tbody>';
 
@@ -84,6 +93,7 @@
                         <div class="col-xs-12 text-left">
                             <div class="form-group">
                                 <a class="btn btn-primary" href="<?php echo base_url(); ?>customer_po"><i class="fa fa-angle-left"></i> Back</a>
+                                <a class="btn btn-success" href="<?php echo base_url().'add_edit_customer_po/'.$datas[0]->po_id; ?>" title="Edit"><i class="fa fa-pencil"></i>Edit</a>&nbsp;
                             </div>
                         </div>
                     </div>
