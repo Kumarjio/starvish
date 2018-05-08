@@ -81,6 +81,7 @@ class Vendor_po_model extends CI_Model{
   public function delete_vendor_po($id)
   {
     $this->db->delete('vendor_po',array('po_id'=>$id));
+    $this->db->delete('vendor_po_products',array('po_id'=>$id));
     return $this->db->affected_rows();
   }
 

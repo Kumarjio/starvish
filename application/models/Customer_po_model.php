@@ -27,7 +27,7 @@ public function count_files($po_id)
   $this->db->where('po_id',$po_id);
   if($res=$this->db->get())
     return $res->num_rows();
-  else 
+  else
     return false;
 
 }
@@ -113,7 +113,7 @@ public function insert_file($data = array()){
 
       return $res;
   }
-
+  
   //function to delete_customer_po
   public function delete_customer_po($id)
   {

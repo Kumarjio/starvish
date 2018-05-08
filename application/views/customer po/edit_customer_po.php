@@ -51,7 +51,6 @@
 				    <?php echo form_open_multipart('update_customer_po');?>
                         <div class="box-body">
 
-
                           <!--row 1-->
                             <div class="row">
 
@@ -61,7 +60,6 @@
                                       <input type="date" class="form-control required" value="<?php echo $datas[0]->date; ?>" id="date" name="date" maxlength="128">
                                   </div>
                               </div>
-
 
                             </div><!--row 1 End-->
 
@@ -74,9 +72,6 @@
                                   </div>
                               </div>
                             </div>
-
-
-
                             <!--row 2 end-->
 
                             <!--row 3-->
@@ -197,7 +192,6 @@
                                   });
                                 </script>
 
-
                           </div><br>
                           <div class="box-footer">
                               <input type="submit" class="btn btn-primary" value="Update Customer PO" name="fileSubmit" />
@@ -205,15 +199,10 @@
                           </div>
                       </form>
 
-
-
-
                     </div><!-- /.box-body -->
-
 
             </div>
         </div>
     </section>
-
 
 </div>

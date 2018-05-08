@@ -155,7 +155,7 @@
                                         <input type="text" value="0" id="ttotal" readonly>
 
                                 </div>
-								<div class="col-md-4">
+								                <div class="col-md-4">
                                         <label for="quote_id">Grand Total</label>
                                         <input type="text" value="0" id="grandtotal" readonly>
 
@@ -164,24 +164,19 @@
 
 				</div>
 
-
                           <div class="box-footer">
 							  <input type="submit" class="btn btn-primary" value="Create & Save" />
                               <input type="reset" class="btn btn-default" value="reset" />
                           </div>
                       </form>
 
-
                     </div><!-- /.box-body -->
-
 
             </div>
         </div>
     </section>
 
-
 </div>
-
 
 <script>
 var grand_total=0;

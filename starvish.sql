@@ -80,8 +80,8 @@ CREATE TABLE `customer_invoice` (
   `customer_id` varchar(15) NOT NULL,
   `invoice_id` varchar(15) NOT NULL,
   `po_id` varchar(15) NOT NULL,
-  `srn/dc` varchar(15) NOT NULL,
-  `paymentt_mode` enum('cash','card','online') NOT NULL
+  `srn_dc` varchar(15) NOT NULL,
+  `payment_mode` enum('cash','card','online') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

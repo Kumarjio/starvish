@@ -174,8 +174,8 @@
 
 
                           <div class="box-footer">
-							  <input type="submit" class="btn btn-primary" value="Create & Save" />
-                              <input type="reset" class="btn btn-default" value="reset" />
+							  <input type="submit" class="btn btn-primary" value="Update" />
+                              <input type="reset" class="btn btn-default" value="Reset" />
                           </div>
 
                     </div><!-- /.box-body -->

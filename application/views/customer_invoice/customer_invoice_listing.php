@@ -96,8 +96,8 @@
                                     data-po_id="<?php echo $data->po_id;?>" data-srn_dc="<?php echo $data->srn_dc;?>"
                                     data-paymentmode="<?php echo $data->payment_mode;?>">
                                     <i class="fa fa-info-circle"></i></a>&nbsp;|
-                                  <a class="btn btn-sm btn-info" href="<?php echo base_url().'add_edit_vendor_po/'.$data->vendor_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>&nbsp;|
-                                  <a class="btn btn-sm btn-danger" href="<?php  echo base_url().'delete_vendor_po/'.$data->vendor_id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
+                                  <a class="btn btn-sm btn-info" href="<?php echo base_url().'add_edit_customer_invoice/'.$data->invoice_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>&nbsp;|
+                                  <a class="btn btn-sm btn-danger" href="<?php  echo base_url().'delete_customer_invoice/'.$data->invoice_id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
                               </td>
                             <?php echo '</tr>
                                 ';

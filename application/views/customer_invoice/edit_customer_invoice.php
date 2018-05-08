@@ -14,7 +14,6 @@
         <small>Add, Edit, Update or Delete the Customer Invoice</small>
       </h1>
     </section>
-
   <section class="content">
 
         <div class="row">
@@ -47,10 +46,11 @@
 
                 <div class="box box-primary">
                     <div class="box-header">
-                        <i><h3 class="box-title">Add New Invoice</h3></i>
+                        <i><h3 class="box-title">Edit Customer Invoice</h3></i>
                     </div><!-- /.box-header -->
                     <?php $this->load->helper("form"); ?>
-                    <form role="form" id="addinvoice" action="<?php echo base_url() ?>add_customer_invoice" method="post" role="form">
+                  <!--  <form role="form" id="addinvoice" action="<?php echo base_url() ?>add_customer_invoice" method="post" role="form">-->
+                      <?php echo form_open_multipart('update_customer_invoice');?>
 
 
                         <div class="box-body">
@@ -60,39 +60,40 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="date">Date</label>
-                                      <input type="date" class="form-control required" value="<?php echo set_value('date'); ?>" id="date" name="date">
+                                      <input type="date" class="form-control required" value="<?php echo $datas[0]->date; ?>" id="date" name="date" maxlength="128">
                                   </div>
                               </div>
 
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="customer_id">Customer ID</label>
-                                      <input type="text" class="form-control required" value="<?php echo set_value('customer_id'); ?>" id="customer_id" name="customer_id">
+                                      <input type="text" class="form-control required" value="<?php echo $datas[0]->customer_id; ?>" id="customer_id" name="customer_id" maxlength="128">
 
                                         <!--    <select class="form-control" name="customer_id">
                                               <?php foreach($customer as $cust){?>
                                                     <option value="<?php echo $cust->customer_id;?>"><?php echo $cust->customer_id;?> - <?php echo $cust->company_name;?></option>
                                                 <?php }?>
-                                              </select>-->
-                                    </div>
-                                </div>
-                              </div><!--row 1 End-->
+                                            </select>-->
+                                  </div>
+                              </div>
+                            </div><!--row 1 End-->
 
                             <!--row 2-->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="invoice_id">Invoice ID</label>
-                                        <input type="text" class="form-control required" value="<?php echo set_value('invoice_id'); ?>" id="invoice_id" name="invoice_id" maxlength="128">
+                                        <input type="text" class="form-control required" value="<?php echo $datas[0]->invoice_id; ?>" id="invoice_id" name="invoice_id" maxlength="128">
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                              <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="po_id">PO ID</label>
-                                      <input type="text" class="form-control required " id="po_id" value="<?php echo set_value('po_id'); ?>" name="po_id" maxlength="500">
+                                      <input type="po_id" class="form-control required" value="<?php echo $datas[0]->po_id; ?>" id="po_id" name="po_id" maxlength="128">
                                   </div>
-                                </div>
+                              </div>
+
                             </div>
                             <!--row 2 end-->
 
@@ -101,10 +102,9 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="srn_dc">Srn/dc</label>
-                                        <input type="text" class="form-control required " id="srn_dc" value="<?php echo set_value('srn_dc'); ?>" name="srn_dc" maxlength="500">
+                                        <input type="srn_dc" class="form-control required" value="<?php echo $datas[0]->srn_dc; ?>" id="srn_dc" name="srn_dc" maxlength="128">
                                     </div>
                                 </div>
-
                               </div>
                               <!--row 3 end-->
 
@@ -113,10 +113,9 @@
                                   <div class="col-md-12">
                                       <div class="form-group">
                                           <label for="payment_mode">Payment Mode</label>
-                                          <input type="text" class="form-control required " id="payment_mode" value="<?php echo set_value('payment_mode'); ?>" name="payment_mode" maxlength="500">
+                                          <input type="payment_mode" class="form-control required" value="<?php echo $datas[0]->payment_mode; ?>" id="payment_mode" name="payment_mode" maxlength="128">
                                       </div>
                                   </div>
-
                                 </div>
                                 <!--row 4 end-->
 
@@ -152,7 +151,21 @@
                     							          </tr>
                                           </thead>
                                           <tbody>
-
+                                            <?php for($i=0;$i<count($data);$i++) {
+                                            echo'<tr>';
+                                                echo '<td><input type="text" id="description" name="description" value='.$data[$i]->description.'></td>
+                                                <td><input type="text" id="hsn_sac" value='.$data[$i]->hsn_sac.' name="hsn_sac"></td>
+                                                <td><input type="text" id="quantity" value='.$data[$i]->quantity.' name="quantity"></td>
+                                                <td><input type="text" id="unit_charges" value='.$data[$i]->unit_charges.' name="unit_charges"></td>
+                                                <td><input type="text" id="total" value='.$data[$i]->total.' name="total"></td>
+                                                <td><input type="text" id="cgst_percent" value='.$data[$i]->cgst_percent.' name="cgst_percent"></td>
+                                                <td><input type="text" id="cgst_amt" value='.$data[$i]->cgst_amt.' name="cgst_amt"></td>
+                                                <td><input type="text" id="sgst_percent" value='.$data[$i]->sgst_percent.' name="sgst_percent"></td>
+                                                <td><input type="text" id="sgst_amt" value='.$data[$i]->sgst_amt.' name="sgst_amt"></td>
+                                                <td><input type="text" id="igst_percent" value='.$data[$i]->igst_percent.' name="igst_percent"></td>
+                                                <td><input type="text" id="igst_amt" value='.$data[$i]->igst_amt.' name="igst_amt"></td>
+                                              </tr>';
+                                            }?>
                                           </tbody>
                                     </table></div></div></div></div>
 
@@ -177,16 +190,12 @@
 
                                 </div>
                             </div>--><!--row 1 End-->
-
-				</div>
-
+                          </div>
 
                           <div class="box-footer">
-							  <input type="submit" class="btn btn-primary" value="Create & Save" />
-                              <input type="reset" class="btn btn-default" value="reset" />
+							  <input type="submit" class="btn btn-primary" value="Update" />
+                              <input type="reset" class="btn btn-default" value="Reset" />
                           </div>
-                      </form>
-
 
                     </div><!-- /.box-body -->
 
@@ -202,11 +211,11 @@
 /*var grand_total=0;
 var ttotal=0;
 //var tot_tax=0;
-var totalArray =  [];
-var grandArray = [];
-//var taxArray = [];*/
-var counter = 1;
 
+var totalArray =  [];
+var grandArray = [];*/
+//var taxArray = [];
+var counter = 1;
 function addRow(){
     counter++;
     console.log("crick");
