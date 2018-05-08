@@ -9,8 +9,8 @@
           </div>
       </div>
       <h1>
-        <i class="fa fa-plus-square-o"></i> Customer Purchase Order
-        <small>Edit</small>
+        <i class="fa fa-file-text-o"></i> Customer Purchase Order
+        <small>Edit !</small>
       </h1>
     </section>
 

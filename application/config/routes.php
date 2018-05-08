@@ -103,6 +103,9 @@ $route['update_customer_po']='customer_po/update_customer_po';
 $route['add_customer_po']='customer_po/add_customer_po';
 $route['delete_customer_po/(:any)']='customer_po/delete_customer_po/$1';
 $route['customer_po_listing']='customer_po/customer_po_listing';
+$route['view_customer_po/(:any)']='customer_po/view_customer_po/$1';
+$route['delete_customer_po_file/(:any)/(:any)']='customer_po/delete_customer_po_file/$1/$2';
+
 
 /****************Vendor PO******************/
 
