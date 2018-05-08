@@ -146,6 +146,16 @@ $route['add_vendor_quotation']='vendorquotation/add_vendor_quotation';
 $route['delete_vendor_quotation/(:any)']='vendorquotation/delete_vendor_quotation/$1';
 $route['vendor_quotation_listing']='vendorquotation/vendor_quotation_listing';
 
+/****************Customer Invoice******************/
+
+$route['customer_invoice']='customer_invoice';
+$route['add_edit_customer_invoice']='customer_invoice/add_edit_customer_invoice';
+$route['add_edit_customer_invoice/(:any)']='customer_invoice/add_edit_customer_invoice/$1';
+$route['update_customer_invoice']='customer_invoice/update_customer_invoice';
+$route['add_customer_invoice']='customer_invoice/add_customer_invoice';
+$route['delete_customer_invoice/(:any)']='customer_invoice/delete_customer_invoice/$1';
+$route['customer_dc_listing']='customer_dc/customer_dc_listing';
+
 
 /*********** USER DEFINED ROUTES *******************/
 

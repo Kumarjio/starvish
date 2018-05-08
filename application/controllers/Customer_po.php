@@ -79,8 +79,8 @@ class Customer_po extends BaseController{
       if($id==NULL)
       {
         $this->global['pageTitle'] = 'StarVish:Add Customer PO';
-        $res['datas']=$this->customer_po_model->fetch_customer();
         $res['customer']=$this->customer_po_model->all_customer();
+        $res['datas']=$this->customer_po_model->fetch_customer();
       $this->loadViews("customer_po/add_customer_po", $this->global, $res , NULL);
       }
       else {
@@ -226,9 +226,6 @@ class Customer_po extends BaseController{
                $statusMsg = $insert?'Files uploaded successfully.':'Some problem occurred, please try again.';
                $this->session->set_flashdata('statusMsg',$statusMsg);
            }
-
-
-
 
             if($result == TRUE)
             {

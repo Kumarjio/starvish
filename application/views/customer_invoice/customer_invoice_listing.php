@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-xs-12 text-right">
             <div class="form-group">
-                <a class="btn btn-primary" href="<?php echo base_url(); ?>"><i class="fa fa-plus"></i> Add New Invoice</a>
+                <a class="btn btn-primary" href="<?php echo base_url(); ?>add_edit_customer_invoice"><i class="fa fa-plus"></i> Add New Invoice</a>
             </div>
         </div>
     </div>

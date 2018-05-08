@@ -2,14 +2,14 @@
 
 class Customer_invoice_model extends CI_Model{
 
-  //function to list the vendor
-  public function fetch_customer()
+  //function to list the customers
+  public function fetch_customers()
   {
     $res=$this->db->get('customer_invoice');
     return $res->result();
   }
 
-  //function to list the vendor po
+  //function to list the customer invoice
   public function customerinvoicelisting()
   {
     if($res=$this->db->get('customer_invoice'))
@@ -21,16 +21,15 @@ class Customer_invoice_model extends CI_Model{
       }
   }
 
-  //function to add vendor po into vendor_po table
-  public function add_vendor_po($datas)
+  //function to add customer invoice into customer_invoice table
+  public function add_customer_invoice($datas)
   {
     $this->db->trans_start();
-    $c_id =$this->db->insert('vendor_po',$datas);
+    $c_id =$this->db->insert('customer_invoice',$datas);
     $vend_id = $this->db->insert_id();
     $this->db->trans_complete();
     return $c_id;
-  }
-
+}
   //function to fetch details from vendor_po table
   public function fetch_vendor_po($id)
   {
