@@ -176,6 +176,12 @@
                       <span>Customer Invoice</span>
                     </a>
                   </li>
+                  <li class="treeview">
+                    <a href="<?php echo base_url()?>vendor_invoice" ><br>
+                      <i class="fa fa-file-text-o"></i>
+                      <span>Vendor Invoice</span>
+                    </a>
+                  </li>
                   <br>
                 </ul>
               </div>

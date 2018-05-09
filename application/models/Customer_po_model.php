@@ -29,7 +29,6 @@ public function count_files($po_id)
     return $res->num_rows();
   else
     return false;
-
 }
 
   public function select_customer_po_file($file)

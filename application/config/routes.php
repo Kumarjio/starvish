@@ -160,6 +160,16 @@ $route['add_customer_invoice']='customer_invoice/add_customer_invoice';
 $route['delete_customer_invoice/(:any)']='customer_invoice/delete_customer_invoice/$1';
 $route['customer_invoice_listing']='customer_invoice/customer_invoice_listing';
 
+/****************Vendor Invoice******************/
+
+$route['vendor_invoice']='vendor_invoice';
+$route['add_edit_vendor_invoice']='vendor_invoice/add_edit_vendor_invoice';
+$route['add_edit_vendor_invoice/(:any)']='vendor_invoice/add_edit_vendor_invoice/$1';
+$route['update_vendor_invoice']='vendor_invoice/update_vendor_invoice';
+$route['add_vendor_invoice']='vendor_invoice/add_vendor_invoice';
+$route['delete_vendor_invoice/(:any)']='vendor_invoice/delete_vendor_invoice/$1';
+$route['vendor_invoice_listing']='vendor_invoice/vendor_invoice_listing';
+$route['view_vendor_invoice/(:any)']='vendor_invoice/view_vendor_invoice/$1';
 
 /*********** USER DEFINED ROUTES *******************/
 
