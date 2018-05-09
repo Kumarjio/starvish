@@ -151,6 +151,7 @@ public function update_customer_quote_product($id,$datas)
 public function delete_customer_quote($id)
 {
   $res=$this->db->delete('customer_quote',array('quote_id'=>$id));
+  $res=$this->db->delete('customer_quote_products',array('quote_id'=>$id));
   return $res;
 }
 //function to fetch details from customer quote table

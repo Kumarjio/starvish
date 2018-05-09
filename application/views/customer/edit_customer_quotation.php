@@ -163,7 +163,7 @@
                                         <input type="text" value="0" id="ttotal" readonly>
 
                                 </div>
-								<div class="col-md-4">
+								                <div class="col-md-4">
                                         <label for="quote_id">Grand Total</label>
                                         <input type="text" value="0" id="grandtotal" readonly>
 
@@ -204,7 +204,10 @@ function addRow(){
     jQuery('table.product-details').append(newRow);
 }
 
-
+function delete(){
+  alert('po');
+  <?php echo base_url();?>
+}
 jQuery('table.product-details').on('click','tr a',function(e){
  e.preventDefault();
 jQuery(this).parents('tr').remove();
