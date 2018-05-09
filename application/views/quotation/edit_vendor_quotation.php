@@ -9,8 +9,8 @@
           </div>
       </div>
       <h1>
-        <i class="fa fa-plus-square-o"></i> Vendor Quotation Listing
-        <small>Add, Edit, Update or Delete the Vendor Quotation</small>
+        <i class="fa fa-file-text-o"></i> Vendor Quotation
+        <small>Edit</small>
       </h1>
     </section>
 
@@ -70,7 +70,7 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="vendor_quote_id">Vendor Quote Id</label>
-                                      <input type="text" class="form-control required" value="<?php echo $datas[0]->vendor_quote_id; ?>" id="vendor_quote_id" name="vendor_quote_id" maxlength="128">
+                                      <input type="text" class="form-control required" value="<?php echo $datas[0]->vendor_quote_id; ?>" id="vendor_quote_id" name="vendor_quote_id" maxlength="128" readonly>
                                   </div>
                               </div>
                             </div>
@@ -84,11 +84,24 @@
                                   <div class="col-md-6">
                                       <div class="form-group">
                                           <label for="vendor_id">Vendor Id</label>
-                                          <input type="textarea" class="form-control required " id="vendor_id" value="<?php echo $datas[0]->vendor_id; ?>" name="vendor_id" maxlength="50">
+                                          <input type="textarea" class="form-control required " id="vendor_id" value="<?php echo $datas[0]->vendor_id; ?>" name="vendor_id" maxlength="50" readonly>
                                       </div>
                                   </div>
                                 </div>
                                 <!--row 3 end-->
+
+
+                                  <!--row 3-->
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="vendor_id">Total Amount</label>
+                                              <input type="textarea" class="form-control required " id="total_amt" value="<?php echo $datas[0]->total_amt; ?>" name="total_amt" maxlength="50">
+                                              </div>
+                                            </div>
+                                      </div>
+                                <!--row 3 end-->
+
 
                                 <!--row 4-->
                                   <div class="row">
@@ -101,14 +114,55 @@
                                   </div>
                                   <!--row 4 end-->
 
+
+
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                      <label for="attachment">Attachments</label>
+
+                                    <?php
+                                    if($files!='NA')
+                                    {
+                                      echo'<ul class="list-group">
+                                        <table>
+                                          <tbody>';
+
+                                        foreach($files as $file)
+                                        {
+
+                                        echo '
+                                        <tr>
+                                        <td><li class="list-group-item"><a href="../uploads/quotation/vendor/'.$file->file_name.'" target="_blank">'.$file->file_name.'</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>';
+                                        ?>
+
+                                      <td>  <a class="btn btn-sm btn-danger" href="<?php  echo base_url().'delete_vendor_quotation_file/'.$file->file_name.'/'.$file->vendor_quote_id; ?>" title="Delete"> <i class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                        <?php
+                                        echo '</li>';
+                                        }
+                                      }
+                                      else {
+                                          echo '<label for="attachments"> :  N / A </label>';
+                                      }
+                                        ?>
+                                      </tbody>
+                                    </table>
+
+                                      </ul>
+                                    </div>
+                                  </div>
+
+                                  <br>
+
+
                                   <!--row 5-->
                                   <div class="row">
                                     <div class="col-md-6">
-                                        <label for="attachment" class="custom-file">Attachment</label>
+                                        <label for="attachment" class="custom-file">Select files to attach</label>
                                       <div class="input-group">
                                           <label class="input-group-btn">
                                             <span class="btn btn-primary">
-                                              Browse&hellip; <input type="file" style="display: none;" name="attachment" id="attachment">
+                                              Browse&hellip; <input type="file" style="display: none;" name="attachment[]" id="attachment" multiple=''>
                                             </span>
                                           </label>
                                           <input type="text" class="form-control" placeholder="Browse Files" readonly>
@@ -150,7 +204,7 @@
 
                           </div><br>
                           <div class="box-footer">
-                              <input type="submit" class="btn btn-primary" value="Update Vendor Quotation" />
+                              <input type="submit" class="btn btn-primary" name="fileSubmit" value="Update Vendor Quotation" />
                               <input type="reset" class="btn btn-default" value="Reset" />
                           </div>
                       </form>

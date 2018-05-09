@@ -60,7 +60,19 @@ class Vendorquotation extends BaseController{
     $html =$this->loadViews("quotation/vendorquotationlisting", $this->global, $res , NULL);
 
   }
+//function to delete the vendor quotation files
+public function delete_vendor_quotation_file($file,$id)
+{
+  $this->global['pageTitle'] = 'StarVish: Delete vendor Quotation';
+  $path=$this->vendor_quotation_model->select_vendor_quotation_file($file);
+  unlink($path[0]->file_path);
+  $del=$this->vendor_quotation_model->delete_vendor_quotation_file($file);
+  $count=$this->vendor_quotation_model->count_files($id);
+  $data=array('no_of_files'=>$count);
+  $this->vendor_quotation_model->update_vendor_quotation($id,$data);
 
+  redirect('add_edit_vendor_quotation/'.$id);
+}
   //this function used to redirect to addvendor or editvendor quotation based on the vendor_quote_id
     public function add_edit_vendor_quotation($id=NULL)
     {
@@ -74,8 +86,41 @@ class Vendorquotation extends BaseController{
       else {
         $this->global['pageTitle'] = 'StarVish:Edit Vendor Quotation';
         $result['datas']=$this->vendor_quotation_model->fetch_vendor_quotation($id);
+        $files=$this->vendor_quotation_model->fetch_vendor_quotation_files($id);
+        if($files!=false)
+        {
+          $result['files']=$files;
+        }
+        else {
+          $result['files']='NA';
+        }
         $this->loadViews("quotation/edit_vendor_quotation",$this->global,$result,NULL);
       }
+
+    }
+
+    //function to view the quotation
+    public function view_vendor_quotation($id)
+    {
+      $this->global['pageTitle'] = 'StarVish:View Vendor Quotation';
+      $vendor_quote=$this->vendor_quotation_model->view_vendor_quotation($id);
+      $vendor_files=$this->vendor_quotation_model->fetch_vendor_quotation_files($id);
+      if($vendor_quote!=false)
+      {
+        $res['datas']=$vendor_quote;
+        if($vendor_files!=false)
+        {
+          $res['files']=$vendor_files;
+        }
+        else {
+          $res['files']='NA';
+        }
+      }
+      else {
+        $res['datas']='NA';
+      }
+      $this->loadViews("quotation/view_vendor_quotation",$this->global,$res,NULL);
+
     }
 
     //function for adding vendor quotation
@@ -84,26 +129,58 @@ class Vendorquotation extends BaseController{
           $date=$this->input->post('date');
           $vendor_quote_id=$this->input->post('vendor_quote_id');
           $vendor_id=$this->input->post('vendor_id');
+          $total_amt=$this->input->post('total_amt');
           $description=$this->input->post('description');
     	   $config = array(	//file upload
       'upload_path' => 'uploads/quotation/vendor/',
-      'file_name'=>$vendor_id.'-'.$vendor_quote_id,
-      'allowed_types' => "gif|jpg|jpeg|png|iso|dmg|zip|rar|doc|docx|xls|xlsx|ppt|pptx|csv|ods|odt|odp|pdf|rtf|sxc|sxi|txt|exe|avi|mpeg|mp3|mp4|3gp",
+      'allowed_types' => "*",
       'overwrite' => TRUE,
       'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
 
       );
-      $this->load->library('upload', $config);
-      $this->upload->initialize($config);
-      $this->upload->do_upload('attachment');
-        $attachment=$this->upload->data('orig_name');
-    	$filePath=$this->upload->data('full_path');
 
-          $data=array('date'=>$date,'vendor_quote_id'=>$vendor_quote_id,'vendor_id'=>$vendor_id,
-                      'description'=>$description,'attachment'=>$attachment ,'file_path'=>$filePath
-    				  );
-            $result = FALSE;
-            $result = $this->vendor_quotation_model->add_vendor_quotation($data);
+      $data=array();
+      if($this->input->post('fileSubmit') && !empty($_FILES['attachment']['name'])){
+           $filesCount = count($_FILES['attachment']['name']);
+           $data=array('date'=>$date,'vendor_quote_id'=>$vendor_quote_id,'vendor_id'=>$vendor_id,
+                       'description'=>$description,'total_amt'=>$total_amt
+               );
+
+             $result = FALSE;
+             $result = $this->vendor_quotation_model->add_vendor_quotation($data);
+
+           for($i = 0; $i < $filesCount; $i++){
+               $_FILES['userFile']['name'] = $_FILES['attachment']['name'][$i];
+               $_FILES['userFile']['type'] = $_FILES['attachment']['type'][$i];
+               $_FILES['userFile']['tmp_name'] = $_FILES['attachment']['tmp_name'][$i];
+               $_FILES['userFile']['error'] = $_FILES['attachment']['error'][$i];
+               $_FILES['userFile']['size'] = $_FILES['attachment']['size'][$i];
+
+               $config['file_name']=$vendor_id.'-'.$vendor_quote_id.'-'.$i;
+               $this->load->library('upload', $config);
+               $this->upload->initialize($config);
+               if($this->upload->do_upload('userFile')){
+                   $fileData = $this->upload->data();
+                   $uploadData[$i]['vendor_quote_id']=$vendor_quote_id;
+                   $uploadData[$i]['file_name'] = $fileData['file_name'];
+                   $uploadData[$i]['file_path'] = $fileData['full_path'];
+               }
+             }
+             print_r($uploadData);
+             if(!empty($uploadData)){
+               //Insert file information into the database
+               $insert = $this->vendor_quotation_model->insert_file($uploadData);
+               //echo'<scriptr>console.log('.$insert.');</scriptr>';
+               //updating files count
+               $count=$this->vendor_quotation_model->count_files($vendor_quote_id);
+               $data=array('no_of_files'=>$count);
+               $this->vendor_quotation_model->update_vendor_quotation($vendor_quote_id,$data);
+
+               $statusMsg = $insert?'Files uploaded successfully.':'Some problem occurred, please try again.';
+               $this->session->set_flashdata('status',$statusMsg);
+           }
+           }
+
             if($result == TRUE){
                 $this->session->set_flashdata('success', 'New Vendor Quotation created successfully');
             }
@@ -114,6 +191,7 @@ class Vendorquotation extends BaseController{
             redirect('add_edit_vendor_quotation');
         }
 
+
         //function for editing vendor Quotation Details
         public function update_vendor_quotation()
         {
@@ -121,31 +199,62 @@ class Vendorquotation extends BaseController{
           $vendor_quote_id=$this->input->post('vendor_quote_id');
           $vendor_id=$this->input->post('vendor_id');
           $description=$this->input->post('description');
-           $config = array(   //attachment upload
-          'upload_path' => 'uploads/quotation/vendor/',
-          'file_name'=>$vendor_id.'-'.$vendor_quote_id,
-          'allowed_types' => "gif|jpg|jpeg|png|iso|dmg|zip|rar|doc|docx|xls|xlsx|ppt|pptx|csv|ods|odt|odp|pdf|rtf|sxc|sxi|txt|exe|avi|mpeg|mp3|mp4|3gp",
-          'overwrite' => TRUE,
-          'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
-        );
-          $this->load->library('upload', $config);
-          $this->upload->initialize($config);
-          $this->upload->do_upload('attachment');
-        	$attachment=$this->upload->data('orig_name');
-        	$filePath=$this->upload->data('full_path');
-        if($attachment=="") //check empty file input
-        	{
-          $datas=array('date'=>$date,'vendor_quote_id'=>$vendor_quote_id,'vendor_id'=>$vendor_id,
-                      'description'=>$description
+          $total_amt=$this->input->post('total_amt');
+          $config = array(	//file upload
+       'upload_path' => 'uploads/quotation/vendor/',
+       'allowed_types' => "*",
+       'overwrite' => TRUE,
+       'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
 
-                      );
-        	}
-        	else{
-          $datas=array('date'=>$date,'vendor_quote_id'=>$vendor_quote_id,'vendor_id'=>$vendor_id,
-                      'description'=>$description,'attachment'=>$attachment ,'file_path'=>$filePath
-                      );
-        	}   $result = FALSE;
-            $result = $this->vendor_quotation_model->update_vendor_quotation($vendor_id,$datas);
+       );
+
+       $data=array();
+       if($this->input->post('fileSubmit') && !empty($_FILES['attachment']['name'])){
+            $filesCount = count($_FILES['attachment']['name']);
+
+            $count=$this->vendor_quotation_model->count_files($vendor_quote_id);
+            $init=$count;
+            $count=$count+$filesCount;
+
+            $data=array('date'=>$date,'vendor_quote_id'=>$vendor_quote_id,'vendor_id'=>$vendor_id,
+                        'description'=>$description,'total_amt'=>$total_amt
+                );
+
+              $result = FALSE;
+              $result = $this->vendor_quotation_model->update_vendor_quotation($vendor_quote_id,$data);
+
+            for($i = 0; $i < $filesCount; $i++){
+                $_FILES['userFile']['name'] = $_FILES['attachment']['name'][$i];
+                $_FILES['userFile']['type'] = $_FILES['attachment']['type'][$i];
+                $_FILES['userFile']['tmp_name'] = $_FILES['attachment']['tmp_name'][$i];
+                $_FILES['userFile']['error'] = $_FILES['attachment']['error'][$i];
+                $_FILES['userFile']['size'] = $_FILES['attachment']['size'][$i];
+
+                $config['file_name']=$vendor_id.'-'.$vendor_quote_id.'-'.$init++;
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+                if($this->upload->do_upload('userFile')){
+                    $fileData = $this->upload->data();
+                    $uploadData[$i]['vendor_quote_id']=$vendor_quote_id;
+                    $uploadData[$i]['file_name'] = $fileData['file_name'];
+                    $uploadData[$i]['file_path'] = $fileData['full_path'];
+                }
+              }
+              print_r($uploadData);
+              if(!empty($uploadData)){
+                //Insert file information into the database
+                $insert = $this->vendor_quotation_model->insert_file($uploadData);
+                //updating files count
+                $count=$this->vendor_quotation_model->count_files($vendor_quote_id);
+                $data=array('no_of_files'=>$count);
+                $this->vendor_quotation_model->update_vendor_quotation($vendor_quote_id,$data);
+
+                $statusMsg = $insert?'Files uploaded successfully.':'Some problem occurred, please try again.';
+                $this->session->set_flashdata('statusMsg',$statusMsg);
+            }
+            }
+
+
             if($result == true)
             {
                 $this->session->set_flashdata('success', 'Vendor Quotation updated successfully');

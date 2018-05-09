@@ -32,7 +32,14 @@ public function count_files($po_id)
 
 }
 
-
+  public function select_customer_po_file($file)
+  {
+    $this->db->select('file_path');
+    $this->db->from('customer_po_files');
+    $this->db->where('file_name',$file);
+    $res=$this->db->get();
+      return $res->result();
+  }
   //function to delete the files in customer_po
   public function delete_customer_po_file($file)
   {
@@ -113,7 +120,7 @@ public function insert_file($data = array()){
 
       return $res;
   }
-  
+
   //function to delete_customer_po
   public function delete_customer_po($id)
   {

@@ -111,7 +111,18 @@
 
                             <!--row 3 end-->
 
-                                <!--row 4-->
+                            <!--row 4-->
+                            <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="total_amt">Total Amount</label>
+                                      <input type="text" class="form-control required" value="<?php echo set_value('total_amt'); ?>" id="total_amt" name="total_amt" maxlength="128">
+                                  </div>
+                              </div>
+                            </div>
+
+
+                                <!--row 5-->
                                   <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -120,19 +131,19 @@
                                         </div>
                                     </div>
                                   </div>
-                                  <!--row 4end-->
+                                  <!--row 5end-->
 
-                                  <!--row 5-->
+                                  <!--row 6-->
                                     <div class="row">
                                       <div class="col-md-6">
                                           <label for="attachment" class="custom-file">Attachment</label>
                                         <div class="input-group">
                                             <label class="input-group-btn">
                                               <span class="btn btn-primary">
-                                                Browse&hellip; <input type="file" style="display: none;" name="attachment" id="attachment">
+                                                Browse&hellip; <input type="file" style="display: none;" name="attachment[]" id="attachment" multiple=''>
                                               </span>
                                             </label>
-                                            <input type="text" class="form-control" placeholder="Browse Files" readonly>
+                                            <input type="text" class="form-control" name="file_holder" placeholder="Browse Files" readonly>
                                         </div>
                                           </span>
                                       </div>
@@ -170,7 +181,7 @@
 
                           </div><br>
                           <div class="box-footer">
-                              <input type="submit" class="btn btn-primary" value="Add Quotation" />
+                              <input type="submit"  name="fileSubmit" class="btn btn-primary" value="Add Quotation" />
                               <input type="reset" class="btn btn-default" value="Reset" />
                           </div>
                       </form>

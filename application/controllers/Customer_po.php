@@ -20,14 +20,15 @@ class Customer_po extends BaseController{
   public function delete_customer_po_file($file,$po_id)
   {
     $this->global['pageTitle'] = 'StarVish: Customer PO Listing';
-    $po_files=$this->customer_po_model->view_customer_files($po_id);
-    $po=$this->customer_po_model->view_customer_po($po_id);
-    unlink($po_files[0]->file_path);
+    $path=$this->customer_po_model->select_customer_po_file($file);
+    unlink($path[0]->file_path);
     $del=$this->customer_po_model->delete_customer_po_file($file);
     $count=$this->customer_po_model->count_files($po_id);
     $data=array('no_of_files'=>$count);
     $this->customer_po_model->update_customer_po($po_id,$data);
-    $this->add_edit_customer_po($po_id);
+    //$this->add_edit_customer_po($po_id);
+    redirect('add_edit_customer_po/'.$po_id);
+
   }
 
 
@@ -121,7 +122,7 @@ class Customer_po extends BaseController{
            $filesCount = count($_FILES['attachment']['name']);
 
            $data=array('date'=>$date,'customer_id'=>$customer_id,'total_amt'=>$total_amt,'po_id'=>$po_id,
-                      'description'=>$description,'no_of_files'=>$filesCount);
+                      'description'=>$description);
 
              $result = FALSE;
              $result = $this->customer_po_model->add_customer_po($data);
@@ -148,6 +149,9 @@ class Customer_po extends BaseController{
 
                //Insert file information into the database
                $insert = $this->customer_po_model->insert_file($uploadData);
+               $count=$this->customer_po_model->count_files($po_id);
+               $data=array('no_of_files'=>$count);
+               $this->customer_po_model->update_customer_po($po_id,$data);
                $statusMsg = $insert?'Files uploaded successfully.':'Some problem occurred, please try again.';
                $this->session->set_flashdata('statusMsg',$statusMsg);
            }
@@ -172,6 +176,7 @@ class Customer_po extends BaseController{
           $po_id=$this->input->post('po_id');
           $description=$this->input->post('description');
           $total_amt=$this->input->post('total_price');
+          $file_holder=$this->input->post('file_holder');
           //file uploading
          //$attachment=$this->input->post('attachment');
          $config = array(	//file upload
@@ -184,23 +189,20 @@ class Customer_po extends BaseController{
       );
       $data=array();
 
-      if($this->input->post('fileSubmit') && !empty($_FILES['attachment']['name'])){
+      if($this->input->post('fileSubmit') && $_FILES['attachment']['name']!=""){
            $filesCount = count($_FILES['attachment']['name']);
            $result = FALSE;
-
+        //   echo "<script>alert('.$file_holder.')</script>";
            $count=$this->customer_po_model->count_files($po_id);
            $init=$count;
            $count=$count+$filesCount;
 
-           if($filesCount!=0)
-           {
            //details to be updated
            $data=array('date'=>$date,'customer_id'=>$customer_id,'total_amt'=>$total_amt,'po_id'=>$po_id,
-                      'description'=>$description,'no_of_files'=>$count);
+                      'description'=>$description);
 
+          $result = $this->customer_po_model->update_customer_po($po_id,$data);
 
-            $result = $this->customer_po_model->update_customer_po($po_id,$data);
-          }
            for($i = 0; $i < $filesCount; $i++){
                $_FILES['userFile']['name'] = $_FILES['attachment']['name'][$i];
                $_FILES['userFile']['type'] = $_FILES['attachment']['type'][$i];
@@ -223,6 +225,9 @@ class Customer_po extends BaseController{
 
                //Insert file information into the database
                $insert = $this->customer_po_model->insert_file($uploadData);
+               $count=$this->customer_po_model->count_files($po_id);
+               $data=array('no_of_files'=>$count);
+               $this->customer_po_model->update_customer_po($po_id,$data);
                $statusMsg = $insert?'Files uploaded successfully.':'Some problem occurred, please try again.';
                $this->session->set_flashdata('statusMsg',$statusMsg);
            }
@@ -236,7 +241,8 @@ class Customer_po extends BaseController{
                 $this->session->set_flashdata('error', 'Customer PO updation failed!');
             }
           }
-            $this->add_edit_customer_po($po_id);
+          redirect('add_edit_customer_po/'.$po_id);
+
         }
 
 

@@ -145,6 +145,10 @@ $route['update_vendor_quotation']='vendorquotation/update_vendor_quotation';
 $route['add_vendor_quotation']='vendorquotation/add_vendor_quotation';
 $route['delete_vendor_quotation/(:any)']='vendorquotation/delete_vendor_quotation/$1';
 $route['vendor_quotation_listing']='vendorquotation/vendor_quotation_listing';
+$route['vendor_quotation_file_upload']='vendorquotation/vendor_quotation_file/upload';
+$route['view_vendor_quotation/(:any)']='vendorquotation/view_vendor_quotation/$1';
+$route['delete_vendor_quotation_file/(:any)/(:any)']='vendorquotation/delete_vendor_quotation_file/$1/$2';
+
 
 /****************Customer Invoice******************/
 
