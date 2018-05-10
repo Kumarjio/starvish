@@ -29,7 +29,6 @@ public function count_files($po_id)
     return $res->num_rows();
   else
     return false;
-
 }
 
 
@@ -113,7 +112,7 @@ public function insert_file($data = array()){
 
       return $res;
   }
-  
+
   //function to delete_customer_po
   public function delete_customer_po($id)
   {
