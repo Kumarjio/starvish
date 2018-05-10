@@ -91,8 +91,8 @@
                                     data-date="<?php echo $data->date;?>" data-customer_id="<?php echo $data->customer_id;?>" data-dc_no="<?php echo $data->dc_no;?>"
                                    data-description="<?php echo $data->description;?>">
                                     <i class="fa fa-info-circle"></i></a>&nbsp;|
-                                  <a class="btn btn-sm btn-info" href="<?php echo base_url().'add_edit_customer_dc/'.$data->customer_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>&nbsp;|
-                                  <a class="btn btn-sm btn-danger" href="<?php  echo base_url().'delete_customer_dc/'.$data->customer_id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
+                                  <a class="btn btn-sm btn-info" href="<?php echo base_url().'add_edit_customer_dc/'.$data->dc_no; ?>" title="Edit"><i class="fa fa-pencil"></i></a>&nbsp;|
+                                  <a class="btn btn-sm btn-danger" href="<?php  echo base_url().'delete_customer_dc/'.$data->dc_no; ?>" title="Delete"><i class="fa fa-trash"></i></a>
                               </td>
                             <?php echo '</tr>
                                 ';

@@ -30,13 +30,32 @@ class Customer_dc_model extends CI_Model{
     $this->db->trans_complete();
     return $c_id;
   }
+  //function to quote to customer_dc_products
+  public function add_customer_dc_product($datas)
+  {
+    $res=$this->db->insert('customer_dc_products',$datas);
+    return $res;
+  }
 
   //function to fetch details from customer_dc table
-  public function fetch_customer_dc($id)
+  public function fetch_customer_dc($dc_no)
   {
     $this->db->select('*');
     $this->db->from('customer_dc');
-    $this->db->where('customer_id',$id);
+    $this->db->where('dc_no',$dc_no);
+    if($res=$this->db->get())
+      return $res->result();
+    else {
+      return false;
+    }
+  }
+  //function to fetch details from customer_dc_products table
+  public function fetch_customer_dc_product($dc_no)
+  {
+    $this->db->select('*');
+    $this->db->from('customer_dc_products');
+    $this->db->where('dc_no',$dc_no);
+    //$this->db->join('customer_dc', 'customer_dc_products.dc_no=customer_dc.dc_no','inner');
     if($res=$this->db->get())
       return $res->result();
     else {
@@ -44,20 +63,34 @@ class Customer_dc_model extends CI_Model{
     }
   }
 
-
   //function to edit customer dc
-
-  public function update_customer_dc($id,$datas)
+  public function update_customer_dc($dc_no,$datas)
   {
-    $this->db->where('customer_id',$id);
+    $this->db->where('dc_no',$dc_no);
     $res=$this->db->update('customer_dc',$datas);
       return $res;
   }
 
-  //function to delete_customer_dc
-  public function delete_customer_dc($id)
+  //function to edit customer dc product
+  public function update_customer_dc_product($dc_no,$datas)
   {
-    $this->db->delete('customer_dc',array('customer_id'=>$id));
+    $this->db->where('dc_no',$dc_no);
+    $res=$this->db->insert('customer_dc_products',$datas);
+      return $res;
+  }
+  //function to edit customer dc product
+  public function update_customer_products($dc_no,$datas)
+  {
+    $this->db->where('dc_no',$dc_no);
+    $res=$this->db->update('customer_dc_products',$datas);
+      return $res;
+  }
+
+  //function to delete_customer_dc
+  public function delete_customer_dc($dc_no)
+  {
+    $this->db->delete('customer_dc',array('dc_no'=>$dc_no));
+    $this->db->delete('customer_dc_products',array('dc_no'=>$dc_no));
     return $this->db->affected_rows();
   }
 

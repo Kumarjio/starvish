@@ -117,13 +117,13 @@
                                 </div>
                                 <!--row 4 end-->
 
-     <div class="container-fluid">
+                  <div class="container-fluid">
                       <div class="row">
                       <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
                       <caption></caption>
                       <div class="table-responsive">
-			  <table id="dataTable" class="table table-striped table-condensed table-hover table-bordered product-details">
-			   <thead class="bg-primary">
+			                <table id="dataTable" class="table table-striped table-condensed table-hover table-bordered product-details">
+			                   <thead class="bg-primary">
                             <tr>
                             <th>Product ID</th>
                             <th>Description</th>
@@ -132,8 +132,7 @@
 							              <th>Unit Charge</th>
                             <th>Tax</th>
 							              <th>Total</th>
-
-							</tr>
+							             </tr>
                           </thead>
                           <tbody>
 

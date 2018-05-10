@@ -188,10 +188,10 @@ public function update_customer_quote($id,$datas)
 }
 
 //function to edit customer quote product
-public function update_customer_quote_product($id,$datas)
+public function update_customer_quote_product($id,$data)
 {
   $this->db->where('quote_id',$id);
-  $res=$this->db->insert('customer_quote_products',$datas);
+  $res=$this->db->insert('customer_quote_products',$data);
     return $res;
 }
 
