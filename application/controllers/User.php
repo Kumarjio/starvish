@@ -27,6 +27,21 @@ class User extends BaseController
         $this->loadViews("dashboard", $this->global, $data , NULL);
     }
 
+    public function view_user($id)
+    {
+      $this->global['pageTitle'] = 'StarVish: view Employee';
+      $res['datas']=$this->user_model->get_details($id);
+      $files=$this->user_model->get_files($id);
+      $res['details']=$this->user_model->get_id($id);
+      if($files!=false)
+      $res['files']=$files;
+      else {
+        $res['files']='NA';
+      }
+      $this->loadViews("view_user", $this->global, $res, NULL);
+    }
+
+
     /**
      * This function is used to load the user list
      */
@@ -152,7 +167,54 @@ class User extends BaseController
                                  'aadhaar_no'=>$aadhaar);
 
                 $this->load->model('user_model');
+
                 $result = $this->user_model->addNewUser($userInfo,$emp_info);
+
+                $config = array(	//file upload
+              'upload_path' => 'uploads/employee/',
+              'allowed_types' => "*",
+              'overwrite' => TRUE,
+              'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
+
+              );
+
+                   //file uploading
+                        $data=array();
+                      if($this->input->post('fileSubmit') && !empty($_FILES['attachment']['name'])){
+                             $filesCount = count($_FILES['attachment']['name']);
+
+                               for($i = 0; $i < $filesCount; $i++){
+                                   $_FILES['userFile']['name'] = $_FILES['attachment']['name'][$i];
+                                   $_FILES['userFile']['type'] = $_FILES['attachment']['type'][$i];
+                                   $_FILES['userFile']['tmp_name'] = $_FILES['attachment']['tmp_name'][$i];
+                                   $_FILES['userFile']['error'] = $_FILES['attachment']['error'][$i];
+                                   $_FILES['userFile']['size'] = $_FILES['attachment']['size'][$i];
+                                   $num=mt_rand(0,9999);
+                                   $config['file_name']=$emp_id.'-'.$num;
+                                   $this->load->library('upload', $config);
+                                   $this->upload->initialize($config);
+                                   if($this->upload->do_upload('userFile')){
+                                       $fileData = $this->upload->data();
+                                       $uploadData[$i]['employee_id']=$emp_id;
+                                       $uploadData[$i]['file_name'] = $fileData['file_name'];
+                                       $uploadData[$i]['file_path'] = $fileData['full_path'];
+                                   }
+                                 }
+
+                                 if(!empty($uploadData)){
+                                   //Insert file information into the database
+                                   $insert = $this->user_model->insert_file($uploadData);
+                                   $count=$this->user_model->count_files($emp_id);
+                                   $data=array('no_of_files'=>$count);
+                                   $this->vendor_model->update_user($emp_id,$data);
+
+                                   $statusMsg = $insert?'Files uploaded successfully.':'Some problem occurred, please try again.';
+                                   $this->session->set_flashdata('statusMsg',$statusMsg);
+                               }
+                               }
+
+///
+
                 if($result > 0)
                 {
                     $this->session->set_flashdata('success', 'New User created successfully');
@@ -189,6 +251,12 @@ class User extends BaseController
             $data['userInfo'] = $this->user_model->getUserInfo($userId);
             $emp_id=$data['userInfo'][0]->employee_id;
             $data['datas']=$this->user_model->get_details($emp_id);
+            $files=$this->user_model->get_files($emp_id);
+            if($files!=false)
+            $data['files']=$files;
+            else {
+              $data['files']='NA';
+            }
             $this->global['pageTitle'] = 'StarVish: Edit User';
 
             $this->loadViews("editOld", $this->global, $data, NULL);
@@ -273,6 +341,50 @@ class User extends BaseController
 
                 $result = $this->user_model->editUser($userInfo, $userId,$emp_id,$emp_info);
 
+                $config = array(	//file upload
+              'upload_path' => 'uploads/employee/',
+              'allowed_types' => "*",
+              'overwrite' => TRUE,
+              'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
+
+              );
+
+                   //file uploading
+                        $data=array();
+                      if($this->input->post('fileSubmit') && !empty($_FILES['attachment']['name'])){
+                             $filesCount = count($_FILES['attachment']['name']);
+
+                               for($i = 0; $i < $filesCount; $i++){
+                                   $_FILES['userFile']['name'] = $_FILES['attachment']['name'][$i];
+                                   $_FILES['userFile']['type'] = $_FILES['attachment']['type'][$i];
+                                   $_FILES['userFile']['tmp_name'] = $_FILES['attachment']['tmp_name'][$i];
+                                   $_FILES['userFile']['error'] = $_FILES['attachment']['error'][$i];
+                                   $_FILES['userFile']['size'] = $_FILES['attachment']['size'][$i];
+                                   $num=mt_rand(0,9999);
+                                   $config['file_name']=$emp_id.'-'.$num;
+                                   $this->load->library('upload', $config);
+                                   $this->upload->initialize($config);
+                                   echo '<script>alert(1);</script>';
+                                   if($this->upload->do_upload('userFile')){
+                                       $fileData = $this->upload->data();
+                                       $uploadData[$i]['employee_id']=$emp_id;
+                                       $uploadData[$i]['file_name'] = $fileData['file_name'];
+                                       $uploadData[$i]['file_path'] = $fileData['full_path'];
+                                   }
+                                 }
+
+                                 if(!empty($uploadData)){
+                                   //Insert file information into the database
+                                   $insert = $this->user_model->insert_file($uploadData);
+                                   $count=$this->user_model->count_files($emp_id);
+                                   $data=array('no_of_files'=>$count);
+                                   $this->vendor_model->update_user($emp_id,$data);
+                                   $statusMsg = $insert?'Files uploaded successfully.':'Some problem occurred, please try again.';
+                                   $this->session->set_flashdata('statusMsg',$statusMsg);
+                               }
+                               }
+
+///
                 if($result == true)
                 {
                     $this->session->set_flashdata('success', 'User updated successfully');
@@ -282,7 +394,7 @@ class User extends BaseController
                     $this->session->set_flashdata('error', 'User updation failed');
                 }
 
-                redirect('userListing');
+                redirect('editOld/'.$userId);
             }
         }
     }

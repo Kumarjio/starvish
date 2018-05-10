@@ -64,6 +64,23 @@ class Vendor extends BaseController
       $html =$this->loadViews("vendor/vendorlisting", $this->global, $res , NULL);
   }
 
+//view vendor function
+public function view_vendor($vendor_id)
+{
+  $this->global['pageTitle'] = 'StarVish: View Vendor';
+  $datas=$this->vendor_model->fetch_vendor($vendor_id);
+  $files=$this->vendor_model->fetch_vendor_files($vendor_id);
+  if($files!=false)
+  {
+    $res['datas']=$datas;
+    $res['files']=$files;
+  }
+  else {
+    $res['datas']=$datas;
+    $res['files']='NA';
+  }
+  $this->loadViews("vendor/view_vendor",$this->global,$res,NULL);
+}
 
 //this function used to redirect to addvendor or editvendor based on the vendorid
   public function add_edit_vendor($id=NULL)
@@ -76,9 +93,32 @@ class Vendor extends BaseController
     else {
       $this->global['pageTitle'] = 'StarVish:Edit Vendor';
       $result['datas']=$this->vendor_model->fetch_vendor($id);
+      $files=$this->vendor_model->fetch_vendor_files($id);
+      if($files!=false)
+      {
+        $result['files']=$files;
+      }
+      else {
+        $result['files']='NA';
+      }
       $this->loadViews("vendor/edit_vendor",$this->global,$result,NULL);
     }
   }
+
+//delete the vendor file
+public function delete_vendor_file($file_name,$vendor_id)
+{
+  $this->global['pageTitle'] = 'StarVish: Vendor file Deletion';
+  $path=$this->vendor_model->select_vendor_file($file_name);
+  unlink($path[0]->file_path);
+  $del=$this->vendor_model->delete_vendor_file($file_name);
+  $count=$this->vendor_model->count_files($vendor_id);
+  $data=array('no_of_files'=>$count);
+  $this->vendor_model->update_vendor($vendor_id,$data);
+  //$this->add_edit_customer_po($po_id);
+  redirect('add_edit_vendor/'.$vendor_id);
+
+}
 
 //function for adding vendor
     public function add_vendor()
@@ -103,35 +143,68 @@ class Vendor extends BaseController
 
 	   $config = array(	//file upload
   'upload_path' => 'uploads/vendor/',
-  'file_name'=>$vendor_id.'-'.$company_name,
-  'allowed_types' => "gif|jpg|jpeg|png|iso|dmg|zip|rar|doc|docx|xls|xlsx|ppt|pptx|csv|ods|odt|odp|pdf|rtf|sxc|sxi|txt|exe|avi|mpeg|mp3|mp4|3gp",
+  'allowed_types' => "*",
   'overwrite' => TRUE,
   'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
 
   );
-  $this->load->library('upload', $config);
-  $this->upload->initialize($config);
-  $this->upload->do_upload('attachment');
-    $attachment=$this->upload->data('orig_name');
-	$filePath=$this->upload->data('full_path');
 
-      $data=array('vendor_id'=>$vendor_id,'company_name'=>$company_name,'address1'=>$address1,
-                  'address2'=>$address2,'contact_person1'=>$contact_person1,'contact_person2'=>$contact_person2,
-                  'designation1'=>$desg1,'designation2'=>$desg2,'email1'=>$email1,'email2'=>$email2,
-                  'contact_no1'=>$contact_no1,'contact_no2'=>$contact_no2,'gstin'=>$gst,'bank_name'=>$bank,
-                  'account_name'=>$bank_acc_name,'account_number'=>$bank_acc_no,'ifsc_code'=>$ifsc_code,
-				  'attachment'=>$attachment ,'file_path'=>$filePath
-				  );
-        $result = FALSE;
-        $result = $this->vendor_model->add_vendor($data);
-        if($result == TRUE){
-            $this->session->set_flashdata('success', 'New Vendor created successfully');
-        }
-        else {
-          $this->session->set_flashdata('error','Vendor creation Failed!');
-        }
+        //file uploading
+             $data=array();
+           if($this->input->post('fileSubmit') && !empty($_FILES['attachment']['name'])){
+                  $filesCount = count($_FILES['attachment']['name']);
 
-        redirect('add_edit_vendor');
+                $data=array('vendor_id'=>$vendor_id,'company_name'=>$company_name,'address1'=>$address1,
+                              'address2'=>$address2,'contact_person1'=>$contact_person1,'contact_person2'=>$contact_person2,
+                                'designation1'=>$desg1,'designation2'=>$desg2,'email1'=>$email1,'email2'=>$email2,
+                                'contact_no1'=>$contact_no1,'contact_no2'=>$contact_no2,'gstin'=>$gst,'bank_name'=>$bank,
+                                'account_name'=>$bank_acc_name,'account_number'=>$bank_acc_no,'ifsc_code'=>$ifsc_code,
+              				  );
+
+                      $result = FALSE;
+                      $result = $this->vendor_model->add_vendor($data);
+
+                    for($i = 0; $i < $filesCount; $i++){
+                        $_FILES['userFile']['name'] = $_FILES['attachment']['name'][$i];
+                        $_FILES['userFile']['type'] = $_FILES['attachment']['type'][$i];
+                        $_FILES['userFile']['tmp_name'] = $_FILES['attachment']['tmp_name'][$i];
+                        $_FILES['userFile']['error'] = $_FILES['attachment']['error'][$i];
+                        $_FILES['userFile']['size'] = $_FILES['attachment']['size'][$i];
+                        $num=mt_rand(0,9999);
+                        $config['file_name']=$vendor_id.'-'.$num;
+                        $this->load->library('upload', $config);
+                        $this->upload->initialize($config);
+                        if($this->upload->do_upload('userFile')){
+                            $fileData = $this->upload->data();
+                            $uploadData[$i]['vendor_id']=$vendor_id;
+                            $uploadData[$i]['file_name'] = $fileData['file_name'];
+                            $uploadData[$i]['file_path'] = $fileData['full_path'];
+                        }
+                      }
+
+                      if(!empty($uploadData)){
+                        //Insert file information into the database
+                        $insert = $this->vendor_model->insert_file($uploadData);
+                        $count=$this->vendor_model->count_files($vendor_id);
+                        $data=array('no_of_files'=>$count);
+                        $this->vendor_model->update_vendor($vendor_id,$data);
+                        $statusMsg = $insert?'Files uploaded successfully.':'Some problem occurred, please try again.';
+                        $this->session->set_flashdata('statusMsg',$statusMsg);
+                    }
+                    }
+
+
+               if($result == TRUE){
+                   $this->session->set_flashdata('success', 'New customer created successfully');
+               }
+               else {
+                 $this->session->set_flashdata('error','customer creation Failed!');
+               }
+
+                 redirect('add_edit_customer');
+
+
+
     }
 
 //function for editing vedor Details
@@ -154,47 +227,68 @@ public function update_vendor()
   $bank_acc_no=$this->input->post('bank_acc_no');
   $ifsc_code=$this->input->post('ifsc_code');
   $gst=$this->input->post('gst');
-   $config = array(   //attachment upload
-  'upload_path' => 'uploads/vendor/',
-  'file_name'=>$vendor_id.'-'.$company_name,
-  'allowed_types' => "gif|jpg|jpeg|png|iso|dmg|zip|rar|doc|docx|xls|xlsx|ppt|pptx|csv|ods|odt|odp|pdf|rtf|sxc|sxi|txt|exe|avi|mpeg|mp3|mp4|3gp",
-  'overwrite' => TRUE,
-  'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
-);
-  $this->load->library('upload', $config);
-  $this->upload->initialize($config);
-  $this->upload->do_upload('attachment');
-	$attachment=$this->upload->data('orig_name');
-	$filePath=$this->upload->data('full_path');
-if($attachment=="") //check empty file input
-	{
-  $datas=array('vendor_id'=>$vendor_id,'company_name'=>$company_name,'address1'=>$address1,
-              'address2'=>$address2,'contact_person1'=>$contact_person1,'contact_person2'=>$contact_person2,
-              'designation1'=>$desg1,'designation2'=>$desg2,'email1'=>$email1,'email2'=>$email2,
-              'contact_no1'=>$contact_no1,'contact_no2'=>$contact_no2,'gstin'=>$gst,'bank_name'=>$bank,
-              'account_name'=>$bank_acc_name,'account_number'=>$bank_acc_no,'ifsc_code'=>$ifsc_code,
 
-              );
-	}
-	else{
-  $datas=array('vendor_id'=>$vendor_id,'company_name'=>$company_name,'address1'=>$address1,
-              'address2'=>$address2,'contact_person1'=>$contact_person1,'contact_person2'=>$contact_person2,
-              'designation1'=>$desg1,'designation2'=>$desg2,'email1'=>$email1,'email2'=>$email2,
-              'contact_no1'=>$contact_no1,'contact_no2'=>$contact_no2,'gstin'=>$gst,'bank_name'=>$bank,
-              'account_name'=>$bank_acc_name,'account_number'=>$bank_acc_no,'ifsc_code'=>$ifsc_code,
-              'file_path'=>$filePath,'attachment'=>$attachment
-              );
-	}   $result = FALSE;
-    $result = $this->vendor_model->update_vendor($vendor_id,$datas);
-    if($result == true)
-    {
-        $this->session->set_flashdata('success', 'Vendor updated successfully');
-    }
-    else
-    {
-        $this->session->set_flashdata('error', 'Vendor updation failed!');
-    }
-    redirect('vendor_master');
+  $config = array(	//file upload
+'upload_path' => 'uploads/vendor/',
+'allowed_types' => "*",
+'overwrite' => TRUE,
+'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
+
+);
+
+     //file uploading
+          $data=array();
+        if($this->input->post('fileSubmit') && !empty($_FILES['attachment']['name'])){
+               $filesCount = count($_FILES['attachment']['name']);
+
+               $datas=array('vendor_id'=>$vendor_id,'company_name'=>$company_name,'address1'=>$address1,
+                           'address2'=>$address2,'contact_person1'=>$contact_person1,'contact_person2'=>$contact_person2,
+                           'designation1'=>$desg1,'designation2'=>$desg2,'email1'=>$email1,'email2'=>$email2,
+                           'contact_no1'=>$contact_no1,'contact_no2'=>$contact_no2,'gstin'=>$gst,'bank_name'=>$bank,
+                           'account_name'=>$bank_acc_name,'account_number'=>$bank_acc_no,'ifsc_code'=>$ifsc_code
+                         );
+                   $result = FALSE;
+                   $result=$this->vendor_model->update_vendor($vendor_id,$datas);
+
+                 for($i = 0; $i < $filesCount; $i++){
+                     $_FILES['userFile']['name'] = $_FILES['attachment']['name'][$i];
+                     $_FILES['userFile']['type'] = $_FILES['attachment']['type'][$i];
+                     $_FILES['userFile']['tmp_name'] = $_FILES['attachment']['tmp_name'][$i];
+                     $_FILES['userFile']['error'] = $_FILES['attachment']['error'][$i];
+                     $_FILES['userFile']['size'] = $_FILES['attachment']['size'][$i];
+                     $num=mt_rand(0,9999);
+                     $config['file_name']=$vendor_id.'-'.$num;
+                     $this->load->library('upload', $config);
+                     $this->upload->initialize($config);
+                     if($this->upload->do_upload('userFile')){
+                         $fileData = $this->upload->data();
+                         $uploadData[$i]['vendor_id']=$vendor_id;
+                         $uploadData[$i]['file_name'] = $fileData['file_name'];
+                         $uploadData[$i]['file_path'] = $fileData['full_path'];
+                     }
+                   }
+
+                   if(!empty($uploadData)){
+                     //Insert file information into the database
+                     $insert = $this->vendor_model->insert_file($uploadData);
+                     $count=$this->vendor_model->count_files($vendor_id);
+                     $data=array('no_of_files'=>$count);
+                     $this->vendor_model->update_vendor($vendor_id,$data);
+                     $statusMsg = $insert?'Files uploaded successfully.':'Some problem occurred, please try again.';
+                     $this->session->set_flashdata('statusMsg',$statusMsg);
+                 }
+                 }
+
+
+            if($result == TRUE){
+                $this->session->set_flashdata('success', 'New Vendor created successfully');
+            }
+            else {
+              $this->session->set_flashdata('error','Vendor creation Failed!');
+            }
+
+              redirect('add_edit_vendor/'.$vendor_id);
+
 }
 
 //function to delete vendor data

@@ -3,7 +3,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <i class="fa fa-plus-square-o"></i> Customer Master
+        <i class="fa fa-heart-o"></i> Customer Master
         <small>Add, Edit or Delete Customer</small>
       </h1>
     </section>
@@ -74,6 +74,7 @@
                             <th>Contact person</th>
                             <th>Contact Number</th>
                             <th>Email Id </th>
+                            <th>Files Attached</th>
                             <th>Actions</th>
                             </tr>
                           </thead>
@@ -88,16 +89,11 @@
                               <td>'.$data->company_name.'</td>
                               <td>'.$data->contact_person1.', '.$data->contact_person2.'</td>
                               <td>'.$data->contact_no1.', '.$data->contact_no2.'</td>
-                              <td>'.$data->email1.', '.$data->email2.'</td>';?>
+                              <td>'.$data->email1.', '.$data->email2.'</td>
+                              <td>'.$data->no_of_files.'</td>';?>
+
                               <td class="text-center">
-                                <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#datas" data-id="<?php echo $data->customer_id?>"
-                                    data-name="<?php echo $data->company_name?>" data-address1="<?php echo $data->address1?>" data-address2="<?php echo $data->address2?>"
-                                   data-cp1="<?php echo $data->contact_person1?>" data-cp2="<?php echo $data->contact_person2?>" data-desg1="<?php echo $data->designation1?>"
-                                   data-desg2="<?php echo $data->designation2?>" data-email1="<?php echo $data->email1?>" data-email2="<?php echo $data->email2?>"
-                                   data-cn1="<?php echo $data->contact_no1?>" data-cn2="<?php echo $data->contact_no2?>" data-gst="<?php echo $data->gstin?>"
-                                   data-bank="<?php echo $data->bank_name?>" data-anm="<?php echo $data->account_name?>" data-ano="<?php echo $data->account_number?>"
-                                   data-ifsc="<?php echo $data->ifsc_code?>" data-at="<?php echo $data->attachment?>">
-                                    <i class="fa fa-info-circle"></i></a>&nbsp;|
+                                <a class="btn btn-sm btn-success" href="<?php echo base_url().'view_customer/'.$data->customer_id; ?>" title="view">&nbsp;View&nbsp;&nbsp;<i class="fa fa-info-circle"></i></a>&nbsp;|
                                   <a class="btn btn-sm btn-info" href="<?php echo base_url().'add_edit_customer/'.$data->customer_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>&nbsp;|
                                   <a class="btn btn-sm btn-danger" href="<?php  echo base_url().'delete_customer/'.$data->customer_id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
                               </td>
@@ -149,7 +145,7 @@
    var anm=btn.data('anm');
    var ano=btn.data('ano');
    var ifsc=btn.data('ifsc');
-   var at=btn.data('at');
+
 
    $('#customer_id').text(id); //put the data value in the element which set in the modal with an id
    $('#name').text(name);
@@ -161,7 +157,7 @@
    $('#gst').text(gst);$('#bank').text(bank);
     $('#anm').text(anm); $('#ano').text(ano);
    $('#ifsc').text(ifsc); $('#at').text(at);
-   $("#at").attr("href", "uploads/customer/"+at);//file upload location
+   //$("#at").attr("href", "uploads/customer/"+at);//file upload location
 
   });
  });

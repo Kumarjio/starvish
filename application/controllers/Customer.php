@@ -45,10 +45,40 @@ class Customer extends BaseController
       }
       else {
         $this->global['pageTitle'] = 'StarVish:Edit Customer';
-        $result['datas']=$this->customer_model->fetch_customer($id);
-        $this->loadViews("customer/edit_customer",$this->global,$result,NULL);
+        $datas=$this->customer_model->fetch_customer($id);
+        $files=$this->customer_model->fetch_customer_files($id);
+        if($files!=false)
+        {
+          $res['datas']=$datas;
+          $res['files']=$files;
+        }
+        else {
+          $res['datas']=$datas;
+          $res['files']='NA';
+        }
+        $this->loadViews("customer/edit_customer",$this->global,$res,NULL);
       }
     }
+
+//function to view the customer details
+public function view_customer($customer_id)
+{
+  $this->global['pageTitle'] = 'StarVish: View Customer';
+  $datas=$this->customer_model->fetch_customer($customer_id);
+  $files=$this->customer_model->fetch_customer_files($customer_id);
+  if($files!=false)
+  {
+    $res['datas']=$datas;
+    $res['files']=$files;
+  }
+  else {
+    $res['datas']=$datas;
+    $res['files']='NA';
+  }
+  $this->loadViews("customer/view_customer",$this->global,$res,NULL);
+
+}
+
 
   /**
    * This function is used to add new customer to the system
@@ -73,28 +103,59 @@ public function add_customer()
   $ifsccode=$this->input->post('ifsc_code');
   $gstin=$this->input->post('gstin');
 
+
   $config = array(	//file upload
  'upload_path' => 'uploads/customer/',
- 'file_name'=>$customer_id.'-'.$company_name,
- 'allowed_types' => "gif|jpg|jpeg|png|iso|dmg|zip|rar|doc|docx|xls|xlsx|ppt|pptx|csv|ods|odt|odp|pdf|rtf|sxc|sxi|txt|exe|avi|mpeg|mp3|mp4|3gp",
+ 'allowed_types' => "*",
  'overwrite' => TRUE,
  'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
  );
- $this->load->library('upload', $config);
- $this->upload->initialize($config);
- $this->upload->do_upload('attachment');
-   $attachment=$this->upload->data('orig_name');
- $filePath=$this->upload->data('full_path');
 
-  $datas=array('customer_id'=>$customer_id,'company_name'=>$company_name,'address1'=>$address1,
-              'address2'=>$address2,'contact_person1'=>$contactperson1,'contact_person2'=>$contactperson2,
-              'designation1'=>$designation1,'designation2'=>$designation2,'email1'=>$email1,'email2'=>$email2,
-              'contact_no1'=>$contactno1,'contact_no2'=>$contactno2,'gstin'=>$gstin,'bank_name'=>$bankname,
-              'account_name'=>$accountname,'account_number'=>$accountnumber,'ifsc_code'=>$ifsccode,
-              'attachment'=>$attachment,'file_path'=>$filePath
-              );
-        $result = FALSE;
-        $result = $this->customer_model->add_customer($datas);
+ //file uploading
+        $data=array();
+        if($this->input->post('fileSubmit') && !empty($_FILES['attachment']['name'])){
+             $filesCount = count($_FILES['attachment']['name']);
+
+        $datas=array('customer_id'=>$customer_id,'company_name'=>$company_name,'address1'=>$address1,
+           'address2'=>$address2,'contact_person1'=>$contactperson1,'contact_person2'=>$contactperson2,
+           'designation1'=>$designation1,'designation2'=>$designation2,'email1'=>$email1,'email2'=>$email2,
+           'contact_no1'=>$contactno1,'contact_no2'=>$contactno2,'gstin'=>$gstin,'bank_name'=>$bankname,
+           'account_name'=>$accountname,'account_number'=>$accountnumber,'ifsc_code'=>$ifsccode
+                 );
+
+               $result = FALSE;
+               $result = $this->customer_model->add_customer($datas);
+
+             for($i = 0; $i < $filesCount; $i++){
+                 $_FILES['userFile']['name'] = $_FILES['attachment']['name'][$i];
+                 $_FILES['userFile']['type'] = $_FILES['attachment']['type'][$i];
+                 $_FILES['userFile']['tmp_name'] = $_FILES['attachment']['tmp_name'][$i];
+                 $_FILES['userFile']['error'] = $_FILES['attachment']['error'][$i];
+                 $_FILES['userFile']['size'] = $_FILES['attachment']['size'][$i];
+                 $num=mt_rand(0,9999);
+                 $config['file_name']=$customer_id.'-'.$num;
+                 $this->load->library('upload', $config);
+                 $this->upload->initialize($config);
+                 if($this->upload->do_upload('userFile')){
+                     $fileData = $this->upload->data();
+                     $uploadData[$i]['customer_id']=$customer_id;
+                     $uploadData[$i]['file_name'] = $fileData['file_name'];
+                     $uploadData[$i]['file_path'] = $fileData['full_path'];
+                 }
+               }
+
+               if(!empty($uploadData)){
+                 //Insert file information into the database
+                 $insert = $this->customer_model->insert_file($uploadData);
+                 $count=$this->customer_model->count_files($customer_id);
+                 $data=array('no_of_files'=>$count);
+                 $this->customer_model->update_customer($customer_id,$data);
+                 $statusMsg = $insert?'Files uploaded successfully.':'Some problem occurred, please try again.';
+                 $this->session->set_flashdata('statusMsg',$statusMsg);
+             }
+             }
+
+
         if($result == TRUE){
             $this->session->set_flashdata('success', 'New customer created successfully');
         }
@@ -104,6 +165,23 @@ public function add_customer()
 
           redirect('add_edit_customer');
 }
+
+
+//function to delete the customer_file
+public function delete_customer_file($file_name,$customer_id)
+{
+  $this->global['pageTitle'] = 'StarVish: Customer deletion';
+  $path=$this->customer_model->select_customer_file($file_name);
+  unlink($path[0]->file_path);
+  $del=$this->customer_model->delete_customer_file($file_name);
+  $count=$this->customer_model->count_files($customer_id);
+  $data=array('no_of_files'=>$count);
+  $this->customer_model->update_customer($customer_id,$data);
+  //$this->add_edit_customer_po($po_id);
+  redirect('add_edit_customer/'.$customer_id);
+
+}
+
 
 //function to edit customer
 
@@ -126,39 +204,56 @@ public function add_customer()
     $ifsc_code=$this->input->post('ifsc_code');
     $gstin=$this->input->post('gstin');
 
+    $config = array(	//file upload
+   'upload_path' => 'uploads/customer/',
+   'allowed_types' => "*",
+   'overwrite' => TRUE,
+   'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
+   );
 
-    $config = array(   //attachment upload
-      'upload_path' => 'uploads/customer/',
-      'file_name'=>$customer_id.'-'.$cname,
-      'allowed_types' => "gif|jpg|jpeg|png|iso|dmg|zip|rar|doc|docx|xls|xlsx|ppt|pptx|csv|ods|odt|odp|pdf|rtf|sxc|sxi|txt|exe|avi|mpeg|mp3|mp4|3gp",
-      'overwrite' => TRUE,
-      'max_size' => "8048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
-    );
-    $this->load->library('upload', $config);
-    $this->upload->initialize($config);
-    $this->upload->do_upload('attachment');
-    $attachment=$this->upload->data('orig_name');
-    $filePath=$this->upload->data('full_path');
-    if($attachment=="") //check empty file input
-    {
-      $datas=array('customer_id'=>$customer_id,'company_name'=>$cname,'address1'=>$address1,
+   //file uploading
+          $data=array();
+          if($this->input->post('fileSubmit') && !empty($_FILES['attachment']['name'])){
+               $filesCount = count($_FILES['attachment']['name']);
+
+          $datas=array('customer_id'=>$customer_id,'company_name'=>$cname,'address1'=>$address1,
              'address2'=>$address2,'contact_person1'=>$contact_person1,'contact_person2'=>$contact_person2,
              'designation1'=>$desg1,'designation2'=>$desg2,'email1'=>$email1,'email2'=>$email2,
              'contact_no1'=>$contact_no1,'contact_no2'=>$contact_no2,'gstin'=>$gstin,'bank_name'=>$bank,
-             'account_name'=>$bank_acc_name,'account_number'=>$bank_acc_no,'ifsc_code'=>$ifsc_code,
-             );
-    }
-    else{
-      $datas=array('customer_id'=>$customer_id,'company_name'=>$cname,'address1'=>$address1,
-             'address2'=>$address2,'contact_person1'=>$contact_person1,'contact_person2'=>$contact_person2,
-             'designation1'=>$desg1,'designation2'=>$desg2,'email1'=>$email1,'email2'=>$email2,
-             'contact_no1'=>$contact_no1,'contact_no2'=>$contact_no2,'gstin'=>$gstin,'bank_name'=>$bank,
-             'account_name'=>$bank_acc_name,'account_number'=>$bank_acc_no,'ifsc_code'=>$ifsc_code,
-             'file_path'=>$filePath,'attachment'=>$attachment
-         );
-       }
-   $result = FALSE;
-   $result = $this->customer_model->update_customer($customer_id,$datas);
+             'account_name'=>$bank_acc_name,'account_number'=>$bank_acc_no,'ifsc_code'=>$ifsc_code
+                   );
+
+                 $result = FALSE;
+                 $result = $this->customer_model->update_customer($customer_id,$datas);
+
+               for($i = 0; $i < $filesCount; $i++){
+                   $_FILES['userFile']['name'] = $_FILES['attachment']['name'][$i];
+                   $_FILES['userFile']['type'] = $_FILES['attachment']['type'][$i];
+                   $_FILES['userFile']['tmp_name'] = $_FILES['attachment']['tmp_name'][$i];
+                   $_FILES['userFile']['error'] = $_FILES['attachment']['error'][$i];
+                   $_FILES['userFile']['size'] = $_FILES['attachment']['size'][$i];
+                   $num=mt_rand(0,9999);
+                   $config['file_name']=$customer_id.'-'.$num;
+                   $this->load->library('upload', $config);
+                   $this->upload->initialize($config);
+                   if($this->upload->do_upload('userFile')){
+                       $fileData = $this->upload->data();
+                       $uploadData[$i]['customer_id']=$customer_id;
+                       $uploadData[$i]['file_name'] = $fileData['file_name'];
+                       $uploadData[$i]['file_path'] = $fileData['full_path'];
+                   }
+                 }
+
+                 if(!empty($uploadData)){
+                   //Insert file information into the database
+                   $insert = $this->customer_model->insert_file($uploadData);
+                   $count=$this->customer_model->count_files($customer_id);
+                   $data=array('no_of_files'=>$count);
+                   $this->customer_model->update_customer($customer_id,$data);
+                   $statusMsg = $insert?'Files uploaded successfully.':'Some problem occurred, please try again.';
+                   $this->session->set_flashdata('statusMsg',$statusMsg);
+               }
+               }
    if($result == true)
    {
        $this->session->set_flashdata('success', 'customer updated successfully');
@@ -169,7 +264,7 @@ public function add_customer()
    }
 
       $this->customer_model->update_customer($customer_id,$datas);
-      redirect('customer_master');
+      redirect('add_edit_customer/'.$customer_id);
   }
 
   //function to delete customer data

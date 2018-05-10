@@ -205,10 +205,51 @@ if(!empty($userInfo))
                                     </div>
                                 </div>
                             </div>
+
+
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="attachment">Select files to attach more</label>
+                                    <input type="file" class="form-control " id="attachment" value="" name="attachment[]" multiple=''>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+
+                                <label for="attachment">Files Attached</label>
+                                    <?php
+                                      if($files!='NA')
+                                  {
+                                      echo'<ul class="list-group">
+                                          <table>
+                                              <tbody>';
+                                        foreach($files as $file)
+                                        {
+                                        echo '
+                                        <tr>
+                              <td><li class="list-group-item"><a href="../uploads/employee/'.$file->file_name.'" target="_blank">'.$file->file_name.'</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>';
+                                        ?>
+                                  <td>  <a class="btn btn-sm btn-danger" href="<?php  echo base_url().'delete_user_file/'.$file->file_name.'/'.$file->employee_id; ?>" title="Delete"> <i class="fa fa-trash"></i></a></td>
+                                        </tr>
+                                    <?php
+                                    echo '</li>';
+                                                  }
+                                                }
+                              else {
+                                    echo '<label for="attachments"> :  N / A </label>';
+                                    }
+                                        ?>
+                                      </tbody>
+                                  </table>
+                              </ul>
+                              </div>
+                            </div>
+
                         </div><!-- /.box-body -->
 
                         <div class="box-footer">
-                            <input type="submit" class="btn btn-primary" value="Submit" />
+                            <input type="submit" class="btn btn-primary" value="Submit" name="fileSubmit" />
                             <input type="reset" class="btn btn-default" value="Reset" />
                         </div>
                     </form>

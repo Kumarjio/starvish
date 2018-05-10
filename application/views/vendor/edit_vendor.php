@@ -146,14 +146,14 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="contact_no1">Contact Number 1</label>
-                                                <input type="number" class="form-control required" id="contact_no1" value="<?php echo $datas[0]->contact_no1; ?>" name="contact_no1" maxlength="13">
+                                                <input type="text" class="form-control required" id="contact_no1" value="<?php echo $datas[0]->contact_no1; ?>" name="contact_no1" maxlength="13">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="contact_no2">Contact Number 2</label>
-                                                <input type="number" class="form-control required " id="contact_no2" value="<?php echo $datas[0]->contact_no2; ?>" name="contact_no2" maxlength="50">
+                                                <input type="text" class="form-control required " id="contact_no2" value="<?php echo $datas[0]->contact_no2; ?>" name="contact_no2" maxlength="50">
                                             </div>
                                         </div>
                                       </div>
@@ -182,7 +182,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="bank_acc_no">Account Number</label>
-                                                    <input type="number" class="form-control required digits" id="bank_acc_no" value="<?php echo $datas[0]->account_number; ?>" name="bank_acc_no" maxlength="20">
+                                                    <input type="text" class="form-control required digits" id="bank_acc_no" value="<?php echo $datas[0]->account_number; ?>" name="bank_acc_no" maxlength="20">
                                                 </div>
                                             </div>
 
@@ -205,15 +205,50 @@
 
                                               <div class="col-md-6">
                                                   <div class="form-group">
-                                                      <label for="attachment">Attachment</label>
-                                                      <input type="file" class="form-control required " id="attachment" value="<?php echo $datas[0]->attachment;?>" name="attachment" maxlength="50">
+                                                      <label for="attachment">Select files to attach more</label>
+                                                      <input type="file" class="form-control required " id="attachment" value="" name="attachment[]" multiple=''>
                                                   </div>
                                               </div>
                                             </div>
                                             <!--row 9 end-->
+
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <label for="attachment">Files Attached</label>
+                                            <?php
+                                              if($files!='NA')
+                                          {
+                                              echo'<ul class="list-group">
+                                                  <table>
+                                                      <tbody>';
+                                                foreach($files as $file)
+                                                {
+                                                echo '
+                                                <tr>
+                                      <td><li class="list-group-item"><a href="../uploads/vendor/'.$file->file_name.'" target="_blank">'.$file->file_name.'</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>';
+                                                ?>
+                                          <td>  <a class="btn btn-sm btn-danger" href="<?php  echo base_url().'delete_vendor_file/'.$file->file_name.'/'.$file->vendor_id; ?>" title="Delete"> <i class="fa fa-trash"></i></a></td>
+                                                </tr>
+                                            <?php
+                                            echo '</li>';
+                                                          }
+                                                        }
+                                      else {
+                                            echo '<label for="attachments"> :  N / A </label>';
+                                            }
+                                                ?>
+                                              </tbody>
+                                          </table>
+                                      </ul>
+                                  </div>
+                                </div>
+
+
+                                    <br>
+
                           </div>
                           <div class="box-footer">
-                              <input type="submit" class="btn btn-primary" value="Update Vendor" />
+                              <input type="submit" name="fileSubmit" class="btn btn-primary" value="Update Vendor" />
                               <input type="reset" class="btn btn-default" value="Reset" />
                           </div>
                       </form>

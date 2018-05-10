@@ -133,8 +133,8 @@ class Customer_po extends BaseController{
                $_FILES['userFile']['tmp_name'] = $_FILES['attachment']['tmp_name'][$i];
                $_FILES['userFile']['error'] = $_FILES['attachment']['error'][$i];
                $_FILES['userFile']['size'] = $_FILES['attachment']['size'][$i];
-
-               $config['file_name']=$customer_id.'-'.$po_id.'-'.$i;
+               $num=mt_rand(0,9999);
+               $config['file_name']=$customer_id.'-'.$po_id.'-'.$num;
                $this->load->library('upload', $config);
                $this->upload->initialize($config);
                if($this->upload->do_upload('userFile')){
@@ -210,7 +210,8 @@ class Customer_po extends BaseController{
                $_FILES['userFile']['error'] = $_FILES['attachment']['error'][$i];
                $_FILES['userFile']['size'] = $_FILES['attachment']['size'][$i];
 
-               $config['file_name']=$customer_id.'-'.$po_id.'-'.$init++;
+               $num=mt_rand(0,9999);
+               $config['file_name']=$customer_id.'-'.$po_id.'-'.$num;
                $this->load->library('upload', $config);
                $this->upload->initialize($config);
                if($this->upload->do_upload('userFile')){

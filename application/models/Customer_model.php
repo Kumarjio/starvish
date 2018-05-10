@@ -17,6 +17,24 @@ public function customerlisting()
   }
 }
 
+//function to count the files
+public function count_files($customer_id)
+{
+  $this->db->select('*');
+  $this->db->from('customer_master_files');
+  $this->db->where('customer_id',$customer_id);
+  if($res=$this->db->get())
+    return $res->num_rows();
+  else
+    return false;
+}
+
+//file uploading in the table customer_po_files
+public function insert_file($data = array()){
+       $insert = $this->db->insert_batch('customer_master_files',$data);
+       return $insert?true:false;
+   }
+
 //function to add customer into customer_master table
 public function add_customer($datas)
 {
@@ -24,11 +42,41 @@ public function add_customer($datas)
   return $res;
 }
 
+//function to select file pathinfo
+public function select_customer_file($file)
+{
+  $this->db->select('file_path');
+  $this->db->from('customer_master_files');
+  $this->db->where('file_name',$file);
+  return $this->db->get()->result();
+
+}
+//function to delete the files in customer_po
+public function delete_customer_file($file)
+{
+  $this->db->delete('customer_master_files',array('file_name'=>$file));
+  return $this->db->affected_rows();
+
+}
+
 //function to fetch details from customer table
 public function fetch_customer($id)
 {
   $this->db->select('*');
   $this->db->from('customer_master');
+  $this->db->where('customer_id',$id);
+  if($res=$this->db->get())
+    return $res->result();
+  else {
+    return false;
+  }
+}
+
+//function to fetch the customer file
+public function fetch_customer_files($id)
+{
+  $this->db->select('*');
+  $this->db->from('customer_master_files');
   $this->db->where('customer_id',$id);
   if($res=$this->db->get())
     return $res->result();

@@ -10,7 +10,7 @@
           </div>
       </div>
       <h1>
-        <i class="fa fa-plus-square-o"></i> Customer Master
+        <i class="fa fa-heart-o"></i> Customer Master
         <small>Add, Edit or Delete the Customers</small>
       </h1>
     </section>
@@ -167,14 +167,14 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="contact_no1">Contact Number 1</label>
-                                                <input type="number" class="form-control required" id="contact_no1" value="<?php echo set_value('contact_no1'); ?>" name="contact_no1" maxlength="13">
+                                                <input type="text" class="form-control required" id="contact_no1" value="<?php echo set_value('contact_no1'); ?>" name="contact_no1" maxlength="13">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="contact_no2">Contact Number 2</label>
-                                                <input type="number" class="form-control required " id="contact_no2" value="<?php echo set_value('contact_no2'); ?>" name="contact_no2" maxlength="50">
+                                                <input type="text" class="form-control required " id="contact_no2" value="<?php echo set_value('contact_no2'); ?>" name="contact_no2" maxlength="50">
                                             </div>
                                         </div>
                                       </div>
@@ -203,7 +203,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="bank_acc_no">Account Number</label>
-                                                    <input type="number" class="form-control required digits" id="account_number" value="<?php echo set_value('account_number'); ?>" name="account_number" maxlength="20">
+                                                    <input type="text" class="form-control required digits" id="account_number" value="<?php echo set_value('account_number'); ?>" name="account_number" maxlength="20">
                                                 </div>
                                             </div>
 
@@ -227,14 +227,14 @@
                                               <div class="col-md-6">
                                                   <div class="form-group">
                                                       <label for="attachment">Attachment</label>
-                                                      <input type="file" class="form-control required " id="attachment"  name="attachment" maxlength="50">
+                                                      <input type="file" class="form-control required " id="attachment[]"  name="attachment[]"  multiple=''>
                                                   </div>
                                               </div>
                                             </div>
                                             <!--row 9 end-->
                           </div>
                           <div class="box-footer">
-                              <input type="submit" class="btn btn-primary" value="Add Customer" />
+                              <input type="submit" class="btn btn-primary" value="Add Customer" name="fileSubmit"/>
                               <input type="reset" class="btn btn-default" value="Reset" />
                           </div>
                       </form>

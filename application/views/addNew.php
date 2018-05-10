@@ -224,10 +224,21 @@
                                 </div>
                             </div>
                             <!--row 8 end-->
+
+                            <div class="row">
+
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="attachment">Select files to attach more</label>
+                                      <input type="file" class="form-control required " id="attachment" value="" name="attachment[]" multiple=''>
+                                  </div>
+                              </div>
+                            </div>
+
                         </div><!-- /.box-body -->
 
                         <div class="box-footer">
-                            <input type="submit" class="btn btn-primary" value="Submit" />
+                            <input type="submit" class="btn btn-primary" value="Submit" name="fileSubmit" />
                             <input type="reset" class="btn btn-default" value="Reset" />
                         </div>
                     </form>

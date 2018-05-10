@@ -3,6 +3,56 @@
 class User_model extends CI_Model
 {
 
+  //file uploading in the table employee_po_files
+  public function insert_file($data = array()){
+         $insert = $this->db->insert_batch('employee_master_files',$data);
+         return $insert?true:false;
+     }
+
+
+  //function to edit vendor
+  public function update_user($id,$datas)
+     {
+       $this->db->where('employee_id',$id);
+       $this->db->update('employee_master',$datas);
+       return TRUE;
+     }
+
+  //function to count the files
+  public function count_files($emp_id)
+  {
+    $this->db->select('*');
+    $this->db->from('employee_master_files');
+    $this->db->where('employee_id',$emp_id);
+    if($res=$this->db->get())
+      return $res->num_rows();
+    else
+      return false;
+  }
+
+//function to view the files
+  function get_files($id)
+  {
+    $this->db->select('*');
+    $this->db->from('employee_master_files');
+    $this->db->where('employee_id',$id);
+    if($res=$this->db->get())
+      return $res->result();
+    else {
+      return false;
+    }
+  }
+
+  //funtion to getuser id using employee ID
+  function get_id($emp_id)
+  {
+    $this->db->select('*');
+    $this->db->from('tbl_users');
+    $this->db->where('employee_id',$emp_id);
+    return $this->db->get()->result();
+
+  }
+
   //count the no of employees
     function count_employee()
     {
@@ -56,7 +106,7 @@ class User_model extends CI_Model
      */
     function userListing($searchText = '', $page, $segment)
     {
-        $this->db->select('BaseTbl.userId,BaseTbl.employee_id, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, Role.role,emp.id,emp.name,emp.address1,emp.address2,emp.designation,emp.email,emp.contact_no,emp.doj,emp.pan_no,emp.bank_name,emp.account_number,emp.ifsc_code,emp.aadhaar_no');
+        $this->db->select('BaseTbl.userId,BaseTbl.employee_id, BaseTbl.email, BaseTbl.name, BaseTbl.mobile,emp.no_of_files, Role.role,emp.id,emp.name,emp.address1,emp.address2,emp.designation,emp.email,emp.contact_no,emp.doj,emp.pan_no,emp.bank_name,emp.account_number,emp.ifsc_code,emp.aadhaar_no');
         $this->db->from('tbl_users as BaseTbl');
         $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
         $this->db->join('employee_master as emp', 'emp.id = BaseTbl.employee_id','left');

@@ -53,6 +53,7 @@
                               <th>Email</th>
                               <th>Mobile</th>
                               <th>Role</th>
+                              <th>Files Attached</th>
                               <th>Actions</th>
                               </tr>
                             </thead>
@@ -67,17 +68,11 @@
                                 <td>'.$record->name.'</td>
                                 <td>'.$record->email.'</td>
                                 <td>'.$record->mobile.'</td>
-                                <td>'.$record->role.'</td>';?>
+                                <td>'.$record->role.'</td>
+                                <td>'.$record->no_of_files.'</td>';?>
                                 <td class="text-center">
 
-                              <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#datas" data-id="<?php echo $record->employee_id?>"
-                              data-name="<?php echo $record->name?>" data-address1="<?php echo $record->address1;?>" data-address2="<?php echo $record->address2?>"
-                              data-desgination="<?php echo $record->designation?>" data-email="<?php echo $record->email?>" data-mobile="<?php echo $record->mobile?>"
-                              data-doj="<?php echo $record->doj?>" data-pan="<?php echo $record->pan_no?>" data-bank="<?php echo $record->bank_name?>"
-                              data-acc="<?php echo $record->account_number?>" data-ifsc="<?php echo $record->ifsc_code?>" data-aadhaar="<?php echo $record->aadhaar_no?>"
-                              data-role="<?php echo $record->role?>">
-
-                            <i class="fa fa-info-circle"></i></a>&nbsp;|
+                          <a class="btn btn-sm btn-success" href="<?php echo base_url().'view_user/'.$record->employee_id; ?>" title="view">&nbsp;View&nbsp;&nbsp;<i class="fa fa-info-circle"></i></a>&nbsp;|
                           <a class="btn btn-sm btn-primary" href="<?= base_url().'login-history/'.$record->userId; ?>" title="Login history"><i class="fa fa-history"></i></a> |
                           <a class="btn btn-sm btn-info" href="<?php echo base_url().'editOld/'.$record->userId; ?>" title="Edit"><i class="fa fa-pencil"></i></a> |
                           <a class="btn btn-sm btn-danger deleteUser" href="#" data-userid="<?php echo $record->userId; ?>" title="Delete"><i class="fa fa-trash"></i></a>

@@ -50,11 +50,14 @@ public function count_files($po_id)
   //function to fetch all files of customer PO
   public function view_customer_files($po_id)
   {
-    if($res=$this->db->get('customer_po_files'))
-      return $res->result();
-    else {
-      return false;
-    }
+  $this->db->select('*');
+  $this->db->from('customer_po_files');
+  $this->db->where('po_id',$po_id);
+  if($res=$this->db->get())
+    return $res->result();
+  else {
+    return false;
+  }
   }
 
 //file uploading in the table customer_po_files

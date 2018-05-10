@@ -63,6 +63,7 @@ $route['add_edit_customer']='customer/add_edit_customer';
 $route['add_edit_customer/(:any)']='customer/add_edit_customer/$1';
 $route['update_customer']='customer/update_customer';
 $route['add_customer']='customer/add_customer';
+$route['view_customer/(:any)']='customer/view_customer/$1';
 $route['delete_customer/(:any)']='customer/delete_customer/$1';
 $route['customer_listing']='customer/customer_listing';
 $route['customer_quotation']='customer/customer_quotation';
@@ -74,15 +75,19 @@ $route['add_customer_quote']='customer/add_customer_quote';
 $route['delete_customer_quote/(:any)']='customer/delete_customer_quote/$1';
 $route['generate_pdf/(:any)']='customer/generate_pdf/$1';
 $route['customer_quotation_view/(:any)']='customer/customer_quotation_view/$1';
+$route['delete_customer_file/(:any)/(:any)']='customer/delete_customer_file/$1/$2';
 
 /****************vendor MASTER******************/
+
 $route['vendor_master']='vendor';
+$route['view_vendor/(:any)']='vendor/view_vendor/$1';
 $route['add_edit_vendor']='vendor/add_edit_vendor';
 $route['add_edit_vendor/(:any)']='vendor/add_edit_vendor/$1';
 $route['update_vendor']='vendor/update_vendor';
 $route['add_vendor']='vendor/add_vendor';
 $route['delete_vendor/(:any)']='vendor/delete_vendor/$1';
 $route['vendor_listing']='vendor/vendor_listing';
+$route['delete_vendor_file/(:any)/(:any)']='vendor/delete_vendor_file/$1/$2';
 
 /****************Note MASTER******************/
 
@@ -179,6 +184,8 @@ $route['logout'] = 'user/logout';
 $route['userListing'] = 'user/userListing';
 $route['addNew'] = "user/addNew";
 
+$route['view_user/(:any)']='user/view_user/$1';
+$route['delete_user_file/(:any)/(:any)']='user/delete_user_file/$1/$2';
 $route['addNewUser'] = "user/addNewUser";
 $route['editOld'] = "user/editOld";
 $route['editOld/(:num)'] = "user/editOld/$1";
