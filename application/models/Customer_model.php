@@ -245,6 +245,17 @@ public function customer_quote_products($id)
 
 }
 
+//function to sort //
+public function sort(){
+  $this->db->select('date');
+  $this->db->from('customer_quote');
+  $this->db->where(1);
+  $this->db->order_by('date', "desc");
+  $this->db->limit(1);
+  return $this->db->get()->result();
+
+}
+
 public function fetch_notes()
 {
   if($res=$this->db->get('note_master'))

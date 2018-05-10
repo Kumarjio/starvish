@@ -16,6 +16,7 @@
             </div>
         </div>
     </div>
+    
         <div class="row">
             <!-- left column -->
             <?php

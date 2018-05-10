@@ -74,7 +74,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="quote_id">Quote ID</label>
-                                        <input type="text" class="form-control required" value="<?php echo set_value('quote_id'); ?>" id="quote_id" name="quote_id" maxlength="128">
+                                        <input type="text" class="form-control required" value="<?php echo $val ?>" id="quote_id" name="quote_id" maxlength="128">
                                     </div>
                                 </div>
                             </div><!--row 1 End-->

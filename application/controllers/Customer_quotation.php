@@ -23,12 +23,15 @@ class CustomerQuotation extends BaseController
   {
       $this->global['pageTitle'] = 'StarVish: Customer Quotation';
       $result=$this->customer_model->customerquote();
+
       if($result!=false)
         {$res['datas']=$result;
+          $res['val']=$val;
           $res['searchText']='';
         }
       else {
         $res['datas']='NA';
+        $res['val']=$val;
         $res['searchText']='';
       }
 
@@ -37,6 +40,7 @@ class CustomerQuotation extends BaseController
   //this function used to redirect to addcustomerquote or editcustomerquote based on the quoteidid
       public function add_edit_customer_quote($id=NULL)
       {
+        $val=$this->cus_quote_id();
         if($id==NULL)
         {
           $this->global['pageTitle'] = 'StarVish:Add Quotation';
@@ -44,6 +48,7 @@ class CustomerQuotation extends BaseController
           $notes=$this->customer_model->fetch_notes();
           $data['customer']=$cust_id;
           $data['notes']=$notes;
+          $data['val']=$val;
         $this->loadViews("customer/add_customer_quotation", $this->global, $data , NULL);
         }
         else {
@@ -115,6 +120,7 @@ class CustomerQuotation extends BaseController
     $this->global['pageTitle'] = 'StarVish: Search';
     $searchText = $this->security->xss_clean($this->input->post('searchText'));
     $result=$this->customer_model->customer_listing($searchText);
+
     if($result!=FALSE)
     {
       $data['datas']=$result;
@@ -125,6 +131,114 @@ class CustomerQuotation extends BaseController
       $data['searchText'] = $searchText;
     }
   $this->loadViews("customer/customerlisting",$this->global,$data,NULL);
+  }
+
+  //function to generate customer_quote_id
+
+  public function cus_quote_id(){
+    $frst = "SV-CQ-";
+    $res = $this->customer_model->sort();
+    $res = explode('-', $res);
+    $year = $res[0];
+    $year = substr($year, -2);
+    $month = $res[1];
+    $date = $res[2];
+    $cdate = date("y-m-d");
+    $cdate = explode('-', $cdate);
+    $cyear = $cdate[0];
+    $cmonth = $cdate[1];
+    $cyear = $cdate[2];
+    if ($year == $cyear) {
+      if ($month == $cmonth) {
+        if ($date <= $cdate) {
+          if ($i >= 1) {
+            $i++;
+          }
+          else if($i < 1){
+            $i++;
+          }
+        }
+      }
+        elseif ($month < $cmonth) {
+          if ($date <= $cdate) {
+            if ($i >= 1) {
+              $i++;
+            }
+            elseif ($i < 1){
+              $i++;
+            }
+          }
+          elseif($date > $cdate){
+            if ($i >= 1) {
+              $i++;
+            }
+            elseif ($i < 1){
+              $i++;
+            }
+          }
+        }
+        elseif ($month > $cmonth) {
+          if ($date <= $cdate) {
+            if ($i >= 1) {
+              $i++;
+            }
+            elseif ($i < 1){
+              $i++;
+            }
+          }
+          elseif($date > $cdate){
+            if ($i >= 1) {
+              $i++;
+            }
+            elseif ($i < 1){
+              $i++;
+            }
+          }
+        }
+        elseif ($year < $cyear) {
+          elseif ($month < $cmonth) {
+            if ($date <= $cdate) {
+              if ($i >= 1) {
+                $i++;
+              }
+              elseif ($i < 1){
+                $i++;
+              }
+            }
+            elseif($date > $cdate){
+              if ($i >= 1) {
+                $i++;
+              }
+              elseif ($i < 1){
+                $i++;
+              }
+            }
+          }
+          elseif ($month > $cmonth) {
+            if ($date <= $cdate) {
+              if ($i >= 1) {
+                $i++;
+              }
+              elseif ($i < 1){
+                $i++;
+              }
+            }
+            elseif($date > $cdate){
+              if ($i >= 1) {
+                $i++;
+              }
+              elseif ($i < 1){
+                $i++;
+              }
+            }
+          }
+        }
+      }
+      $val=$frst.$i."-".$month."-".$year;
+      echo "<script>alert('.$val.');</script>";
+      return $val;
+    }
+
   }
 
 
