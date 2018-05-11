@@ -227,7 +227,7 @@
                                               <div class="col-md-6">
                                                   <div class="form-group">
                                                       <label for="attachment">Attachment</label>
-                                                      <input type="file" class="form-control required " id="attachment[]"  name="attachment[]"  multiple=''>
+                                                      <input type="file" class="form-control" id="attachment[]"  name="attachment[]"  multiple=''>
                                                   </div>
                                               </div>
                                             </div>

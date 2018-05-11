@@ -211,7 +211,7 @@ if(!empty($userInfo))
                               <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="attachment">Select files to attach more</label>
-                                    <input type="file" class="form-control " id="attachment" value="" name="attachment[]" multiple=''>
+                                    <input type="file" class="form-control " id="attachment[]" name="attachment[]" multiple=''>
                                 </div>
                               </div>
 

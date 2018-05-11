@@ -236,6 +236,7 @@ class User extends BaseController
      */
     function editOld($userId = NULL)
     {
+echo '<script>console.log(1);</script>';
         if($this->isAdmin() == TRUE || $userId == 1)
         {
             $this->loadThis();
@@ -269,14 +270,15 @@ class User extends BaseController
      */
     function editUser()
     {
+  echo '<script>console.log(22);</script>';
         if($this->isAdmin() == TRUE)
         {
             $this->loadThis();
+
         }
         else
         {
             $this->load->library('form_validation');
-
             $userId = $this->input->post('userId');
             $this->form_validation->set_rules('emp_id','Employee ID','trim|required');
             $this->form_validation->set_rules('fname','Full Name','trim|required|max_length[128]');
@@ -298,6 +300,7 @@ class User extends BaseController
 
             if($this->form_validation->run() == FALSE)
             {
+
                 $this->editOld($userId);
             }
             else
@@ -338,9 +341,9 @@ class User extends BaseController
                                 'pan_no'=>$pan,'bank_name'=>$bank,
                                 'account_number'=>$bank_acc, 'ifsc_code'=>$ifsc,
                                  'aadhaar_no'=>$aadhaar);
-
+                $result=false;
                 $result = $this->user_model->editUser($userInfo, $userId,$emp_id,$emp_info);
-
+                echo '<script>alert(1);</script>';
                 $config = array(	//file upload
               'upload_path' => 'uploads/employee/',
               'allowed_types' => "*",
@@ -353,7 +356,7 @@ class User extends BaseController
                         $data=array();
                       if($this->input->post('fileSubmit') && !empty($_FILES['attachment']['name'])){
                              $filesCount = count($_FILES['attachment']['name']);
-
+                             echo "<script>alert('.$filesCount.');</script>";
                                for($i = 0; $i < $filesCount; $i++){
                                    $_FILES['userFile']['name'] = $_FILES['attachment']['name'][$i];
                                    $_FILES['userFile']['type'] = $_FILES['attachment']['type'][$i];
@@ -364,7 +367,6 @@ class User extends BaseController
                                    $config['file_name']=$emp_id.'-'.$num;
                                    $this->load->library('upload', $config);
                                    $this->upload->initialize($config);
-                                   echo '<script>alert(1);</script>';
                                    if($this->upload->do_upload('userFile')){
                                        $fileData = $this->upload->data();
                                        $uploadData[$i]['employee_id']=$emp_id;
@@ -373,12 +375,12 @@ class User extends BaseController
                                    }
                                  }
 
-                                 if(!empty($uploadData)){
+                               if(!empty($uploadData)){
                                    //Insert file information into the database
                                    $insert = $this->user_model->insert_file($uploadData);
                                    $count=$this->user_model->count_files($emp_id);
                                    $data=array('no_of_files'=>$count);
-                                   $this->vendor_model->update_user($emp_id,$data);
+                                   $this->user_model_model->update_user($emp_id,$data);
                                    $statusMsg = $insert?'Files uploaded successfully.':'Some problem occurred, please try again.';
                                    $this->session->set_flashdata('statusMsg',$statusMsg);
                                }
@@ -393,6 +395,7 @@ class User extends BaseController
                 {
                     $this->session->set_flashdata('error', 'User updation failed');
                 }
+
 
                 redirect('editOld/'.$userId);
             }
