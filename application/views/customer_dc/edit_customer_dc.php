@@ -95,18 +95,59 @@
                                     </div>
                                   </div>
 
-                          </div><br>
-                          <div class="box-footer">
-                              <input type="submit" class="btn btn-primary" value="Update Customer DC" />
-                              <input type="reset" class="btn btn-default" value="Reset" />
+                                  <!--row 4-->
+                                      <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                               <button type="button" class="btn btn-primary" onClick="addRow()">Add Product</button></div>
+                                        </div>
+                                      </div>
+                                      <!--row 4 end-->
+
+                                      <div class="container-fluid">
+                                          <div class="row">
+                                          <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
+                                          <caption></caption>
+                                          <div class="table-responsive">
+                                          <table id="dataTable" class="table table-striped table-condensed table-hover table-bordered product-details">
+                                             <thead class="bg-primary">
+                                                <tr>
+                                                <th>Description</th>
+                                                <th>Quantity</th>
+                                                <th>Remarks</th>
+                                               </tr>
+                                            </thead>
+                                            <tbody>
+                                              <?php for($i=0;$i<count($data);$i++) {
+                                             echo'<tr>
+                                                  <td><input type="text" value='.$data[$i]->description.' name="p_description[]"></td>
+                                                  <td><input type="text" value='.$data[$i]->quantity.' name="quantity[]"></td>
+                                                  <td><input type="text" value='.$data[$i]->remarks.' name="remarks[]"></td>';?>
+                                                  <td class="text-center"><a class="btn btn-sm btn-success" href="<?php echo base_url().'update_customer_products/'.$data[$i]->dc_no; ?>" title="Update"><i class="fa fa-view"></i>Update</a></td>
+                                                <?php echo'</tr>';
+                                              }?>
+                                            </tbody>
+                                    </table></div></div></div></div>
+                            </div>
+
+                                    <div class="box-footer">
+                                        <input type="submit" class="btn btn-primary" value="Update Customer DC" />
+                                        <input type="reset" class="btn btn-default" value="Reset" />
+                                    </div>
+                              </div><!-- /.box-body -->
                           </div>
-                      </form>
+                      </div>
+              </section>
 
-                    </div><!-- /.box-body -->
+          </div>
 
-            </div>
-        </div>
-    </section>
+<script>
+var counter = 1;
 
+function addRow(){
+counter++;
+var newRow = jQuery('<tr><td><input type="text" name="p_description[]" class="small" required></td><td><input type="text" class="product-add-field quantity ' + counter + '" name="quantity[]" class="small" required/></td><td><input type="text" class="product-add-field remarks" name="remarks[]" class="small" required/></td><td><a href="#" class="close">X</a></td></tr>');
+jQuery('table.product-details').append(newRow);
+}
 
-</div>
+</script>

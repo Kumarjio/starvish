@@ -126,6 +126,7 @@ $route['update_customer_dc']='customer_dc/update_customer_dc';
 $route['add_customer_dc']='customer_dc/add_customer_dc';
 $route['delete_customer_dc/(:any)']='customer_dc/delete_customer_dc/$1';
 $route['customer_dc_listing']='customer_dc/customer_dc_listing';
+$route['update_customer_products/(:any)']='customer_dc/update_customer_products/$1';
 
 /****************Vendor DC******************/
 

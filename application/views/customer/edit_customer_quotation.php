@@ -110,18 +110,19 @@
                                 <div class="row">
                                   <div class="col-md-6">
                                       <div class="form-group">
-                                         <button type="button" class="btn btn-primary" onClick="addRow()">Add Product</button></div>
+                                         <button type="button" class="btn btn-primary" onClick="addRow()">Add Product</button>
+                                       </div>
                                   </div>
                                 </div>
                                 <!--row 4 end-->
 
-     <div class="container-fluid">
+                    <div class="container-fluid">
                       <div class="row">
                       <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
                       <caption></caption>
                       <div class="table-responsive">
-			  <table id="dataTable" class="table table-striped table-condensed table-hover table-bordered product-details">
-			   <thead class="bg-primary">
+			               <table id="dataTable" class="table table-striped table-condensed table-hover table-bordered product-details">
+			                   <thead class="bg-primary">
                             <tr>
                               <th>Product ID</th>
                               <th>Description</th>
@@ -136,7 +137,7 @@
                             <?php for($i=0;$i<count($data);$i++) {
                            echo'<tr>';
                                 echo '<td><input type="text" id="product_id" name="product_id" value='.$data[$i]->product_id.'></td>
-                                <td><input type="text" id="description" value='.$data[$i]->description.' name="description"></td>
+                                <td><input type="text" id="p_description" value='.$data[$i]->description.' name="p_description"></td>
                                 <td><input type="text" id="hsn_sac" value='.$data[$i]->hsn_sac.' name="hsn_sac"></td>
                                 <td><input type="text" id="quantity" value='.$data[$i]->quantity.' name="quantity"></td>
                                 <td><input type="text" id="unit_charges" value='.$data[$i]->unit_charges.' name="unit_charges"></td>
@@ -174,7 +175,7 @@
 
 
                           <div class="box-footer">
-							  <input type="submit" class="btn btn-primary" value="Update" />
+							                <input type="submit" class="btn btn-primary" value="Update" />
                               <input type="reset" class="btn btn-default" value="Reset" />
                           </div>
 
@@ -204,10 +205,7 @@ function addRow(){
     jQuery('table.product-details').append(newRow);
 }
 
-function delete(){
-  alert('po');
-  <?php echo base_url();?>
-}
+
 jQuery('table.product-details').on('click','tr a',function(e){
  e.preventDefault();
 jQuery(this).parents('tr').remove();
