@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 09, 2018 at 09:51 PM
+-- Generation Time: May 11, 2018 at 10:12 AM
 -- Server version: 5.7.22-0ubuntu0.17.10.1
 -- PHP Version: 7.1.15-0ubuntu0.17.10.1
 
@@ -30,7 +30,8 @@ CREATE TABLE `customer_dc` (
   `date` date NOT NULL,
   `customer_id` varchar(15) NOT NULL,
   `dc_no` varchar(20) NOT NULL,
-  `description` varchar(50) NOT NULL
+  `description` varchar(50) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -81,7 +82,8 @@ CREATE TABLE `customer_invoice` (
   `invoice_id` varchar(15) NOT NULL,
   `po_id` varchar(15) NOT NULL,
   `srn_dc` varchar(15) NOT NULL,
-  `payment_mode` enum('cash','card','online') NOT NULL
+  `payment_mode` enum('cash','card','online') NOT NULL,
+  `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -129,16 +131,45 @@ CREATE TABLE `customer_master` (
   `account_name` varchar(30) NOT NULL,
   `account_number` int(30) NOT NULL,
   `ifsc_code` varchar(30) NOT NULL,
-  `attachment` varchar(50) NOT NULL,
-  `file_path` varchar(500) NOT NULL
+  `no_of_files` int(5) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customer_master`
 --
 
-INSERT INTO `customer_master` (`customer_id`, `company_name`, `address1`, `address2`, `contact_person1`, `designation1`, `email1`, `contact_no1`, `contact_person2`, `designation2`, `email2`, `contact_no2`, `gstin`, `bank_name`, `account_name`, `account_number`, `ifsc_code`, `attachment`, `file_path`) VALUES
-('cust1', 'V2lancers', '108 sourashtra teachers colony', 'madurai', 'yogesh', 'manager', 'developer@igniteddreamz.com', 23456789, 'arun', 'employee', 'developer@igniteddreamz.com', 23456789, '34567890', 'canara bank', '123456789', 23456789, '234567890', 'cust1-V2lancers.pdf', '/var/www/starvish/uploads/customer/cust1-V2lancers.pdf');
+INSERT INTO `customer_master` (`customer_id`, `company_name`, `address1`, `address2`, `contact_person1`, `designation1`, `email1`, `contact_no1`, `contact_person2`, `designation2`, `email2`, `contact_no2`, `gstin`, `bank_name`, `account_name`, `account_number`, `ifsc_code`, `no_of_files`, `created`) VALUES
+('cust1', 'V2lancers', '108 sourashtra teachers colony', 'madurai', 'xzff', 'manager', 'developer@igniteddreamz.com', 23456789, 'asdf', 'employee', 'developer@igniteddreamz.com', 23456789, '34567890', 'canara bank', '123456789', 23456789, '234567890', 3, '2018-05-10 06:19:40'),
+('yogesh', 'Free lancer', '108/ 235 sourashtra teachers c', 'Anuppanadi', 'Yogesh', 'fcgfvhbjkml', 'tsyogesh40@gmail.com', 2147483647, 'S', 'manager', 'tsyogesh40@gmail.com', 2147483647, '567890', '34567890', 'arun', 12412312, '4567890-', 3, '2018-05-10 06:19:40'),
+('yogeshads', 'V2lancers', '108 sourashtra teachers colony', 'Anuppanadi', 'Yogesh', 'asdf', 'developer@igniteddreamz.com', 2147483647, 'S', 'dasf', 'developer@igniteddreamz.com', 12133, '12312', '123123', '123123', 123123, 'asdf', 2, '2018-05-10 07:11:24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_master_files`
+--
+
+CREATE TABLE `customer_master_files` (
+  `customer_id` varchar(15) NOT NULL,
+  `file_name` varchar(500) NOT NULL,
+  `file_path` varchar(2000) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer_master_files`
+--
+
+INSERT INTO `customer_master_files` (`customer_id`, `file_name`, `file_path`, `created`) VALUES
+('yogesh', 'yogesh-5009.jpeg', '/var/www/starvish/uploads/customer/yogesh-5009.jpeg', '2018-05-10 03:11:47'),
+('yogesh', 'yogesh-2797.jpg', '/var/www/starvish/uploads/customer/yogesh-2797.jpg', '2018-05-10 03:11:47'),
+('yogesh', 'yogesh-3097.pdf', '/var/www/starvish/uploads/customer/yogesh-3097.pdf', '2018-05-10 03:11:47'),
+('cust1', 'cust1-538.jpeg', '/var/www/starvish/uploads/customer/cust1-538.jpeg', '2018-05-10 06:12:53'),
+('cust1', 'cust1-1404.jpg', '/var/www/starvish/uploads/customer/cust1-1404.jpg', '2018-05-10 06:12:53'),
+('cust1', 'cust1-3912.pdf', '/var/www/starvish/uploads/customer/cust1-3912.pdf', '2018-05-10 06:12:53'),
+('yogeshads', 'yogeshads-1979.jpeg', '/var/www/starvish/uploads/customer/yogeshads-1979.jpeg', '2018-05-10 07:11:25'),
+('yogeshads', 'yogeshads-1679.jpg', '/var/www/starvish/uploads/customer/yogeshads-1679.jpg', '2018-05-10 07:11:25');
 
 -- --------------------------------------------------------
 
@@ -161,8 +192,8 @@ CREATE TABLE `customer_po` (
 --
 
 INSERT INTO `customer_po` (`date`, `customer_id`, `total_amt`, `po_id`, `description`, `no_of_files`, `created`) VALUES
-('2018-05-19', 'cust1', 1234, '123', 'asddafsdfadf', 0, '2018-05-07 11:20:01'),
-('2018-05-18', 'cust1', 12321, '1234', '233', 4, '2018-05-09 05:38:23');
+('2018-05-19', 'cust1', 1234, '123', 'asddafsdfadf', 1, '2018-05-07 11:20:01'),
+('2018-05-18', 'cust1', 12321, '1234', '233', 1, '2018-05-09 05:38:23');
 
 -- --------------------------------------------------------
 
@@ -182,10 +213,8 @@ CREATE TABLE `customer_po_files` (
 --
 
 INSERT INTO `customer_po_files` (`po_id`, `file_name`, `file_path`, `created`) VALUES
-('1234', 'cust1-1234-0.jpg', '/var/www/starvish/uploads/po/customer/cust1-1234-0.jpg', '2018-05-09 05:38:23'),
-('1234', 'cust1-1234-1.jpg', '/var/www/starvish/uploads/po/customer/cust1-1234-1.jpg', '2018-05-09 05:38:23'),
-('1234', 'cust1-1234-2.jpg', '/var/www/starvish/uploads/po/customer/cust1-1234-2.jpg', '2018-05-09 05:38:23'),
-('1234', 'cust1-1234-3.jpg', '/var/www/starvish/uploads/po/customer/cust1-1234-3.jpg', '2018-05-09 05:38:23');
+('1234', 'cust1-1234-589.jpg', '/var/www/starvish/uploads/po/customer/cust1-1234-589.jpg', '2018-05-10 02:13:16'),
+('123', 'cust1-123-477.jpeg', '/var/www/starvish/uploads/po/customer/cust1-123-477.jpeg', '2018-05-10 02:20:31');
 
 -- --------------------------------------------------------
 
@@ -198,17 +227,18 @@ CREATE TABLE `customer_quote` (
   `quote_id` varchar(15) NOT NULL,
   `customer_id` varchar(15) NOT NULL,
   `description` varchar(20) NOT NULL,
-  `note` varchar(50) NOT NULL
+  `note` varchar(50) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customer_quote`
 --
 
-INSERT INTO `customer_quote` (`date`, `quote_id`, `customer_id`, `description`, `note`) VALUES
-('2018-03-25', 'quot1', 'cust1', 'dummy', 'Credit card only acceptable'),
-('2018-04-17', 'SV-CQ-01-04-18', 'cust1', 'dummy', '5'),
-('2018-04-17', 'SV-CQ-02-04-18', 'cust1', 'Description', 'credit card payment');
+INSERT INTO `customer_quote` (`date`, `quote_id`, `customer_id`, `description`, `note`, `created`) VALUES
+('2018-03-25', 'quot1', 'cust1', 'dummy', 'Credit card only acceptable', '2018-05-10 06:20:51'),
+('2018-04-17', 'SV-CQ-01-04-18', 'cust1', 'dummy', '5', '2018-05-10 06:20:51'),
+('2018-04-17', 'SV-CQ-02-04-18', 'cust1', 'Description', 'credit card payment', '2018-05-10 06:20:51');
 
 -- --------------------------------------------------------
 
@@ -301,16 +331,44 @@ CREATE TABLE `employee_master` (
   `bank_name` varchar(30) NOT NULL,
   `account_number` int(30) NOT NULL,
   `ifsc_code` varchar(20) NOT NULL,
-  `aadhaar_no` varchar(20) NOT NULL
+  `aadhaar_no` varchar(20) NOT NULL,
+  `no_of_files` int(10) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `employee_master`
 --
 
-INSERT INTO `employee_master` (`id`, `name`, `address1`, `address2`, `designation`, `email`, `contact_no`, `doj`, `pan_no`, `bank_name`, `account_number`, `ifsc_code`, `aadhaar_no`) VALUES
-('svemp1', 'Employee1', '108 sourashtra teachers colony', 'madurai', 'manager', 'employee1@example.co', 2147483647, '2018-03-03', '9991212', 'HDFC', 2147483647, 'asd12', '1212323231'),
-('svemp2', 'Employee2', '108 sourashtra teachers colony', 'madurai', 'Employee', 'employee2@example.co', 2147483647, '2018-03-14', 'sdsdf', 'Axis Bank', 2147483647, 'asd12', '1212323231');
+INSERT INTO `employee_master` (`id`, `name`, `address1`, `address2`, `designation`, `email`, `contact_no`, `doj`, `pan_no`, `bank_name`, `account_number`, `ifsc_code`, `aadhaar_no`, `no_of_files`, `created`) VALUES
+('emp22', 'Yogesh', '108 sourashtra teachers colony', 'dasfs', 'asdsf', 'tsyogesh40@gmail.com', 2147483647, '2018-05-12', '1232314', 'HDFC', 0, 'kljh', '1212323231', 0, '2018-05-10 17:24:47'),
+('emp23', 'Yogesh', '108 sourashtra teachers colony', 'zzzz', 'ad', 'tsyogesh40@gmail.com', 2147483647, '2018-05-04', 'xfdasdf', 'Canara Bank', 12, 'asd12', '1212323231', 1, '2018-05-10 17:35:35'),
+('Ssas', 'Yogesh', '108 sourashtra teachers colony', 'Anuppanadi', 'manager', 'tsyogesh40@gmail.com', 2147483647, '2018-05-02', '123', 'Canara Bank', 0, 'asd12', '1212323231', 2, '2018-05-11 04:37:43'),
+('svemp1', 'Employee1', '108 sourashtra teachers colony', 'madurai', 'manager', 'employee1@example.co', 2147483647, '2018-03-03', '99912123', 'HDFC', 2147483647, 'asd12', '1212323231', 1, '2018-05-10 14:36:40'),
+('svemp2', 'Employee2', '108 sourashtra teachers colony', 'madurai', 'Employee', 'employee2@example.co', 2147483647, '2018-03-14', 'sdsdf', 'Axis Bank', 2147483647, 'asd12', '1212323231', 0, '2018-05-10 14:36:40');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employee_master_files`
+--
+
+CREATE TABLE `employee_master_files` (
+  `employee_id` varchar(15) NOT NULL,
+  `file_path` varchar(500) NOT NULL,
+  `file_name` varchar(2000) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employee_master_files`
+--
+
+INSERT INTO `employee_master_files` (`employee_id`, `file_path`, `file_name`, `created`) VALUES
+('svemp1', '/var/www/starvish/uploads/employee/svemp1-3937.jpeg', 'svemp1-3937.jpeg', '2018-05-11 04:17:29'),
+('Ssas', '/var/www/starvish/uploads/employee/Ssas-2337.jpeg', 'Ssas-2337.jpeg', '2018-05-11 04:37:43'),
+('Ssas', '/var/www/starvish/uploads/employee/Ssas-1864.jpg', 'Ssas-1864.jpg', '2018-05-11 04:38:13'),
+('emp23', '/var/www/starvish/uploads/employee/emp23-8362.jpeg', 'emp23-8362.jpeg', '2018-05-11 04:38:33');
 
 -- --------------------------------------------------------
 
@@ -542,7 +600,10 @@ INSERT INTO `tbl_last_login` (`id`, `userId`, `sessionData`, `machineIp`, `userA
 (72, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 66.0.3359.139', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', 'Linux', '2018-05-08 05:34:13'),
 (73, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 66.0.3359.139', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', 'Linux', '2018-05-09 02:03:40'),
 (74, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 66.0.3359.139', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', 'Linux', '2018-05-09 10:37:46'),
-(75, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 66.0.3359.139', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', 'Linux', '2018-05-09 10:37:46');
+(75, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 66.0.3359.139', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', 'Linux', '2018-05-09 10:37:46'),
+(76, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 66.0.3359.139', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', 'Linux', '2018-05-10 00:57:37'),
+(77, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 66.0.3359.139', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', 'Linux', '2018-05-10 11:18:51'),
+(78, 1, '{\"emp_id\":\"admin\",\"role\":\"1\",\"roleText\":\"System Administrator\",\"name\":\"System Administrator\"}', '::1', 'Chrome 66.0.3359.139', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', 'Linux', '2018-05-11 01:09:42');
 
 -- --------------------------------------------------------
 
@@ -610,8 +671,11 @@ CREATE TABLE `tbl_users` (
 
 INSERT INTO `tbl_users` (`userId`, `employee_id`, `email`, `password`, `name`, `mobile`, `roleId`, `isDeleted`, `createdBy`, `createdDtm`, `updatedBy`, `updatedDtm`) VALUES
 (1, 'admin', 'admin@gmail.com', '$2y$10$j9HPTqIJOp0/9TbRA5T8A.oIF6SxeC5b4xsXPBCOKX8iLwomItcya', 'System Administrator', '9890098900', 1, 0, 0, '2015-07-01 18:56:49', 1, '2018-01-05 05:56:34'),
-(18, 'svemp1', 'employee1@example.com', '$2y$10$s6hWVkMJ1wEMQSWkHPIlnuUa5LAEt87.trEpqZiXbbPSmvst7sEei', 'Employee1', '9994021735', 2, 0, 1, '2018-03-13 15:17:23', 1, '2018-03-13 18:43:25'),
-(19, 'svemp2', 'employee2@example.com', '$2y$10$OG..KYKPgC4R3EUyPPZ.cefFOdmxh1Z/Sc/uacX8L81nKzFZKCax6', 'Employee2', '7373535614', 3, 0, 1, '2018-03-13 15:18:54', 1, '2018-03-13 18:52:54');
+(18, 'svemp1', 'employee1@example.com', '$2y$10$s6hWVkMJ1wEMQSWkHPIlnuUa5LAEt87.trEpqZiXbbPSmvst7sEei', 'Employee1', '9994021735', 2, 0, 1, '2018-03-13 15:17:23', 1, '2018-05-11 09:49:22'),
+(19, 'svemp2', 'employee2@example.com', '$2y$10$OG..KYKPgC4R3EUyPPZ.cefFOdmxh1Z/Sc/uacX8L81nKzFZKCax6', 'Employee2', '7373535614', 3, 0, 1, '2018-03-13 15:18:54', 1, '2018-03-13 18:52:54'),
+(20, 'emp22', 'tsyogesh40@gmail.com', '$2y$10$YuBA/AlTX0ZeYpFTlqKtw.2GNVkmiXQtV59oX8DyoaHeO9yj.558m', 'Yogesh', '7373535614', 2, 1, 1, '2018-05-10 22:54:47', 1, '2018-05-10 22:56:15'),
+(21, 'emp23', 'tsyogesh40@gmail.com', '$2y$10$4D1utDvGXJuctSdPslvcl.J48oOvY/a7X3UZUr/IxCh2d2mfFIMzi', 'Yogesh', '7373535614', 2, 0, 1, '2018-05-10 23:05:35', 1, '2018-05-11 10:08:33'),
+(22, 'Ssas', 'tsyogesh40@gmail.com', '$2y$10$0uI0USn7OlPPuOBRYNG08uCz3KCP2OKYK0JXCgkE.ptUj94gd4Ce2', 'Yogesh', '7373535614', 2, 0, 1, '2018-05-11 10:07:42', 1, '2018-05-11 10:08:13');
 
 -- --------------------------------------------------------
 
@@ -664,7 +728,8 @@ CREATE TABLE `vendor_invoice` (
   `cgst` int(10) NOT NULL,
   `sgst` int(10) NOT NULL,
   `igst` int(10) NOT NULL,
-  `grant_total` int(10) NOT NULL
+  `grant_total` int(10) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -704,16 +769,44 @@ CREATE TABLE `vendor_master` (
   `account_name` varchar(30) NOT NULL,
   `account_number` int(30) NOT NULL,
   `ifsc_code` varchar(30) NOT NULL,
-  `attachment` varchar(50) NOT NULL,
-  `file_path` varchar(500) NOT NULL
+  `no_of_files` int(10) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `vendor_master`
 --
 
-INSERT INTO `vendor_master` (`vendor_id`, `company_name`, `address1`, `address2`, `contact_person1`, `designation1`, `email1`, `contact_no1`, `contact_person2`, `designation2`, `email2`, `contact_no2`, `gstin`, `bank_name`, `account_name`, `account_number`, `ifsc_code`, `attachment`, `file_path`) VALUES
-('ven1', 'v7lancerss', '108 sourashtra teachers colony', 'Madurai', 'yogesh', 'ceo', 'tsyogesh40@gmail.com', '07373535614', 'Arun', 'manager', 'tsyogesh46@gmail.com', '34567890', '213131421', 'hdfc', 'yogesh ', 2147483647, 'xfcghgjkl123', 'ven1-v7lancerss.pdf', '/var/www/starvish/uploads/vendor/ven1-v7lancerss.pdf');
+INSERT INTO `vendor_master` (`vendor_id`, `company_name`, `address1`, `address2`, `contact_person1`, `designation1`, `email1`, `contact_no1`, `contact_person2`, `designation2`, `email2`, `contact_no2`, `gstin`, `bank_name`, `account_name`, `account_number`, `ifsc_code`, `no_of_files`, `created`) VALUES
+('ven1', 'v7lancerss', '108 sourashtra teachers colony', 'Madurai', 'yogesh', 'ceo', 'tsyogesh40@gmail.com', '07373535614', 'Arun', 'manager', 'tsyogesh46@gmail.com', '34567890', '213131421', 'hdfc', 'yogesh ', 2147483647, 'xfcghgjkl123', 2, '2018-05-10 06:29:24'),
+('ven1233', 'V2lancers', '108 sourashtra teachers colony', 'Anuppanadi', 'Yogesh', 'kjhgjh', 'developer@igniteddreamz.com', '+917373535614', 'arun', 'jkhg', 'developer@igniteddreamz.com', '07373535614', '1212', 'Canara Bank', 'yogesh ', 123, '12412', 4, '2018-05-10 11:36:21');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor_master_files`
+--
+
+CREATE TABLE `vendor_master_files` (
+  `vendor_id` varchar(15) NOT NULL,
+  `file_name` varchar(500) NOT NULL,
+  `file_path` varchar(1000) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `vendor_master_files`
+--
+
+INSERT INTO `vendor_master_files` (`vendor_id`, `file_name`, `file_path`, `created`) VALUES
+('ven11', 'ven11-1303.jpeg', '/var/www/starvish/uploads/vendor/ven11-1303.jpeg', '2018-05-10 11:32:40'),
+('ven11', 'ven11-4522.jpg', '/var/www/starvish/uploads/vendor/ven11-4522.jpg', '2018-05-10 11:32:40'),
+('ven1233', 'ven1233-5808.jpg', '/var/www/starvish/uploads/vendor/ven1233-5808.jpg', '2018-05-10 11:35:44'),
+('ven1233', 'ven1233-4468.jpeg', '/var/www/starvish/uploads/vendor/ven1233-4468.jpeg', '2018-05-10 11:36:21'),
+('ven1233', 'ven1233-1550.jpg', '/var/www/starvish/uploads/vendor/ven1233-1550.jpg', '2018-05-10 11:36:21'),
+('ven1233', 'ven1233-7744.jpeg', '/var/www/starvish/uploads/vendor/ven1233-7744.jpeg', '2018-05-10 13:56:08'),
+('ven1', 'ven1-4717.jpeg', '/var/www/starvish/uploads/vendor/ven1-4717.jpeg', '2018-05-10 14:29:11'),
+('ven1', 'ven1-8303.jpeg', '/var/www/starvish/uploads/vendor/ven1-8303.jpeg', '2018-05-11 03:49:37');
 
 -- --------------------------------------------------------
 
@@ -725,7 +818,8 @@ CREATE TABLE `vendor_po` (
   `date` date NOT NULL,
   `po_id` varchar(15) NOT NULL,
   `vendor_id` varchar(15) NOT NULL,
-  `description` varchar(50) NOT NULL
+  `description` varchar(50) NOT NULL,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -765,6 +859,7 @@ CREATE TABLE `vendor_quote` (
 --
 
 INSERT INTO `vendor_quote` (`date`, `vendor_quote_id`, `vendor_id`, `description`, `total_amt`, `no_of_files`, `created`) VALUES
+('2018-05-18', 'abcc', 'ven1', 'asdf', '1200', 3, '2018-05-10 02:24:28'),
 ('2018-05-15', 'venq1', 'ven1', 'tey', '13330', 1, '2018-05-09 10:59:36');
 
 -- --------------------------------------------------------
@@ -785,7 +880,10 @@ CREATE TABLE `vendor_quote_files` (
 --
 
 INSERT INTO `vendor_quote_files` (`vendor_quote_id`, `file_name`, `file_path`, `created`) VALUES
-('venq1', 'ven1-venq1-0.jpg', '/var/www/starvish/uploads/quotation/vendor/ven1-venq1-0.jpg', '2018-05-09 16:17:02');
+('venq1', 'ven1-venq1-0.jpg', '/var/www/starvish/uploads/quotation/vendor/ven1-venq1-0.jpg', '2018-05-09 16:17:02'),
+('abcc', 'ven1-abcc-0.jpeg', '/var/www/starvish/uploads/quotation/vendor/ven1-abcc-0.jpeg', '2018-05-10 02:24:28'),
+('abcc', 'ven1-abcc-1.pdf', '/var/www/starvish/uploads/quotation/vendor/ven1-abcc-1.pdf', '2018-05-10 02:24:28'),
+('abcc', 'ven1-abcc-2.jpg', '/var/www/starvish/uploads/quotation/vendor/ven1-abcc-2.jpg', '2018-05-10 02:24:28');
 
 --
 -- Indexes for dumped tables
@@ -832,6 +930,12 @@ ALTER TABLE `customer_invoice_products`
 --
 ALTER TABLE `customer_master`
   ADD PRIMARY KEY (`customer_id`);
+
+--
+-- Indexes for table `customer_master_files`
+--
+ALTER TABLE `customer_master_files`
+  ADD KEY `customer_master_files` (`customer_id`);
 
 --
 -- Indexes for table `customer_po`
@@ -1017,7 +1121,7 @@ ALTER TABLE `note_master`
 -- AUTO_INCREMENT for table `tbl_last_login`
 --
 ALTER TABLE `tbl_last_login`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 --
 -- AUTO_INCREMENT for table `tbl_reset_password`
 --
@@ -1032,7 +1136,7 @@ ALTER TABLE `tbl_roles`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- Constraints for dumped tables
 --
@@ -1070,6 +1174,12 @@ ALTER TABLE `customer_invoice`
 --
 ALTER TABLE `customer_invoice_products`
   ADD CONSTRAINT `customer_invoice_products_ibfk_1` FOREIGN KEY (`invoice_id`) REFERENCES `customer_invoice` (`invoice_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `customer_master_files`
+--
+ALTER TABLE `customer_master_files`
+  ADD CONSTRAINT `customer_master_files` FOREIGN KEY (`customer_id`) REFERENCES `customer_master` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `customer_po`
