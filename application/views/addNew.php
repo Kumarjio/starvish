@@ -68,7 +68,7 @@
                       })
                     </script>
                     <?php $this->load->helper("form"); ?>
-                    <form role="form" id="addVendor" action="<?php echo base_url() ?>addNewUser" method="post" role="form">
+                    <?php echo form_open_multipart('addNewUser');?>
                         <div class="box-body">
 
                           <!--row 1-->

@@ -15,6 +15,23 @@ class User extends BaseController
         $this->isLoggedIn();
     }
 
+    //delete the user file
+    public function delete_user_file($file_name,$emp_id,$user_id)
+    {
+      $this->global['pageTitle'] = 'StarVish: User file Deletion';
+      $path=$this->user_model->select_user_file($file_name);
+      unlink($path[0]->file_path);
+      $del=$this->user_model->delete_user_file($file_name);
+      $count=$this->user_model->count_files($emp_id);
+      $data=array('no_of_files'=>$count);
+      $this->user_model->update_user($emp_id,$data);
+      //$this->add_edit_customer_po($po_id);
+      redirect('editOld/'.$user_id);
+
+    }
+
+
+
     /**
      * This function used to load the first screen of the user
      */
@@ -206,7 +223,7 @@ class User extends BaseController
                                    $insert = $this->user_model->insert_file($uploadData);
                                    $count=$this->user_model->count_files($emp_id);
                                    $data=array('no_of_files'=>$count);
-                                   $this->vendor_model->update_user($emp_id,$data);
+                                   $this->user_model->update_user($emp_id,$data);
 
                                    $statusMsg = $insert?'Files uploaded successfully.':'Some problem occurred, please try again.';
                                    $this->session->set_flashdata('statusMsg',$statusMsg);
@@ -343,7 +360,7 @@ echo '<script>console.log(1);</script>';
                                  'aadhaar_no'=>$aadhaar);
                 $result=false;
                 $result = $this->user_model->editUser($userInfo, $userId,$emp_id,$emp_info);
-                echo '<script>alert(1);</script>';
+
                 $config = array(	//file upload
               'upload_path' => 'uploads/employee/',
               'allowed_types' => "*",
@@ -356,7 +373,7 @@ echo '<script>console.log(1);</script>';
                         $data=array();
                       if($this->input->post('fileSubmit') && !empty($_FILES['attachment']['name'])){
                              $filesCount = count($_FILES['attachment']['name']);
-                             echo "<script>alert('.$filesCount.');</script>";
+
                                for($i = 0; $i < $filesCount; $i++){
                                    $_FILES['userFile']['name'] = $_FILES['attachment']['name'][$i];
                                    $_FILES['userFile']['type'] = $_FILES['attachment']['type'][$i];
@@ -380,7 +397,7 @@ echo '<script>console.log(1);</script>';
                                    $insert = $this->user_model->insert_file($uploadData);
                                    $count=$this->user_model->count_files($emp_id);
                                    $data=array('no_of_files'=>$count);
-                                   $this->user_model_model->update_user($emp_id,$data);
+                                   $this->user_model->update_user($emp_id,$data);
                                    $statusMsg = $insert?'Files uploaded successfully.':'Some problem occurred, please try again.';
                                    $this->session->set_flashdata('statusMsg',$statusMsg);
                                }

@@ -3,6 +3,24 @@
 class User_model extends CI_Model
 {
 
+  //function to select file pathinfo
+  public function select_user_file($file)
+  {
+    $this->db->select('file_path');
+    $this->db->from('employee_master_files');
+    $this->db->where('file_name',$file);
+    return $this->db->get()->result();
+  }
+
+
+  //function to delete the files in employeee files
+  public function delete_user_file($file)
+  {
+    $this->db->delete('employee_master_files',array('file_name'=>$file));
+    return $this->db->affected_rows();
+
+  }
+
   //file uploading in the table employee_po_files
   public function insert_file($data = array()){
          $insert = $this->db->insert_batch('employee_master_files',$data);
@@ -13,7 +31,7 @@ class User_model extends CI_Model
   //function to edit vendor
   public function update_user($id,$datas)
      {
-       $this->db->where('employee_id',$id);
+       $this->db->where('id',$id);
        $this->db->update('employee_master',$datas);
        return TRUE;
      }
@@ -52,6 +70,7 @@ class User_model extends CI_Model
     return $this->db->get()->result();
 
   }
+
 
   //count the no of employees
     function count_employee()

@@ -42,8 +42,8 @@ public function insert_file($data = array()){
      $this->db->from('vendor_master_files');
      $this->db->where('file_name',$file);
      return $this->db->get()->result();
-
    }
+
    //function to delete the files in customer_po
    public function delete_vendor_file($file)
    {
@@ -51,8 +51,6 @@ public function insert_file($data = array()){
      return $this->db->affected_rows();
 
    }
-
-
 
    //function to fetch the customer file
    public function fetch_vendor_files($id)

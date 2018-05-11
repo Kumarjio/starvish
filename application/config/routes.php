@@ -186,7 +186,7 @@ $route['userListing'] = 'user/userListing';
 $route['addNew'] = "user/addNew";
 
 $route['view_user/(:any)']='user/view_user/$1';
-$route['delete_user_file/(:any)/(:any)']='user/delete_user_file/$1/$2';
+$route['delete_user_file/(:any)/(:any)/(:any)']='user/delete_user_file/$1/$2/$3';
 $route['addNewUser'] = "user/addNewUser";
 $route['editOld'] = "user/editOld";
 $route['editOld/(:num)'] = "user/editOld/$1";

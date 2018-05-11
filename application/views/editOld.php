@@ -48,8 +48,10 @@ if(!empty($userInfo))
                         <h3 class="box-title">Enter User Details</h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
+                    <?php $this->load->helper("form"); ?>
+                    <!-- <form role="form" id="addvendor" action="<?php echo base_url() ?>add_vendor" method="post" role="form">-->
+                    <?php echo form_open_multipart('editUser');?>
 
-                    <form role="form" action="<?php echo base_url() ?>editUser" method="post" id="editUser" role="form">
                         <div class="box-body">
 
                           <!--row 1-->
@@ -230,7 +232,7 @@ if(!empty($userInfo))
                                         <tr>
                               <td><li class="list-group-item"><a href="../uploads/employee/'.$file->file_name.'" target="_blank">'.$file->file_name.'</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>';
                                         ?>
-                                  <td>  <a class="btn btn-sm btn-danger" href="<?php  echo base_url().'delete_user_file/'.$file->file_name.'/'.$file->employee_id; ?>" title="Delete"> <i class="fa fa-trash"></i></a></td>
+                                  <td>  <a class="btn btn-sm btn-danger" href="<?php  echo base_url().'delete_user_file/'.$file->file_name.'/'.$file->employee_id.'/'.$userId; ?>" title="Delete"> <i class="fa fa-trash"></i></a></td>
                                         </tr>
                                     <?php
                                     echo '</li>';
